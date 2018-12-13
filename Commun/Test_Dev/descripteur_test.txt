@@ -1,0 +1,4 @@
+id=0;mots=43;total=754
+jeux:20;olympique:15;natation:10;medaille:7
+id=1;mots=68;total=920
+software:12;hardware:25;olympique:4;natation:3
