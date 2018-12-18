@@ -1,6 +1,6 @@
 # include <stdio.h>
 
-void menu2(){
+int menu2(){
 	printf("\nSélectionner le type de fichier recherché :\n1 - Texte\n2 - Image\n3 - Son\n4 - Retour\nType de fichier : ");
 	int type = 0;
 	scanf("%d",&type);
@@ -9,6 +9,6 @@ void menu2(){
 		printf("\nSélectionner le type de fichier recherché :\n1 - Texte\n2 - Image\n3 - Son\n4 - Retour\nType de fichier : ");
 		scanf("%d",&type);
 	}
-	return;
+	return type;
 }
 
