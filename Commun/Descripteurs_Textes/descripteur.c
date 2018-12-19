@@ -78,3 +78,35 @@ void addWordandOcc_DESCR(DESCR* descriptor, char* word, int occurence)
 
     descriptor->termes = termesTemp;
 }
+
+int getOccurence_DESCR(DESCR descriptor, char* word)
+{
+    TERMES prochainTerme = descriptor.termes;
+    while (prochainTerme != NULL)
+    {
+        if (strcmp(prochainTerme->terme->word, word) == 0)
+        {
+            return prochainTerme->terme->occurence;
+        }
+
+        prochainTerme = prochainTerme->termeSuivant;
+    }
+
+    return 0;
+}
+
+void removeWord_DESCR(DESCR* descriptor, TERME* terme)
+{
+    if (descriptor->termes == NULL)
+    {
+        terme = NULL;
+        return;
+    }
+
+    TERME* termeTemp;
+
+    terme = descriptor->termes->terme;
+    termeTemp = descriptor->termes->terme;
+    descriptor->termes = descriptor->termes->termeSuivant;
+    free(termeTemp);
+}

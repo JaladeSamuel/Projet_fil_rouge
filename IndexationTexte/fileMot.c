@@ -122,31 +122,35 @@ int defilerPlusGrand(File *file, char *mot)
 {
   if (file == NULL)
   {
+      printf("file vide exit\n");
       exit(EXIT_FAILURE);
   }
-
-  Cellule *cel = file->premier;
-  Cellule *tamp;
-  while(cel->occurence < file->occurencePlusGrande)
+  int nb = 0;
+  if (file->premier != NULL)
   {
-    tamp = cel;
-    cel = cel->suivant;
-  }
-  strcpy(mot,cel->mot);
-  int nb = cel->occurence;
-  tamp->suivant = cel->suivant;
-
-  free(cel);
-  //on redefinit le plus grand
-  file->occurencePlusGrande = 0;
-  cel = file->premier;
-  while (cel != NULL)
-  {
-      if(cel->occurence > file->occurencePlusGrande)
-      {
-        file->occurencePlusGrande = cel->occurence;
-      }
+    Cellule *cel = file->premier;
+    Cellule *tamp;
+    while(cel->occurence < file->occurencePlusGrande)
+    {
+      tamp = cel;
       cel = cel->suivant;
+    }
+    strcpy(mot,cel->mot);
+    nb = cel->occurence;
+    tamp->suivant = cel->suivant;
+
+    free(cel);
+    //on redefinit le plus grand
+    file->occurencePlusGrande = 0;
+    cel = file->premier;
+    while (cel != NULL)
+    {
+        if(cel->occurence > file->occurencePlusGrande)
+        {
+          file->occurencePlusGrande = cel->occurence;
+        }
+        cel = cel->suivant;
+    }
   }
   return nb;
 }
@@ -158,4 +162,14 @@ int estVide(File *file)
     return 1;
   }
   return 0;
+}
+
+void reinit(File *file)
+{
+  char c[100];
+  while(file->premier != NULL)
+  {
+    DEFILER(file,c);
+
+  }
 }

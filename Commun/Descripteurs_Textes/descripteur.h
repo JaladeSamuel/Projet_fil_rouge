@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #define WORD_LENGTH_MAX 25
 
 typedef struct tag_TERME
@@ -25,3 +27,5 @@ void init_DESCR(DESCR* descriptor, int id);
 void fill_DESCR(DESCR* descriptor, FILE* file);
 void addWord_DESCR(DESCR* descriptor, char* word);
 void addWordandOcc_DESCR(DESCR* descriptor, char* word, int occurence);
+int getOccurence_DESCR(DESCR descriptor, char* word);
+void removeWord_DESCR(DESCR* descriptor, TERME* terme);

@@ -7,12 +7,11 @@ int main()
 
     printf(" - Initialisation d'une structure descripteur.\n");
     DESCR descripteur;
-    init_DESCR(&descripteur, 0);
+    init_DESCR(&descripteur, 2);
 
     printf(" - Lecture du fichier de test et remplissage du descripteur.\n");
     FILE* file;
     file = fopen("../Test_Dev/descripteur_test.txt", "r");
-    fseek(file, 34, SEEK_SET); // Avancement pour sauter les deux premieres lignes de commentaire
     fill_DESCR(&descripteur, file);
     fclose(file);
 
