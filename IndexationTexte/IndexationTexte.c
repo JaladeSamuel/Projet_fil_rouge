@@ -9,30 +9,11 @@
 
 int main(void)
 {
-  //parcours du repertoire
-  /* DIR *dir = opendir (PATH);
 
-   struct dirent *dp;
-   int filecount = 0;
-
-   if (dir == NULL)
-    {
-        printf("pas de dossier");
-    }
-
-   while ((dp = readdir (dir)) != NULL) //tant qu'il y'a des fichiers non lu dans le dossier
-    {
-        filecount++;
-        printf("%s\n", dp->d_name);
-    }
-
-    printf("\nil y a %d trucs dans de dossier\n\n",filecount);
-
-    return 0;*/
     unsigned int taille = 20;
     char str1[taille];
     FILE* fichier = NULL;
-    fichier = fopen("03-Des_chercheurs_parviennent_α_rΘgΘnΘrer.xml", "r");
+    fichier = fopen("03-Mimer_un_signal_nerveux_pour_utf8.xml", "r");
 
     char *ret;
     char ret2[2] = "<";
@@ -44,29 +25,19 @@ int main(void)
       rewind(fichier);
       printf("Taille octet du fichier : %d\n",tailleOctetF);
       char fichierString[tailleOctetF];
-      //printf("NB Ligne : %d \n",nbLigne );
+
       int b = 1;
 
       while(b == 1)
       {
         b = fscanf(fichier,"%s",str1);
-        /*if(str1[0] == '<') {
-          balise = 1;
-          printf("Balise ouvrante");
-        }
-        if(strstr(str1,">"))
-        {
-          balise = 0;
-        }
-        if(!balise){
-
-        }*/
         strcat(fichierString, strcat(str1," "));
       }
       fclose(fichier);
-      printf("%s\n",fichierString );
-      /*int balise = 0;
+      //printf("%s\n",fichierString );
+      int balise = 0 , j= 0;
       char fichierStringF[tailleOctetF];
+      char ponctuation[10] = ";,:?/!.\"()";
       for(int i = 0; i<tailleOctetF; i++) {
         if(fichierString[i] == '<')
         {
@@ -78,11 +49,14 @@ int main(void)
           balise = 0;
           continue;
         }
-        if(!balise) {
-            fichierStringF[i] = fichierString[i];
+        if(!balise && strchr(ponctuation, fichierString[i]) == NULL) {
+            fichierStringF[j] = fichierString[i];
+            j++;
         }
-      }*/
-      //printf("\n %s",fichierStringF);
+      }
+      fichierStringF[j++] = '\0';
+      
+      printf("\n%s",fichierStringF);
       }
 
       return 0;
