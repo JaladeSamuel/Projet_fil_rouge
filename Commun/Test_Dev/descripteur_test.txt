@@ -1,4 +1,4 @@
-//id;termes;total
+//id termes total
 //terme:occurence
 0 4 754
 jeux:20 olympique:15 natation:10 medaille:7
