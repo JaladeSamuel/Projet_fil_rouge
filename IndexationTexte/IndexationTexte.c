@@ -81,11 +81,11 @@ int main(void)
         if(!balise) {
             fichierStringF[i] = fichierString[i];
         }
+      }*/
+      //printf("\n %s",fichierStringF);
       }
-      printf("\n %s",fichierStringF);
-    }*/
 
-    return 0;
+      return 0;
 
 }
 
