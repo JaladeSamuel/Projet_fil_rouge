@@ -1,1 +1,1 @@
-
+int compteNbLigne(FILE *fichier);
