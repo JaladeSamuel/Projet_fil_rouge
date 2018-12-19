@@ -69,7 +69,7 @@ void R_couleur(){
 
 void couleur_dom(){	
 	int couleur;
-	printf("\nChoisir une couleur : \n1 - Rouge\n2 - Rose\n3 - Violet\n4 - Bleu\n5 - Vert\n6 - Jaune\n7 - Orange\n8 - Retour\nCouleur : ");
+	printf("\nChoisir une couleur : \n1 - Rouge\n2 - Rose\n3 - Violet\n4 - Bleu\n5 - Vert\n6 - Jaune\n7 - Orange\n8 - Noir\n9 - Blanc\n10 - Retour\nCouleur : ");
 	scanf("%d",&couleur);
 	
 	switch(couleur){
@@ -80,9 +80,11 @@ void couleur_dom(){
 	case 5 : 
 	case 6 :
 	case 7 : 
+	case 8 :
+	case 9 :
 		printf("\nEn travaux...\n");
 		break;
-	case 8 :
+	case 10 :
 		R_couleur();
 		break;
 	default :

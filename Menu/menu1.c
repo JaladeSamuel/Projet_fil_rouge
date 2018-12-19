@@ -1,8 +1,10 @@
 # include <stdio.h>
+# include <string.h>
+# include "menu5.h"
 # include "menu2.h"
 
 void identification(){
-	system("stty -echo; read -p \"\nMot de passe : \" password; stty echo; if [ $password == \"123upssitech\" ] ;then echo \"\nMot de passe accepté !\";else echo \"\nMot de passe refusé ! Réessayez.\n\";fi;");
+	system("stty -echo; read -p \"\nMot de passe : \" password; stty echo; while [ $password != \"123upssitech\" ] ;do echo \"\nMot de passe refusé ! Réessayez.\n\";stty -echo; read -p \"\nMot de passe : \" password; stty echo; done; echo \"\nMot de passe accepté.\"");
 	
 }
 
@@ -17,6 +19,7 @@ void menu1(){
 		break;
 	case 2 :
 		identification();
+		choix_adm();
 		break;
 	default : 
 		printf("\nErreur : Saisie impossible, veuillez choisir \"1\" ou \"2\".\n");
@@ -24,5 +27,32 @@ void menu1(){
 		break;
 	}
 }
+
+void test_adresse(){
+	system("read -p \"Lien du fichier : \" adresse; while [ ! -e \"$adresse\" ];do echo \"Ce fichier n'existe pas, rentrez à nouveau l'adresse.\";read -p \"Lien du fichier : \" adresse;done");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
