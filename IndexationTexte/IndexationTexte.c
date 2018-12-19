@@ -36,30 +36,54 @@ int main(void)
 
     char *ret;
     char ret2[2] = "<";
-
+    int tailleOctetF;
     if (fichier != NULL)
     {
+      fseek (fichier, 0, SEEK_END);   // non-portable
+      tailleOctetF=ftell (fichier);
+      rewind(fichier);
+      printf("Taille octet du fichier : %d\n",tailleOctetF);
+      char fichierString[tailleOctetF];
+      //printf("NB Ligne : %d \n",nbLigne );
+      int b = 1;
 
-      // int nbLigne = compteNbLigne(fichier);
-        int l = 0;
-        //printf("NB Ligne : %d \n",nbLigne );
-        int b = 1;
-        while(b == 1)
-        {
-          b = fscanf(fichier,"%s",str1);
-          printf("%s",str1);
-        /*  ret = strstr(str1,ret2);
-          printf("%s",ret);
-          strcpy(ret2,"\n");
-          if(strcmp(ret,ret2))
-          {
-            l++;
-            printf("saut");
-          }*/
-
+      while(b == 1)
+      {
+        b = fscanf(fichier,"%s",str1);
+        /*if(str1[0] == '<') {
+          balise = 1;
+          printf("Balise ouvrante");
         }
-        fclose(fichier);
-    }
+        if(strstr(str1,">"))
+        {
+          balise = 0;
+        }
+        if(!balise){
+
+        }*/
+        strcat(fichierString, strcat(str1," "));
+      }
+      fclose(fichier);
+      printf("%s\n",fichierString );
+      /*int balise = 0;
+      char fichierStringF[tailleOctetF];
+      for(int i = 0; i<tailleOctetF; i++) {
+        if(fichierString[i] == '<')
+        {
+          balise = 1;
+          continue;
+        }
+        if(balise && fichierString[i] == '>')
+        {
+          balise = 0;
+          continue;
+        }
+        if(!balise) {
+            fichierStringF[i] = fichierString[i];
+        }
+      }
+      printf("\n %s",fichierStringF);
+    }*/
 
     return 0;
 
