@@ -6,7 +6,7 @@
 #include "IndexationTexte.h"
 
 #define PATH "../Base_de_donnees/TEXTES/Textes/"
-#define TAILLE 20
+
 int main(void)
 {
 
@@ -23,37 +23,16 @@ int main(void)
     rewind(fichier);
     printf("Taille octet du fichier : %d\n",tailleOctetF);
     char fichierString[tailleOctetF];
-    int b = 1;
-    while(b == 1)
+
+    fgets(str1,1,fichier);
+    while(!feof(fichier))
     {
-      b = fscanf(fichier,"%s",str1);
+      fscanf(fichier,"%s",str1);
       strcat(fichierString, strcat(str1," "));
     }
+
     fclose(fichier);
-    //printf("%s\n",fichierString );
-    int balise = 0 , j= 0;
-    char fichierStringF[tailleOctetF];
-    char ponctuation[10] = ";,:?/!.\"()";
-    for(int i = 0; i<tailleOctetF; i++) {
-      if(fichierString[i] == '<')
-      {
-        balise = 1;
-        continue;
-      }
-      if(balise && fichierString[i] == '>')
-      {
-        balise = 0;
-        continue;
-      }
-      if(!balise && strchr(ponctuation, fichierString[i]) == NULL) {
-          fichierStringF[j] = fichierString[i];
-          j++;
-      }
-    }
-    fichierStringF[j++] = '\0';
-
-    printf("\n%s",fichierStringF);
-
+    printf("%s",fichierString);
 
     return 0;
 
