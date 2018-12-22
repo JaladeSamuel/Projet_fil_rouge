@@ -29,7 +29,6 @@ void fill_DESCR(DESCR* descriptor, FILE *file)
             for (i = 0; i < termes; i++)
             {
                 fscanf(file, "%s %d", &word, &occurence);
-                // printf("%s ", word);
                 addWord_DESCR(descriptor, word);
             }
 

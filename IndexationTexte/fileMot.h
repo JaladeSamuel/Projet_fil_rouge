@@ -14,12 +14,14 @@ struct File
 {
     Cellule *premier;
     int nbMot;
+    int occurencePlusGrande;
 };
 
 void INIT_FILE(File *file);
 void ENFILER(File *file, char *mot);
 void DEFILER(File *file, char *motDefile);
 void AFFICHER_FILE(File *file);
+void defilerPlusGrand(File *file, char *mot);
 
 
 

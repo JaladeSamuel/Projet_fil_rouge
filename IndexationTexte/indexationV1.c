@@ -70,9 +70,21 @@ int main(void)
           }
         }
     }
-
-    AFFICHER_FILE(&fileDeMot);
     fclose(fichier);
+    AFFICHER_FILE(&fileDeMot);
+
+    File descripteur;
+    INIT_FILE(&descripteur);
+
+    char motFrequent[50];
+    for(int i = 0; i<10; i++)
+    {
+      defilerPlusGrand(&fileDeMot,motFrequent);
+      ENFILER(&descripteur,motFrequent);
+    }
+    //File de mot les plus frequent
+    AFFICHER_FILE(&descripteur);
+
 
     return 0;
 }

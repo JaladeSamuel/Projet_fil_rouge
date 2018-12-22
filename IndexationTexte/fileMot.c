@@ -7,6 +7,7 @@ void INIT_FILE(File *file)
 {
     file->premier = NULL;
     file->nbMot = 0;
+    file->occurencePlusGrande = 0;
 }
 
 
@@ -31,6 +32,10 @@ void ENFILER(File *file, char *nvElement)
             if(strcmp(celActuel->mot,nouveau->mot) == 0)
             {
               celActuel->occurence += 1;
+              if(celActuel->occurence > file->occurencePlusGrande)
+              {
+                file->occurencePlusGrande = celActuel->occurence;
+              }
               return;
             }
             celActuel = celActuel->suivant;
@@ -79,9 +84,35 @@ void AFFICHER_FILE(File *file)
 
     printf("\n");
     printf("Nombre de mot total : %d \n",file->nbMot);
+    printf("Occurence la plus grande : %d \n",file->occurencePlusGrande);
 }
 
-int nbOccurence(File *file, char *mot)
+void defilerPlusGrand(File *file, char *mot)
 {
+  if (file == NULL)
+  {
+      exit(EXIT_FAILURE);
+  }
 
+  Cellule *cel = file->premier;
+  Cellule *tamp;
+  while(cel->occurence < file->occurencePlusGrande)
+  {
+    tamp = cel;
+    cel = cel->suivant;
+  }
+  strcpy(mot,cel->mot);
+  tamp->suivant = cel->suivant;
+  free(cel);
+  //on redefinit le plus grand
+  file->occurencePlusGrande = 0;
+  cel = file->premier;
+  while (cel != NULL)
+  {
+      if(cel->occurence > file->occurencePlusGrande)
+      {
+        file->occurencePlusGrande = cel->occurence;
+      }
+      cel = cel->suivant;
+  }
 }
