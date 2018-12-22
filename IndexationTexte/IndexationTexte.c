@@ -3,65 +3,66 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 #include "IndexationTexte.h"
 
 #define PATH "../Base_de_donnees/TEXTES/Textes/"
-
+#define TAILLE 20
 int main(void)
 {
 
-    unsigned int taille = 20;
+    int taille = 20;
     char str1[taille];
     FILE* fichier = NULL;
     fichier = fopen("03-Mimer_un_signal_nerveux_pour_utf8.xml", "r");
 
-    char *ret;
-    char ret2[2] = "<";
     int tailleOctetF;
-    if (fichier != NULL)
+    if (fichier == NULL){return 0;}
+
+    fseek (fichier, 0, SEEK_END);   // non-portable
+    tailleOctetF=ftell (fichier);
+    rewind(fichier);
+    printf("Taille octet du fichier : %d\n",tailleOctetF);
+    char fichierString[tailleOctetF];
+    int b = 1;
+    while(b == 1)
     {
-      fseek (fichier, 0, SEEK_END);   // non-portable
-      tailleOctetF=ftell (fichier);
-      rewind(fichier);
-      printf("Taille octet du fichier : %d\n",tailleOctetF);
-      char fichierString[tailleOctetF];
-
-      int b = 1;
-
-      while(b == 1)
+      b = fscanf(fichier,"%s",str1);
+      strcat(fichierString, strcat(str1," "));
+    }
+    fclose(fichier);
+    //printf("%s\n",fichierString );
+    int balise = 0 , j= 0;
+    char fichierStringF[tailleOctetF];
+    char ponctuation[11] = ";,:?/!.\"()";
+    for(int i = 0; i<tailleOctetF; i++) {
+      if(fichierString[i] == '<')
       {
-        b = fscanf(fichier,"%s",str1);
-        strcat(fichierString, strcat(str1," "));
+        balise = 1;
+        continue;
       }
-      fclose(fichier);
-      //printf("%s\n",fichierString );
-      int balise = 0 , j= 0;
-      char fichierStringF[tailleOctetF];
-      char ponctuation[10] = ";,:?/!.\"()";
-      for(int i = 0; i<tailleOctetF; i++) {
-        if(fichierString[i] == '<')
-        {
-          balise = 1;
-          continue;
-        }
-        if(balise && fichierString[i] == '>')
-        {
-          balise = 0;
-          continue;
-        }
-        if(!balise && strchr(ponctuation, fichierString[i]) == NULL) {
-            fichierStringF[j] = fichierString[i];
-            j++;
-        }
+      if(balise && fichierString[i] == '>')
+      {
+        balise = 0;
+        continue;
       }
-      fichierStringF[j++] = '\0';
-      
-      printf("\n%s",fichierStringF);
-      }
+      if(!balise && strchr(ponctuation, fichierString[i]) == NULL) {
+          printf("%c",fichierString[i]);
+          fichierStringF[j] = fichierString[i];
+          j++;
 
-      return 0;
+      }
+    }
+    fichierStringF[j++] = '\0';
+
+    //printf("\n%s",fichierStringF);
+
+
+    return 0;
 
 }
+
+
 
 /*int compteNbLigne(FILE *fichier)
 {
