@@ -3,7 +3,7 @@
 #include <string.h>
 #include "descripteur.h"
 
-void init_DESCR(DESCR *descriptor, int id)
+void init_DESCR(DESCR* descriptor, int id)
 {
     descriptor->id = id;
     descriptor->termes = NULL;
@@ -29,8 +29,7 @@ void fill_DESCR(DESCR* descriptor, FILE *file)
             for (i = 0; i < termes; i++)
             {
                 fscanf(file, "%s %d", &word, &occurence);
-                // printf("%s ", word);
-                addWord_DESCR(descriptor, word);
+                addWordandOcc_DESCR(descriptor, word, occurence);
             }
 
             return;
@@ -38,30 +37,44 @@ void fill_DESCR(DESCR* descriptor, FILE *file)
     }
 }
 
-void addWord_DESCR(DESCR *descriptor, char *word)
+void addWord_DESCR(DESCR* descriptor, char *word)
 {
-    if (descriptor->termes != NULL)
+    // On recherche le terme
+    TERMES prochainTerme = descriptor->termes;
+    while (prochainTerme != NULL)
     {
-        TERME *terme;
-
-        strcpy(terme->word, word);
-        terme->occurence = 1;
-
-        descriptor->termes->terme = terme;
-        descriptor->termes->termeSuivant = NULL;
-    }
-    else
-    {
-        TERMES prochainTerme = descriptor->termes;
-        while (prochainTerme != NULL)
+        if (strcmp(prochainTerme->terme->word, word) == 0)
         {
-            if (strcmp(prochainTerme->terme->word, word) == 0)
-            {
-                prochainTerme->terme->occurence++;
-                return;
-            }
-
-            prochainTerme = prochainTerme->termeSuivant;
+            prochainTerme->terme->occurence++;
+            return;
         }
+
+        prochainTerme = prochainTerme->termeSuivant;
     }
+
+    // Si on ne l'a pas trouvé on l'empile
+    TERME* terme = malloc(sizeof(TERME*));
+    TERMES termesTemp = (TERMES)malloc(sizeof(TERMES));
+
+    strcpy(terme->word, word);
+    terme->occurence = 1;
+
+    termesTemp->terme = terme;
+    termesTemp->termeSuivant = descriptor->termes;
+
+    descriptor->termes = termesTemp;
+}
+
+void addWordandOcc_DESCR(DESCR* descriptor, char* word, int occurence)
+{
+    TERME* terme = malloc(sizeof(TERME*));
+    TERMES termesTemp = (TERMES)malloc(sizeof(TERMES));
+
+    strcpy(terme->word, word);
+    terme->occurence = occurence;
+
+    termesTemp->terme = terme;
+    termesTemp->termeSuivant = descriptor->termes;
+
+    descriptor->termes = termesTemp;
 }

@@ -1,11 +1,13 @@
 #define WORD_LENGTH_MAX 25
 
-typedef struct tag_TERME {
+typedef struct tag_TERME
+{
     char word[WORD_LENGTH_MAX];
     int occurence;
 } TERME;
 
-typedef struct tag_TERMES {
+typedef struct tag_TERMES
+{
     TERME* terme;
     struct tag_TERMES* termeSuivant;
 } pileTERMES;
@@ -22,3 +24,4 @@ typedef struct tag_DESCR {
 void init_DESCR(DESCR* descriptor, int id);
 void fill_DESCR(DESCR* descriptor, FILE* file);
 void addWord_DESCR(DESCR* descriptor, char* word);
+void addWordandOcc_DESCR(DESCR* descriptor, char* word, int occurence);
