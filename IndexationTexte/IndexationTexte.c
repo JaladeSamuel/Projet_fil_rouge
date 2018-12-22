@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 #include "IndexationTexte.h"
 
 #define PATH "../Base_de_donnees/TEXTES/Textes/"
@@ -33,7 +34,7 @@ int main(void)
     //printf("%s\n",fichierString );
     int balise = 0 , j= 0;
     char fichierStringF[tailleOctetF];
-    char ponctuation[10] = ";,:?/!.\"()";
+    char ponctuation[11] = ";,:?/!.\"()";
     for(int i = 0; i<tailleOctetF; i++) {
       if(fichierString[i] == '<')
       {
@@ -46,18 +47,22 @@ int main(void)
         continue;
       }
       if(!balise && strchr(ponctuation, fichierString[i]) == NULL) {
+          printf("%c",fichierString[i]);
           fichierStringF[j] = fichierString[i];
           j++;
+
       }
     }
     fichierStringF[j++] = '\0';
 
-    printf("\n%s",fichierStringF);
+    //printf("\n%s",fichierStringF);
 
 
     return 0;
 
 }
+
+
 
 /*int compteNbLigne(FILE *fichier)
 {

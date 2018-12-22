@@ -1,14 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "file.h"
+#include <string.h>
+#include "fileMot.h"
 
 void INIT_FILE(File *file)
 {
     file->premier = NULL;
+    file->nbMot = 0;
 }
 
 
-void ENFILER(File *file, ELEMENT nvElement)
+void ENFILER(File *file, char *nvElement)
 {
 
     Cellule *nouveau = malloc(sizeof(*nouveau));
@@ -16,8 +18,9 @@ void ENFILER(File *file, ELEMENT nvElement)
     {
         exit(EXIT_FAILURE);
     }
-
-    nouveau->element = nvElement;
+    file->nbMot += 1;
+    strcpy(nouveau->mot,nvElement);
+    nouveau->occurence = 1;
     nouveau->suivant = NULL;
     if (file->premier != NULL) /* La file n'est pas vide */
     {
@@ -25,6 +28,11 @@ void ENFILER(File *file, ELEMENT nvElement)
         Cellule *celActuel = file->premier;
         while (celActuel->suivant != NULL)
         {
+            if(strcmp(celActuel->mot,nouveau->mot) == 0)
+            {
+              celActuel->occurence += 1;
+              return;
+            }
             celActuel = celActuel->suivant;
         }
         celActuel->suivant = nouveau;
@@ -36,26 +44,22 @@ void ENFILER(File *file, ELEMENT nvElement)
 }
 
 
-int DEFILER(File *file)
+void DEFILER(File *file, char *motDefile)
 {
     if (file == NULL)
     {
         exit(EXIT_FAILURE);
     }
-
-    int nombreDefile = 0;
-
+    file->nbMot -= 1;
     /* On vérifie s'il y a quelque chose à défiler */
     if (file->premier != NULL)
     {
         Cellule *celDefile = file->premier;
 
-        nombreDefile = celDefile->element;
+        strcpy(motDefile,celDefile->mot);
         file->premier = celDefile->suivant;
         free(celDefile);
     }
-
-    return nombreDefile;
 }
 
 void AFFICHER_FILE(File *file)
@@ -69,69 +73,15 @@ void AFFICHER_FILE(File *file)
 
     while (cel != NULL)
     {
-         affiche_ELEMENT(cel->element);
+        printf("%s : %d\n",cel->mot,cel->occurence);
         cel = cel->suivant;
     }
 
     printf("\n");
+    printf("Nombre de mot total : %d \n",file->nbMot);
 }
 
-
-int main()
+int nbOccurence(File *file, char *mot)
 {
-    MA_FILE maFile;
-    INIT_FILE(&maFile);
-    /*for(int i = 0; i<20; i++){
-      ENFILER(&maFile, i);
-    }*/
-    SAISIR_FILE(&maFile);
 
-    printf("\nAffichage file :\n");
-    AFFICHER_FILE(&maFile);
-
-    printf("\nJe defile %d\n", DEFILER(&maFile));
-    printf("Je defile %d\n", DEFILER(&maFile));
-
-    printf("\nEtat de la file :\n");
-    AFFICHER_FILE(&maFile);
-
-
-    //DEUXIEME PARTIE
-    printf("DEUXIEME PARTIE\n");
-    printf("------------\n");
-    MA_FILE seance1;
-    MA_FILE seance2;
-    MA_FILE seance3;
-    MA_FILE seance4;
-    INIT_FILE(&seance1);
-    INIT_FILE(&seance2);
-    INIT_FILE(&seance3);
-    INIT_FILE(&seance4);
-    int j = 0;
-    int caisse = 0;
-    for(int i = 0; i<6; i++){
-      ENFILER(&seance1, i);
-      caisse += i;
-      j++;
-    }
-    for(int i = 0; i<6; i++){
-      ENFILER(&seance1, i);
-      caisse += i;
-      j++;
-    }
-    for(int i = 0; i<6; i++){
-      ENFILER(&seance1, i);
-      caisse += i;
-      j++;
-    }
-    for(int i = 0; i<6; i++){
-      ENFILER(&seance1, i);
-      caisse += i;
-      j++;
-    }
-    printf("Il y a 4 seances dans la journee\n");
-    printf("Nombre de tickets vendu : %d \n",caisse);
-    printf("Nombre de client : %d",j);
-
-    return 0;
 }
