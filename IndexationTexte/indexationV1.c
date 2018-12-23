@@ -20,39 +20,46 @@ int main(void)
     rep = opendir(PATH);
 
 
-
     FILE* fichierDescripteur = NULL;
     fichierDescripteur = fopen("../Commun/descripteur_base_texte.txt", "w");
 
     File fileDeMot;
     File fileDescripteur;
 
+
     char motDefile[50];
     int id = 0, nb = 0;
     while ((lecture = readdir(rep))) {//nom du fichier = lectur ->d_name
         if(strcmp(lecture->d_name,"..") == 0 || strcmp(lecture->d_name,".") == 0 ){
-          continue;
+
+        }else{
+          INIT_FILE(&fileDeMot);
+          INIT_FILE(&fileDescripteur);
+
+
+          printf("\n%s\n", lecture->d_name);
+          fileMotFichier(&fileDeMot,lecture->d_name);
+          fileMotFrequent(&fileDeMot,&fileDescripteur);//free
+
+
+          if (fichierDescripteur == NULL){return 1;}
+          fprintf(fichierDescripteur,"%d %d ",id,fileDeMot.nbMot);
+          AFFICHER_FILE(&fileDescripteur);
+          while(!estVide(&fileDescripteur))
+          {
+            printf("On ECRIT\n");
+            nb = DEFILER(&fileDescripteur,motDefile); //free
+            fprintf(fichierDescripteur, "%s %d ",motDefile,nb);
+          }
+
+          fprintf(fichierDescripteur,"\n");
+          id++;
+
+          reinit(&fileDeMot);
+
         }
-        INIT_FILE(&fileDescripteur);
-        INIT_FILE(&fileDeMot);
-
-        printf("\n%s\n", lecture->d_name);
-        fileMotFichier(&fileDeMot,lecture->d_name);
-        fileMotFrequent(&fileDeMot,&fileDescripteur);
 
 
-        if (fichierDescripteur == NULL){return 1;}
-        fprintf(fichierDescripteur,"%d %d ",id,fileDeMot.nbMot);
-        AFFICHER_FILE(&fileDescripteur);
-        while(!estVide(&fileDescripteur))
-        {
-          printf("On ECRIT\n");
-          nb = DEFILER(&fileDescripteur,motDefile);
-          fprintf(fichierDescripteur, "%s %d ",motDefile,nb);
-        }
-
-        fprintf(fichierDescripteur,"\n");
-        id++;
     }
     fclose(fichierDescripteur);
     closedir(rep);

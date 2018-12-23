@@ -24,6 +24,7 @@ void AFFICHER_FILE(File *file);
 int defilerPlusGrand(File *file, char *mot);
 void ENFILER_FREQUENT(File *file, char *nvElement, int nbOccurence);
 int estVide(File *file);
+void reinit(File *file);
 
 
 
