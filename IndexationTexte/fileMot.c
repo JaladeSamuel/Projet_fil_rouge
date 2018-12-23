@@ -122,6 +122,7 @@ int defilerPlusGrand(File *file, char *mot)
 {
   if (file == NULL)
   {
+      printf("file vide exit\n");
       exit(EXIT_FAILURE);
   }
 
