@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/types.h>
+#include <dirent.h>
 #include "fileMot.h"
 
 #include "IndexationTexte.h"
@@ -15,7 +17,7 @@ int main(void)
     fichier = fopen("03-Mimer_un_signal_nerveux_pour_utf8.xml", "r"); // Ouverture
 
 
-    if (fichier == NULL){return 0;}
+    if (fichier == NULL){return 1;}
 
     int tailleOctetF;
     fseek (fichier, 0, SEEK_END);   // non-portable
@@ -73,21 +75,46 @@ int main(void)
     fclose(fichier);
     AFFICHER_FILE(&fileDeMot);
 
-    File descripteur;
-    INIT_FILE(&descripteur);
+    File fileDescripteur;
+    INIT_FILE(&fileDescripteur);
 
     char motFrequent[50];
+    int nb;
     for(int i = 0; i<10; i++)
     {
-      defilerPlusGrand(&fileDeMot,motFrequent);
-      ENFILER(&descripteur,motFrequent);
+      nb = defilerPlusGrand(&fileDeMot,motFrequent);
+      if(nb>=2)
+      {
+        ENFILER_FREQUENT(&fileDescripteur,motFrequent,nb);
+      }
     }
     //File de mot les plus frequent
-    AFFICHER_FILE(&descripteur);
+    AFFICHER_FILE(&fileDescripteur);
 
 
+    struct dirent *lecture;
+    DIR *rep;
+    rep = opendir("../Base_de_donnees/TEXTES/Textes/" );
+    while ((lecture = readdir(rep))) {
+        printf("%s\n", lecture->d_name);
+    }
+    closedir(rep);
+    //ECRITURE DU DESCRIPTEUR DANS LE fichier
+    FILE* fichierDescripteur = NULL;
+    fichierDescripteur = fopen("descripteur_base_texte.txt", "w");
+
+    if (fichierDescripteur == NULL){return 2;}
+    char motDefile[50];
+    while(!estVide(&fileDescripteur))
+    {
+      fprintf(fichierDescripteur, "%s %d ",motDefile,DEFILER(&fileDescripteur,motDefile));
+    }
+    fprintf(fichierDescripteur,"\n");
+    fclose(fichierDescripteur);
     return 0;
 }
+
+
 
 /*int compteNbLigne(FILE *fichier)
 {

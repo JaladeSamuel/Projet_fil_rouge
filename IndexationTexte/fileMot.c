@@ -48,23 +48,54 @@ void ENFILER(File *file, char *nvElement)
     }
 }
 
+void ENFILER_FREQUENT(File *file, char *nvElement, int nbOccurence)
+{
 
-void DEFILER(File *file, char *motDefile)
+    Cellule *nouveau = malloc(sizeof(*nouveau));
+    if (file == NULL || nouveau == NULL)
+    {
+        exit(EXIT_FAILURE);
+    }
+    file->nbMot += 1;
+    strcpy(nouveau->mot,nvElement);
+    nouveau->occurence = nbOccurence;
+    nouveau->suivant = NULL;
+    if (file->premier != NULL) /* La file n'est pas vide */
+    {
+        /* On se positionne à la fin de la file */
+        Cellule *celActuel = file->premier;
+        while (celActuel->suivant != NULL)
+        {
+            celActuel = celActuel->suivant;
+        }
+        celActuel->suivant = nouveau;
+    }
+    else /* La file est vide, notre élément est le premier */
+    {
+        file->premier = nouveau;
+    }
+}
+
+
+int DEFILER(File *file, char *motDefile)
 {
     if (file == NULL)
     {
         exit(EXIT_FAILURE);
     }
     file->nbMot -= 1;
+    int nb = -1;
     /* On vérifie s'il y a quelque chose à défiler */
     if (file->premier != NULL)
     {
         Cellule *celDefile = file->premier;
 
         strcpy(motDefile,celDefile->mot);
+        nb = celDefile->occurence;
         file->premier = celDefile->suivant;
         free(celDefile);
     }
+    return nb;
 }
 
 void AFFICHER_FILE(File *file)
@@ -87,7 +118,7 @@ void AFFICHER_FILE(File *file)
     printf("Occurence la plus grande : %d \n",file->occurencePlusGrande);
 }
 
-void defilerPlusGrand(File *file, char *mot)
+int defilerPlusGrand(File *file, char *mot)
 {
   if (file == NULL)
   {
@@ -102,7 +133,9 @@ void defilerPlusGrand(File *file, char *mot)
     cel = cel->suivant;
   }
   strcpy(mot,cel->mot);
+  int nb = cel->occurence;
   tamp->suivant = cel->suivant;
+
   free(cel);
   //on redefinit le plus grand
   file->occurencePlusGrande = 0;
@@ -115,4 +148,14 @@ void defilerPlusGrand(File *file, char *mot)
       }
       cel = cel->suivant;
   }
+  return nb;
+}
+
+int estVide(File *file)
+{
+  if(file->premier == NULL)
+  {
+    return 1;
+  }
+  return 0;
 }

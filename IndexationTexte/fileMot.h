@@ -19,9 +19,11 @@ struct File
 
 void INIT_FILE(File *file);
 void ENFILER(File *file, char *mot);
-void DEFILER(File *file, char *motDefile);
+int DEFILER(File *file, char *motDefile);
 void AFFICHER_FILE(File *file);
-void defilerPlusGrand(File *file, char *mot);
+int defilerPlusGrand(File *file, char *mot);
+void ENFILER_FREQUENT(File *file, char *nvElement, int nbOccurence);
+int estVide(File *file);
 
 
 
