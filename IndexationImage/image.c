@@ -135,7 +135,7 @@ void affiche_imageNB(imageNB m){
 }
 
 imageNB copieNB(int numeroFichier){
-  char deb[]="/home/thomas/Documents/TP_C/PFR/data/DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/";
+  char deb[]="./../IMG_et_AUDIO/TEST_NB/";
   char nom[7];
   nom[2]='.';
   nom[3]='t';
@@ -176,7 +176,7 @@ imageNB copieNB(int numeroFichier){
 }
 
 image copieRGB(int numeroFichier){
-  char deb[]="/home/thomas/Documents/TP_C/PFR/data/DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/";
+  char deb[]="./../IMG_et_AUDIO/TEST_RGB/";
   char nom[7];
   nom[2]='.';
   nom[3]='t';
@@ -259,7 +259,7 @@ void constructeurNB(imageNB imageTMP){
 void constructeurRGB(image imageTMP){
   int x,y,composante,tmp;
   FILE* fichier = NULL;
-  fichier = fopen("/home/thomas/Documents/TP_C/PFR/data/base_descripteur_imageRGB.txt", "a");
+  fichier = fopen("./data/base_descripteur_imageRGB.txt", "a");
   if (fichier != NULL){
       // On peut lire et écrire dans le fichier
       fprintf(fichier, "%s\n",imageTMP->id);
@@ -278,10 +278,10 @@ void constructeurRGB(image imageTMP){
 
 void descripteurNB(){
   //mettre les .txt dans le fichier liste_descripteur
-  system("ls data/DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/ | grep .txt > data/liste_descripteur_imageNB.txt");
+  system("ls ./../IMG_et_AUDIO/TEST_NB/ | grep .txt > ./data/liste_descripteur_imageNB.txt");
   system("echo "">./data/base_descripteur_imageNB.txt");
-  char nom1[150]="./data/DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/";
-  char sauveur[150]="./data/DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/";
+  char nom1[150]="./../IMG_et_AUDIO/TEST_NB/";
+  char sauveur[150]="./../IMG_et_AUDIO/TEST_NB/";
   char nom2[150]="";
   FILE* fichier = NULL;
   FILE* fichier2 = NULL;
@@ -322,10 +322,10 @@ void descripteurNB(){
 
 void descripteurRGB(){
   //mettre les .txt dans le fichier liste_descripteur
-  system("ls data/DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/ | grep .txt > data/liste_descripteur_imageRGB.txt");
+  system("ls ./../IMG_et_AUDIO/TEST_RGB/ | grep .txt > ./data/liste_descripteur_imageRGB.txt");
   system("echo "">./data/base_descripteur_imageRGB.txt");
-  char nom1[150]="./data/DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/";
-  char sauveur[150]="./data/DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/";
+  char nom1[150]="./../IMG_et_AUDIO/TEST_RGB/";
+  char sauveur[150]="./../IMG_et_AUDIO/TEST_RGB/";
   char nom2[150]="";
   FILE* fichier = NULL;
   FILE* fichier2 = NULL;
