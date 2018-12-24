@@ -384,4 +384,354 @@ void descripteurRGB(){
   }
 }
 
+//comparaison
+int comparaisonNB(imageNB des1,imageNB des2){
+  int i,tmp;
+  int somme=0;
+  for(int i=0;i<4;i++){
+    tmp=des1->histogramme[i] - des2->histogramme[i];
+    if(tmp<0){tmp=tmp*(-1);}
+    somme=somme+tmp;
+  }
+  return somme;  
+}
+
+int comparaisonRGB(image des1,image des2){
+  int i,tmp;
+  int somme=0;
+  for(int i=0;i<64;i++){
+    tmp=des1->histogramme[i] - des2->histogramme[i];
+    if(tmp<0){tmp=tmp*(-1);}
+    somme=somme+tmp;
+  }
+  return somme;  
+}
+
+void comparerImageAvecImageNB(){
+  //créer un descripteur du fichier entrée
+  system("ls data/depot_image_a_compararer/ | grep .txt > data/listeEphemereNB.txt");
+  system("echo "">./data/baseEphemereNB.txt");
+  char nom1[150]="./data/depot_image_a_compararer/";
+  char sauveur[150]="./data/depot_image_a_compararer/";
+  char nom2[150]="";
+  FILE* fichier = NULL;
+  FILE* fichier2 = NULL;
+  int x,y,composante,tmp,i,j;
+
+  fichier = fopen("./data/listeEphemereNB.txt", "r");
+  if (fichier != NULL){
+      while(!feof(fichier)){
+        strcpy(nom1,sauveur);
+        fscanf(fichier,"%s\n",nom2);
+        strcat(nom1,nom2);
+        fichier2=fopen(nom1,"r");//ouverture de l'image
+        if (fichier2 != NULL){
+          fscanf(fichier2,"%d %d %d",&x,&y,&composante);
+          imageNB imageTMP=creation_imageNB(y,x);
+          for(i=0;i<y;i++){
+            for(j=0;j<x;j++){
+              fscanf(fichier2,"%d",&tmp);
+              tmp=quantificationNoirBlanc(tmp);
+              imageTMP->image[i][j]=tmp;
+            }
+          }
+          //affiche_imageNB(imageTMP);
+          strcpy(imageTMP->id,nom2);
+          FILE* fichier3 = NULL;
+		  fichier3 = fopen("./data/baseEphemereNB.txt", "r+");
+		  if (fichier3 != NULL){
+			  fprintf(fichier3, "%s\n",imageTMP->id);
+			  histogrammeNB(imageTMP);
+			  for(int i=0;i<4;i++){
+				fprintf(fichier3,"%d %d\n",i,imageTMP->histogramme[i]);
+			  }
+			  fclose(fichier3);
+		  }
+		  else{
+			  printf("Impossible d'ouvrir le fichier baseEphemereNB.txt");
+		  }
+        }
+        else{
+          printf("Impossible d'ouvrir %s\n",nom2);
+        }
+        fclose(fichier2);
+      }
+      fclose(fichier);
+  }
+  else{
+      printf("Impossible d'ouvrir le fichier liste_descripteur_imageNB\n");
+  }
+  imageNB imageEntree=creation_imageNB(140,140);
+  imageNB imageTmp=creation_imageNB(140,140);
+  fichier = fopen("./data/baseEphemereNB.txt", "r");
+  if(fichier != NULL){
+    fscanf(fichier,"%s\n",imageEntree->id);
+    for(i=0;i<4;i++){
+      fscanf(fichier,"%d %d\n",&composante,&tmp);
+      imageEntree->histogramme[i]=tmp;
+    }
+  }else{
+    printf("Impossible d'ouvrir le fichier baseEphemereNB.txt");
+  }
+  PILE p=init_PILE();
+  int resultatComp;
+  fichier=fopen("./data/base_descripteur_imageNB.txt", "r");
+  if(fichier != NULL){
+    while(!feof(fichier)){
+      fscanf(fichier,"%s\n",imageTmp->id);
+      for(i=0;i<4;i++){
+        fscanf(fichier,"%d %d\n",&composante,&tmp);
+        imageTmp->histogramme[i]=tmp;
+      }
+      resultatComp=comparaisonNB(imageEntree,imageTmp);
+      p=emPILE(p,resultatComp,imageTmp->id);
+      //ici imageTmp est fini on va passer au suivant
+    }
+  }else{
+    printf("Impossible d'ouvrir le fichier base_descripteur_imageNB.txt");
+  }
+  //parcourir l'ensemble des descripteurs d'image et leur appliquer la comparaison
+  //empiler le résultat dans une pile d'image
+  //parcourir la pile est renvoyé les plus petits
+  int minim;
+  PILE p2=init_PILE();
+  int taillePile=taillePILE(p);
+  for(i=0;i<NOMBRE_DE_RESULTAT;i++){
+    minim=1000000;
+    if(taillePile<NOMBRE_DE_RESULTAT){
+      printf("Nombre de résultat attendu supérieur au nombre de fichier présent");
+    }else{
+      Cellule* caseMoment = p.premier;
+      while(caseMoment!=NULL){
+        if(caseMoment->valeur<minim){minim=caseMoment->valeur;}
+	    caseMoment=caseMoment->suivant;
+	  }
+      caseMoment = p.premier;
+      while(caseMoment!=NULL){
+        if(caseMoment->valeur==minim){
+          p2=emPILE(p2,caseMoment->valeur,caseMoment->id);
+		  caseMoment->valeur=1000001;
+        }
+	    caseMoment=caseMoment->suivant;
+	  }
+      
+    }
+  }
+ 
+  //ParcoursPILE(p2);
+  int tabValeur[NOMBRE_DE_RESULTAT];
+  char tabNom[NOMBRE_DE_RESULTAT][150];
+  
+  i=0;
+  Cellule* caseMoment = p2.premier;
+  while(caseMoment!=NULL){
+    tabValeur[i]=caseMoment->valeur;
+    strcpy(tabNom[i],caseMoment->id);
+    caseMoment=caseMoment->suivant;
+    i++;
+  }
+  for(i=NOMBRE_DE_RESULTAT-1;i>=0;i--){
+    printf("Le ficher %s\n",tabNom[i]);
+    printf("avec un comparaison à %d\n\n",tabValeur[i]);
+  }
+  
+  system("rm ./data/listeEphemereNB.txt");
+  system("rm ./data/baseEphemereNB.txt");
+}
+
+void comparerImageAvecImageRGB(){
+  system("ls data/depot_image_a_compararer/ | grep .txt > data/listeEphemereRGB.txt");
+  system("echo "">./data/baseEphemereRGB.txt");
+  char nom1[150]="./data/depot_image_a_compararer/";
+  char sauveur[150]="./data/depot_image_a_compararer/";
+  char nom2[150]="";
+  FILE* fichier = NULL;
+  FILE* fichier2 = NULL;
+  int x,y,composante,tmp,i,j;
+
+  fichier = fopen("./data/listeEphemereRGB.txt", "r");
+  if (fichier != NULL){
+      while(!feof(fichier)){
+        strcpy(nom1,sauveur);
+        fscanf(fichier,"%s\n",nom2);
+        strcat(nom1,nom2);
+        fichier2=fopen(nom1,"r");//ouverture de l'image
+        if (fichier2 != NULL){
+          fscanf(fichier2,"%d %d %d",&x,&y,&composante);
+          image imageTMP=creation_imageRGB(y,x);
+          for(i=0;i<y;i++){
+            for(j=0;j<x;j++){
+              fscanf(fichier2,"%d",&tmp);
+              imageTMP->imageR[i][j]=tmp;
+            }
+          }
+          for(i=0;i<y;i++){
+            for(j=0;j<x;j++){
+              fscanf(fichier2,"%d",&tmp);
+              imageTMP->imageG[i][j]=tmp;
+            }
+          }
+          for(i=0;i<y;i++){
+            for(j=0;j<x;j++){
+              fscanf(fichier2,"%d",&tmp);
+              imageTMP->imageB[i][j]=tmp;
+            }
+          }
+          for(i=0;i<y;i++){
+            for(j=0;j<x;j++){
+              tmp=quantificationRGB(imageTMP->imageR[i][j],imageTMP->imageG[i][j],imageTMP->imageB[i][j]);
+              imageTMP->image[i][j]=tmp;
+            }
+          }
+          
+          //affiche_imageNB(imageTMP);
+          strcpy(imageTMP->id,nom2);
+          FILE* fichier3 = NULL;
+		  fichier3 = fopen("./data/baseEphemereRGB.txt", "r+");
+		  if (fichier3 != NULL){
+			  fprintf(fichier3, "%s\n",imageTMP->id);
+			  histogrammeRGB(imageTMP);
+			  for(int i=0;i<64;i++){
+				fprintf(fichier3,"%d %d\n",i,imageTMP->histogramme[i]);
+			  }
+			  fclose(fichier3);
+		  }
+		  else{
+			  printf("Impossible d'ouvrir le fichier baseEphemereRGB.txt");
+		  }
+        }
+        else{
+          printf("Impossible d'ouvrir %s\n",nom2);
+        }
+        fclose(fichier2);
+      }
+      fclose(fichier);
+  }
+  else{
+      printf("Impossible d'ouvrir le fichier liste_descripteur_imageNB\n");
+  }
+  image imageEntree=creation_imageRGB(y,x);
+  image imageTmp=creation_imageRGB(y,x);
+  fichier = fopen("./data/baseEphemereRGB.txt", "r");
+  if(fichier != NULL){
+    fscanf(fichier,"%s\n",imageEntree->id);
+    for(i=0;i<64;i++){
+      fscanf(fichier,"%d %d\n",&composante,&tmp);
+      imageEntree->histogramme[i]=tmp;
+    }
+  }else{
+    printf("Impossible d'ouvrir le fichier baseEphemereRGB.txt");
+  }
+  PILE p=init_PILE();
+  int resultatComp;
+  fichier=fopen("./data/base_descripteur_imageRGB.txt", "r");
+  if(fichier != NULL){
+    while(!feof(fichier)){
+      fscanf(fichier,"%s\n",imageTmp->id);
+      for(i=0;i<64;i++){
+        fscanf(fichier,"%d %d\n",&composante,&tmp);
+        imageTmp->histogramme[i]=tmp;
+      }
+      resultatComp=comparaisonRGB(imageEntree,imageTmp);  
+      
+      p=emPILE(p,resultatComp,imageTmp->id);
+      //ici imageTmp est fini on va passer au suivant
+    }
+  }else{
+    printf("Impossible d'ouvrir le fichier base_descripteur_imageNB.txt");
+  }
+  //parcourir l'ensemble des descripteurs d'image et leur appliquer la comparaison
+  //empiler le résultat dans une pile d'image
+  //parcourir la pile est renvoyé les plus petits
+  int minim;
+  PILE p2=init_PILE();
+  int taillePile=taillePILE(p);
+  for(i=0;i<NOMBRE_DE_RESULTAT;i++){
+    minim=1000000;
+    if(taillePile<NOMBRE_DE_RESULTAT){
+      printf("Nombre de résultat attendu supérieur au nombre de fichier présent");
+    }else{
+      Cellule* caseMoment = p.premier;
+      while(caseMoment!=NULL){
+        if(caseMoment->valeur<minim){minim=caseMoment->valeur;}
+	    caseMoment=caseMoment->suivant;
+	  }
+      caseMoment = p.premier;
+      while(caseMoment!=NULL){
+        if(caseMoment->valeur==minim){
+          p2=emPILE(p2,caseMoment->valeur,caseMoment->id);
+		  caseMoment->valeur=1000001;
+        }
+	    caseMoment=caseMoment->suivant;
+	  }
+      
+    }
+  }
+ 
+  //ParcoursPILE(p2);
+  int tabValeur[NOMBRE_DE_RESULTAT];
+  char tabNom[NOMBRE_DE_RESULTAT][150];
+  
+  i=0;
+  Cellule* caseMoment = p2.premier;
+  while(caseMoment!=NULL){
+    tabValeur[i]=caseMoment->valeur;
+    strcpy(tabNom[i],caseMoment->id);
+    caseMoment=caseMoment->suivant;
+    i++;
+  }
+  for(i=NOMBRE_DE_RESULTAT-1;i>=0;i--){
+    printf("Le ficher %s\n",tabNom[i]);
+    printf("avec un comparaison à %d\n\n",tabValeur[i]);
+  }
+  
+  system("rm ./data/listeEphemereRGB.txt");
+  system("rm ./data/baseEphemereRGB.txt");
+}
+
+//Pile dynamique
+PILE init_PILE(){
+  PILE p;
+  p.premier=NULL;
+  return p;
+}
+int PILE_estVide(PILE pile){
+  return pile.premier==NULL;
+}
+void ParcoursPILE(PILE pile){ 
+  if(pile.premier==NULL){
+    printf("PILE vide");
+  }else{
+    Cellule* caseMoment = pile.premier;
+    while(caseMoment!=NULL){
+      printf("%s\n",caseMoment->id);//a retirer
+      printf("%d\n",caseMoment->valeur);//a retirer
+      caseMoment=caseMoment->suivant;
+    }
+  }  
+}
+
+int taillePILE(PILE pile){ 
+  int res=0;
+  if(pile.premier==NULL){
+    printf("PILE vide");
+  }else{
+    Cellule* caseMoment = pile.premier;
+    while(caseMoment!=NULL){
+      res++;
+      caseMoment=caseMoment->suivant;
+    }
+  }
+  return res;  
+}
+
+PILE emPILE(PILE pile,int val,char * idd){
+  Cellule* nouvelleCase =malloc(sizeof(Cellule));
+  nouvelleCase->valeur=val;
+  strcpy(nouvelleCase->id,idd);
+  nouvelleCase->suivant=pile.premier;
+  pile.premier=nouvelleCase;  
+  return pile;
+}
+
 

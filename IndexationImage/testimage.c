@@ -10,7 +10,13 @@ int main(void) {
   
   //descripteurNB();
   
-  descripteurRGB();
+  //descripteurRGB();
+ 
+  
+  //comparerImageAvecImageNB();
+  comparerImageAvecImageRGB();
+
+  
   printf("\nGoodbye World\n");
   return 0;
 }
