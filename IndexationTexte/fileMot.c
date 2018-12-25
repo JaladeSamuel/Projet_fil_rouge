@@ -29,6 +29,7 @@ void ENFILER(File *file, char *nvElement)
         Cellule *celActuel = file->premier;
         while (celActuel->suivant != NULL)
         {
+          
             if(strcmp(celActuel->mot,nouveau->mot) == 0)
             {
               celActuel->occurence += 1;
@@ -128,9 +129,25 @@ int defilerPlusGrand(File *file, char *mot)
   int nb = 0;
   if (file->premier != NULL)
   {
+
     Cellule *cel = file->premier;
     Cellule *tamp;
-    while(cel->occurence < file->occurencePlusGrande)
+    if(file->occurencePlusGrande < 2)// OCCURENCE MINIMUM DU MOT
+    {
+      while(cel->suivant != NULL)
+      {
+        tamp = cel;
+        cel = cel->suivant;
+      }
+      strcpy(mot,cel->mot);
+      nb = cel->occurence;
+      tamp->suivant = cel->suivant;
+
+      free(cel);
+      //on redefinit le plus
+      return nb;
+    }
+    while(cel->occurence < file->occurencePlusGrande && cel->suivant != NULL)
     {
       tamp = cel;
       cel = cel->suivant;
