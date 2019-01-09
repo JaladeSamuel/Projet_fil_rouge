@@ -29,7 +29,7 @@ void menu1(){
 }
 
 void test_adresse(){
-	system("read -p \"Lien du fichier : \" adresse; while [ ! -e \"$adresse\" ];do echo \"Ce fichier n'existe pas, rentrez à nouveau l'adresse.\";read -p \"Lien du fichier : \" adresse;done");
+	system("read -p \"Lien du fichier : \" adresse; while [ ! -e \"$adresse\" ];do echo \"\nCe fichier n'existe pas, rentrez à nouveau l'adresse.\";read -p \"Lien du fichier : \" adresse;done");
 }
 
 

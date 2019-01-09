@@ -3,6 +3,7 @@
 #include"menu2.h"
 #include"menu5.h"
 #include"menu3.h"
+#include"menu1.h"
 
 void indexation(){
 	int choix;
@@ -11,13 +12,13 @@ void indexation(){
 	
 	switch(choix){
 	case 1 :
-		adresse();
+		test_adresse();
 		break;
 	case 2 :   
-		adresse();
+		test_adresse();
 		break;
 	case 3 : 
-		adresse();
+		test_adresse();
 		break;
 	case 4 : 
 		choix_adm();
@@ -27,6 +28,20 @@ void indexation(){
 		indexation();
 		break;
 	} 
+}
+
+void configuration(){
+	int choix;
+	printf("Configurer : \n1 - Indexation\n2 - Comparaison\n3 - Retour\nChoix : ");
+	scanf("%d", &choix);
+	
+	switch(choix){
+	case 1:
+	case 2: 
+	case 3:
+	default : 
+		break;
+	}
 }
 
 void choix_adm(){
@@ -41,11 +56,15 @@ void choix_adm(){
 		menu2_adm();
 		break;
 	case 2 :
+		printf("\nEn travaux...\n");
+		choix_adm();
+		break;
 	case 3 :
 		indexation();
 		break;
 	case 4 :
 		printf("\nEn travaux...\n");
+		choix_adm();
 		break;
 	case 5 : 
 		menu1();

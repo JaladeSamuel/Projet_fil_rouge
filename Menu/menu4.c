@@ -1,5 +1,6 @@
 #include"menu2.h"
 #include"menu4.h"
+#include"menu1.h"
 #include"menu3.h"
 #include<stdlib.h>
 
@@ -34,7 +35,7 @@ void noir_blanc(){
 		nb_dom();
 		break;
 	case 2 :
-		adresse();
+		test_adresse();
 		break;
 	case 3 :
 		Recherche_image();
@@ -54,7 +55,7 @@ void R_couleur(){
 		couleur_dom();
 		break;
 	case 2 :
-		adresse();
+		test_adresse();
 		break;
 	case 3 :
 		Recherche_image();

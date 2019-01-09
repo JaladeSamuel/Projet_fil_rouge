@@ -2,4 +2,3 @@
 
 void menu3();
 void motcle();
-void adresse();

@@ -1,17 +1,11 @@
 #include"menu3.h"
 #include"menu2.h"
+#include"menu1.h"
 
 void motcle(){
 	char mot;
 	printf("\nRentrer le mot clé :\nMot clé : ");
 	scanf("%s",mot);
-}
-
-
-void adresse(){
-	char add;
-	printf("\nLien du fichier : ");
-	scanf("%s",add);
 }
 
 void menu3(){
@@ -24,7 +18,7 @@ void menu3(){
 		motcle();
 		break;
 	case 2 :
-		adresse();
+		test_adresse();
 		break;
 	case 3 :
 		menu2();
