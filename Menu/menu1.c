@@ -8,9 +8,16 @@ void identification(){
 	
 }
 
+
+void Exit(){
+	printf("\nFin du programme.\n");
+	EXIT_SUCCESS;
+}
+
+
 void menu1(){
 	int mode=0;
-	printf("\nSélectionner un mode : \n1 - Utilisateur\n2 - Administrateur\nType de connexion : ");
+	printf("\nSélectionner un mode : \n1 - Utilisateur\n2 - Administrateur\n3 - Quitter\nType de connexion : ");
 	scanf("%d", &mode);
 
 	switch(mode){	
@@ -20,6 +27,9 @@ void menu1(){
 	case 2 :
 		identification();
 		choix_adm();
+		break;
+	case 3 : 
+		Exit();
 		break;
 	default : 
 		printf("\nErreur : Saisie impossible, veuillez choisir \"1\" ou \"2\".\n");
@@ -31,7 +41,6 @@ void menu1(){
 void test_adresse(){
 	system("read -p \"Lien du fichier : \" adresse; while [ ! -e \"$adresse\" ];do echo \"\nCe fichier n'existe pas, rentrez à nouveau l'adresse.\";read -p \"Lien du fichier : \" adresse;done");
 }
-
 
 
 

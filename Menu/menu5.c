@@ -7,7 +7,7 @@
 
 void indexation(){
 	int choix;
-	printf("\nSélectionner le type du fichier à indexer :\n1 - Fichier texte\n2 - Fichier image\n3 - Fichier son\n4 - Retour\nChoix : ");
+	printf("\nSélectionner le type du fichier à indexer :\n1 - Fichier texte\n2 - Fichier image\n3 - Fichier son\n4 - Retour\n5 - Quitter\nChoix : ");
 	scanf("%d",&choix);
 	
 	switch(choix){
@@ -22,6 +22,9 @@ void indexation(){
 		break;
 	case 4 : 
 		choix_adm();
+		break;
+	case 5 : 
+		Exit();
 		break;
 	default : 
 		printf("\nErreur : Saisie impossible, veuillez choisir \"1\",\"2\",\"3\" ou \"4\".");
@@ -47,7 +50,7 @@ void configuration(){
 void choix_adm(){
 
 	int choix;
-	printf("\nSélectionner une action :\n1 - Lancer une recherche\n2 - Accéder aux descripteurs\n3 - Lancer une indexation\n4 - Modifier les configurations\n5 - Retour\nChoix : ");
+	printf("\nSélectionner une action :\n1 - Lancer une recherche\n2 - Accéder aux descripteurs\n3 - Lancer une indexation\n4 - Modifier les configurations\n5 - Retour\n6 - Quitter\nChoix : ");
 	scanf("%d",&choix);
 
 
@@ -68,6 +71,9 @@ void choix_adm(){
 		break;
 	case 5 : 
 		menu1();
+		break;
+	case 6 :
+		Exit();
 		break;
 	default :
 		printf("\nErreur : Saisie impossible, veuillez choisir \"1\",\"2\",\"3\",\"4\" ou \"5\".\n");

@@ -10,7 +10,7 @@ void motcle(){
 
 void menu3(){
 	int R_par=0;
-	printf("\nRecherche par :\n1 - Mot clé\n2 - Fichier\n3 - Retour\nType de Recherche : ");
+	printf("\nRecherche par :\n1 - Mot clé\n2 - Fichier\n3 - Retour\n4 - Quitter\nType de Recherche : ");
 	scanf("%d", &R_par);
 
 	switch(R_par){
@@ -22,6 +22,9 @@ void menu3(){
 		break;
 	case 3 :
 		menu2();
+		break;
+	case 4 : 
+		Exit();
 		break;
 	default :
 		printf("\nErreur : Saisie impossible, veuillez choisir \"1\",\"2\" ou \"3\"\n");

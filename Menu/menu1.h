@@ -2,3 +2,4 @@
 
 void menu1();
 void test_adresse();
+void Exit();
