@@ -3,17 +3,15 @@
 #include <string.h>
 #include <sys/types.h>
 #include <dirent.h>
-
-#include "fileMot.h"
-#include "IndexationTexte.h"
 #include "indexationV1.h"
 
 
-int main(void)
+
+/*int main(void)
 {
   indexationBaseTexte();
 }
-
+*/
 
 int indexationBaseTexte()
 {
