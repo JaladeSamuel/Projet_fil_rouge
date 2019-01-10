@@ -29,9 +29,11 @@ void ENFILER(File *file, char *nvElement)
         Cellule *celActuel = file->premier;
         while (celActuel->suivant != NULL)
         {
-          
+
             if(strcmp(celActuel->mot,nouveau->mot) == 0)
             {
+              /*printf("Mot actuel %s : ",celActuel);
+              printf("Mot qui veut integrer la file %s\n",nouveau->mot);*/
               celActuel->occurence += 1;
               if(celActuel->occurence > file->occurencePlusGrande)
               {

@@ -8,28 +8,18 @@
 #include "IndexationTexte.h"
 #include "indexationV1.h"
 
-#define PATH "../Base_de_donnees/TEXTES/"
 
 
 
 int main(void)
 {
     //LECTURE des fichier du repertoire bd
-    int i = 0;
     struct dirent *lecture;
     DIR *rep;
     rep = opendir(PATH);
 
-    while ((lecture = readdir(rep)))
-    {
-      if(strcmp(lecture->d_name,"..") == 0 || strcmp(lecture->d_name,".") == 0 ){
-        continue;
-      }
-      printf("%d : %s\n",i,lecture->d_name);
-      i++;
-    }
-    closedir(rep);
-  /*  FILE* fichierDescripteur = NULL;
+
+    FILE* fichierDescripteur = NULL;
     fichierDescripteur = fopen("../Commun/descripteur_base_texte.txt", "w");
 
     File fileDeMot;
@@ -38,59 +28,56 @@ int main(void)
 
     char motDefile[50];
     int id = 0, nb = 0;
-    for(int i = 0; i<1; i++)
-    {
+    //parcour des fichiers du repertoire
+    while ((lecture = readdir(rep))) {//nom du fichier = lectur ->d_name
+        if(strcmp(lecture->d_name,"..") == 0 || strcmp(lecture->d_name,".") == 0 ){
+          continue;
+        }
+        INIT_FILE(&fileDeMot);
+        INIT_FILE(&fileDescripteur);
 
-          INIT_FILE(&fileDeMot);
-          INIT_FILE(&fileDescripteur);
-          printf("FILE DE MOT ");
-          AFFICHER_FILE(&fileDeMot);
-          printf("FILE DESCRIPEUR ");
-          AFFICHER_FILE(&fileDescripteur);
 
-          printf("\n%s\n", "/home/sam/pfr/Projet_fil_rouge/Base_de_donnees/TEXTES/29-Ligue_des_champions___Lyon_utf8.xml");
-          fileMotFichier(&fileDeMot,"/home/sam/pfr/Projet_fil_rouge/Base_de_donnees/TEXTES/29-Ligue_des_champions___Lyon_utf8.xml");
-          fileMotFrequent(&fileDeMot,&fileDescripteur);//free
+        printf("\n%s\n", lecture->d_name);
+        fileMotFichier(&fileDeMot,lecture->d_name);
+        printf("IDDDDDDDDDDDDDDDDDDDDddd : %d",id);
+        printf("\nOn passe fileMtFichier\n");
+        fileMotFrequent(&fileDeMot,&fileDescripteur);//free
 
-          printf("FILE DE MOT apres traitement ");
-          AFFICHER_FILE(&fileDeMot);
-          printf("FILE DESCRIPEUR apres traitement ");
-          AFFICHER_FILE(&fileDescripteur);
+        if (fichierDescripteur == NULL){return 1;}
+        fprintf(fichierDescripteur,"%d %d ",id,fileDeMot.nbMot);
+        AFFICHER_FILE(&fileDescripteur);
+        while(!estVide(&fileDescripteur))
+        {
+          printf("On ECRIT\n");
+          nb = DEFILER(&fileDescripteur,motDefile); //free
+          fprintf(fichierDescripteur, "%s %d ",motDefile,nb);
+        }
 
-          if (fichierDescripteur == NULL){return 1;}
-          fprintf(fichierDescripteur,"%d %d ",id,fileDeMot.nbMot);
-          AFFICHER_FILE(&fileDescripteur);
-          while(!estVide(&fileDescripteur))
-          {
-            printf("On ECRIT\n");
-            nb = DEFILER(&fileDescripteur,motDefile); //free
-            fprintf(fichierDescripteur, "%s %d ",motDefile,nb);
-          }
+        fprintf(fichierDescripteur,"\n");
+        id++;
 
-          fprintf(fichierDescripteur,"\n");
-          printf("FILE DE MOT ");
-          AFFICHER_FILE(&fileDeMot);
-          printf("FILE DESCRIPEUR ");
-          AFFICHER_FILE(&fileDescripteur);
+        reinit(&fileDeMot);
+        reinit(&fileDescripteur);
 
-          reinit(&fileDeMot);
-          reinit(&fileDescripteur);
+
+
+
     }
-
-
-
-
-
-    fclose(fichierDescripteur);*/
-
+    fclose(fichierDescripteur);
+    closedir(rep);
     return 0;
 }
 
+/*
+**Ajoute les mots du fichier texte dans une file, si le mot est deja existant dans la file
+**le compteur du mot est incremente.
+*/
 void fileMotFichier(File *fileDeMot, char *nomFichier)
 {
 
-  char path[400];
-  strcpy(path,nomFichier);
+  char path[200] = PATH;
+
+  strcat(path,nomFichier);
 
   FILE* fichier = NULL;
   fichier = fopen(path, "r"); // Ouverture
@@ -116,7 +103,7 @@ void fileMotFichier(File *fileDeMot, char *nomFichier)
         continue;
       }
 
-      if(caractereActuel == ' ' || caractereActuel == '\n' || caractereActuel == '.' || caractereActuel == ',' && balise == 0  )
+      if((caractereActuel == ' ' || caractereActuel == '\n' || caractereActuel == '.' || caractereActuel == ',') && balise == 0 )
       {
         if(strlen(mot)>5)//On ne prend en compte que les mots plus grand que 5
         {
@@ -130,7 +117,6 @@ void fileMotFichier(File *fileDeMot, char *nomFichier)
       }else{
         if(balise == 0 && strchr(ponctuation, caractereActuel) == NULL) {
           mot[i] = caractereActuel;
-
           i++;
         }
       }
@@ -139,7 +125,9 @@ void fileMotFichier(File *fileDeMot, char *nomFichier)
   fclose(fichier);
 
 }
-
+/*
+**Prend une file de mot A et enfile dans une seconde File B les mots les plus frequent de A.
+*/
 void fileMotFrequent(File *fileDeMot, File *fileMotFrequent)
 {
   char motFrequent[50];
@@ -152,3 +140,23 @@ void fileMotFrequent(File *fileDeMot, File *fileMotFrequent)
     }
   }
 }
+
+/*int compteNbLigne(FILE *fichier)
+{
+	int c;
+	int nLignes = 0;
+	int c2 = '\0';
+
+	while((c=fgetc(fichier)) != EOF)
+	{
+		if(c=='\n')
+			nLignes++;
+		c2 = c;
+	}
+
+	// Ici, c2 est égal au caractère juste avant le EOF.
+	if(c2 != '\n')
+		nLignes++; // Dernière ligne non finie
+
+	return nLignes;
+}*/

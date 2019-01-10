@@ -8,16 +8,19 @@
 #include "IndexationTexte.h"
 #include "indexationV1.h"
 
-#define PATH "../Base_de_donnees/TEXTES/"
-
-
 
 int main(void)
+{
+  indexationBaseTexte();
+}
+
+
+int indexationBaseTexte()
 {
     //LECTURE des fichier du repertoire bd
     struct dirent *lecture;
     DIR *rep;
-    rep = opendir(PATH);
+    rep = opendir(PATH_BD);
 
 
     FILE* fichierDescripteur = NULL;
@@ -29,6 +32,9 @@ int main(void)
 
     char motDefile[50];
     int id = 0, nb = 0;
+
+    printf("INDEXATION DES FICHIERS SUIVANT : \n");
+    //parcour des fichiers du repertoire
     while ((lecture = readdir(rep))) {//nom du fichier = lectur ->d_name
         if(strcmp(lecture->d_name,"..") == 0 || strcmp(lecture->d_name,".") == 0 ){
           continue;
@@ -37,18 +43,14 @@ int main(void)
         INIT_FILE(&fileDescripteur);
 
 
-        printf("\n%s\n", lecture->d_name);
+        printf("%s\n", lecture->d_name);
         fileMotFichier(&fileDeMot,lecture->d_name);
-        printf("\nOn passe fileMtFichier\n");
         fileMotFrequent(&fileDeMot,&fileDescripteur);//free
-        printf("\nOn passe fileMtFichier\n");
 
         if (fichierDescripteur == NULL){return 1;}
         fprintf(fichierDescripteur,"%d %d ",id,fileDeMot.nbMot);
-        AFFICHER_FILE(&fileDescripteur);
         while(!estVide(&fileDescripteur))
         {
-          printf("On ECRIT\n");
           nb = DEFILER(&fileDescripteur,motDefile); //free
           fprintf(fichierDescripteur, "%s %d ",motDefile,nb);
         }
@@ -58,20 +60,21 @@ int main(void)
 
         reinit(&fileDeMot);
         reinit(&fileDescripteur);
-
-
-
-        printf("IDDDDDDDDDDDDDDDDDDDDddd : %d",id);
     }
+    printf("INDEXATION TERMINE\n");
     fclose(fichierDescripteur);
     closedir(rep);
     return 0;
 }
 
+/*
+**Ajoute les mots du fichier texte dans une file, si le mot est deja existant dans la file
+**le compteur du mot est incremente.
+*/
 void fileMotFichier(File *fileDeMot, char *nomFichier)
 {
 
-  char path[200] = PATH;
+  char path[200] = PATH_BD;
 
   strcat(path,nomFichier);
 
@@ -99,7 +102,7 @@ void fileMotFichier(File *fileDeMot, char *nomFichier)
         continue;
       }
 
-      if(caractereActuel == ' ' || caractereActuel == '\n' || caractereActuel == '.' || caractereActuel == ',' && balise == 0 )
+      if((caractereActuel == ' ' || caractereActuel == '\n' || caractereActuel == '.' || caractereActuel == ',') && balise == 0 )
       {
         if(strlen(mot)>5)//On ne prend en compte que les mots plus grand que 5
         {
@@ -121,7 +124,9 @@ void fileMotFichier(File *fileDeMot, char *nomFichier)
   fclose(fichier);
 
 }
-
+/*
+**Prend une file de mot A et enfile dans une seconde File B les mots les plus frequent de A.
+*/
 void fileMotFrequent(File *fileDeMot, File *fileMotFrequent)
 {
   char motFrequent[50];
