@@ -16,6 +16,7 @@ void menu3(){
 	switch(R_par){
 	case 1 :
 		motcle();
+		printf("En travaux...\n");
 		break;
 	case 2 :
 		test_adresse();
