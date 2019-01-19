@@ -7,11 +7,18 @@ int main()
 
     printf(" - Initialisation d'une structure descripteur.\n");
     DESCR descripteur;
-    init_DESCR(&descripteur, 2);
+    init_DESCR(&descripteur, 4);
 
     printf(" - Lecture du fichier de test et remplissage du descripteur.\n");
     FILE* file;
-    file = fopen("../Test_Dev/descripteur_test.txt", "r");
+    file = fopen("../descripteur_base_texte.txt", "r");
+
+    if (file == NULL)
+    {
+        printf("Impossible de lire le fichier.\n");
+        return -1;
+    }
+
     fill_DESCR(&descripteur, file);
     fclose(file);
 

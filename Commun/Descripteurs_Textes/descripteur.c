@@ -11,30 +11,35 @@ void init_DESCR(DESCR* descriptor, int id)
 
 void fill_DESCR(DESCR* descriptor, FILE *file)
 {
-    int id, termes, total;
-    char line[100];
+    int id, total;
+    char line[500];
 
-    while (fgets(line, 100, file) != NULL)
+    while (fgets(line, 500, file) != NULL)
     {
-        fscanf(file, "%d %d %d\n", &id, &termes, &total);
+        fscanf(file, "%d %d", &id, &total);
 
         if (id == descriptor->id)
         {
             char word[WORD_LENGTH_MAX];
-            int occurence, i;
+            int occurence;
+            int termes = 0;
 
-            descriptor->nbTermes = termes;
             descriptor->total = total;
 
-            for (i = 0; i < termes; i++)
+            fscanf(file, "%s %d", &word, &occurence);
+            while (atoi(word) == 0)
             {
-                fscanf(file, "%s %d", &word, &occurence);
                 addWordandOcc_DESCR(descriptor, word, occurence);
+                fscanf(file, "%s %d", &word, &occurence);
+                termes++;
             }
 
+            descriptor->nbTermes = termes;
             return;
         }
     }
+
+    descriptor->nbTermes = 0;
 }
 
 void addWord_DESCR(DESCR* descriptor, char *word)
