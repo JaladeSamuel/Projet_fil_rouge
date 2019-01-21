@@ -33,6 +33,7 @@ int main()
         terme = terme->termeSuivant;
     }
 
+    close_DESCR(&descripteur);
     printf("\n - Fin des tests.\n");
     return 0;
 }

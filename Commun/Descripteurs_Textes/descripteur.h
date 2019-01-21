@@ -28,4 +28,6 @@ void fill_DESCR(DESCR* descriptor, FILE* file);
 void addWord_DESCR(DESCR* descriptor, char* word);
 void addWordandOcc_DESCR(DESCR* descriptor, char* word, int occurence);
 int getOccurence_DESCR(DESCR descriptor, char* word);
-void removeWord_DESCR(DESCR* descriptor, TERME* terme);
+void removeWord_DESCR(DESCR* descriptor);
+TERME* get_DESCR(DESCR descriptor, int index);
+void close_DESCR(DESCR* descriptor);
