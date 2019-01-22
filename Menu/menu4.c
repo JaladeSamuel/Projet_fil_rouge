@@ -5,9 +5,16 @@
 #include<stdlib.h>
 
 void nb_dom(){
-	int dom;
-	printf("\nChoisir une couleur :\n1 - Noir\n2 - Blanc\n3 - Retour\nCouleur : ");
-	scanf("%d",&dom);
+	int dom;	
+	char saisie[255];
+
+	while(1)
+	{
+		printf("\nChoisir une couleur :\n1 - Noir\n2 - Blanc\n3 - Retour\nCouleur : ");
+		fgets(saisie, 255, stdin);
+		if (sscanf(saisie, "%d", &dom) == 1) break;
+		printf("\nErreur de saisie, veuillez saisir un entier.\n");
+	}
 	
 	switch(dom){
 	case 1 :
@@ -26,9 +33,14 @@ void nb_dom(){
 
 void noir_blanc(){	
 	int nblc;
-	printf("\n1 - Noir/Blanc dominant\n2 - Fichier\n3 - Retour\nType de recherche : ");
-	scanf("%d",&nblc);
-
+	char saisie[255];
+	while(1)
+	{
+		printf("\n1 - Noir/Blanc dominant\n2 - Fichier\n3 - Retour\nType de recherche : ");
+		fgets(saisie, 255, stdin);
+		if (sscanf(saisie, "%d", &nblc) == 1) break;
+		printf("\nErreur de saisie, veuillez saisir un entier.\n");
+	}
 
 	switch(nblc){
 	case 1 :
@@ -47,9 +59,15 @@ void noir_blanc(){
 
 void R_couleur(){
 	int cl;
-	printf("\n1 - Couleur dominante\n2 - Fichier\n3 - Retour\nType de recherche :");
-	scanf("%d",&cl);
+	char saisie[255];
 	
+	while(1)
+	{
+		printf("\n1 - Couleur dominante\n2 - Fichier\n3 - Retour\nType de recherche :");
+		fgets(saisie, 255, stdin);
+		if (sscanf(saisie, "%d", &cl) == 1) break;
+		printf("\nErreur de saisie, veuillez saisir un entier.\n");
+	}
 	switch(cl){
 	case 1 : 
 		couleur_dom();
@@ -70,9 +88,15 @@ void R_couleur(){
 
 void couleur_dom(){	
 	int couleur;
-	printf("\nChoisir une couleur : \n1 - Rouge\n2 - Rose\n3 - Violet\n4 - Bleu\n5 - Vert\n6 - Jaune\n7 - Orange\n8 - Noir\n9 - Blanc\n10 - Retour\nCouleur : ");
-	scanf("%d",&couleur);
+	char saisie[255];
 	
+	while(1)
+	{
+		printf("\nChoisir une couleur : \n1 - Rouge\n2 - Rose\n3 - Violet\n4 - Bleu\n5 - Vert\n6 - Jaune\n7 - Orange\n8 - Noir\n9 - Blanc\n10 - Retour\nCouleur : ");
+		fgets(saisie, 255, stdin);
+		if (sscanf(saisie, "%d", &couleur) == 1) break;
+		printf("\nErreur de saisie, veuillez saisir un entier.\n");
+	}
 	switch(couleur){
 	case 1 :
 	case 2 :
@@ -101,9 +125,16 @@ void couleur_dom(){
 
 void Recherche_image(){
 	int R_image;
-	printf("\nSélectionner un type d'image :\n1 - Noir et Blanc\n2 - Couleur\n3 - Retour\nType de recherche : ");
-	scanf("%d",& R_image);
+	char saisie[255];
+	
 
+	while(1)
+	{
+		printf("\nSélectionner un type d'image :\n1 - Noir et Blanc\n2 - Couleur\n3 - Retour\nType de recherche : ");
+		fgets(saisie, 255, stdin);
+		if (sscanf(saisie, "%d", &R_image) == 1) break;
+		printf("\nErreur de saisie, veuillez saisir un entier.\n");
+	}
 	switch(R_image){
 	case 1 :
 		noir_blanc();

@@ -7,9 +7,15 @@
 
 void indexation(){
 	int choix;
-	printf("\nSélectionner le type du fichier à indexer :\n1 - Fichier texte\n2 - Fichier image\n3 - Fichier son\n4 - Retour\nChoix : ");
-	scanf("%d",&choix);
-	
+	char saisie[255];
+
+	while(1)
+	{
+		printf("\nSélectionner le type du fichier à indexer :\n1 - Fichier texte\n2 - Fichier image\n3 - Fichier son\n4 - Retour\nChoix : ");
+		fgets(saisie, 255, stdin);
+		if (sscanf(saisie, "%d", &choix) == 1) break;
+		printf("\nErreur de saisie, veuillez saisir un entier.\n");
+	}
 	switch(choix){
 	case 1 :
 		test_adresse();
@@ -32,9 +38,15 @@ void indexation(){
 
 void configuration(){
 	int choix;
-	printf("Configurer : \n1 - Indexation\n2 - Comparaison\n3 - Retour\nChoix : ");
-	scanf("%d", &choix);
-	
+	char saisie[255];
+
+	while(1)
+	{
+		printf("Configurer : \n1 - Indexation\n2 - Comparaison\n3 - Retour\nChoix : ");
+		fgets(saisie, 255, stdin);
+		if (sscanf(saisie, "%d", &choix) == 1) break;
+		printf("\nErreur de saisie, veuillez saisir un entier.\n");
+	}
 	switch(choix){
 	case 1:
 	case 2: 
@@ -47,10 +59,17 @@ void configuration(){
 void choix_adm(){
 
 	int choix;
-	printf("\nSélectionner une action :\n1 - Lancer une recherche\n2 - Accéder aux descripteurs\n3 - Lancer une indexation\n4 - Modifier les configurations\n5 - Retour\nChoix : ");
-	scanf("%d",&choix);
+	char saisie[255];
 
-
+	while(1)
+	{
+		
+		printf("\nSélectionner une action :\n1 - Lancer une recherche\n2 - Accéder aux descripteurs\n3 - Lancer une indexation\n4 - Modifier les configurations\n5 - Retour\nChoix : ");
+		fgets(saisie, 255, stdin);
+		if (sscanf(saisie, "%d", &choix) == 1) break;
+		printf("\nErreur de saisie, veuillez saisir un entier.\n");
+	}
+	
 	switch(choix){
 	case 1 : 
 		menu2_adm();

@@ -10,8 +10,15 @@ void motcle(){
 
 void menu3(){
 	int R_par=0;
-	printf("\nRecherche par :\n1 - Mot clé\n2 - Fichier\n3 - Retour\nType de Recherche : ");
-	scanf("%d", &R_par);
+	char saisie[255];
+	
+	while(1)
+	{
+		printf("\nRecherche par :\n1 - Mot clé\n2 - Fichier\n3 - Retour\nType de Recherche : ");
+		fgets(saisie, 255, stdin);
+		if (sscanf(saisie, "%d", &R_par) == 1) break;
+		printf("\nErreur de saisie, veuillez saisir un entier.\n");
+	}
 
 	switch(R_par){
 	case 1 :

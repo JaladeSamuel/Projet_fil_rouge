@@ -10,8 +10,15 @@ void identification(){
 
 void menu1(){
 	int mode=0;
-	printf("\nSélectionner un mode : \n1 - Utilisateur\n2 - Administrateur\nType de connexion : ");
-	scanf("%d", &mode);
+	char saisie[255];
+	
+	while(1)
+	{
+		printf("\nSélectionner un mode : \n1 - Utilisateur\n2 - Administrateur\nType de connexion : ");
+		fgets(saisie, 255, stdin);
+		if (sscanf(saisie, "%d", &mode) == 1) break;
+		printf("\nErreur de saisie, veuillez saisir un entier.\n");
+	}
 
 	switch(mode){	
 	case 1 :

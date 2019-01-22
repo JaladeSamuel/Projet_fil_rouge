@@ -6,9 +6,16 @@
 
 
 void menu2(){
-	printf("\nSélectionner le type de fichier recherché :\n1 - Texte\n2 - Image\n3 - Son\n4 - Retour\nType de fichier : ");
 	int type = 0;
-	scanf("%d",&type);
+	char saisie[255];
+	
+	while(1)
+	{
+		printf("\nSélectionner le type de fichier recherché :\n1 - Texte\n2 - Image\n3 - Son\n4 - Retour\nType de fichier : ");
+		fgets(saisie, 255, stdin);
+		if (sscanf(saisie, "%d", &type) == 1) break;
+		printf("\nErreur de saisie, veuillez saisir un entier.\n");
+	}
 
 	switch(type){
 	case 1 : 
@@ -31,9 +38,17 @@ void menu2(){
 }
 
 void menu2_adm(){
-	printf("\nSélectionner le type de fichier recherché :\n1 - Texte\n2 - Image\n3 - Son\n4 - Retour\nType de fichier : ");
+	
 	int type = 0;
-	scanf("%d",&type);
+	char saisie[255];
+	
+	while(1)
+	{
+		printf("\nSélectionner le type de fichier recherché :\n1 - Texte\n2 - Image\n3 - Son\n4 - Retour\nType de fichier : ");
+		fgets(saisie, 255, stdin);
+		if (sscanf(saisie, "%d", &type) == 1) break;
+		printf("\nErreur de saisie, veuillez saisir un entier.\n");
+	}
 
 	switch(type){
 	case 1 : 
