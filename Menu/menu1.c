@@ -4,7 +4,7 @@
 # include "menu2.h"
 
 void quitter(){
-	printf("\nFin de l'application.\n");
+	printf("\nFin du programme.\n");
 	exit(EXIT_SUCCESS);
 	
 }

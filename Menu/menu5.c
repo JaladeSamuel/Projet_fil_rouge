@@ -11,7 +11,7 @@ void indexation(){
 
 	while(1)
 	{
-		printf("\nSélectionner le type du fichier à indexer :\n1 - Fichier texte\n2 - Fichier image\n3 - Fichier son\n4 - Retour\nChoix : ");
+		printf("\nSélectionner le type du fichier à indexer :\n1 - Fichier texte\n2 - Fichier image\n3 - Fichier son\n4 - Retour\n5 - Quitter\nChoix : ");
 		fgets(saisie, 255, stdin);
 		if (sscanf(saisie, "%d", &choix) == 1) break;
 		printf("\nErreur de saisie, veuillez saisir un entier.\n");
@@ -29,6 +29,9 @@ void indexation(){
 	case 4 : 
 		choix_adm();
 		break;
+	case 5 : 
+		quitter();
+		break;
 	default : 
 		printf("\nErreur : Saisie impossible, veuillez choisir \"1\",\"2\",\"3\" ou \"4\".");
 		indexation();
@@ -42,7 +45,7 @@ void configuration(){
 
 	while(1)
 	{
-		printf("Configurer : \n1 - Indexation\n2 - Comparaison\n3 - Retour\nChoix : ");
+		printf("Configurer : \n1 - Indexation\n2 - Comparaison\n3 - Retour\n4 - Quitter\nChoix : ");
 		fgets(saisie, 255, stdin);
 		if (sscanf(saisie, "%d", &choix) == 1) break;
 		printf("\nErreur de saisie, veuillez saisir un entier.\n");
@@ -51,6 +54,11 @@ void configuration(){
 	case 1:
 	case 2: 
 	case 3:
+		printf("En travaux...\n");
+		break;
+	case 4 : 
+		quitter();
+		break;
 	default : 
 		break;
 	}
@@ -64,7 +72,7 @@ void choix_adm(){
 	while(1)
 	{
 		
-		printf("\nSélectionner une action :\n1 - Lancer une recherche\n2 - Accéder aux descripteurs\n3 - Lancer une indexation\n4 - Modifier les configurations\n5 - Retour\nChoix : ");
+		printf("\nSélectionner une action :\n1 - Lancer une recherche\n2 - Accéder aux descripteurs\n3 - Lancer une indexation\n4 - Modifier les configurations\n5 - Retour\n6 - Quitter\nChoix : ");
 		fgets(saisie, 255, stdin);
 		if (sscanf(saisie, "%d", &choix) == 1) break;
 		printf("\nErreur de saisie, veuillez saisir un entier.\n");
@@ -87,6 +95,9 @@ void choix_adm(){
 		break;
 	case 5 : 
 		menu1();
+		break;
+	case 6 :
+		quitter();
 		break;
 	default :
 		printf("\nErreur : Saisie impossible, veuillez choisir \"1\",\"2\",\"3\",\"4\" ou \"5\".\n");

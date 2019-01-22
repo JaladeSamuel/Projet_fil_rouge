@@ -6,6 +6,5 @@ tst_menu : menu1.c menu2.c menu3.c menu4.c menu.c menu5.c menu2.h menu3.h menu4.
 	./tst_menu.out
 
 
-
 clean:
 	rm -rf *.o

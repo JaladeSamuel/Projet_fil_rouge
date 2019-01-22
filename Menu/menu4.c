@@ -10,7 +10,7 @@ void nb_dom(){
 
 	while(1)
 	{
-		printf("\nChoisir une couleur :\n1 - Noir\n2 - Blanc\n3 - Retour\nCouleur : ");
+		printf("\nChoisir une couleur :\n1 - Noir\n2 - Blanc\n3 - Retour\n4 - Quitter\nCouleur : ");
 		fgets(saisie, 255, stdin);
 		if (sscanf(saisie, "%d", &dom) == 1) break;
 		printf("\nErreur de saisie, veuillez saisir un entier.\n");
@@ -24,6 +24,9 @@ void nb_dom(){
 	case 3 : 
 		noir_blanc();
 		break;
+	case 4 : 
+		quitter();
+		break;
 	default : 
 		printf("\nErreur : Saisie impossible, veuillez choisir \"1\" ou \"2\".\n");
 		nb_dom();
@@ -36,7 +39,7 @@ void noir_blanc(){
 	char saisie[255];
 	while(1)
 	{
-		printf("\n1 - Noir/Blanc dominant\n2 - Fichier\n3 - Retour\nType de recherche : ");
+		printf("\n1 - Noir/Blanc dominant\n2 - Fichier\n3 - Retour\n4 - Quitter\nType de recherche : ");
 		fgets(saisie, 255, stdin);
 		if (sscanf(saisie, "%d", &nblc) == 1) break;
 		printf("\nErreur de saisie, veuillez saisir un entier.\n");
@@ -51,6 +54,9 @@ void noir_blanc(){
 		break;
 	case 3 :
 		Recherche_image();
+		break;
+	case 4 :
+		quitter();
 		break;
 	default : 
 		break;

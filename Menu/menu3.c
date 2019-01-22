@@ -14,7 +14,7 @@ void menu3(){
 	
 	while(1)
 	{
-		printf("\nRecherche par :\n1 - Mot clé\n2 - Fichier\n3 - Retour\n4 - QuitterType de Recherche : ");
+		printf("\nRecherche par :\n1 - Mot clé\n2 - Fichier\n3 - Retour\n4 - Quitter\nType de Recherche : ");
 		fgets(saisie, 255, stdin);
 		if (sscanf(saisie, "%d", &R_par) == 1) break;
 		printf("\nErreur de saisie, veuillez saisir un entier.\n");
@@ -30,8 +30,11 @@ void menu3(){
 	case 3 :
 		menu2();
 		break;
+	case 4 : 
+		quitter();
+		break;
 	default :
-		printf("\nErreur : Saisie impossible, veuillez choisir \"1\",\"2\" ou \"3\"\n");
+		printf("\nErreur : Saisie impossible, veuillez choisir \"1\",\"2\",\"3\" ou \"4\"\n");
 		menu3();
 		break;
 	}
