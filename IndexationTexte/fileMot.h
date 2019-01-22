@@ -1,5 +1,3 @@
-#ifndef H_FILE
-#define H_FILE
 
 typedef struct Cellule Cellule;
 struct Cellule
@@ -27,5 +25,19 @@ int estVide(File *file);
 void reinit(File *file);
 
 
+typedef struct CheminDescripteur CheminDescripteur;
+struct CheminDescripteur
+{
+    char* chemin;
+    int id;
+    CheminDescripteur *suivant;
+};
 
-#endif
+typedef struct FileChemin FileChemin;
+struct FileChemin
+{
+    CheminDescripteur *premier;
+};
+
+void INIT_FILE_TABLE_INDEX(FileChemin *file);
+void ENFILER_CHEMIN(FileChemin *file, char* chemin, int id);

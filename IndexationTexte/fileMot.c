@@ -192,3 +192,38 @@ void reinit(File *file)
 
   }
 }
+///////////////
+//FILE_CHEMIN//
+///////////////
+void ENFILER_CHEMIN(FileChemin *file, char *nvChemin, int nvId)
+{
+
+    CheminDescripteur *nouveau = malloc(sizeof(*nouveau));
+    if (file == NULL || nouveau == NULL)
+    {
+        exit(EXIT_FAILURE);
+    }
+
+    nouveau->chemin = nvChemin;
+    nouveau->id = nvId;
+    nouveau->suivant = NULL;
+    if (file->premier != NULL) /* La file n'est pas vide */
+    {
+        /* On se positionne à la fin de la file */
+        CheminDescripteur *chActuel = file->premier;
+        while (chActuel->suivant != NULL)
+        {
+            chActuel = chActuel->suivant;
+        }
+        chActuel->suivant = nouveau;
+    }
+    else /* La file est vide, notre élément est le premier */
+    {
+        file->premier = nouveau;
+    }
+}
+
+void INIT_FILE_TABLE_INDEX(FileChemin *file)
+{
+    file->premier = NULL;
+}

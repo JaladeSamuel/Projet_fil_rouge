@@ -7,11 +7,12 @@
 
 
 
-/*int main(void)
+int main(void)
 {
   indexationBaseTexte();
+  //tableTexteIndexEstVide();
 }
-*/
+
 
 int indexationBaseTexte()
 {
@@ -22,11 +23,13 @@ int indexationBaseTexte()
 
 
     FILE* fichierDescripteur = NULL;
-    fichierDescripteur = fopen("../Commun/descripteur_base_texte.txt", "w");
+    fichierDescripteur = fopen("../Commun/descripteur_base_texte.txt", "w"); //LEs descripteurs genere seront ecrit dans ce fichier
 
     File fileDeMot;
     File fileDescripteur;
 
+    FileChemin fileTableIndex;
+    INIT_FILE_TABLE_INDEX(&fileTableIndex);
 
     char motDefile[50];
     int id = 0, nb = 0;
@@ -37,6 +40,8 @@ int indexationBaseTexte()
         if(strcmp(lecture->d_name,"..") == 0 || strcmp(lecture->d_name,".") == 0 ){
           continue;
         }
+
+        //INITIALISATION DES FILES
         INIT_FILE(&fileDeMot);
         INIT_FILE(&fileDescripteur);
 
@@ -58,10 +63,13 @@ int indexationBaseTexte()
 
         reinit(&fileDeMot);
         reinit(&fileDescripteur);
+
+        ENFILER_CHEMIN(&fileTableIndex, lecture->d_name,id);
     }
     printf("INDEXATION TERMINE\n");
     fclose(fichierDescripteur);
     closedir(rep);
+    actualiserTableTexteIndex(&fileTableIndex);
     return 0;
 }
 
@@ -138,6 +146,44 @@ void fileMotFrequent(File *fileDeMot, File *fileMotFrequent)
   }
 }
 
+int tableTexteIndexEstVide()
+{
+  int taille = 0;
+  FILE* fichierTableIndex = NULL;
+  fichierTableIndex = fopen("../Commun/tableTexteIndex.txt","r");
+  if(fichierTableIndex == NULL)
+  {
+    printf("Erreur : fichier NULL \n");
+    return -1;
+  }
+  fseek(fichierTableIndex, 0, SEEK_END);
+  taille = ftell(fichierTableIndex);
+  fclose(fichierTableIndex);
+  if(taille)
+  {
+    return 0;
+  } else {
+    return 1;
+  }
+}
+
+void actualiserTableTexteIndex(FileChemin *file)
+{
+  FILE* fichierTableIndex = NULL;
+  fichierTableIndex = fopen("../Commun/tableTexteIndex.txt","w");
+  if (file == NULL)
+  {
+      exit(EXIT_FAILURE);
+  }
+
+  CheminDescripteur *cel = file->premier;
+  while (cel != NULL)
+  {
+      fprintf(fichierTableIndex,"%d %s\n",cel->id,cel->chemin);
+      cel = cel->suivant;
+  }
+  fclose(fichierTableIndex);
+}
 /*int compteNbLigne(FILE *fichier)
 {
 	int c;
