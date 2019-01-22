@@ -8,7 +8,6 @@
 #define TRUE 1
 #define FALSE 0
 int main(void){
-	
 	menu1();
 	
 	return 0;

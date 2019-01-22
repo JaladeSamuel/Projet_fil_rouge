@@ -3,6 +3,12 @@
 # include "menu5.h"
 # include "menu2.h"
 
+void quitter(){
+	printf("\nFin de l'application.\n");
+	exit(EXIT_SUCCESS);
+	
+}
+
 void identification(){
 	system("stty -echo; read -p \"\nMot de passe : \" password; stty echo; while [ $password != \"123upssitech\" ] ;do echo \"\nMot de passe refusé ! Réessayez.\n\";stty -echo; read -p \"\nMot de passe : \" password; stty echo; done; echo \"\nMot de passe accepté.\"");
 	
