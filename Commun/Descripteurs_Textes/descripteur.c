@@ -41,6 +41,41 @@ void fill_DESCR(DESCR* descriptor, FILE *file)
     }
 }
 
+void fillWithPath_DESCR(DESCR* descriptor, char* path)
+{
+    int id, total;
+    char line[500];
+
+    descriptor->nbTermes = 0;
+
+    FILE* file = fopen(path, "r");
+
+    while (fgets(line, 500, file) != NULL)
+    {
+        fscanf(file, "%d %d", &id, &total);
+
+        if (id == descriptor->id)
+        {
+            char word[WORD_LENGTH_MAX];
+            int occurence;
+
+            descriptor->total = total;
+
+            fscanf(file, "%s %d", &word, &occurence);
+            while (atoi(word) == 0 && !feof(file))
+            {
+                addWordandOcc_DESCR(descriptor, word, occurence);
+                fscanf(file, "%s %d", &word, &occurence);
+                descriptor->nbTermes++;
+            }
+
+            return;
+        }
+    }
+
+    fclose(file);
+}
+
 void addWord_DESCR(DESCR* descriptor, char *word)
 {
     // On recherche le terme

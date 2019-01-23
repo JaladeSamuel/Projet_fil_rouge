@@ -1,4 +1,5 @@
 #include "comparaison.h"
+#include <string.h>
 
 int DESCRIPTORS_MAX_ID = 0;
 
@@ -57,6 +58,12 @@ void add_RES(RESULTS* res, int id, float pourcentage)
  */
 void print_RES(RESULTS res)
 {
+    if (res.size == 0)
+    {
+        printf("Aucun resultats n'a ete trouve.\n");
+        return;
+    }
+
     for (int i = 0; i < res.size; i++)
     {
         FILE* file;
@@ -183,6 +190,59 @@ void searchWord_COMPTXT(char mot[WORD_LENGTH_MAX], RESULTS* res)
     search_COMPTXT(searchDescr, res);
 }
 
+/** Lance une recherche en comparant avec le nom du fichier donné 
+ * 
+ */
+void searchFILE_COMPTXT(char filePath[50], RESULTS* res)
+{
+    FILE* file;
+
+    char fullFilePath[200];
+    strcpy(fullFilePath, DATA_BASE_PATH);
+    strcat(fullFilePath, filePath);
+    file = fopen(fullFilePath, "r");
+
+    if (file == NULL)
+    {
+        file = fopen(filePath, "r");
+
+        if (file == NULL)
+        {
+            printf("ERREUR : Impossible d'ouvrir le fichier %s\n", fullFilePath);
+            return;
+        }
+    }
+
+    fclose(file);
+    
+    file = fopen(FILE_DESCRIPTORS_INDEX, "r");
+
+    if (file == NULL)
+    {
+        printf("ERREUR : Impossible d'ouvrir le fichier d'index des descripteurs.");
+        return;
+    }
+
+    int id;
+    char fileName[60];
+    while (!feof(file))
+    {
+        fscanf(file, "%d %s", &id, &fileName);
+
+        if (strcmp(fileName, filePath) == 0)
+        {
+            DESCR descriptor;
+            init_DESCR(&descriptor, id);
+            fillWithPath_DESCR(&descriptor, FILE_DESCRIPTORS_PATH);
+            search_COMPTXT(descriptor, res);
+
+            break;
+        }
+    }
+
+
+}
+
 /** Lance une recherche par rapport au descripteur 'base' et renvoie la liste des résultats dans la structure RESULTATS 'res'.
  *  DESCR base : descripteur de référence pour la recherche.
  *  RESULTS* res : structure de resultats que l'on veut afficher
@@ -207,7 +267,7 @@ void search_COMPTXT(DESCR base, RESULTS* res)
         fill_DESCR(&tempDescr, file);
 
         float tempComp = compare_COMPTXT(base, tempDescr);
-        if (tempComp > 0.0)
+        if (tempComp > 0.0 && counter != base.id)
         {
             add_RES(res, tempDescr.id, tempComp);
         }

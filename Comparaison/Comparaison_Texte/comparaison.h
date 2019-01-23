@@ -17,6 +17,7 @@ typedef struct RESULTS_tag
 char* FILE_DESCRIPTORS_PATH;
 char* FILE_TEXT_CONFIG_PATH;
 char* FILE_DESCRIPTORS_INDEX;
+char* DATA_BASE_PATH;
 
 void init_RES(RESULTS* res);
 void add_RES(RESULTS* res, int id, float pourcentage);
@@ -25,6 +26,7 @@ void print_RES(RESULTS res);
 void init_COMPTXT();
 float compare_COMPTXT(DESCR base, DESCR descriptor);
 void searchWord_COMPTXT(char mot[WORD_LENGTH_MAX], RESULTS* res);
+void searchFILE_COMPTXT(char file[50], RESULTS* res);
 void search_COMPTXT(DESCR base, RESULTS* res);
 
 #endif

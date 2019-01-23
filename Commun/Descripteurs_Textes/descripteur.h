@@ -28,6 +28,7 @@ typedef struct tag_DESCR {
 
 void init_DESCR(DESCR* descriptor, int id);
 void fill_DESCR(DESCR* descriptor, FILE* file);
+void fillWithPath_DESCR(DESCR* descriptor, char* path);
 void addWord_DESCR(DESCR* descriptor, char* word);
 void addWordandOcc_DESCR(DESCR* descriptor, char* word, int occurence);
 int getOccurence_DESCR(DESCR descriptor, char* word);
