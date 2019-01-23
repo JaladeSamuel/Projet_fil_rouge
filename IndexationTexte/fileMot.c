@@ -197,7 +197,7 @@ void reinit(File *file)
 ///////////////
 void ENFILER_CHEMIN(FileChemin *file, char *nvChemin, int nvId)
 {
-
+  //  printf("CHEMIN PARAMETRE DANS ENFILER CHEMIN : %s\n",nvChemin);
     CheminDescripteur *nouveau = malloc(sizeof(*nouveau));
     if (file == NULL || nouveau == NULL)
     {
@@ -211,7 +211,7 @@ void ENFILER_CHEMIN(FileChemin *file, char *nvChemin, int nvId)
     {
         /* On se positionne à la fin de la file */
         CheminDescripteur *chActuel = file->premier;
-        while (chActuel->suivant != NULL)
+        while(chActuel->suivant != NULL)
         {
             chActuel = chActuel->suivant;
         }
@@ -223,7 +223,93 @@ void ENFILER_CHEMIN(FileChemin *file, char *nvChemin, int nvId)
     }
 }
 
+int tableTexteIndexEstVide()
+{
+  int taille = 0;
+  FILE* fichierTableIndex = NULL;
+  fichierTableIndex = fopen("../Commun/tableTexteIndex.txt","r");
+  if(fichierTableIndex == NULL)
+  {
+    printf("Erreur : fichier NULL \n");
+    return -1;
+  }
+  fseek(fichierTableIndex, 0, SEEK_END);
+  taille = ftell(fichierTableIndex);
+  fclose(fichierTableIndex);
+  if(taille)
+  {
+    return 0;
+  } else {
+    return 1;
+  }
+}
+
 void INIT_FILE_TABLE_INDEX(FileChemin *file)
 {
-    file->premier = NULL;
+    if(tableTexteIndexEstVide() || 1)
+    {
+      file->premier = NULL;
+    } else {
+      FILE* fichierTableIndex = NULL;
+      fichierTableIndex = fopen("../Commun/tableTexteIndex.txt","r");
+      if(fichierTableIndex == NULL)
+      {
+        printf("Erreur : fichier NULL \n");
+        exit(EXIT_FAILURE);
+      }
+      rewind(fichierTableIndex);
+      int t;
+      char path[500];
+      while(!feof(fichierTableIndex))
+      {
+        fscanf(fichierTableIndex,"%d %s",&t,path);
+        //printf("%s\n",chemin);
+        ENFILER_CHEMIN(file,path,t);
+      }
+      rewind(fichierTableIndex);
+      fclose(fichierTableIndex);
+    }
+
+}
+
+int fileContainsChemin(FileChemin *file, char *chemin)
+{
+  if(file->premier == NULL || tableTexteIndexEstVide())
+  {
+    printf("0 premier nul \n");
+    return 0;
+  }
+
+  CheminDescripteur *cel = file->premier;
+  while (cel != NULL)
+  {
+
+    if(strcmp(chemin,cel->chemin) == 0)
+    {
+      printf("1\n");
+      return 1;
+    }
+    printf("chemin parametre : %s Chemin file : %s NE SONT PAS =\n",chemin,cel->chemin);
+    printf("%s\n",(cel->suivant)->chemin);
+    cel = cel->suivant;
+  }
+  printf("0 aucun chemin == cel->chemin\n");
+  return 0;
+}
+
+void AFFICHER_FILE_TABLE_INDEX(FileChemin *file)
+{
+    if (file == NULL)
+    {
+        printf("ERREUR : File vide");
+        exit(EXIT_FAILURE);
+    }
+
+    CheminDescripteur *cel = file->premier;
+
+    while (cel != NULL)
+    {
+        printf("Cellule : %s | id : %d \n",cel->chemin,cel->id);
+        cel = cel->suivant;
+    }
 }

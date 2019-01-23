@@ -7,12 +7,23 @@
 
 
 
+
 int main(void)
 {
-  indexationBaseTexte();
+  //indexationBaseTexte();
   //tableTexteIndexEstVide();
+  return 0;
 }
 
+
+int indexationFichierTexte(char *cheminFichier, DESCR* descripteur)
+{
+  File fileDeMotDuFichier;
+  INIT_FILE(&fileDeMotDuFichier);
+  fileMotFichier(&fileDeMotDuFichier,cheminFichier,0);
+  fileMotFrequentDansDESCR(&fileDeMotDuFichier,descripteur);
+  return 1;
+}
 
 int indexationBaseTexte()
 {
@@ -30,24 +41,45 @@ int indexationBaseTexte()
 
     FileChemin fileTableIndex;
     INIT_FILE_TABLE_INDEX(&fileTableIndex);
+    //AFFICHER_FILE_TABLE_INDEX(&fileTableIndex);
+    int aucunFichierIndexe = 1;
 
     char motDefile[50];
     int id = 0, nb = 0;
 
     printf("INDEXATION DES FICHIERS SUIVANT : \n");
     //parcour des fichiers du repertoire
+
     while ((lecture = readdir(rep))) {//nom du fichier = lectur ->d_name
-        if(strcmp(lecture->d_name,"..") == 0 || strcmp(lecture->d_name,".") == 0 ){
+
+        if(strcmp(lecture->d_name,"..") == 0 || strcmp(lecture->d_name,".") == 0){
           continue;
         }
+        printf("%s\n", lecture->d_name);
+    /*    if(fileContainsChemin(&fileTableIndex,lecture->d_name))
+        {
+          printf("Fichier : %s deja indexe\n",lecture->d_name);
+          continue;
+        } */
+        aucunFichierIndexe = 0;
+        //Convertit les fichier ISO-8859-1 en UTF-8
+        /*char conv[500] = {"iconv -f ISO-8859-1 -t UTF-8 "};
+        strcat(conv,"../Base_de_donnees/texte2/");
+        strcat(conv,lecture->d_name);
+        strcat(conv," -o ");
+        strcat(conv,"../Base_de_donnees/texte2/");
+        strcat(conv,lecture->d_name);
+        printf("%s\n",conv);
+        system(conv);*/
+
 
         //INITIALISATION DES FILES
         INIT_FILE(&fileDeMot);
         INIT_FILE(&fileDescripteur);
 
 
-        printf("%s\n", lecture->d_name);
-        fileMotFichier(&fileDeMot,lecture->d_name);
+
+        fileMotFichier(&fileDeMot,lecture->d_name,1);
         fileMotFrequent(&fileDeMot,&fileDescripteur);//free
 
         if (fichierDescripteur == NULL){return 1;}
@@ -59,17 +91,25 @@ int indexationBaseTexte()
         }
 
         fprintf(fichierDescripteur,"\n");
-        id++;
 
         reinit(&fileDeMot);
         reinit(&fileDescripteur);
 
-        ENFILER_CHEMIN(&fileTableIndex, lecture->d_name,id);
-    }
+        ENFILER_CHEMIN(&fileTableIndex, lecture->d_name, id);
+        id++;
+
+
+    }// end while
+
     printf("INDEXATION TERMINE\n");
     fclose(fichierDescripteur);
     closedir(rep);
-    actualiserTableTexteIndex(&fileTableIndex);
+    //Si au moin un fichier a ete indexe
+    if(!aucunFichierIndexe)
+    {
+      actualiserTableTexteIndex(&fileTableIndex); //on actualise la table
+    }
+
     return 0;
 }
 
@@ -77,12 +117,16 @@ int indexationBaseTexte()
 **Ajoute les mots du fichier texte dans une file, si le mot est deja existant dans la file
 **le compteur du mot est incremente.
 */
-void fileMotFichier(File *fileDeMot, char *nomFichier)
+void fileMotFichier(File *fileDeMot, char *nomFichier,int dansBase)
 {
-
   char path[200] = PATH_BD;
+  if(dansBase)
+  {
+    strcat(path,nomFichier);
+  }
 
-  strcat(path,nomFichier);
+
+
 
   FILE* fichier = NULL;
   fichier = fopen(path, "r"); // Ouverture
@@ -146,24 +190,16 @@ void fileMotFrequent(File *fileDeMot, File *fileMotFrequent)
   }
 }
 
-int tableTexteIndexEstVide()
+void fileMotFrequentDansDESCR(File *fileDeMot, DESCR *fileMotFrequent)
 {
-  int taille = 0;
-  FILE* fichierTableIndex = NULL;
-  fichierTableIndex = fopen("../Commun/tableTexteIndex.txt","r");
-  if(fichierTableIndex == NULL)
+  char motFrequent[50];
+  int nb;
+  for(int i = 0; i<10; i++)
   {
-    printf("Erreur : fichier NULL \n");
-    return -1;
-  }
-  fseek(fichierTableIndex, 0, SEEK_END);
-  taille = ftell(fichierTableIndex);
-  fclose(fichierTableIndex);
-  if(taille)
-  {
-    return 0;
-  } else {
-    return 1;
+    nb = defilerPlusGrand(fileDeMot,motFrequent);
+    if(nb > 0){
+      addWordandOcc_DESCR(fileMotFrequent,motFrequent,nb);
+    }
   }
 }
 
@@ -184,22 +220,3 @@ void actualiserTableTexteIndex(FileChemin *file)
   }
   fclose(fichierTableIndex);
 }
-/*int compteNbLigne(FILE *fichier)
-{
-	int c;
-	int nLignes = 0;
-	int c2 = '\0';
-
-	while((c=fgetc(fichier)) != EOF)
-	{
-		if(c=='\n')
-			nLignes++;
-		c2 = c;
-	}
-
-	// Ici, c2 est égal au caractère juste avant le EOF.
-	if(c2 != '\n')
-		nLignes++; // Dernière ligne non finie
-
-	return nLignes;
-}*/

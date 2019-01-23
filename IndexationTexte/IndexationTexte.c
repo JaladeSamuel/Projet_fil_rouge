@@ -2,7 +2,7 @@
 #include <dirent.h>
 #include <stdlib.h>
 #include <string.h>
-
+//CLASSE DE TEST en cours...
 
 #include "IndexationTexte.h"
 

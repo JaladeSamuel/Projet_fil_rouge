@@ -41,3 +41,5 @@ struct FileChemin
 
 void INIT_FILE_TABLE_INDEX(FileChemin *file);
 void ENFILER_CHEMIN(FileChemin *file, char* chemin, int id);
+int fileContainsChemin(FileChemin *file, char *chemin);
+void AFFICHER_FILE_TABLE_INDEX(FileChemin *file);
