@@ -2,6 +2,9 @@
 
 #define WORD_LENGTH_MAX 25
 
+#ifndef DESCRIPTEURTXT_H
+#define DESCRIPTEURTXT_H
+
 typedef struct tag_TERME
 {
     char word[WORD_LENGTH_MAX];
@@ -31,3 +34,5 @@ int getOccurence_DESCR(DESCR descriptor, char* word);
 void removeWord_DESCR(DESCR* descriptor);
 TERME* get_DESCR(DESCR descriptor, int index);
 void close_DESCR(DESCR* descriptor);
+
+#endif

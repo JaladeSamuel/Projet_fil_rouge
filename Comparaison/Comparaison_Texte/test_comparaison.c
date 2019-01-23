@@ -6,7 +6,10 @@ int main()
     int i;
     float comparaison;
 
-    initComparaison();
+    FILE_DESCRIPTORS_PATH = "../../Commun/descripteur_base_texte.txt";
+    FILE_TEXT_CONFIG_PATH = "../../Config/config_texte.txt";
+    FILE_DESCRIPTORS_INDEX = "../../Commun/tableTexteIndex.txt";
+    init_COMPTXT();
 
     printf(" - Initialisation de deux descripteurs.\n");
     DESCR descripteur1, descripteur2;
@@ -42,13 +45,13 @@ int main()
         terme = terme->termeSuivant;
     }
 
-    comparaison = comparer(descripteur1, descripteur2);
+    comparaison = compare_COMPTXT(descripteur1, descripteur2);
     printf("\n - Comparaison des deux : %f %%", comparaison);
 
     printf("\n - Recherche du mot 'navigateur' : \n");
     RESULTS res;
     init_RES(&res);
-    rechercherParMot("navigateur", &res);
+    searchWord_COMPTXT("navigateur", &res);
     print_RES(res);
 
     printf(" - Fin des tests.\n");

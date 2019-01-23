@@ -37,16 +37,11 @@ void add_RES(RESULTS* res, int id, float pourcentage)
 
         if (counter != SIZE_RESULTS_MAX)
         {
-            int idTemp = res->ids[counter];
-            float pourcentageTemp = res->percentages[counter];
-
-            for (int i = counter; i < res->size - counter; i++)
+            int i = 0;
+            for (i = res->size; (i >= counter && i < SIZE_RESULTS_MAX); i--)
             {
-                int idTemp = res->ids[i];
-                float pourcentageTemp = res->percentages[i];
-
-                res->ids[i + 1] = idTemp;
-                res->percentages[i + 1] = pourcentageTemp;
+                res->ids[i + 1] = res->ids[i];
+                res->percentages[i + 1] = res->percentages[i];
             }
 
             res->ids[counter] = id;
@@ -64,11 +59,36 @@ void print_RES(RESULTS res)
 {
     for (int i = 0; i < res.size; i++)
     {
-        printf(" - %d (%.0f%%)\n", res.ids[i], res.percentages[i]);
+        FILE* file;
+        file = fopen(FILE_DESCRIPTORS_INDEX, "r");
+
+        if (file == NULL)
+        {
+            printf("ERREUR : Impossible d'ouvrir le fichier d'index des descripteurs.");
+            return;
+        }
+
+        printf(" - ");
+
+        int id;
+        char fileName[60];
+        while (!feof(file))
+        {
+            fscanf(file, "%d %s", &id, &fileName);
+
+            if (id == res.ids[i])
+            {
+                printf("%s (%.0f%%)\n", fileName, res.percentages[i]);
+            }
+        }
+
+        rewind(file);
     }
 }
 
-void initComparaison()
+/** Initialise la comparaison.
+ */
+void init_COMPTXT()
 {
     FILE* file;
     file = fopen(FILE_TEXT_CONFIG_PATH, "r");
@@ -76,13 +96,13 @@ void initComparaison()
     if (file == NULL)
     {
         printf("ERREUR : Impossible d'ouvrir le fichier de configurations texte.\n");
-        return;
     }
-
-    // TODO
-
-    fclose(file);
-
+    else
+    {
+        // TODO
+        fclose(file);
+    }
+    
     file = fopen(FILE_DESCRIPTORS_PATH, "r");
 
     if (file == NULL)
@@ -91,11 +111,10 @@ void initComparaison()
         return;
     }
 
-    int id = 0, total, max = 0;
-    char line[500];
-    while (fgets(line, 500, file) != NULL)
+    int id = 0, max = 0;
+    while (!feof(file))
     {
-        fscanf(file, "%d %d", &id, &total);
+        fscanf(file, "%d%*[^\n]", &id);
 
         if (max < id)
         {
@@ -107,7 +126,11 @@ void initComparaison()
     fclose(file);
 }
 
-float comparer(DESCR base, DESCR descriptor)
+/** Compare deux descripteurs et renvoie la similarité en pourcentage, de 0% (complètement différents) à 100% (descripteurs identiques).
+ *  DESCR base : descripteur de référence pour la comparaison
+ *  DESCR descriptor : descripteur comparé à celui de référence
+ */
+float compare_COMPTXT(DESCR base, DESCR descriptor)
 {
     TERME* termeBase;
     int occTermeDescr;
@@ -145,25 +168,45 @@ float comparer(DESCR base, DESCR descriptor)
     return sum / (float)base.nbTermes;
 }
 
-void rechercherParMot(char mot[WORD_LENGTH_MAX], RESULTS* res)
+/** Recherche un mot dans la liste des descripteurs et retourne la liste ordonnée dans la structure RESULTS
+ *  char mot[WORD_LENGTH_MAX] : le mot à chercher
+ *  RESULTS* res : la structure RESULTS dans laquelle on sauvegarde le résultat de la recherche
+ */
+void searchWord_COMPTXT(char mot[WORD_LENGTH_MAX], RESULTS* res)
 {
-    int counter = 0;
-
     DESCR searchDescr, tempDescr;
     init_DESCR(&searchDescr, -1);
     addWord_DESCR(&searchDescr, mot);
     searchDescr.nbTermes = 1;
     searchDescr.total = 1;
 
+    search_COMPTXT(searchDescr, res);
+}
+
+/** Lance une recherche par rapport au descripteur 'base' et renvoie la liste des résultats dans la structure RESULTATS 'res'.
+ *  DESCR base : descripteur de référence pour la recherche.
+ *  RESULTS* res : structure de resultats que l'on veut afficher
+ */
+void search_COMPTXT(DESCR base, RESULTS* res)
+{
     FILE* file;
+    int counter = 0;
+    DESCR tempDescr;
+
     while (counter <= DESCRIPTORS_MAX_ID)
     {
         file = fopen(FILE_DESCRIPTORS_PATH, "r");
 
+        if (file == NULL)
+        {
+            printf("ERREUR : Impossible d'ouvrir le fichier de descripteurs texte.\n");
+            return;
+        }
+
         init_DESCR(&tempDescr, counter);
         fill_DESCR(&tempDescr, file);
 
-        float tempComp = comparer(searchDescr, tempDescr);
+        float tempComp = compare_COMPTXT(base, tempDescr);
         if (tempComp > 0.0)
         {
             add_RES(res, tempDescr.id, tempComp);
@@ -174,13 +217,4 @@ void rechercherParMot(char mot[WORD_LENGTH_MAX], RESULTS* res)
         counter++;
         fclose(file);
     }
-}
-
-/** Lance une recherche par rapport au descripteur 'base' et renvoie la liste des résultats dans la structure RESULTATS 'res'.
- *  DESCR base : descripteur de référence pour la recherche.
- *  RESULTS* res : structure de resultats que l'on veut afficher
- */
-void search_COMPTXT(DESCR base, RESULTS res)
-{
-
 }

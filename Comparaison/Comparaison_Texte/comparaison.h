@@ -2,8 +2,9 @@
 
 // TODO : lire la valeur dans le fichier de configs
 #define SIZE_RESULTS_MAX 10
-#define FILE_DESCRIPTORS_PATH "../../Commun/descripteur_base_texte.txt"
-#define FILE_TEXT_CONFIG_PATH "../../Config/config_texte.txt"
+
+#ifndef COMPARAISONTXT_H
+#define COMPARAISONTXT_H
 
 typedef struct RESULTS_tag
 {
@@ -13,11 +14,17 @@ typedef struct RESULTS_tag
 
 } RESULTS;
 
+char* FILE_DESCRIPTORS_PATH;
+char* FILE_TEXT_CONFIG_PATH;
+char* FILE_DESCRIPTORS_INDEX;
+
 void init_RES(RESULTS* res);
 void add_RES(RESULTS* res, int id, float pourcentage);
 void print_RES(RESULTS res);
 
-void initComparaison();
-float comparer(DESCR base, DESCR descriptor);
-void rechercherParMot(char mot[WORD_LENGTH_MAX], RESULTS* res);
-void search_COMPTXT(DESCR base, RESULTS res);
+void init_COMPTXT();
+float compare_COMPTXT(DESCR base, DESCR descriptor);
+void searchWord_COMPTXT(char mot[WORD_LENGTH_MAX], RESULTS* res);
+void search_COMPTXT(DESCR base, RESULTS* res);
+
+#endif
