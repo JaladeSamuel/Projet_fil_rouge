@@ -7,16 +7,16 @@
 
 
 
-
-// int main(void)
-// {
-//   //indexationBaseTexte();
-//   return 0;
-// }
+/*int main(void)
+{
+   indexationBaseTexte();
+   return 0;
+}*/
 
 
 int indexationFichierTexte(char *cheminFichier, DESCR* descripteur)
 {
+  printf("Generation du descripteur pour le fichier : %s\n",cheminFichier);
   File fileDeMotDuFichier;
   INIT_FILE(&fileDeMotDuFichier);
   fileMotFichier(&fileDeMotDuFichier,cheminFichier,0);
@@ -118,6 +118,7 @@ int indexationBaseTexte()
 */
 void fileMotFichier(File *fileDeMot, char *nomFichier,int dansBase)
 {
+
   char path[200] = PATH_BD;
   if(dansBase)
   {
@@ -126,8 +127,6 @@ void fileMotFichier(File *fileDeMot, char *nomFichier,int dansBase)
     memset(path,'\0',sizeof(nomFichier));
     strcpy(path,nomFichier);
   }
-
-
 
 
   FILE* fichier = NULL;

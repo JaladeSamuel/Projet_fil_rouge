@@ -3,10 +3,8 @@
 #include <string.h>
 #include <sys/types.h>
 #include <dirent.h>
+
 #include "indexationV1.h"
-
-
-
 
 int main(void)
 {
@@ -55,10 +53,6 @@ int main(void)
 
         reinit(&fileDeMot);
         reinit(&fileDescripteur);
-
-
-
-
     }
     fclose(fichierDescripteur);
     closedir(rep);

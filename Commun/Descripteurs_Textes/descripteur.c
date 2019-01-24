@@ -28,11 +28,11 @@ void fill_DESCR(DESCR* descriptor, FILE *file)
 
             descriptor->total = total;
 
-            fscanf(file, "%s %d", &word, &occurence);
+            fscanf(file, "%s %d",word, &occurence);
             while (atoi(word) == 0 && !feof(file))
             {
                 addWordandOcc_DESCR(descriptor, word, occurence);
-                fscanf(file, "%s %d", &word, &occurence);
+                fscanf(file, "%s %d",word, &occurence);
                 descriptor->nbTermes++;
             }
 
@@ -61,11 +61,11 @@ void fillWithPath_DESCR(DESCR* descriptor, char* path)
 
             descriptor->total = total;
 
-            fscanf(file, "%s %d", &word, &occurence);
+            fscanf(file, "%s %d", word, &occurence);
             while (atoi(word) == 0 && !feof(file))
             {
                 addWordandOcc_DESCR(descriptor, word, occurence);
-                fscanf(file, "%s %d", &word, &occurence);
+                fscanf(file, "%s %d", word, &occurence);
                 descriptor->nbTermes++;
             }
 

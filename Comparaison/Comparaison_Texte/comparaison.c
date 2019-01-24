@@ -90,7 +90,7 @@ void print_RES(RESULTS res)
         char fileName[60];
         while (!feof(file))
         {
-            fscanf(file, "%d %s", &id, &fileName);
+            fscanf(file, "%d %s", &id, fileName);
 
             if (id == res.ids[i])
             {
@@ -118,7 +118,7 @@ void init_COMPTXT()
         // TODO
         fclose(file);
     }
-    
+
     file = fopen(FILE_DESCRIPTORS_PATH, "r");
 
     if (file == NULL)
@@ -199,8 +199,8 @@ void searchWord_COMPTXT(char mot[WORD_LENGTH_MAX], RESULTS* res)
     search_COMPTXT(searchDescr, res);
 }
 
-/** Lance une recherche en comparant avec le nom du fichier donné 
- * 
+/** Lance une recherche en comparant avec le nom du fichier donné
+ *
  */
 void searchFILE_COMPTXT(char filePath[400], RESULTS* res)
 {
@@ -228,10 +228,10 @@ void searchFILE_COMPTXT(char filePath[400], RESULTS* res)
             char fileNameMinimized[100];
             char closestFileName[500];
             closestFileName[0] = '\0';
-            
+
             while (!feof(file))
             {
-                fscanf(file, "%d %s", &id, &fileName);
+                fscanf(file, "%d %s", &id, fileName);
                 strcpy(fileNameMinimized, fileName);
                 tolower_STR(fileNameMinimized);
                 if (strstr(fileNameMinimized, filePath) != NULL)
@@ -245,7 +245,7 @@ void searchFILE_COMPTXT(char filePath[400], RESULTS* res)
             if (strlen(closestFileName) > 0)
             {
                 printf("Voulez-vous dire le(s) fichier(s) %s?\n", closestFileName);
-            }            
+            }
 
             fclose(file);
             return;
@@ -274,7 +274,7 @@ void searchFILE_COMPTXT(char filePath[400], RESULTS* res)
     char fileName[60];
     while (!feof(file))
     {
-        fscanf(file, "%d %s", &id, &fileName);
+        fscanf(file, "%d %s", &id, fileName);
 
         if (strcmp(fileName, filePath) == 0)
         {
@@ -316,7 +316,7 @@ void search_COMPTXT(DESCR base, RESULTS* res)
         {
             add_RES(res, tempDescr.id, tempComp);
         }
-        
+
         close_DESCR(&tempDescr);
 
         counter++;
