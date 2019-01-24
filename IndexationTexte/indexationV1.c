@@ -208,8 +208,9 @@ void fileMotFrequentDansDESCR(File *fileDeMot, DESCR *fileMotFrequent)
       nbTermes++;
     }
   }
-  fileMotFrequent.nbTermes = nbTermes;
-  fileMotFrequent.total = nbMotsTotal;
+  //passage des attributs pour la structure descripteur de comparaison
+  fileMotFrequent->nbTermes = nbTermes;
+  fileMotFrequent->total = nbMotsTotal;
 }
 
 void actualiserTableTexteIndex(FileChemin *file)
