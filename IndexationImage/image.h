@@ -8,6 +8,9 @@
 
 #define NOMBRE_DE_RESULTAT 4 //nombre de résultat renvoyé par la comparaison d'image
 typedef struct etImage{//Image RGB
+  /*
+  Structure pour une image RGB, qui contient les infos sur l'image
+  */
   int nb_lignes;
   int nb_colonnes;
   int** imageR;
@@ -15,7 +18,7 @@ typedef struct etImage{//Image RGB
   int** imageB;
   int** image;
   int histogramme[64];
-  char id[150];
+  char id[150];/*Id est un moyen de la reconnaitre parmi les autres*/
 }*image;
 
 
@@ -23,19 +26,19 @@ typedef struct etImageNB{ //Image NB
   int nb_lignes;
   int nb_colonnes;
   int** image;
-  int histogramme[4];
-  char id[150];
+  int histogramme[4];/*Tableau de 4 pour aller de 0 à 3*/
+  char id[150];/*Id est un moyen de la reconnaitre parmi les autres*/
 }*imageNB;
 
 //Pile dynamique
-typedef struct Cellule{
-  struct Cellule* suivant;
+typedef struct Cell{
+  struct Cell* suivant;
   int valeur;
   char id[150];
-}Cellule;
+}Cell;
  
 typedef struct{
-  Cellule* premier;
+  Cell* premier;
 }PILE;
 
 //MODULE POUR LA QUANRIFICATION
@@ -46,8 +49,6 @@ int quantificationRGB(int nombreR,int nombreG,int nombreB);
 void histogrammeRGB(image m);
 
 void histogrammeNB(imageNB m);
-
-//TEST
 
 image creation_imageRGB(int nb_lignes ,int nb_colonnes);
 

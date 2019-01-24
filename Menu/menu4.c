@@ -3,6 +3,7 @@
 #include"menu1.h"
 #include"menu3.h"
 #include<stdlib.h>
+#include "../IndexationImage/image.h"
 
 void nb_dom(){
 	int dom;	
@@ -79,7 +80,7 @@ void R_couleur(){
 		couleur_dom();
 		break;
 	case 2 :
-		test_adresse();
+		comparaisonFichierRGB();
 		break;
 	case 3 :
 		Recherche_image();
@@ -158,7 +159,7 @@ void Recherche_image(){
 	}
 }
 	
-
-
-
-
+void comparaisonFichierRGB()
+{
+	comparerImageAvecImageRGB();
+}

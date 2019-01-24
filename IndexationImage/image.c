@@ -501,7 +501,7 @@ void comparerImageAvecImageNB(){
     if(taillePile<NOMBRE_DE_RESULTAT){
       printf("Nombre de résultat attendu supérieur au nombre de fichier présent");
     }else{
-      Cellule* caseMoment = p.premier;
+      Cell* caseMoment = p.premier;
       while(caseMoment!=NULL){
         if(caseMoment->valeur<minim){minim=caseMoment->valeur;}
 	    caseMoment=caseMoment->suivant;
@@ -523,7 +523,7 @@ void comparerImageAvecImageNB(){
   char tabNom[NOMBRE_DE_RESULTAT][150];
   
   i=0;
-  Cellule* caseMoment = p2.premier;
+  Cell* caseMoment = p2.premier;
   while(caseMoment!=NULL){
     tabValeur[i]=caseMoment->valeur;
     strcpy(tabNom[i],caseMoment->id);
@@ -651,7 +651,7 @@ void comparerImageAvecImageRGB(){
     if(taillePile<NOMBRE_DE_RESULTAT){
       printf("Nombre de résultat attendu supérieur au nombre de fichier présent");
     }else{
-      Cellule* caseMoment = p.premier;
+      Cell* caseMoment = p.premier;
       while(caseMoment!=NULL){
         if(caseMoment->valeur<minim){minim=caseMoment->valeur;}
 	    caseMoment=caseMoment->suivant;
@@ -673,7 +673,7 @@ void comparerImageAvecImageRGB(){
   char tabNom[NOMBRE_DE_RESULTAT][150];
   
   i=0;
-  Cellule* caseMoment = p2.premier;
+  Cell* caseMoment = p2.premier;
   while(caseMoment!=NULL){
     tabValeur[i]=caseMoment->valeur;
     strcpy(tabNom[i],caseMoment->id);
@@ -702,7 +702,7 @@ void ParcoursPILE(PILE pile){
   if(pile.premier==NULL){
     printf("PILE vide");
   }else{
-    Cellule* caseMoment = pile.premier;
+    Cell* caseMoment = pile.premier;
     while(caseMoment!=NULL){
       printf("%s\n",caseMoment->id);//a retirer
       printf("%d\n",caseMoment->valeur);//a retirer
@@ -716,7 +716,7 @@ int taillePILE(PILE pile){
   if(pile.premier==NULL){
     printf("PILE vide");
   }else{
-    Cellule* caseMoment = pile.premier;
+    Cell* caseMoment = pile.premier;
     while(caseMoment!=NULL){
       res++;
       caseMoment=caseMoment->suivant;
@@ -726,7 +726,7 @@ int taillePILE(PILE pile){
 }
 
 PILE emPILE(PILE pile,int val,char * idd){
-  Cellule* nouvelleCase =malloc(sizeof(Cellule));
+  Cell* nouvelleCase =malloc(sizeof(Cell));
   nouvelleCase->valeur=val;
   strcpy(nouvelleCase->id,idd);
   nouvelleCase->suivant=pile.premier;
