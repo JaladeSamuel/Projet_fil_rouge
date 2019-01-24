@@ -6,6 +6,18 @@
 #include <stdlib.h>
 #include <string.h>
 
+char* BASE_DESCRIPTEUR_IMAGE_NB;
+char* BASE_DESCRIPTEUR_IMAGE_RGB;
+char* BASE_EPHEMERE_NB;
+char* BASE_EPHEMERE_RGB;
+char* LISTE_EPHEMERE_NB;
+char* LISTE_EPHEMERE_RGB;
+char* LISTE_DESCRIPTEUR_IMAGE_NB;
+char* LISTE_DESCRIPTEUR_IMAGE_RGB;
+char* TEST_NB_DIR_PATH;
+char* TEST_RGB_DIR_PATH;
+char* DEPOT_IMAGE_A_COMPARER;
+
 #define NOMBRE_DE_RESULTAT 4 //nombre de résultat renvoyé par la comparaison d'image
 typedef struct etImage{//Image RGB
   /*

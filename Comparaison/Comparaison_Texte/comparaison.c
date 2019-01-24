@@ -256,7 +256,7 @@ void searchFILE_COMPTXT(char filePath[400], RESULTS* res)
             init_DESCR(&newDescriptor, -1);
 
             indexationFichierTexte(filePath, &newDescriptor);
-
+            
             search_COMPTXT(newDescriptor, res);
             return;
         }

@@ -51,7 +51,7 @@ void noir_blanc(){
 		nb_dom();
 		break;
 	case 2 :
-		test_adresse();
+		comparaisonFichierNB();
 		break;
 	case 3 :
 		Recherche_image();
@@ -158,8 +158,13 @@ void Recherche_image(){
 		break;
 	}
 }
-	
+
 void comparaisonFichierRGB()
 {
 	comparerImageAvecImageRGB();
+}
+
+void comparaisonFichierNB()
+{
+	comparerImageAvecImageNB();
 }

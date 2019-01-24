@@ -6,9 +6,22 @@
 #include "menu4.c"
 #include "menu5.c"
 #include "../IndexationTexte/indexationV1.h"
+#include "../IndexationImage/image.h"
 
 int main(void){
 	indexationBaseTexte();
+
+	BASE_DESCRIPTEUR_IMAGE_NB = "../IndexationImage/data/base_descripteur_imageNB.txt";
+	BASE_DESCRIPTEUR_IMAGE_RGB = "../IndexationImage/data/base_descripteur_imageRGB.txt";
+	BASE_EPHEMERE_NB = "../IndexationImage/data/baseEphemereNB.txt";
+	BASE_EPHEMERE_RGB = "../IndexationImage/data/baseEphemereRGB.txt";
+	LISTE_EPHEMERE_NB = "../IndexationImage/data/listeEphemereNB.txt";
+	LISTE_EPHEMERE_RGB = "../IndexationImage/data/listeEphemereRGB.txt";
+	TEST_NB_DIR_PATH = "../IMG_et_AUDIO/TEST_NB/";
+	TEST_RGB_DIR_PATH = "../IMG_et_AUDIO/TEST_RGB/";
+	LISTE_DESCRIPTEUR_IMAGE_NB = "../IndexationImage/data/liste_descripteur_imageNB.txt";
+	LISTE_DESCRIPTEUR_IMAGE_RGB = "../IndexationImage/data/liste_descripteur_imageRGB.txt";
+	DEPOT_IMAGE_A_COMPARER = "../IndexationImage/data/depot_image_a_compararer/";
 
 	FILE_DESCRIPTORS_PATH = "../Commun/descripteur_base_texte.txt";
 	FILE_TEXT_CONFIG_PATH = "../Config/config_texte.txt";

@@ -6,3 +6,4 @@ void nb_dom();
 void R_couleur();
 void couleur_dom();
 void comparaisonFichierRGB();
+void comparaisonFichierNB();

@@ -238,7 +238,7 @@ void constructeurNB(imageNB imageTMP){
   int x,y,composante,tmp;
 
   FILE* fichier = NULL;
-  fichier = fopen("./data/base_descripteur_imageNB.txt", "a");
+  fichier = fopen(BASE_DESCRIPTEUR_IMAGE_NB, "a");
   if (fichier != NULL){
       
       // On peut lire et écrire dans le fichier
@@ -259,7 +259,7 @@ void constructeurNB(imageNB imageTMP){
 void constructeurRGB(image imageTMP){
   int x,y,composante,tmp;
   FILE* fichier = NULL;
-  fichier = fopen("./data/base_descripteur_imageRGB.txt", "a");
+  fichier = fopen(BASE_DESCRIPTEUR_IMAGE_RGB, "a");
   if (fichier != NULL){
       // On peut lire et écrire dans le fichier
       fprintf(fichier, "%s\n",imageTMP->id);
@@ -278,10 +278,18 @@ void constructeurRGB(image imageTMP){
 
 void descripteurNB(){
   //mettre les .txt dans le fichier liste_descripteur
-  system("ls ./../IMG_et_AUDIO/TEST_NB/ | grep .txt > ./data/liste_descripteur_imageNB.txt");
-  system("echo "">./data/base_descripteur_imageNB.txt");
-  char nom1[150]="./../IMG_et_AUDIO/TEST_NB/";
-  char sauveur[150]="./../IMG_et_AUDIO/TEST_NB/";
+  char command[strlen(LISTE_EPHEMERE_NB) + strlen(LISTE_DESCRIPTEUR_IMAGE_NB) + 18];
+
+  sprintf(command, "ls %s | grep .txt > %s", TEST_NB_DIR_PATH, LISTE_DESCRIPTEUR_IMAGE_NB);
+  system(command);
+
+  sprintf(command, "echo >%s", BASE_DESCRIPTEUR_IMAGE_NB);
+  system(command);
+
+  char nom1[150];
+  strcpy(nom1, TEST_NB_DIR_PATH);
+  char sauveur[150];
+  strcpy(sauveur, TEST_NB_DIR_PATH);
   char nom2[150]="";
   FILE* fichier = NULL;
   FILE* fichier2 = NULL;
@@ -322,16 +330,24 @@ void descripteurNB(){
 
 void descripteurRGB(){
   //mettre les .txt dans le fichier liste_descripteur
-  system("ls ./../IMG_et_AUDIO/TEST_RGB/ | grep .txt > ./data/liste_descripteur_imageRGB.txt");
-  system("echo "">./data/base_descripteur_imageRGB.txt");
-  char nom1[150]="./../IMG_et_AUDIO/TEST_RGB/";
-  char sauveur[150]="./../IMG_et_AUDIO/TEST_RGB/";
+  char command[strlen(LISTE_EPHEMERE_NB) + strlen(LISTE_DESCRIPTEUR_IMAGE_RGB) + 18];
+
+  sprintf(command, "ls %s | grep .txt > %s", TEST_RGB_DIR_PATH, LISTE_DESCRIPTEUR_IMAGE_RGB);
+  system(command);
+
+  sprintf(command, "echo >%s", BASE_DESCRIPTEUR_IMAGE_RGB);
+  system(command);
+
+  char nom1[150];
+  strcpy(nom1, TEST_RGB_DIR_PATH);
+  char sauveur[150];
+  strcpy(sauveur, TEST_RGB_DIR_PATH);
   char nom2[150]="";
   FILE* fichier = NULL;
   FILE* fichier2 = NULL;
   int x,y,composante,tmp,i,j;
 
-  fichier = fopen("./data/liste_descripteur_imageRGB.txt", "r");
+  fichier = fopen(LISTE_DESCRIPTEUR_IMAGE_RGB, "r");
   if (fichier != NULL){
       while(!feof(fichier)){
         strcpy(nom1,sauveur);
@@ -409,10 +425,18 @@ int comparaisonRGB(image des1,image des2){
 
 void comparerImageAvecImageNB(){
   //créer un descripteur du fichier entrée
-  system("ls data/depot_image_a_compararer/ | grep .txt > data/listeEphemereNB.txt");
-  system("echo "">./data/baseEphemereNB.txt");
-  char nom1[150]="./data/depot_image_a_compararer/";
-  char sauveur[150]="./data/depot_image_a_compararer/";
+  char command[strlen(LISTE_EPHEMERE_NB) + strlen(LISTE_EPHEMERE_NB) + 18];
+
+  sprintf(command, "ls %s | grep .txt > %s", DEPOT_IMAGE_A_COMPARER, LISTE_EPHEMERE_NB);
+  system(command);
+
+  sprintf(command, "echo >%s", BASE_EPHEMERE_NB);
+  system(command);
+
+  char nom1[150];
+  strcpy(nom1, DEPOT_IMAGE_A_COMPARER);
+  char sauveur[150];
+  strcpy(sauveur, DEPOT_IMAGE_A_COMPARER);
   char nom2[150]="";
   FILE* fichier = NULL;
   FILE* fichier2 = NULL;
@@ -475,7 +499,7 @@ void comparerImageAvecImageNB(){
   }
   PILE p=init_PILE();
   int resultatComp;
-  fichier=fopen("./data/base_descripteur_imageNB.txt", "r");
+  fichier=fopen(BASE_DESCRIPTEUR_IMAGE_NB, "r");
   if(fichier != NULL){
     while(!feof(fichier)){
       fscanf(fichier,"%s\n",imageTmp->id);
@@ -535,21 +559,32 @@ void comparerImageAvecImageNB(){
     printf("avec un comparaison à %d\n\n",tabValeur[i]);
   }
   
-  system("rm ./data/listeEphemereNB.txt");
-  system("rm ./data/baseEphemereNB.txt");
+  sprintf(command, "rm %s", LISTE_EPHEMERE_NB);
+  system(command);
+
+  sprintf(command, "rm %s", BASE_EPHEMERE_NB);
+  system(command);
 }
 
 void comparerImageAvecImageRGB(){
-  system("ls data/depot_image_a_compararer/ | grep .txt > data/listeEphemereRGB.txt");
-  system("echo "">./data/baseEphemereRGB.txt");
-  char nom1[150]="./data/depot_image_a_compararer/";
-  char sauveur[150]="./data/depot_image_a_compararer/";
+  char command[strlen(DEPOT_IMAGE_A_COMPARER) + strlen(LISTE_EPHEMERE_RGB) + 18];
+
+  sprintf(command, "ls %s | grep .txt > %s", DEPOT_IMAGE_A_COMPARER, LISTE_EPHEMERE_RGB);
+  system(command);
+
+  sprintf(command, "echo >%s", BASE_EPHEMERE_RGB);
+  system(command);
+
+  char nom1[150];
+  strcpy(nom1, DEPOT_IMAGE_A_COMPARER);
+  char sauveur[150];
+  strcpy(sauveur, DEPOT_IMAGE_A_COMPARER);
   char nom2[150]="";
   FILE* fichier = NULL;
   FILE* fichier2 = NULL;
   int x,y,composante,tmp,i,j;
 
-  fichier = fopen("./data/listeEphemereRGB.txt", "r");
+  fichier = fopen(LISTE_EPHEMERE_RGB, "r");
   if (fichier != NULL){
       while(!feof(fichier)){
         strcpy(nom1,sauveur);
@@ -587,7 +622,7 @@ void comparerImageAvecImageRGB(){
           //affiche_imageNB(imageTMP);
           strcpy(imageTMP->id,nom2);
           FILE* fichier3 = NULL;
-		  fichier3 = fopen("./data/baseEphemereRGB.txt", "r+");
+		  fichier3 = fopen(BASE_EPHEMERE_RGB, "r+");
 		  if (fichier3 != NULL){
 			  fprintf(fichier3, "%s\n",imageTMP->id);
 			  histogrammeRGB(imageTMP);
@@ -612,7 +647,7 @@ void comparerImageAvecImageRGB(){
   }
   image imageEntree=creation_imageRGB(y,x);
   image imageTmp=creation_imageRGB(y,x);
-  fichier = fopen("./data/baseEphemereRGB.txt", "r");
+  fichier = fopen(BASE_EPHEMERE_RGB, "r");
   if(fichier != NULL){
     fscanf(fichier,"%s\n",imageEntree->id);
     for(i=0;i<64;i++){
@@ -624,7 +659,7 @@ void comparerImageAvecImageRGB(){
   }
   PILE p=init_PILE();
   int resultatComp;
-  fichier=fopen("./data/base_descripteur_imageRGB.txt", "r");
+  fichier=fopen(BASE_DESCRIPTEUR_IMAGE_RGB, "r");
   if(fichier != NULL){
     while(!feof(fichier)){
       fscanf(fichier,"%s\n",imageTmp->id);
@@ -685,8 +720,11 @@ void comparerImageAvecImageRGB(){
     printf("avec un comparaison à %d\n\n",tabValeur[i]);
   }
   
-  system("rm ./data/listeEphemereRGB.txt");
-  system("rm ./data/baseEphemereRGB.txt");
+  sprintf(command, "rm %s", LISTE_EPHEMERE_RGB);
+  system(command);
+
+  sprintf(command, "rm %s", BASE_EPHEMERE_RGB);
+  system(command);
 }
 
 //Pile dynamique
