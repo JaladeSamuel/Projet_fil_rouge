@@ -46,8 +46,8 @@ int indexationBaseTexte()
 
     char motDefile[50];
     int id = 0, nb = 0;
-
-    printf("INDEXATION DES FICHIERS SUIVANT : \n");
+    printf("-------------------------------------------\n");
+    printf("|            INDEXATION texte ...         |\n");
     //parcour des fichiers du repertoire
 
     while ((lecture = readdir(rep))) {//nom du fichier = lectur ->d_name
@@ -55,13 +55,13 @@ int indexationBaseTexte()
         if(strcmp(lecture->d_name,"..") == 0 || strcmp(lecture->d_name,".") == 0){
           continue;
         }
-        printf("%s\n", lecture->d_name);
+      //  printf("%s\n", lecture->d_name);
     /*    if(fileContainsChemin(&fileTableIndex,lecture->d_name))
         {
           printf("Fichier : %s deja indexe\n",lecture->d_name);
           continue;
         } */
-        aucunFichierIndexe = 0;
+
         //Convertit les fichier ISO-8859-1 en UTF-8
         /*char conv[500] = {"iconv -f ISO-8859-1 -t UTF-8 "};
         strcat(conv,"../Base_de_donnees/texte2/");
@@ -72,7 +72,7 @@ int indexationBaseTexte()
         printf("%s\n",conv);
         system(conv);*/
 
-
+        aucunFichierIndexe = 0;
         //INITIALISATION DES FILES
         INIT_FILE(&fileDeMot);
         INIT_FILE(&fileDescripteur);
@@ -101,7 +101,6 @@ int indexationBaseTexte()
 
     }// end while
 
-    printf("INDEXATION TERMINE\n");
     fclose(fichierDescripteur);
     closedir(rep);
     //Si au moin un fichier a ete indexe
@@ -110,6 +109,8 @@ int indexationBaseTexte()
       actualiserTableTexteIndex(&fileTableIndex); //on actualise la table
     }
 
+    printf("| INDEXATION TERMINE | %d fichiers indexe |\n",id);
+    printf("-------------------------------------------\n");
     return 0;
 }
 
