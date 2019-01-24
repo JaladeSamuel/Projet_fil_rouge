@@ -16,6 +16,7 @@
 
 int indexationFichierTexte(char *cheminFichier, DESCR* descripteur)
 {
+  load_config_texte();
   printf("Generation du descripteur pour le fichier : %s\n",cheminFichier);
   File fileDeMotDuFichier;
   INIT_FILE(&fileDeMotDuFichier);
@@ -26,6 +27,7 @@ int indexationFichierTexte(char *cheminFichier, DESCR* descripteur)
 
 int indexationBaseTexte()
 {
+    load_config_texte();
     //LECTURE des fichier du repertoire bd
     struct dirent *lecture;
     DIR *rep;
@@ -155,7 +157,7 @@ void fileMotFichier(File *fileDeMot, char *nomFichier,int dansBase)
 
       if((caractereActuel == ' ' || caractereActuel == '\n' || caractereActuel == '.' || caractereActuel == ',') && balise == 0 )
       {
-        if(strlen(mot)>5)//On ne prend en compte que les mots plus grand que 5
+        if(strlen(mot)>lg_mini_mots)//lg_mini_mots est une variable globale cf : load_config_texte On ne prend en compte que les mots plus grand que lg_mini_mots
         {
           ENFILER(fileDeMot,mot); //incrementation de mot deja existant dans enfiler
         }
@@ -171,9 +173,7 @@ void fileMotFichier(File *fileDeMot, char *nomFichier,int dansBase)
         }
       }
   }
-
   fclose(fichier);
-
 }
 /*
 **Prend une file de mot A et enfile dans une seconde File B les mots les plus frequent de A.
@@ -182,7 +182,7 @@ void fileMotFrequent(File *fileDeMot, File *fileMotFrequent)
 {
   char motFrequent[50];
   int nb;
-  for(int i = 0; i<10; i++)
+  for(int i = 0; i<nb_termes_max; i++)//nb_termes_max est une variable globale cf : load_config_texte
   {
     nb = defilerPlusGrand(fileDeMot,motFrequent);
     if(nb > 0){
@@ -223,4 +223,20 @@ void actualiserTableTexteIndex(FileChemin *file)
       cel = cel->suivant;
   }
   fclose(fichierTableIndex);
+}
+
+void load_config_texte()
+{
+  FILE* fichierConfig = NULL;
+  fichierConfig = fopen("../Config/config_texte.txt","r");
+  if(fichierConfig == NULL)
+  {
+    printf("Impossible de charger le fichier config_texte\n");
+    exit(EXIT_FAILURE);
+  }
+  char tamp[100];
+  //CHARGEMENT DES PARAMETRES
+  rewind(fichierConfig);//positionne le flag au debut du fichier
+  fscanf(fichierConfig,"%s %d",tamp,&nb_termes_max);
+  fscanf(fichierConfig,"%s %d",tamp,&lg_mini_mots);
 }
