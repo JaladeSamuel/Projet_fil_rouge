@@ -16,6 +16,8 @@ int main(void){
     DATA_BASE_PATH = "../Base_de_donnees/TEXTES/";
 	init_COMPTXT();
 
+	printf("\n\n\n");
+	system("echo -e \"\033[36;1;5mFoxIt vous souhaite la bienvenue sur son nouveau moteur de recherche !\033[0m\"");
 	menu1();
 	
 	return 0;
