@@ -83,7 +83,8 @@ void choix_adm(){
 		menu2_adm();
 		break;
 	case 2 :
-		printf("\nEn travaux...\n");
+		printf("\nAffichage des descripteurs : \n\n");
+		system("cat ../Commun/descripteur_base_texte.txt");
 		choix_adm();
 		break;
 	case 3 :
