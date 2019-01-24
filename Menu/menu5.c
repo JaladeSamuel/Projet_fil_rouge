@@ -11,7 +11,7 @@ void indexation(){
 
 	while(1)
 	{
-		printf("\nSélectionner le type du fichier à indexer :\n1 - Fichier texte\n2 - Fichier image\n3 - Fichier son\n4 - Retour\n5 - Quitter\nChoix : ");
+		printf("\nSélectionner le type du fichier à indexer :\n1 - Fichier texte\n2 - Fichier image\n3 - Retour\n4 - Quitter\nChoix : ");
 		fgets(saisie, 255, stdin);
 		if (sscanf(saisie, "%d", &choix) == 1) break;
 		printf("\nErreur de saisie, veuillez saisir un entier.\n");
@@ -24,12 +24,9 @@ void indexation(){
 		test_adresse();
 		break;
 	case 3 : 
-		test_adresse();
-		break;
-	case 4 : 
 		choix_adm();
 		break;
-	case 5 : 
+	case 4 : 
 		quitter();
 		break;
 	default : 
@@ -42,24 +39,28 @@ void indexation(){
 void configuration(){
 	int choix;
 	char saisie[255];
-
 	while(1)
 	{
-		printf("Configurer : \n1 - Indexation\n2 - Comparaison\n3 - Retour\n4 - Quitter\nChoix : ");
+		printf("\n\nConfigurer : \n1 - Configuration générale\n2 - Configuration Texte\n3 - Configuration Image\n4 - Retour\n5 - Quitter\nChoix : ");
 		fgets(saisie, 255, stdin);
 		if (sscanf(saisie, "%d", &choix) == 1) break;
 		printf("\nErreur de saisie, veuillez saisir un entier.\n");
 	}
 	switch(choix){
-	case 1:
-	case 2: 
-	case 3:
-		printf("En travaux...\n");
+	case 1: system("nano ../Config/config.txt");
 		break;
-	case 4 : 
+	case 2: system("nano ../Config/config_texte.txt");
+		break;
+	case 3: system("echo \"En Travaux...\"");
+		break;
+	case 4: 
+		choix_adm();
+		break;
+	case 5 : 
 		quitter();
 		break;
 	default : 
+		choix_adm();
 		break;
 	}
 }
@@ -72,7 +73,7 @@ void choix_adm(){
 	while(1)
 	{
 		
-		printf("\nSélectionner une action :\n1 - Lancer une recherche\n2 - Accéder aux descripteurs\n3 - Lancer une indexation\n4 - Modifier les configurations\n5 - Retour\n6 - Quitter\nChoix : ");
+		printf("\n\nSélectionner une action :\n1 - Lancer une recherche\n2 - Accéder aux descripteurs\n3 - Lancer une indexation\n4 - Modifier les configurations\n5 - Retour\n6 - Quitter\nChoix : ");
 		fgets(saisie, 255, stdin);
 		if (sscanf(saisie, "%d", &choix) == 1) break;
 		printf("\nErreur de saisie, veuillez saisir un entier.\n");
@@ -91,8 +92,7 @@ void choix_adm(){
 		indexation();
 		break;
 	case 4 :
-		printf("\nEn travaux...\n");
-		choix_adm();
+		configuration();
 		break;
 	case 5 : 
 		menu1();
@@ -101,7 +101,7 @@ void choix_adm(){
 		quitter();
 		break;
 	default :
-		printf("\nErreur : Saisie impossible, veuillez choisir \"1\",\"2\",\"3\",\"4\" ou \"5\".\n");
+		printf("\nErreur : Saisie impossible, veuillez choisir \"1\",\"2\",\"3\",\"4\",\"5\" ou \"6\".\n");
 		choix_adm();
 		break;
 	}	
