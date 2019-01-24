@@ -1,4 +1,5 @@
 # include <stdio.h>
+# include <stdlib.h>
 # include <string.h>
 # include "menu5.h"
 # include "menu2.h"
@@ -11,8 +12,7 @@ void quitter(){
 }
 
 void identification(){
-	system("stty -echo; read -p \"\nMot de passe : \" password; stty echo; while [ $password != \"123upssitech\" ] ;do echo \"\nMot de passe refusé ! Réessayez.\n\";stty -echo; read -p \"\nMot de passe : \" password; stty echo; done; echo \"\nMot de passe accepté.\"");
-
+	system("stty -echo; read -p \"\nMot de passe : \" password; stty echo; while [ $password != \"123upssitech\" ] || [ $password -n ] >& fichier_erreur;do echo \"\nMot de passe refusé ! Réessayez.\n\";stty -echo; read -p \"\nMot de passe : \" password; stty echo; done; echo \"\nMot de passe accepté.;\"");	
 }
 
 
