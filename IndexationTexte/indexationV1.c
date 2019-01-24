@@ -24,6 +24,35 @@ int indexationFichierTexte(char *cheminFichier, DESCR* descripteur)
   return 1;
 }
 
+void ajoutDocBase(char *path)
+{
+  char temp = path[0];
+  int lastSlash = 0;
+  int dotPosition = strlen(path);
+  for (int i = 0; i < strlen(path); i++)
+  {
+    if (path[i] == '/')
+    {
+      lastSlash = i + 1;
+    }
+    else if (path[i] == '.')
+    {
+      dotPosition = i;
+      break;
+    }
+  }
+  char nomFichier[100];
+  int i = 0;
+  for (int j = lastSlash; j < dotPosition; j++)
+  {
+    nomFichier[i] = path[j]);
+    i++;
+  }
+  char command[500];
+  sprinf(command, "cp %s ../Base_de_donnees/TEXTES/%s", path, nomFichier);
+  system(command);
+  indexationBaseTexte();
+}
 int indexationBaseTexte()
 {
     load_config_texte();
