@@ -6,7 +6,6 @@
 #include "indexationV1.h"
 
 
-
 /*int main(void)
 {
    indexationBaseTexte();
