@@ -11,7 +11,6 @@
 // int main(void)
 // {
 //   //indexationBaseTexte();
-//   //tableTexteIndexEstVide();
 //   return 0;
 // }
 
@@ -123,6 +122,9 @@ void fileMotFichier(File *fileDeMot, char *nomFichier,int dansBase)
   if(dansBase)
   {
     strcat(path,nomFichier);
+  } else {
+    memset(path,'\0',sizeof(nomFichier));
+    strcpy(path,nomFichier);
   }
 
 
