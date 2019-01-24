@@ -19,6 +19,8 @@ char* FILE_TEXT_CONFIG_PATH;
 char* FILE_DESCRIPTORS_INDEX;
 char* DATA_BASE_PATH;
 
+void tolower_STR(char* word);
+
 void init_RES(RESULTS* res);
 void add_RES(RESULTS* res, int id, float pourcentage);
 void print_RES(RESULTS res);

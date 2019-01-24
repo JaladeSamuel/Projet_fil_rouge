@@ -2,6 +2,7 @@
 # include <string.h>
 # include "menu5.h"
 # include "menu2.h"
+#include "../Comparaison/Comparaison_Texte/comparaison.h"
 
 void quitter(){
 	printf("\nFin du programme.\n");
@@ -41,8 +42,25 @@ void menu1(){
 	}
 }
 
-void test_adresse(){
+void test_adresse()
+{
 	system("read -p \"Lien du fichier : \" adresse; while [ ! -e \"$adresse\" ];do echo \"\nCe fichier n'existe pas, rentrez à nouveau l'adresse.\";read -p \"Lien du fichier : \" adresse;done");
+}
+
+void rechercheParAdresse(){
+	char path[50];
+	RESULTS res;
+	init_RES(&res);
+
+	printf("\nRentrer le nom du fichier : ");
+	scanf("%s", path);
+
+	searchFILE_COMPTXT(path, &res);
+
+	if (res.size > 0)
+	{
+		print_RES(res);
+	}
 }
 
 

@@ -49,10 +49,10 @@ int main()
     comparaison = compare_COMPTXT(descripteur1, descripteur2);
     printf("\n\n - Comparaison des deux : %f %%", comparaison);
 
-    printf("\n\n - Recherche du mot 'navigateur' : \n");
+    printf("\n\n - Recherche du mot 'frames' : \n");
     RESULTS res;
     init_RES(&res);
-    searchWord_COMPTXT("navigateur", &res);
+    searchWord_COMPTXT("frames", &res);
     print_RES(res);
 
     printf("\n - Recherche avec le fichier '27-Le_Stade_de_France_s_ouvre_utf8.xml' : \n");

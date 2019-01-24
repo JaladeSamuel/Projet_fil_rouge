@@ -1,11 +1,24 @@
 #include"menu3.h"
 #include"menu2.h"
 #include"menu1.h"
+#include "../Comparaison/Comparaison_Texte/comparaison.h"
 
 void motcle(){
-	char mot;
+	char mot[30];
 	printf("\nRentrer le mot clé :\nMot clé : ");
-	scanf("%s",mot);
+	scanf("%s", mot);
+
+	while (strlen(mot) < 3)
+	{
+		printf("Vous devez entrez un mot clé qui a 3 ou plus caractères : ");
+		scanf("%s", mot);
+	}	
+
+	RESULTS res;
+	init_RES(&res);
+
+	searchWord_COMPTXT(mot, &res);
+	print_RES(res);
 }
 
 void menu3(){
@@ -25,7 +38,7 @@ void menu3(){
 		motcle();
 		break;
 	case 2 :
-		test_adresse();
+		rechercheParAdresse();
 		break;
 	case 3 :
 		menu2();

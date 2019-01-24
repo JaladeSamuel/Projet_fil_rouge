@@ -8,12 +8,12 @@
 
 
 
-int main(void)
-{
-  //indexationBaseTexte();
-  //tableTexteIndexEstVide();
-  return 0;
-}
+// int main(void)
+// {
+//   //indexationBaseTexte();
+//   //tableTexteIndexEstVide();
+//   return 0;
+// }
 
 
 int indexationFichierTexte(char *cheminFichier, DESCR* descripteur)

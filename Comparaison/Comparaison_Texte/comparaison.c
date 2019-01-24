@@ -1,7 +1,16 @@
 #include "comparaison.h"
+#include "../../IndexationTexte/indexationV1.h"
 #include <string.h>
+#include <ctype.h>
 
 int DESCRIPTORS_MAX_ID = 0;
+
+void tolower_STR(char* word)
+{
+    for (int i = 0; word[i]; i++){
+        word[i] = tolower(word[i]);
+    }
+}
 
 /** Initialise la structure 'res' donnée en paramètres.
  *  RESULTS* res : structure de resultats qu'on initialise
@@ -60,7 +69,7 @@ void print_RES(RESULTS res)
 {
     if (res.size == 0)
     {
-        printf("Aucun resultats n'a ete trouve.\n");
+        printf("Aucun resultat n'a été trouvé.\n");
         return;
     }
 
@@ -197,7 +206,9 @@ void searchFILE_COMPTXT(char filePath[50], RESULTS* res)
 {
     FILE* file;
 
-    char fullFilePath[200];
+    char errorMessage[200];
+
+    char fullFilePath[100];
     strcpy(fullFilePath, DATA_BASE_PATH);
     strcat(fullFilePath, filePath);
     file = fopen(fullFilePath, "r");
@@ -205,21 +216,57 @@ void searchFILE_COMPTXT(char filePath[50], RESULTS* res)
     if (file == NULL)
     {
         file = fopen(filePath, "r");
-
         if (file == NULL)
         {
-            printf("ERREUR : Impossible d'ouvrir le fichier %s\n", fullFilePath);
+            printf("Impossible de trouver ni le fichier '%s' ni le fichier '%s'.\n", fullFilePath, filePath);
+
+            file = fopen(FILE_DESCRIPTORS_INDEX, "r");
+            tolower_STR(filePath);
+
+            int id;
+            char fileName[100];
+            char fileNameMinimized[100];
+            char closestFileName[500];
+            closestFileName[0] = '\0';
+            
+            while (!feof(file))
+            {
+                fscanf(file, "%d %s", &id, &fileName);
+                strcpy(fileNameMinimized, fileName);
+                tolower_STR(fileNameMinimized);
+                if (strstr(fileNameMinimized, filePath) != NULL)
+                {
+                    strcat(closestFileName, "'");
+                    strcat(closestFileName, fileName);
+                    strcat(closestFileName, "' ");
+                }
+            }
+
+            if (strlen(closestFileName) > 0)
+            {
+                printf("Voulez-vous dire le(s) fichier(s) %s?\n", closestFileName);
+            }            
+
+            fclose(file);
             return;
         }
+        else
+        {
+            DESCR newDescriptor;
+            init_DESCR(&newDescriptor, -1);
+
+            indexationFichierTexte(filePath, &newDescriptor);
+
+            search_COMPTXT(newDescriptor, res);
+            return;
+        }
+        fclose(file);
     }
 
-    fclose(file);
-    
     file = fopen(FILE_DESCRIPTORS_INDEX, "r");
-
     if (file == NULL)
     {
-        printf("ERREUR : Impossible d'ouvrir le fichier d'index des descripteurs.");
+        printf("ERREUR : Impossible d'ouvrir le fichier d'index des descripteurs.\n");
         return;
     }
 
@@ -235,12 +282,10 @@ void searchFILE_COMPTXT(char filePath[50], RESULTS* res)
             init_DESCR(&descriptor, id);
             fillWithPath_DESCR(&descriptor, FILE_DESCRIPTORS_PATH);
             search_COMPTXT(descriptor, res);
-
-            break;
         }
     }
 
-
+    fclose(file);
 }
 
 /** Lance une recherche par rapport au descripteur 'base' et renvoie la liste des résultats dans la structure RESULTATS 'res'.
