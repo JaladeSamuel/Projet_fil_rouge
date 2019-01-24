@@ -192,6 +192,9 @@ void fileMotFrequent(File *fileDeMot, File *fileMotFrequent)
   }
 }
 
+/*
+**Prend une file de mot A et enfile dans un DESCR (pour la comparaison) B les mots les plus frequent de A.
+*/
 void fileMotFrequentDansDESCR(File *fileDeMot, DESCR *fileMotFrequent)
 {
   char motFrequent[50];
