@@ -48,7 +48,7 @@ void test_adresse()
 }
 
 void rechercheParAdresse(){
-	char path[50];
+	char path[400];
 	RESULTS res;
 	init_RES(&res);
 
@@ -57,10 +57,7 @@ void rechercheParAdresse(){
 
 	searchFILE_COMPTXT(path, &res);
 
-	if (res.size > 0)
-	{
-		print_RES(res);
-	}
+	print_RES(res);
 }
 
 

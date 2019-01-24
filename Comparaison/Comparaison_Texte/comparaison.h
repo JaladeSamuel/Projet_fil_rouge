@@ -28,7 +28,7 @@ void print_RES(RESULTS res);
 void init_COMPTXT();
 float compare_COMPTXT(DESCR base, DESCR descriptor);
 void searchWord_COMPTXT(char mot[WORD_LENGTH_MAX], RESULTS* res);
-void searchFILE_COMPTXT(char file[50], RESULTS* res);
+void searchFILE_COMPTXT(char file[400], RESULTS* res);
 void search_COMPTXT(DESCR base, RESULTS* res);
 
 #endif

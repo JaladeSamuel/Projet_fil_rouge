@@ -202,13 +202,13 @@ void searchWord_COMPTXT(char mot[WORD_LENGTH_MAX], RESULTS* res)
 /** Lance une recherche en comparant avec le nom du fichier donné 
  * 
  */
-void searchFILE_COMPTXT(char filePath[50], RESULTS* res)
+void searchFILE_COMPTXT(char filePath[400], RESULTS* res)
 {
     FILE* file;
 
-    char errorMessage[200];
+    char errorMessage[600];
 
-    char fullFilePath[100];
+    char fullFilePath[400];
     strcpy(fullFilePath, DATA_BASE_PATH);
     strcat(fullFilePath, filePath);
     file = fopen(fullFilePath, "r");
