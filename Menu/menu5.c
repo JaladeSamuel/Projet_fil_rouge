@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 #include"menu2.h"
 #include"menu5.h"
 #include"menu3.h"
@@ -47,9 +48,17 @@ void configuration(){
 		printf("\nErreur de saisie, veuillez saisir un entier.\n");
 	}
 	switch(choix){
-	case 1: system("nano ../Config/config.txt");
+	case 1:
+		if(fork()==0){
+			execlp("gedit", "gedit", "../Config/config.txt", NULL);
+		}
+		configuration();
 		break;
-	case 2: system("nano ../Config/config_texte.txt");
+
+	case 2: if(fork()==0){
+			execlp("gedit", "gedit", "../Config/config_texte.txt", NULL);
+		}
+		configuration();
 		break;
 	case 3: system("echo \"En Travaux...\"");
 		break;
