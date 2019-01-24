@@ -199,7 +199,7 @@ void fileMotFrequentDansDESCR(File *fileDeMot, DESCR *fileMotFrequent)
   char motFrequent[50];
   int nb;
   int nbTermes = 0;
-  int nbMotsTotal = fileDeMot.nbMot;
+  int nbMotsTotal = fileDeMot->nbMot;
   for(int i = 0; i<10; i++)
   {
     nb = defilerPlusGrand(fileDeMot,motFrequent);
