@@ -198,13 +198,18 @@ void fileMotFrequentDansDESCR(File *fileDeMot, DESCR *fileMotFrequent)
 {
   char motFrequent[50];
   int nb;
+  int nbTermes = 0;
+  int nbMotsTotal = fileDeMot.nbMot;
   for(int i = 0; i<10; i++)
   {
     nb = defilerPlusGrand(fileDeMot,motFrequent);
     if(nb > 0){
       addWordandOcc_DESCR(fileMotFrequent,motFrequent,nb);
+      nbTermes++;
     }
   }
+  fileMotFrequent.nbTermes = nbTermes;
+  fileMotFrequent.total = nbMotsTotal;
 }
 
 void actualiserTableTexteIndex(FileChemin *file)
