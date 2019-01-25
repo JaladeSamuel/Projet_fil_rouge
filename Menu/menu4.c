@@ -5,10 +5,12 @@
 #include<stdlib.h>
 #include "../IndexationImage/image.h"
 
+/** Choix de la couleur dominante pour une image noir/blanc
+*/
 void nb_dom(){
 	int dom;	
 	char saisie[255];
-
+	//contrôle sur la saisie
 	while(1)
 	{
 		printf("\nChoisir une couleur :\n1 - Noir\n2 - Blanc\n3 - Retour\n4 - Quitter\nCouleur : ");
@@ -17,7 +19,9 @@ void nb_dom(){
 		printf("\nErreur de saisie, veuillez saisir un entier.\n");
 	}
 	
-	switch(dom){
+	switch(dom)
+	{
+
 	case 1 :
 	case 2 :
 		printf("\nEn travaux...\n");
@@ -35,9 +39,14 @@ void nb_dom(){
 	}
 }
 
+
+/** Choix du type de recherche pour une image noir/blanc
+*   soit par fichier ou soir par couleur dominante
+*/
 void noir_blanc(){	
 	int nblc;
 	char saisie[255];
+	//contrôle sur la saisie
 	while(1)
 	{
 		printf("\n1 - Noir/Blanc dominant\n2 - Fichier\n3 - Retour\n4 - Quitter\nType de recherche : ");
@@ -46,7 +55,9 @@ void noir_blanc(){
 		printf("\nErreur de saisie, veuillez saisir un entier.\n");
 	}
 
-	switch(nblc){
+	switch(nblc)
+	{
+
 	case 1 :
 		nb_dom();
 		break;
@@ -64,10 +75,14 @@ void noir_blanc(){
 	}
 }
 
+
+/** Choix du type de recherche pour une image noir/blanc
+*   soit par fichier ou soir par couleur dominante
+*/
 void R_couleur(){
 	int cl;
 	char saisie[255];
-	
+	//contrôle sur la saisie
 	while(1)
 	{
 		printf("\n1 - Couleur dominante\n2 - Fichier\n3 - Retour\nType de recherche :");
@@ -75,7 +90,10 @@ void R_couleur(){
 		if (sscanf(saisie, "%d", &cl) == 1) break;
 		printf("\nErreur de saisie, veuillez saisir un entier.\n");
 	}
-	switch(cl){
+
+	switch(cl)
+	{
+
 	case 1 : 
 		couleur_dom();
 		break;
@@ -93,10 +111,12 @@ void R_couleur(){
 }
 
 
+/** Choix de la couleur dominante pour une image couleur
+*/
 void couleur_dom(){	
 	int couleur;
 	char saisie[255];
-	
+	//contrôle sur la saisie
 	while(1)
 	{
 		printf("\nChoisir une couleur : \n1 - Rouge\n2 - Rose\n3 - Violet\n4 - Bleu\n5 - Vert\n6 - Jaune\n7 - Orange\n8 - Noir\n9 - Blanc\n10 - Retour\nCouleur : ");
@@ -104,7 +124,10 @@ void couleur_dom(){
 		if (sscanf(saisie, "%d", &couleur) == 1) break;
 		printf("\nErreur de saisie, veuillez saisir un entier.\n");
 	}
-	switch(couleur){
+
+	switch(couleur)
+	{
+
 	case 1 :
 	case 2 :
 	case 3 : 
@@ -129,12 +152,13 @@ void couleur_dom(){
 
 
 
-
+/** Fonction permettant de choisir à comparer une image couleur 
+*   ou une image noir/blanc
+*/
 void Recherche_image(){
 	int R_image;
 	char saisie[255];
-	
-
+	//contrôle sur la saisie
 	while(1)
 	{
 		printf("\nSélectionner un type d'image :\n1 - Noir et Blanc\n2 - Couleur\n3 - Retour\nType de recherche : ");
