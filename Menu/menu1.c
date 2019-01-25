@@ -12,7 +12,7 @@ void quitter(){
 }
 
 void identification(){
-	system("stty -echo; read -p \"\nMot de passe : \" password; stty echo; while [ $password != \"123upssitech\" ] || [ $password -n ] >& fichier_erreur;do echo \"\nMot de passe refusé ! Réessayez.\n\";stty -echo; read -p \"\nMot de passe : \" password; stty echo; done; echo \"\nMot de passe accepté.\"");	
+	system("stty -echo; read -p \"\nMot de passe : \" password; stty echo; while [ \"$password\" != \"123upssitech\" ] >& fichier_erreur;do echo \"\nMot de passe refusé ! Réessayez.\n\";stty -echo; read -p \"\nMot de passe : \" password; stty echo; done; echo \"\nMot de passe accepté.\"");	
 }
 
 
