@@ -13,7 +13,7 @@ void nb_dom(){
 	//contrôle sur la saisie
 	while(1)
 	{
-		printf("\nChoisir une couleur :\n1 - Noir\n2 - Blanc\n3 - Retour\n4 - Quitter\nCouleur : ");
+		printf("\nQuelle est la couleur dominante de l'image ?\n1 - Noir\n2 - Blanc\n3 - Retour\n4 - Quitter\nCouleur : ");
 		fgets(saisie, 255, stdin);
 		if (sscanf(saisie, "%d", &dom) == 1) break;
 		printf("\nErreur de saisie, veuillez saisir un entier.\n");
@@ -49,7 +49,7 @@ void noir_blanc(){
 	//contrôle sur la saisie
 	while(1)
 	{
-		printf("\n1 - Noir/Blanc dominant\n2 - Fichier\n3 - Retour\n4 - Quitter\nType de recherche : ");
+		printf("\nQuel type de recherche voulez-vous effectuer ?\n1 - Choix d'une couleur dominante\n2 - Recherche par fichier\n3 - Retour\n4 - Quitter\nType de recherche : ");
 		fgets(saisie, 255, stdin);
 		if (sscanf(saisie, "%d", &nblc) == 1) break;
 		printf("\nErreur de saisie, veuillez saisir un entier.\n");
@@ -85,7 +85,7 @@ void R_couleur(){
 	//contrôle sur la saisie
 	while(1)
 	{
-		printf("\n1 - Couleur dominante\n2 - Fichier\n3 - Retour\nType de recherche :");
+		printf("\nQuel type de recherche voulez-vous effectuer ?\n1 - Choix d'une couleur dominante\n2 - Recherche par fichier\n3 - Retour\nType de recherche :");
 		fgets(saisie, 255, stdin);
 		if (sscanf(saisie, "%d", &cl) == 1) break;
 		printf("\nErreur de saisie, veuillez saisir un entier.\n");
