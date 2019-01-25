@@ -869,7 +869,7 @@ void rechercherNiveauGris(int niveau)
     i++;
   }
 
-  for(i=NOMBRE_DE_RESULTAT-1;i>=0;i--){
+  for(i = 0; i < NOMBRE_DE_RESULTAT; i++){
     if (tabValeur[i] != 0)
     {
       printf(" - Le ficher %s en contient a %d %%\n", tabNom[i], tabValeur[i]);
@@ -949,7 +949,7 @@ void rechercherCouleur(int couleur)
     caseMoment=caseMoment->suivant;
     i++;
   }
-  for(i=NOMBRE_DE_RESULTAT-1;i>=0;i--){
+  for(i = 0; i< NOMBRE_DE_RESULTAT; i++){
     if (tabValeur[i] > 0)
     {
       printf(" - %s en contient a %d %%\n", tabNom[i], tabValeur[i]);
