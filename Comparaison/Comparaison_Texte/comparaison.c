@@ -108,6 +108,7 @@ void getPathFromId_RES(RESULTS* res, char* path)
 {
     if (res->size == 0)
     {
+        strcpy(path, "NULL");
         return;
     }
 
@@ -134,6 +135,11 @@ void getPathFromId_RES(RESULTS* res, char* path)
     }
 
     fclose(file);
+
+    if (!fork())
+    {
+        execlp("gedit", "gedit", path, NULL);
+    }
 }
 
 /** Initialise la comparaison.
@@ -237,11 +243,6 @@ void searchWord_COMPTXT(char mot[WORD_LENGTH_MAX], RESULTS* res)
 
     char filepath[150];
     getPathFromId_RES(res, filepath);
-
-    if(!fork())
-    {
-        execlp("gedit", "gedit", filepath, NULL);
-    }
 }
 
 /** Lance une recherche en comparant avec le nom du fichier donné
