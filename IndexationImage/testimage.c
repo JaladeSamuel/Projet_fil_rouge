@@ -25,8 +25,11 @@ int main(void) {
   //descripteurRGB();
  
   
-  comparerImageAvecImageNB();
+  //comparerImageAvecImageNB();
   //comparerImageAvecImageRGB();
+
+  rechercherNiveauGris(1);
+  rechercherCouleur(21);
 
   
   printf("\nGoodbye World\n");

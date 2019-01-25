@@ -23,6 +23,9 @@ int main(void){
 	LISTE_DESCRIPTEUR_IMAGE_RGB = "../IndexationImage/data/liste_descripteur_imageRGB.txt";
 	DEPOT_IMAGE_A_COMPARER = "../IndexationImage/data/depot_image_a_compararer/";
 
+	descripteurNB();
+	descripteurRGB();
+
 	FILE_DESCRIPTORS_PATH = "../Commun/descripteur_base_texte.txt";
 	FILE_TEXT_CONFIG_PATH = "../Config/config_texte.txt";
     FILE_DESCRIPTORS_INDEX = "../Commun/tableTexteIndex.txt";

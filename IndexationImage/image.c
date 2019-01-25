@@ -295,7 +295,7 @@ void descripteurNB(){
   FILE* fichier2 = NULL;
   int x,y,composante,tmp,i,j;
 
-  fichier = fopen("./data/liste_descripteur_imageNB.txt", "r");
+  fichier = fopen(LISTE_DESCRIPTEUR_IMAGE_NB, "r");
   if (fichier != NULL){
       while(!feof(fichier)){
         strcpy(nom1,sauveur);
@@ -442,7 +442,7 @@ void comparerImageAvecImageNB(){
   FILE* fichier2 = NULL;
   int x,y,composante,tmp,i,j;
 
-  fichier = fopen("./data/listeEphemereNB.txt", "r");
+  fichier = fopen(LISTE_EPHEMERE_NB, "r");
   if (fichier != NULL){
       while(!feof(fichier)){
         strcpy(nom1,sauveur);
@@ -462,12 +462,12 @@ void comparerImageAvecImageNB(){
           //affiche_imageNB(imageTMP);
           strcpy(imageTMP->id,nom2);
           FILE* fichier3 = NULL;
-		  fichier3 = fopen("./data/baseEphemereNB.txt", "r+");
+		  fichier3 = fopen(BASE_EPHEMERE_NB, "r+");
 		  if (fichier3 != NULL){
 			  fprintf(fichier3, "%s\n",imageTMP->id);
 			  histogrammeNB(imageTMP);
 			  for(int i=0;i<4;i++){
-				fprintf(fichier3,"%d %d\n",i,imageTMP->histogramme[i]);
+				  fprintf(fichier3,"%d %d\n",i,imageTMP->histogramme[i]);
 			  }
 			  fclose(fichier3);
 		  }
@@ -487,7 +487,7 @@ void comparerImageAvecImageNB(){
   }
   imageNB imageEntree=creation_imageNB(140,140);
   imageNB imageTmp=creation_imageNB(140,140);
-  fichier = fopen("./data/baseEphemereNB.txt", "r");
+  fichier = fopen(BASE_EPHEMERE_NB, "r");
   if(fichier != NULL){
     fscanf(fichier,"%s\n",imageEntree->id);
     for(i=0;i<4;i++){
@@ -554,9 +554,10 @@ void comparerImageAvecImageNB(){
     caseMoment=caseMoment->suivant;
     i++;
   }
+
   for(i=NOMBRE_DE_RESULTAT-1;i>=0;i--){
     printf("Le ficher %s\n",tabNom[i]);
-    printf("avec un comparaison à %d\n\n",tabValeur[i]);
+    printf("a une distance de %d\n\n",tabValeur[i]);
   }
   
   sprintf(command, "rm %s", LISTE_EPHEMERE_NB);
@@ -772,4 +773,188 @@ PILE emPILE(PILE pile,int val,char * idd){
   return pile;
 }
 
+void rechercherNiveauGris(int niveau)
+{
+  PILE p = init_PILE();
+  int i, composante, tmp, compoNivRecherche, total;
+  char imageName[150];
+  float resultatComp;
+  
+  FILE* fichier = fopen(BASE_DESCRIPTEUR_IMAGE_NB, "r");
+  if (fichier != NULL)
+  {
+    while (!feof(fichier))
+    {
+      fscanf(fichier, "%s\n", imageName);
 
+      total = 0;
+      compoNivRecherche = 0;
+      for (i = 0; i < 4; i++)
+      {
+        fscanf(fichier,"%d %d\n",&composante, &tmp);
+
+        if (composante == niveau)
+        {
+          compoNivRecherche = tmp;
+        }
+
+        total += tmp;
+      }
+
+      resultatComp = (float)compoNivRecherche / (float)total * 100.0;
+      p = emPILE(p, (int)resultatComp, imageName);
+    }
+  }
+  else
+  {
+    printf("Impossible d'ouvrir le fichier base_descripteur_imageNB.txt");
+  }
+
+  int minim;
+  PILE p2=init_PILE();
+  int taillePile=taillePILE(p);
+  
+  for (i = 0; i < NOMBRE_DE_RESULTAT; i++)
+  {
+    minim=1000000;
+    if (taillePile < NOMBRE_DE_RESULTAT)
+    {
+      printf("Nombre de résultat attendu supérieur au nombre de fichier présent");
+    }
+    else
+    {
+      Cell* caseMoment = p.premier;
+      while(caseMoment!=NULL)
+      {
+        if(caseMoment->valeur < minim)
+        {
+          minim = caseMoment->valeur;
+        }
+	      caseMoment=caseMoment->suivant;
+	    }
+      caseMoment = p.premier;
+      while(caseMoment!=NULL)
+      {
+        if (caseMoment->valeur == minim)
+        {
+          p2=emPILE(p2,caseMoment->valeur,caseMoment->id);
+		      caseMoment->valeur=1000001;
+        }
+	      caseMoment=caseMoment->suivant;
+	    }
+    }
+  }
+
+  //ParcoursPILE(p2);
+  int tabValeur[NOMBRE_DE_RESULTAT];
+  char tabNom[NOMBRE_DE_RESULTAT][150];
+  i=0;
+  Cell* caseMoment = p2.premier;
+  while(caseMoment!=NULL){
+    tabValeur[i]=caseMoment->valeur;
+    strcpy(tabNom[i],caseMoment->id);
+    caseMoment=caseMoment->suivant;
+    i++;
+  }
+
+  for(i=NOMBRE_DE_RESULTAT-1;i>=0;i--){
+    if (tabValeur[i] != 0)
+    {
+      printf(" - Le ficher %s contient a %d %% du niveau %d\n", tabNom[i], tabValeur[i], niveau);
+    }
+  }
+  
+  char command[150];
+  sprintf(command, "rm %s", LISTE_EPHEMERE_NB);
+  system(command);
+
+  sprintf(command, "rm %s", BASE_EPHEMERE_NB);
+  system(command);
+}
+
+void rechercherCouleur(int couleur)
+{
+  PILE p=init_PILE();
+  int i, composante, tmp, total, couleurCherche;
+  char imageName[150];
+  float resultatComp;
+
+  FILE* fichier = fopen(BASE_DESCRIPTEUR_IMAGE_RGB, "r");
+  if(fichier != NULL){
+    while(!feof(fichier)){
+      fscanf(fichier,"%s\n", imageName);
+
+      total = 0;
+      for(i=0;i<64;i++){
+        fscanf(fichier,"%d %d\n",&composante,&tmp);
+
+        if (couleur == composante)
+        {
+          couleurCherche = tmp;
+        }
+
+        total += tmp;
+      }
+
+      resultatComp = (float)couleurCherche / (float)total * 100.0;  
+      
+      p=emPILE(p,(int)resultatComp,imageName);
+      //ici imageTmp est fini on va passer au suivant
+    }
+  }else{
+    printf("Impossible d'ouvrir le fichier base_descripteur_imageNB.txt");
+  }
+  //parcourir l'ensemble des descripteurs d'image et leur appliquer la comparaison
+  //empiler le résultat dans une pile d'image
+  //parcourir la pile est renvoyé les plus petits
+  int minim;
+  PILE p2=init_PILE();
+  int taillePile=taillePILE(p);
+  for(i=0;i<NOMBRE_DE_RESULTAT;i++){
+    minim=1000000;
+    if(taillePile<NOMBRE_DE_RESULTAT){
+      printf("Nombre de résultat attendu supérieur au nombre de fichier présent");
+    }else{
+      Cell* caseMoment = p.premier;
+      while(caseMoment!=NULL){
+        if(caseMoment->valeur<minim){minim=caseMoment->valeur;}
+	    caseMoment=caseMoment->suivant;
+	  }
+      caseMoment = p.premier;
+      while(caseMoment!=NULL){
+        if(caseMoment->valeur==minim){
+          p2=emPILE(p2,caseMoment->valeur,caseMoment->id);
+		  caseMoment->valeur=1000001;
+        }
+	    caseMoment=caseMoment->suivant;
+	  }
+      
+    }
+  }
+ 
+  //ParcoursPILE(p2);
+  int tabValeur[NOMBRE_DE_RESULTAT];
+  char tabNom[NOMBRE_DE_RESULTAT][150];
+  
+  i=0;
+  Cell* caseMoment = p2.premier;
+  while(caseMoment!=NULL){
+    tabValeur[i]=caseMoment->valeur;
+    strcpy(tabNom[i],caseMoment->id);
+    caseMoment=caseMoment->suivant;
+    i++;
+  }
+  for(i=NOMBRE_DE_RESULTAT-1;i>=0;i--){
+    if (tabValeur[i] > 0)
+    {
+      printf(" - %s contient a %d %% de la couleur %d\n", tabNom[i], tabValeur[i], couleur);
+    }
+  }
+  
+  char command[150];
+  sprintf(command, "rm %s", LISTE_EPHEMERE_RGB);
+  system(command);
+
+  sprintf(command, "rm %s", BASE_EPHEMERE_RGB);
+  system(command);
+}

@@ -86,6 +86,8 @@ int comparaisonRGB(image des1,image des2);
 
 void comparerImageAvecImageNB();
 void comparerImageAvecImageRGB();
+void rechercherNiveauGris(int niveau);
+void rechercherCouleur(int couleur);
 
 //Module Pile
 PILE init_PILE();
