@@ -48,7 +48,7 @@ typedef struct Cell{
   int valeur;
   char id[150];
 }Cell;
- 
+
 typedef struct{
   Cell* premier;
 }PILE;
@@ -96,5 +96,3 @@ void ParcoursPILE(PILE pile);
 int taillePILE(PILE pile);
 PILE emPILE(PILE pile,int val,char * id);
 #endif
-
-
