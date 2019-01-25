@@ -44,11 +44,15 @@ void menu2(){
 	saisie[0] = '\0';
 }
 
+
+/**Fonction qui permet le choix du type du fichier recherché 
+*  en tant qu'administrateur
+*/
 void menu2_adm(){
 	
 	int type = 0;
 	char saisie[255];
-	
+	//contrôle de saisie
 	while(1)
 	{
 		printf("\nSélectionner le type de fichier recherché :\n1 - Texte\n2 - Image\n3 - Retour\n4 - Quitter\nType de fichier : ");
