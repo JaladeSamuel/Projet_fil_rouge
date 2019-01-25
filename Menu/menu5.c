@@ -88,6 +88,51 @@ void configuration(){
 }
 
 
+
+/** Fonction demandant de lire les descripteurs image 
+*   ou les descripteurs texte
+*/
+void affiche_descripteur(){
+	int choix;
+	char saisie[255];
+	//contrôle de saisie
+	while(1)
+	{
+		printf("\n\nQuels descripteurs voulez-vous consulter ?\n1 - Descripteurs texte\n2 - Descripteurs image\n3 - Retour\n4 - Quitter\nChoix : ");
+		fgets(saisie, 255, stdin);
+		if (sscanf(saisie, "%d", &choix) == 1) break;
+		printf("\nErreur de saisie, veuillez saisir un entier.\n");
+	}
+
+	switch(choix)
+	{
+
+	case 1 :
+		printf("\nAffichage des descripteurs texte : \n\n");
+		system("cat ../Commun/descripteur_base_texte.txt");
+		choix_adm();
+		break;
+	case 2 :
+		printf("\nAffichage des descripteurs image noir/blanc : \n\n");
+		system("cat ../IndexationImage/data/base_descripteur_imageNB.txt");
+		printf("\n\nAffichage des descripteurs image couleur : \n\n");
+		system("cat ../IndexationImage/data/base_descripteur_imageRGB.txt");
+		break;
+	case 3 :
+		choix_adm();
+		break;
+	case 4 :
+		quitter();
+		break;
+	default :
+		printf("\nErreur : Saisie impossible, veuillez choisir \"1\",\"2\",\"3\" ou \"4\".\n");
+		choix_adm();
+		break;
+	}
+}
+
+
+
 /** Fonction proposant les différentes options 
 *   auxquelles l'administrateur peut accéder
 */
@@ -111,8 +156,7 @@ void choix_adm(){
 		menu2_adm();
 		break;
 	case 2 :
-		printf("\nAffichage des descripteurs : \n\n");
-		system("cat ../Commun/descripteur_base_texte.txt");
+		affiche_descripteur();
 		choix_adm();
 		break;
 	case 3 :
