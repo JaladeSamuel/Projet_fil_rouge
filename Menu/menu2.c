@@ -51,7 +51,7 @@ void menu2_adm(){
 	
 	while(1)
 	{
-		printf("\nSélectionner le type de fichier recherché :\n1 - Texte\n2 - Image\n3 Retour\n5 - Quitter\nType de fichier : ");
+		printf("\nSélectionner le type de fichier recherché :\n1 - Texte\n2 - Image\n3 - Retour\n4 - Quitter\nType de fichier : ");
 		fgets(saisie, 255, stdin);
 
 		if (saisie[0] == '\n') // on a des "restes" du stdin, on re demande la saisie 
