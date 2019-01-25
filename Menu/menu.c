@@ -11,20 +11,6 @@
 int main(void){
 	indexationBaseTexte();
 
-	BASE_DESCRIPTEUR_IMAGE_NB = "../IndexationImage/data/base_descripteur_imageNB.txt\0";
-	BASE_DESCRIPTEUR_IMAGE_RGB = "../IndexationImage/data/base_descripteur_imageRGB.txt\0";
-	BASE_EPHEMERE_NB = "../IndexationImage/data/baseEphemereNB.txt\0";
-	BASE_EPHEMERE_RGB = "../IndexationImage/data/baseEphemereRGB.txt\0";
-	LISTE_EPHEMERE_NB = "../IndexationImage/data/listeEphemereNB.txt\0";
-	LISTE_EPHEMERE_RGB = "../IndexationImage/data/listeEphemereRGB.txt\0";
-	TEST_NB_DIR_PATH = "../IMG_et_AUDIO/TEST_NB/\0";
-	TEST_RGB_DIR_PATH = "../IMG_et_AUDIO/TEST_RGB/\0";
-	LISTE_DESCRIPTEUR_IMAGE_NB = "../IndexationImage/data/liste_descripteur_imageNB.txt\0";
-	LISTE_DESCRIPTEUR_IMAGE_RGB = "../IndexationImage/data/liste_descripteur_imageRGB.txt\0";
-	DEPOT_IMAGE_A_COMPARER = "../IndexationImage/data/depot_image_a_compararer/\0";
-
-	printf("%s\n",BASE_DESCRIPTEUR_IMAGE_NB);
-
 	descripteurNB();
 	descripteurRGB();
 

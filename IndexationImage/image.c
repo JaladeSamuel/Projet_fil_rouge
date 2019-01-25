@@ -4,6 +4,18 @@
 #include <string.h>
 #include "image.h"
 
+char * BASE_DESCRIPTEUR_IMAGE_NB = "../IndexationImage/data/base_descripteur_imageNB.txt\0";
+char * BASE_DESCRIPTEUR_IMAGE_RGB = "../IndexationImage/data/base_descripteur_imageRGB.txt\0";
+char * BASE_EPHEMERE_NB = "../IndexationImage/data/baseEphemereNB.txt\0";
+char * BASE_EPHEMERE_RGB = "../IndexationImage/data/baseEphemereRGB.txt\0";
+char * LISTE_EPHEMERE_NB = "../IndexationImage/data/listeEphemereNB.txt\0";
+char * LISTE_EPHEMERE_RGB = "../IndexationImage/data/listeEphemereRGB.txt\0";
+char * TEST_NB_DIR_PATH = "../IMG_et_AUDIO/TEST_NB/\0";
+char * TEST_RGB_DIR_PATH = "../IMG_et_AUDIO/TEST_RGB/\0";
+char * LISTE_DESCRIPTEUR_IMAGE_NB = "../IndexationImage/data/liste_descripteur_imageNB.txt\0";
+char * LISTE_DESCRIPTEUR_IMAGE_RGB = "../IndexationImage/data/liste_descripteur_imageRGB.txt\0";
+char * DEPOT_IMAGE_A_COMPARER = "../IndexationImage/data/depot_image_a_compararer/\0";
+
 /*MODULE POUR LA QUANRIFICATION*/
 int quantificationNoirBlanc(int nombre){
   int resultat=0;
@@ -386,7 +398,7 @@ void descripteurRGB(){
           //affiche_imageNB(imageTMP);
           strcpy(imageTMP->id,nom2);
           constructeurRGB(imageTMP);
-          //free(imageTMP);
+          free(imageTMP);
         }
         else{
           printf("Impossible d'ouvrir %s\n",nom2);
@@ -860,16 +872,9 @@ void rechercherNiveauGris(int niveau)
   for(i=NOMBRE_DE_RESULTAT-1;i>=0;i--){
     if (tabValeur[i] != 0)
     {
-      printf(" - Le ficher %s contient a %d %% du niveau %d\n", tabNom[i], tabValeur[i], niveau);
+      printf(" - Le ficher %s en contient a %d %%\n", tabNom[i], tabValeur[i]);
     }
   }
-  
-  char command[150];
-  sprintf(command, "rm %s", LISTE_EPHEMERE_NB);
-  system(command);
-
-  sprintf(command, "rm %s", BASE_EPHEMERE_NB);
-  system(command);
 }
 
 void rechercherCouleur(int couleur)
@@ -888,9 +893,9 @@ void rechercherCouleur(int couleur)
       for(i=0;i<64;i++){
         fscanf(fichier,"%d %d\n",&composante,&tmp);
 
-        if (couleur == composante)
+        if (couleur == composante || (composante + 1) == couleur || (composante - 1) == couleur)
         {
-          couleurCherche = tmp;
+          couleurCherche += tmp;
         }
 
         total += tmp;
@@ -947,14 +952,7 @@ void rechercherCouleur(int couleur)
   for(i=NOMBRE_DE_RESULTAT-1;i>=0;i--){
     if (tabValeur[i] > 0)
     {
-      printf(" - %s contient a %d %% de la couleur %d\n", tabNom[i], tabValeur[i], couleur);
+      printf(" - %s en contient a %d %%\n", tabNom[i], tabValeur[i]);
     }
   }
-  
-  char command[150];
-  sprintf(command, "rm %s", LISTE_EPHEMERE_RGB);
-  system(command);
-
-  sprintf(command, "rm %s", BASE_EPHEMERE_RGB);
-  system(command);
 }

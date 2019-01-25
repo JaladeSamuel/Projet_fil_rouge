@@ -23,8 +23,10 @@ void nb_dom(){
 	{
 
 	case 1 :
+		rechercherNiveauGris(0);
+		break;
 	case 2 :
-		printf("\nEn travaux...\n");
+		rechercherNiveauGris(3);
 		break;
 	case 3 : 
 		noir_blanc();
@@ -119,7 +121,7 @@ void couleur_dom(){
 	//contrôle sur la saisie
 	while(1)
 	{
-		printf("\nChoisir une couleur : \n1 - Rouge\n2 - Rose\n3 - Violet\n4 - Bleu\n5 - Vert\n6 - Jaune\n7 - Orange\n8 - Noir\n9 - Blanc\n10 - Retour\nCouleur : ");
+		printf("\nChoisir une couleur : \n1 - Rouge\n2 - Rose\n3 - Bleu\n4 - Vert\n5 - Jaune\n6 - Orange\n7 - Noir\n8 - Blanc\n9 - Retour\nCouleur : ");
 		fgets(saisie, 255, stdin);
 		if (sscanf(saisie, "%d", &couleur) == 1) break;
 		printf("\nErreur de saisie, veuillez saisir un entier.\n");
@@ -129,17 +131,30 @@ void couleur_dom(){
 	{
 
 	case 1 :
-	case 2 :
-	case 3 : 
-	case 4 : 
-	case 5 : 
-	case 6 :
-	case 7 : 
-	case 8 :
-	case 9 :
-		printf("\nEn travaux...\n");
+		rechercherCouleur(48);
 		break;
-	case 10 :
+	case 2 :
+		rechercherCouleur(54);
+		break;
+	case 3 : 
+		rechercherCouleur(3);
+		break;
+	case 4 : 
+		rechercherCouleur(12);
+		break;
+	case 5 : 
+		rechercherCouleur(60);
+		break;
+	case 6 :
+		rechercherCouleur(52);
+		break;
+	case 7 : 
+		rechercherCouleur(0);
+		break;
+	case 8 :
+		rechercherCouleur(63);
+		break;
+	case 9 :
 		R_couleur();
 		break;
 	default :
