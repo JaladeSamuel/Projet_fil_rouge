@@ -1,3 +1,6 @@
+#ifndef INDEXATIONTXT_H
+#define INDEXATIONTXT_H
+
 #include "fileMot.h"
 #include "../Commun/Descripteurs_Textes/descripteur.h"
 
@@ -15,3 +18,6 @@ void actualiserTableTexteIndex(FileChemin *file);
 int indexationFichierTexte(char *cheminFichier, DESCR *descripteur);
 void fileMotFrequentDansDESCR(File *fileDeMot, DESCR *fileMotFrequent);
 void load_config_texte();
+void ajoutDocBase(char *path);
+
+#endif

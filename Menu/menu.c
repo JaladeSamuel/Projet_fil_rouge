@@ -10,7 +10,7 @@
 
 int main(void){
 	indexationBaseTexte();
-
+	
 	BASE_DESCRIPTEUR_IMAGE_NB = "../IndexationImage/data/base_descripteur_imageNB.txt";
 	BASE_DESCRIPTEUR_IMAGE_RGB = "../IndexationImage/data/base_descripteur_imageRGB.txt";
 	BASE_EPHEMERE_NB = "../IndexationImage/data/baseEphemereNB.txt";

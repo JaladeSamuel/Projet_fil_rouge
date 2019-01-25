@@ -75,8 +75,7 @@ int indexationBaseTexte()
 
     char motDefile[50];
     int id = 0, nb = 0;
-    printf("-------------------------------------------\n");
-    printf("|            INDEXATION texte ...         |\n");
+
     //parcour des fichiers du repertoire
 
     while ((lecture = readdir(rep))) {//nom du fichier = lectur ->d_name
@@ -138,8 +137,6 @@ int indexationBaseTexte()
       actualiserTableTexteIndex(&fileTableIndex); //on actualise la table
     }
 
-    printf("| INDEXATION TERMINE | %d fichiers indexe |\n",id);
-    printf("-------------------------------------------\n");
     return 0;
 }
 

@@ -19,22 +19,22 @@ void indexation(){
 	}
 	switch(choix){
 	case 1 :
+		nouveauFichierTexte();
+		break;
+	case 2 :
 		test_adresse();
 		break;
-	case 2 :   
-		test_adresse();
-		break;
-	case 3 : 
+	case 3 :
 		choix_adm();
 		break;
-	case 4 : 
+	case 4 :
 		quitter();
 		break;
-	default : 
+	default :
 		printf("\nErreur : Saisie impossible, veuillez choisir \"1\",\"2\",\"3\" ou \"4\".");
 		indexation();
 		break;
-	} 
+	}
 }
 
 void configuration(){
@@ -62,13 +62,13 @@ void configuration(){
 		break;
 	case 3: system("echo \"En Travaux...\"");
 		break;
-	case 4: 
+	case 4:
 		choix_adm();
 		break;
-	case 5 : 
+	case 5 :
 		quitter();
 		break;
-	default : 
+	default :
 		choix_adm();
 		break;
 	}
@@ -81,15 +81,15 @@ void choix_adm(){
 
 	while(1)
 	{
-		
+
 		printf("\n\nSélectionner une action :\n1 - Lancer une recherche\n2 - Accéder aux descripteurs\n3 - Lancer une indexation\n4 - Modifier les configurations\n5 - Retour\n6 - Quitter\nChoix : ");
 		fgets(saisie, 255, stdin);
 		if (sscanf(saisie, "%d", &choix) == 1) break;
 		printf("\nErreur de saisie, veuillez saisir un entier.\n");
 	}
-	
+
 	switch(choix){
-	case 1 : 
+	case 1 :
 		menu2_adm();
 		break;
 	case 2 :
@@ -103,7 +103,7 @@ void choix_adm(){
 	case 4 :
 		configuration();
 		break;
-	case 5 : 
+	case 5 :
 		menu1();
 		break;
 	case 6 :
@@ -113,5 +113,5 @@ void choix_adm(){
 		printf("\nErreur : Saisie impossible, veuillez choisir \"1\",\"2\",\"3\",\"4\",\"5\" ou \"6\".\n");
 		choix_adm();
 		break;
-	}	
+	}
 }

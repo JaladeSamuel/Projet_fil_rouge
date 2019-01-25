@@ -4,6 +4,7 @@
 # include "menu5.h"
 # include "menu2.h"
 #include "../Comparaison/Comparaison_Texte/comparaison.h"
+#include "../IndexationTexte/indexationV1.h"
 
 void quitter(){
 	printf("\nFin du programme.\n");
@@ -12,7 +13,7 @@ void quitter(){
 }
 
 void identification(){
-	system("stty -echo; read -p \"\nMot de passe : \" password; stty echo; while [ \"$password\" != \"123upssitech\" ] >& fichier_erreur;do echo \"\nMot de passe refusé ! Réessayez.\n\";stty -echo; read -p \"\nMot de passe : \" password; stty echo; done; echo \"\nMot de passe accepté.\"");	
+	system("stty -echo; read -p \"\nMot de passe : \" password; stty echo; while [ \"$password\" != \"123upssitech\" ] >& fichier_erreur;do echo \"\nMot de passe refusé ! Réessayez.\n\";stty -echo; read -p \"\nMot de passe : \" password; stty echo; done; echo \"\nMot de passe accepté.\"");
 }
 
 
@@ -59,4 +60,22 @@ void rechercheParAdresse(){
 	searchFILE_COMPTXT(path, &res);
 
 	print_RES(res);
+}
+
+void nouveauFichierTexte()
+{
+	printf("\nRentrer le chemin absolu du fichier texte a indexer : ");
+	char path[500];
+	FILE *fichier = fopen("","r");
+	while(fichier == NULL)
+	{
+		scanf("%s", path);
+		fichier = fopen(path,"r");
+		if(fichier == NULL)
+		{
+			printf("\nFichier introuvable veuillez reessayer : ");
+		}
+	}
+	ajoutDocBase(path);
+	printf("Fichier indexe et ajoute a la base\n");
 }
