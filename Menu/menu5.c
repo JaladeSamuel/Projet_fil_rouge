@@ -6,10 +6,13 @@
 #include"menu3.h"
 #include"menu1.h"
 
+/** choix entre une indexation de fichier texte 
+*   ou de fichier image
+*/
 void indexation(){
 	int choix;
 	char saisie[255];
-
+	//contrôle sur la saisie
 	while(1)
 	{
 		printf("\nSélectionner le type du fichier à indexer :\n1 - Fichier texte\n2 - Fichier image\n3 - Retour\n4 - Quitter\nChoix : ");
@@ -17,7 +20,10 @@ void indexation(){
 		if (sscanf(saisie, "%d", &choix) == 1) break;
 		printf("\nErreur de saisie, veuillez saisir un entier.\n");
 	}
-	switch(choix){
+
+	switch(choix)
+	{
+
 	case 1 :
 		nouveauFichierTexte();
 		break;
@@ -37,9 +43,14 @@ void indexation(){
 	}
 }
 
+
+/** choix entre configurer le fichier de configuration générale 
+*   ou le fichier de configuration texte
+*/
 void configuration(){
 	int choix;
 	char saisie[255];
+	//contrôle de saisie
 	while(1)
 	{
 		printf("\n\nConfigurer : \n1 - Configuration générale\n2 - Configuration Texte\n3 - Configuration Image\n4 - Retour\n5 - Quitter\nChoix : ");
@@ -47,7 +58,9 @@ void configuration(){
 		if (sscanf(saisie, "%d", &choix) == 1) break;
 		printf("\nErreur de saisie, veuillez saisir un entier.\n");
 	}
-	switch(choix){
+	
+	switch(choix)
+	{
 	case 1:
 		if(fork()==0){
 			execlp("gedit", "gedit", "../Config/config.txt", NULL);
@@ -74,21 +87,26 @@ void configuration(){
 	}
 }
 
+
+/** Fonction proposant les différentes options 
+*   auxquelles l'administrateur peut accéder
+*/
 void choix_adm(){
 
 	int choix;
 	char saisie[255];
-
+	//contrôle de saisie
 	while(1)
 	{
-
 		printf("\n\nSélectionner une action :\n1 - Lancer une recherche\n2 - Accéder aux descripteurs\n3 - Lancer une indexation\n4 - Modifier les configurations\n5 - Retour\n6 - Quitter\nChoix : ");
 		fgets(saisie, 255, stdin);
 		if (sscanf(saisie, "%d", &choix) == 1) break;
 		printf("\nErreur de saisie, veuillez saisir un entier.\n");
 	}
 
-	switch(choix){
+	switch(choix)
+	{
+
 	case 1 :
 		menu2_adm();
 		break;
