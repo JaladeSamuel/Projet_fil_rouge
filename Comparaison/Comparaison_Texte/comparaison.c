@@ -115,7 +115,10 @@ void init_COMPTXT()
     }
     else
     {
-        // TODO
+        // while (feof(file))
+        // {
+        //     fscanf("%s %d", );
+        // }
         fclose(file);
     }
 
