@@ -1,7 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "descripteur.h"
+
+void tolower_DESC_STR(char* word)
+{
+    for (int i = 0; word[i]; i++){
+        word[i] = tolower(word[i]);
+    }
+}
 
 void init_DESCR(DESCR* descriptor, int id)
 {
@@ -120,10 +128,15 @@ void addWordandOcc_DESCR(DESCR* descriptor, char* word, int occurence)
 
 int getOccurence_DESCR(DESCR descriptor, char* word)
 {
+    char temp[30];
     TERMES prochainTerme = descriptor.termes;
+    
     while (prochainTerme != NULL)
     {
-        if (strcmp(prochainTerme->terme->word, word) == 0)
+        strcpy(temp, prochainTerme->terme->word);
+        tolower_DESC_STR(temp);
+        tolower_DESC_STR(word);
+        if (strcmp(temp, word) == 0)
         {
             return prochainTerme->terme->occurence;
         }

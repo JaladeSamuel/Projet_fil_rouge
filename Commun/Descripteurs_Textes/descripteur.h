@@ -26,6 +26,8 @@ typedef struct tag_DESCR {
     TERMES termes;
 } DESCR;
 
+void tolower_DESC_STR(char* word);
+
 void init_DESCR(DESCR* descriptor, int id);
 void fill_DESCR(DESCR* descriptor, FILE* file);
 void fillWithPath_DESCR(DESCR* descriptor, char* path);
