@@ -11,8 +11,8 @@
 int main(void){
 	indexationBaseTexte();
 
-	descripteurNB();
-	descripteurRGB();
+	//descripteurNB();
+	//descripteurRGB();
 
 	FILE_DESCRIPTORS_PATH = "../Commun/descripteur_base_texte.txt\0";
 	FILE_TEXT_CONFIG_PATH = "../Config/config_texte.txt\0";
