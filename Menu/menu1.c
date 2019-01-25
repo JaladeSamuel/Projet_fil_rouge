@@ -54,7 +54,7 @@ void rechercheParAdresse(){
 	RESULTS res;
 	init_RES(&res);
 
-	printf("\nRentrer le nom du fichier present dans la base que vous voules comparer ou un chemin absolu : ");
+	printf("\nRentrer le nom du fichier present dans la base que vous voulez comparer ou un chemin absolu : ");
 	scanf("%s", path);
 
 	searchFILE_COMPTXT(path, &res);
@@ -64,7 +64,7 @@ void rechercheParAdresse(){
 
 void nouveauFichierTexte()
 {
-	printf("\nRentrer le chemin absolu du fichier texte a indexer : ");
+	printf("\nRentrer le chemin absolu du fichier texte à indexer : ");
 	char path[500];
 	FILE *fichier = fopen("","r");
 	while(fichier == NULL)
@@ -73,9 +73,9 @@ void nouveauFichierTexte()
 		fichier = fopen(path,"r");
 		if(fichier == NULL)
 		{
-			printf("\nFichier introuvable veuillez reessayer : ");
+			printf("\nFichier introuvable veuillez réessayer : ");
 		}
 	}
 	ajoutDocBase(path);
-	printf("Fichier indexe et ajoute a la base\n");
+	printf("Fichier indexé et ajouté a la base\n");
 }
