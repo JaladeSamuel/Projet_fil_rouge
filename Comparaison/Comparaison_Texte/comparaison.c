@@ -2,6 +2,8 @@
 #include "../../IndexationTexte/indexationV1.h"
 #include <string.h>
 #include <ctype.h>
+#include <unistd.h>
+#include <sys/types.h> 
 
 int DESCRIPTORS_MAX_ID = 0;
 
@@ -102,6 +104,38 @@ void print_RES(RESULTS res)
     }
 }
 
+void getPathFromId_RES(RESULTS* res, char* path)
+{
+    if (res->size == 0)
+    {
+        return;
+    }
+
+    FILE* file;
+    file = fopen(FILE_DESCRIPTORS_INDEX, "r");
+
+    if (file == NULL)
+    {
+        printf("ERREUR : Impossible d'ouvrir le fichier d'index des descripteurs.");
+        return;
+    }
+
+    int id;
+    char fileName[60];
+    while (!feof(file))
+    {
+        fscanf(file, "%d %s", &id, fileName);
+
+        if (id == res->ids[0])
+        {
+            strcpy(path, "../Base_de_donnees/TEXTES/");
+            strcat(path, fileName);
+        }
+    }
+
+    fclose(file);
+}
+
 /** Initialise la comparaison.
  */
 void init_COMPTXT()
@@ -200,6 +234,14 @@ void searchWord_COMPTXT(char mot[WORD_LENGTH_MAX], RESULTS* res)
     searchDescr.total = 1;
 
     search_COMPTXT(searchDescr, res);
+
+    char filepath[150];
+    getPathFromId_RES(res, filepath);
+
+    if(!fork())
+    {
+        execlp("gedit", "gedit", filepath, NULL);
+    }
 }
 
 /** Lance une recherche en comparant avec le nom du fichier donné
