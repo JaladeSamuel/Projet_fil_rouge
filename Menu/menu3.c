@@ -1,3 +1,7 @@
+/** XIONG Amelie
+*   menu3.c concerne la recherche d'un fichier texte
+*/
+
 #include"menu3.h"
 #include"menu2.h"
 #include"menu1.h"
