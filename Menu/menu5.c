@@ -1,3 +1,7 @@
+/** XIONG Amelie
+*   menu5.c concerne les actions spécifiques du mode administrateur
+*/
+
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
