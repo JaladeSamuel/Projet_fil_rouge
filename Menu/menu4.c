@@ -6,6 +6,8 @@
 #include "../IndexationImage/image.h"
 
 /** Choix de la couleur dominante pour une image noir/blanc
+*   dom = numéro de la couleur dominante
+*   saisie = chaine de contrôle sur la saisie
 */
 void nb_dom(){
 	int dom;	
@@ -43,21 +45,23 @@ void nb_dom(){
 
 
 /** Choix du type de recherche pour une image noir/blanc
-*   soit par fichier ou soir par couleur dominante
+*   soit par fichier ou soir par couleur dominante.
+*   choix = type de recherche désiré
+*   saisie = chaine de contrôle sur la saisie
 */
 void noir_blanc(){	
-	int nblc;
+	int choix;
 	char saisie[255];
 	//contrôle sur la saisie
 	while(1)
 	{
 		printf("\nQuel type de recherche voulez-vous effectuer ?\n1 - Choix d'une couleur dominante\n2 - Recherche par fichier\n3 - Retour\n4 - Quitter\nType de recherche : ");
 		fgets(saisie, 255, stdin);
-		if (sscanf(saisie, "%d", &nblc) == 1) break;
+		if (sscanf(saisie, "%d", &choix) == 1) break;
 		printf("\nErreur de saisie, veuillez saisir un entier.\n");
 	}
 
-	switch(nblc)
+	switch(choix)
 	{
 
 	case 1 :
@@ -80,6 +84,8 @@ void noir_blanc(){
 
 /** Choix du type de recherche pour une image noir/blanc
 *   soit par fichier ou soir par couleur dominante
+*   cl = choix du type de recherche
+*   saisie = chaine de contrôle sur la saisie
 */
 void R_couleur(){
 	int cl;
@@ -114,6 +120,8 @@ void R_couleur(){
 
 
 /** Choix de la couleur dominante pour une image couleur
+*   couleur = couleur dominante choisie
+*   saisie = chaine de contrôle sur la saisie
 */
 void couleur_dom(){	
 	int couleur;
@@ -169,6 +177,8 @@ void couleur_dom(){
 
 /** Fonction permettant de choisir à comparer une image couleur 
 *   ou une image noir/blanc
+*   R_image = choix entre image couleur ou image noir/blanc
+*   saisie = chaine de contrôle sur la saisie
 */
 void Recherche_image(){
 	int R_image;
