@@ -1,7 +1,8 @@
 /** XIONG Amélie
 *   Les fichiers menu*.c et menu*.h ont une corrélation avec les différents menus (cf spécifications)
 *   chaque menu possède un .c et un .h associé.
-*   menu1.c concerne l'authentifcation de l'utilisateur
+*   menu1.c concerne l'authentifcation de l'utilisateur.
+*   Il posssède également le code des fonctions utiles dans chaque autre fichier menu*.c
 */
 
 

@@ -1,3 +1,7 @@
+/** XIONG Amelie
+*   menu2.c concerne les choix possibles lorsqu'on désire faire une recherche
+*/
+
 # include <stdio.h>
 #include"menu2.h"
 #include"menu3.h"
