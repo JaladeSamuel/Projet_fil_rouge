@@ -3,12 +3,15 @@
 #include"menu3.h"
 #include"menu4.h"
 
-int type = 0;
-char saisie[255];
 
-//Fonction qui permet le choix du type du fichier recherché : 
+
+/** Fonction qui permet le choix du type du fichier recherché : 
+*   int type = variable contenant la valeur de saisie
+*   char saisie[255} = chaine de contrôle sur la saisie
+*/
 void menu2(){
-
+	int type = 0;
+	char saisie[255];
 	//contrôle sur la saisie, on attend un entier.
 	while(1)
 	{
@@ -46,7 +49,10 @@ void menu2(){
 
 
 /**Fonction qui permet le choix du type du fichier recherché 
-*  en tant qu'administrateur
+*  en tant qu'administrateur.
+*  Il s'agit de la même fonction que menu2()
+*  avec comme unique différence un retour 
+*  vers les choix administrateur.
 */
 void menu2_adm(){
 	
