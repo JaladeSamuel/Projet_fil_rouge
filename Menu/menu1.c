@@ -73,6 +73,7 @@ void rechercheParAdresse(){
 	searchFILE_COMPTXT(path, &res);
 
 	print_RES(res);
+    openFirstResult_RES(res);
 }
 
 void nouveauFichierTexte()

@@ -104,9 +104,11 @@ void print_RES(RESULTS res)
     }
 }
 
-void getPathFromId_RES(RESULTS* res, char* path)
+void openFirstResult_RES(RESULTS res)
 {
-    if (res->size == 0)
+    char path[150];
+
+    if (res.size == 0)
     {
         strcpy(path, "NULL");
         return;
@@ -127,7 +129,7 @@ void getPathFromId_RES(RESULTS* res, char* path)
     {
         fscanf(file, "%d %s", &id, fileName);
 
-        if (id == res->ids[0])
+        if (id == res.ids[0])
         {
             strcpy(path, "../Base_de_donnees/TEXTES/");
             strcat(path, fileName);
@@ -240,9 +242,6 @@ void searchWord_COMPTXT(char mot[WORD_LENGTH_MAX], RESULTS* res)
     searchDescr.total = 1;
 
     search_COMPTXT(searchDescr, res);
-
-    char filepath[150];
-    getPathFromId_RES(res, filepath);
 }
 
 /** Lance une recherche en comparant avec le nom du fichier donné

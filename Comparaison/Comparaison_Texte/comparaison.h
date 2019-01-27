@@ -24,7 +24,7 @@ void tolower_STR(char* word);
 void init_RES(RESULTS* res);
 void add_RES(RESULTS* res, int id, float pourcentage);
 void print_RES(RESULTS res);
-void getPathFromId_RES(RESULTS* res, char* path);
+void openFirstResult_RES(RESULTS res);
 
 void init_COMPTXT();
 float compare_COMPTXT(DESCR base, DESCR descriptor);

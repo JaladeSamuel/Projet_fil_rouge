@@ -21,6 +21,7 @@ void motcle(){
 
 	searchWord_COMPTXT(mot, &res);
 	print_RES(res);
+    openFirstResult_RES(res);
 }
 
 /** Choix du mode de recherche d'un fichier texte
