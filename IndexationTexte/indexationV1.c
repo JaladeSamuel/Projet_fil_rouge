@@ -1,3 +1,10 @@
+/*
+** indexationV1.c
+** Samuel Jalade
+** Contient tout les fonctions necessaire pour indexer la base de donnees texte ainsi que
+** Indexation temporaire de fichier unique et d ajout de fichier a la base de donnees texte
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -12,7 +19,7 @@
    return 0;
 }*/
 
-
+//Indexe un fichier unique et rempli la structure descripeur pour decrire le fichier
 int indexationFichierTexte(char *cheminFichier, DESCR* descripteur)
 {
   load_config_texte();
@@ -24,6 +31,7 @@ int indexationFichierTexte(char *cheminFichier, DESCR* descripteur)
   return 1;
 }
 
+//permet d ajouter des fichiers xml a la base de donnee et indexe a nouveau la base pour actualiser
 void ajoutDocBase(char *path)
 {
   char temp = path[0];
@@ -53,6 +61,8 @@ void ajoutDocBase(char *path)
   system(command);
   indexationBaseTexte();
 }
+
+//Parcours toute la base est indexa chaque fichier a la vole
 int indexationBaseTexte()
 {
     load_config_texte();
@@ -77,35 +87,16 @@ int indexationBaseTexte()
     int id = 0, nb = 0;
 
     //parcour des fichiers du repertoire
-
     while ((lecture = readdir(rep))) {//nom du fichier = lectur ->d_name
 
         if(strcmp(lecture->d_name,"..") == 0 || strcmp(lecture->d_name,".") == 0){
           continue;
         }
-      //  printf("%s\n", lecture->d_name);
-    /*    if(fileContainsChemin(&fileTableIndex,lecture->d_name))
-        {
-          printf("Fichier : %s deja indexe\n",lecture->d_name);
-          continue;
-        } */
-
-        //Convertit les fichier ISO-8859-1 en UTF-8
-        /*char conv[500] = {"iconv -f ISO-8859-1 -t UTF-8 "};
-        strcat(conv,"../Base_de_donnees/texte2/");
-        strcat(conv,lecture->d_name);
-        strcat(conv," -o ");
-        strcat(conv,"../Base_de_donnees/texte2/");
-        strcat(conv,lecture->d_name);
-        printf("%s\n",conv);
-        system(conv);*/
 
         aucunFichierIndexe = 0;
         //INITIALISATION DES FILES
         INIT_FILE(&fileDeMot);
         INIT_FILE(&fileDescripteur);
-
-
 
         fileMotFichier(&fileDeMot,lecture->d_name,1);
         fileMotFrequent(&fileDeMot,&fileDescripteur);//free
@@ -125,8 +116,6 @@ int indexationBaseTexte()
 
         ENFILER_CHEMIN(&fileTableIndex, lecture->d_name, id);
         id++;
-
-
     }// end while
 
     fclose(fichierDescripteur);
@@ -239,6 +228,7 @@ void fileMotFrequentDansDESCR(File *fileDeMot, DESCR *fileMotFrequent)
   fileMotFrequent->total = nbMotsTotal;
 }
 
+//fonction non qui permet d actualiser la table de chemin et d ID des descripteurs indexes
 void actualiserTableTexteIndex(FileChemin *file)
 {
   FILE* fichierTableIndex = NULL;
@@ -256,7 +246,9 @@ void actualiserTableTexteIndex(FileChemin *file)
   }
   fclose(fichierTableIndex);
 }
-
+/*
+**Charge les variable par le fichier de configuration config_texte.txt
+*/
 void load_config_texte()
 {
   FILE* fichierConfig = NULL;
