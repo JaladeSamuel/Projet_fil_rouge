@@ -1,3 +1,7 @@
+/** XIONG Amelie
+*   menu4.c concerne la recherche d'un fichier image
+*/
+
 #include"menu2.h"
 #include"menu4.h"
 #include"menu1.h"
