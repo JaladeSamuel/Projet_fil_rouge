@@ -16,6 +16,8 @@ void quitter(){
 
 /** Fonction d'identification, le bon mot de passe doit être saisi.
 *   pour cacher la saisie, on utilise les commandes unix
+*   password = variable contenant la saisie du mdp
+*   fichier_erreur = fichier de redirection des erreurs
 */
 void identification(){
 	system("stty -echo; read -p \"\nMot de passe : \" password; stty echo; while [ \"$password\" != \"123upssitech\" ] >& fichier_erreur;do echo \"\nMot de passe refusé ! Réessayez.\n\";stty -echo; read -p \"\nMot de passe : \" password; stty echo; done; echo \"\nMot de passe accepté.\"");
@@ -23,6 +25,8 @@ void identification(){
 
 
 /** Demande du mode d'utilisation
+*   int mode = variable contenant va valeur de la saisie
+*   char saisie = chaine de caractères pour le contrôle de la saisie
 */
 void menu1(){
 	int mode=0;
@@ -55,6 +59,7 @@ void menu1(){
 
 /* Fonction demandant une saisie d'adresse et 
 *  vérifie si le fichier existe
+*  adresse = variable contenant la saisie
 */
 void test_adresse()
 {
