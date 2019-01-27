@@ -4,6 +4,7 @@
 #include "../Comparaison/Comparaison_Texte/comparaison.h"
 
 /** Demande et contrôle sur la saisie du mot-clé
+*   char mot = variable contenant la saisie
 */
 void motcle(){
 	char mot[30];
@@ -25,6 +26,8 @@ void motcle(){
 }
 
 /** Choix du mode de recherche d'un fichier texte
+*   int R_par = variable contenant la valeur de la saisie
+*   char saisie[255] = chaine de contrôle sur la saisie
 */
 void menu3(){
 	int R_par=0;
