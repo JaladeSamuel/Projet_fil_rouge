@@ -1,3 +1,9 @@
+/*
+** fileMot.c
+** Samuel Jalade
+** Contient tout les fonctions necessaire pour manipuler les file definit dans le fichier fileMot.h
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

@@ -1,3 +1,8 @@
+/*
+** fileMot.h
+** Samuel Jalade
+** Structure de file de mots ainsi que de fileDeChemin pur le fichier tableTexteIndex.txt
+*/
 #ifndef FILEMOT_H
 #define FILEMOT_H
 
