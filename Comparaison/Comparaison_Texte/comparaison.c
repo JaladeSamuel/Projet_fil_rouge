@@ -1,3 +1,8 @@
+/** Module de la comparaison texte.
+ *  Ce module comprend une structure RESULTS qui permet de stocker et traiter les résultats d'un recherche.
+ *  Aurélien Montmejat 
+ */
+
 #include "comparaison.h"
 #include "../../IndexationTexte/indexationV1.h"
 #include <string.h>
@@ -107,13 +112,15 @@ void print_RES(RESULTS res)
     }
 }
 
+/** Ouvre le premier fichier des résultats donné en paramètre.
+ *  RESULTS res : résultats à traiter
+ */
 void openFirstResult_RES(RESULTS res)
 {
     char path[150];
 
     if (res.size == 0)
     {
-        strcpy(path, "NULL");
         return;
     }
 
@@ -147,7 +154,7 @@ void openFirstResult_RES(RESULTS res)
     }
 }
 
-/** Initialise la comparaison.
+/** Initialise la comparaison, à la lancer avant chaque comparaison.
  */
 void init_COMPTXT()
 {
@@ -247,8 +254,8 @@ void searchWord_COMPTXT(char mot[WORD_LENGTH_MAX], RESULTS* res)
     search_COMPTXT(searchDescr, res);
 }
 
-/** Lance une recherche en comparant avec le nom du fichier donné
- *
+/** Lance une recherche en comparant avec le nom du fichier donné.
+ *  Vérifie l'exitante du fichier dans la base et en tant que chemin absolue.
  */
 void searchFILE_COMPTXT(char filePath[400], RESULTS* res)
 {

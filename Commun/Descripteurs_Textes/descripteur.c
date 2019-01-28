@@ -1,9 +1,17 @@
+/** Module des descripteurs textes.
+ *  Contient une structure de descripteur et les fonctions nécessaire pour les manipuler.
+ *  Aurélien Montmejat 
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 #include "descripteur.h"
 
+/** Fonction qui transforme la chaine de charactères en minuscule.
+ *  char* word : la chaine à transformer en minuscule
+ */
 void tolower_DESC_STR(char* word)
 {
     for (int i = 0; word[i]; i++){
@@ -11,6 +19,10 @@ void tolower_DESC_STR(char* word)
     }
 }
 
+/** Initialise un descripteur.
+ *  DESCR* descripteur : la structure de descripteur à initialiser
+ *  int id : l'id à utiliser pour l'initialisation
+ */
 void init_DESCR(DESCR* descriptor, int id)
 {
     descriptor->id = id;
@@ -18,6 +30,12 @@ void init_DESCR(DESCR* descriptor, int id)
     descriptor->termes = NULL;
 }
 
+/** Remplis le descripteur donné en paramètre avec les informations de son 
+ *  descripteur en utilisant le fichier donné en paramètre, utile si l'on veut 
+ *  en faire plusieurs à la suite sans fermer et ouvrir le fichier.
+ *  DESCR* descriptor : la structure du descripteur à remplir
+ *  FILE* file : le fichier à utiliser pour le remplissage
+ */
 void fill_DESCR(DESCR* descriptor, FILE *file)
 {
     int id, total;
@@ -49,6 +67,11 @@ void fill_DESCR(DESCR* descriptor, FILE *file)
     }
 }
 
+/** Remplis le descripteur donné en paramètre avec les informations de son 
+ *  descripteur en utilisant le chemin du fichier donné en paramètre.
+ *  DESCR* descriptor : la structure du descripteur à remplir
+ *  FILE* file : le fichier à utiliser pour le remplissage
+ */
 void fillWithPath_DESCR(DESCR* descriptor, char* path)
 {
     int id, total;
@@ -84,6 +107,10 @@ void fillWithPath_DESCR(DESCR* descriptor, char* path)
     fclose(file);
 }
 
+/** Ajoute un mot au descripteur.
+ *  DESCR* descriptor : descripteur dans lequel on ajoute le mot
+ *  char* word : mot à ajouter au descripteur
+ */
 void addWord_DESCR(DESCR* descriptor, char *word)
 {
     // On recherche le terme
@@ -112,6 +139,11 @@ void addWord_DESCR(DESCR* descriptor, char *word)
     descriptor->termes = termesTemp;
 }
 
+/** Ajoute un mot et une occurence à un descripteur. 
+ *  DESCR* descriptor : descriptor dans lequel on ajout le mot et son occurence
+ *  char* word : mot à ajouter
+ *  int occurence : occurence du mot à ajouer
+ */
 void addWordandOcc_DESCR(DESCR* descriptor, char* word, int occurence)
 {
     TERME* terme = malloc(sizeof(TERME*));
@@ -126,6 +158,10 @@ void addWordandOcc_DESCR(DESCR* descriptor, char* word, int occurence)
     descriptor->termes = termesTemp;
 }
 
+/** Retourne l'occurence d'un mot cherché dans le descripteur donné.
+ *  DESCR descriptor : descripteur dans lequel on recherche le mot
+ *  char* word : mot à rechercher
+ */
 int getOccurence_DESCR(DESCR descriptor, char* word)
 {
     char temp[30];
@@ -147,6 +183,8 @@ int getOccurence_DESCR(DESCR descriptor, char* word)
     return 0;
 }
 
+/** Dépile un mot de la pile du descripteur.
+ */
 void removeWord_DESCR(DESCR* descriptor)
 {
     if (descriptor->termes == NULL)
@@ -161,6 +199,10 @@ void removeWord_DESCR(DESCR* descriptor)
     descriptor->nbTermes--;
 }
 
+/** Retourne un terme à l'indice donné d'un descripteur donné.
+ *  DESCR descriptor : descripteur dans lequel on recherche le terme à l'index donné
+ *  int index : l'index du terme recherché
+ */
 TERME* get_DESCR(DESCR descriptor, int index)
 {
     TERMES termes = descriptor.termes;
@@ -173,6 +215,9 @@ TERME* get_DESCR(DESCR descriptor, int index)
     return termes->terme;
 }
 
+/** Ferme un descripteur.
+ *  Cette fonction le dépile et libère la place pris par celui-ci.
+ */
 void close_DESCR(DESCR* descriptor)
 {
     for (int i = 0; i < descriptor->nbTermes - 1; i++)
