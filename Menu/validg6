@@ -1,0 +1,747 @@
+Script started on 2019-01-25 17:27:26+01:00
+]777;notify;Command completed;./tst_menu.out \]0;aurelien@localhost:~/Documents/Projects/Projet_fil_rouge/Menu\]7;file://localhost.localdomain/home/aurelien/Documents/Projects/Projet_fil_rouge/Menu\[aurelien@localhost Menu]$ make
+gcc -c -g menu.c
+gcc -c -g ../IndexationTexte/fileMot.c
+gcc -c -g ../IndexationTexte/indexationV1.c
+gcc -c -g ../Commun/Descripteurs_Textes/descripteur.c
+gcc -c -g ../Comparaison/Comparaison_Texte/comparaison.c
+gcc -c -g ../IndexationImage/image.c
+gcc -o tst_menu.out menu.o fileMot.o indexationV1.o descripteur.o comparaison.o image.o -lm
+./tst_menu.out
+
+
+
+[36;1mFoxIt vous souhaite la bienvenue sur son nouveau moteur de recherche ![0m
+
+Sélectionner un mode : 
+1 - Utilisateur
+2 - Administrateur
+Type de connexion : 1
+
+Sélectionner le type de fichier recherché :
+1 - Texte
+2 - Image
+3 - Retour
+4 - Quitter
+Type de fichier : 1
+
+Recherche par :
+1 - Mot clé
+2 - Fichier
+3 - Retour
+4 - Quitter
+Type de Recherche : 1
+
+Rentrer le mot clé :
+Mot clé : navigateur
+ - 06-US_Open___Mauresmo_et_utf8.xml (24%)
+ - 29-Ligue_des_champions___Lyon_utf8.xml (16%)
+ - 18-Ligue_1___Lyon_a_utf8.xml (12%)
+
+Sélectionner le type de fichier recherché :
+1 - Texte
+2 - Image
+3 - Retour
+4 - Quitter
+Type de fichier : abcd d
+
+Erreur de saisie, veuillez saisir un entier.
+
+Sélectionner le type de fichier recherché :
+1 - Texte
+2 - Image
+3 - Retour
+4 - Quitter
+Type de fichier : 1
+
+Recherche par :
+1 - Mot clé
+2 - Fichier
+3 - Retour
+4 - Quitter
+Type de Recherche : 1
+
+Rentrer le mot clé :
+Mot clé : abdc  cd
+Aucun resultat n'a été trouvé.
+
+Sélectionner le type de fichier recherché :
+1 - Texte
+2 - Image
+3 - Retour
+4 - Quitter
+Type de fichier : £^  musique
+
+Erreur de saisie, veuillez saisir un entier.
+
+Sélectionner le type de fichier recherché :
+1 - Texte
+2 - Image
+3 - Retour
+4 - Quitter
+Type de fichier : 1
+
+Recherche par :
+1 - Mot clé
+2 - Fichier
+3 - Retour
+4 - Quitter
+Type de Recherche : 1
+
+Rentrer le mot clé :
+Mot clé : musique
+ - 12-Musiques_du_monde___les_utf8.xml (4%)
+ - 22-Danse___quarante_jeunes_de_utf8.xml (3%)
+
+Sélectionner le type de fichier recherché :
+1 - Texte
+2 - Image
+3 - Retour
+4 - Quitter
+Type de fichier : 1
+
+Recherche par :
+1 - Mot clé
+2 - Fichier
+3 - Retour
+4 - Quitter
+Type de Recherche : 1
+
+Rentrer le mot clé :
+Mot clé : grippe
+ - 14-Grippe_aviaire___l_OMS_exhorte_utf8.xml (19%)
+ - 22-Grippe_aviaire___la_course_utf8.xml (4%)
+
+Sélectionner le type de fichier recherché :
+1 - Texte
+2 - Image
+3 - Retour
+4 - Quitter
+Type de fichier : 1
+
+Recherche par :
+1 - Mot clé
+2 - Fichier
+3 - Retour
+4 - Quitter
+Type de Recherche : 2
+
+Rentrer le nom du fichier present dans la base que vous voulez comparer ou un chemin absolu : 26-lyon    Lyon_prends 
+Impossible de trouver ni le fichier '../Base_de_donnees/TEXTES/26-Lyon_prend' ni le fichier '26-Lyon_prend'.
+Voulez-vous dire le(s) fichier(s) '26-Lyon_prend_ses_aises_en_utf8.xml' ?
+Aucun resultat n'a été trouvé.
+
+Sélectionner le type de fichier recherché :
+1 - Texte
+2 - Image
+3 - Retour
+4 - Quitter
+Type de fichier : 1
+
+Recherche par :
+1 - Mot clé
+2 - Fichier
+3 - Retour
+4 - Quitter
+Type de Recherche : 2
+
+Rentrer le nom du fichier present dans la base que vous voulez comparer ou un chemin absolu : 26-Lyon_prend_ses_aises_en_utf8.xml
+ - 05-Le_Colombien_Juan_Pablo_Montoya_utf8.xml (10%)
+ - 27-Le_Stade_de_France_s_ouvre_utf8.xml (10%)
+ - 29-Ligue_des_champions___Lyon_utf8.xml (10%)
+ - 23-Les_Bleus,_tombeurs_de_la_utf8.xml (10%)
+ - 05-Photographie___Philip_Blenkinsop_a_utf8.xml (10%)
+ - 27-A_Lens,_le_Louvre_sera_utf8.xml (10%)
+
+Sélectionner le type de fichier recherché :
+1 - Texte
+2 - Image
+3 - Retour
+4 - Quitter
+Type de fichier : 1
+
+Recherche par :
+1 - Mot clé
+2 - Fichier
+3 - Retour
+4 - Quitter
+Type de Recherche : 2 2
+
+Rentrer le nom du fichier present dans la base que vous voulez comparer ou un chemin absolu : /home/aurelien/testINDEXATION.xml
+Generation du descripteur pour le fichier : /home/aurelien/testINDEXATION.xml
+ - 29-Ligue_des_champions___Lyon_utf8.xml (90%)
+ - 06-US_Open___Mauresmo_et_utf8.xml (40%)
+ - 18-Ligue_1___Lyon_a_utf8.xml (37%)
+ - 22-Danse___quarante_jeunes_de_utf8.xml (10%)
+ - 27-Le_Stade_de_France_s_ouvre_utf8.xml (7%)
+ - 26-Lyon_prend_ses_aises_en_utf8.xml (7%)
+ - 15-Lille_s_incline_dans_les_utf8.xml (2%)
+ - 22-Les_clubs_de_football_anglais_utf8.xml (2%)
+ - 13-Ligue_des_champions____Si_utf8.xml (1%)
+
+Sélectionner le type de fichier recherché :
+1 - Texte
+2 - Image
+3 - Retour
+4 - Quitter
+Type de fichier : 1
+
+Recherche par :
+1 - Mot clé
+2 - Fichier
+3 - Retour
+4 - Quitter
+Type de Recherche : 2
+
+Rentrer le nom du fichier present dans la base que vous voulez comparer ou un chemin absolu : qqsdfqsdfqsd
+Impossible de trouver ni le fichier '../Base_de_donnees/TEXTES/qqsdfqsdfqsd' ni le fichier 'qqsdfqsdfqsd'.
+Aucun resultat n'a été trouvé.
+
+Sélectionner le type de fichier recherché :
+1 - Texte
+2 - Image
+3 - Retour
+4 - Quitter
+Type de fichier : 2
+
+Sélectionner un type d'image :
+1 - Noir et Blanc
+2 - Couleur
+3 - Retour
+Type de recherche : 1
+
+Quel type de recherche voulez-vous effectuer ?
+1 - Choix d'une couleur dominante
+2 - Recherche par fichier
+3 - Retour
+4 - Quitter
+Type de recherche : 1
+
+Quelle est la couleur dominante de l'image ?
+1 - Noir
+2 - Blanc
+3 - Retour
+4 - Quitter
+Couleur : 2 1
+ - Le ficher 61.txt en contient a 25 %
+ - Le ficher 63.txt en contient a 25 %
+ - Le ficher 58.txt en contient a 21 %
+ - Le ficher 59.txt en contient a 20 %
+
+Sélectionner le type de fichier recherché :
+1 - Texte
+2 - Image
+3 - Retour
+4 - Quitter
+Type de fichier : 2
+
+Sélectionner un type d'image :
+1 - Noir et Blanc
+2 - Couleur
+3 - Retour
+Type de recherche : 1
+
+Quel type de recherche voulez-vous effectuer ?
+1 - Choix d'une couleur dominante
+2 - Recherche par fichier
+3 - Retour
+4 - Quitter
+Type de recherche : 2
+Le ficher 55.txt
+a une distance de 0
+
+Le ficher 54.txt
+a une distance de 844
+
+Le ficher 56.txt
+a une distance de 1477
+
+Le ficher 62.txt
+a une distance de 25270
+
+
+Sélectionner le type de fichier recherché :
+1 - Texte
+2 - Image
+3 - Retour
+4 - Quitter
+Type de fichier : 2
+
+Sélectionner un type d'image :
+1 - Noir et Blanc
+2 - Couleur
+3 - Retour
+Type de recherche : 1
+
+Quel type de recherche voulez-vous effectuer ?
+1 - Choix d'une couleur dominante
+2 - Recherche par fichier
+3 - Retour
+4 - Quitter
+Type de recherche : 2
+Le ficher 61.txt
+a une distance de 276
+
+Le ficher 59.txt
+a une distance de 1816
+
+Le ficher 62.txt
+a une distance de 23706
+
+Le ficher 57.txt
+a une distance de 23706
+
+
+Sélectionner le type de fichier recherché :
+1 - Texte
+2 - Image
+3 - Retour
+4 - Quitter
+Type de fichier : 2
+
+Sélectionner un type d'image :
+1 - Noir et Blanc
+2 - Couleur
+3 - Retour
+Type de recherche : 2
+
+Quel type de recherche voulez-vous effectuer ?
+1 - Choix d'une couleur dominante
+2 - Recherche par fichier
+3 - Retour
+Type de recherche :1
+
+Choisir une couleur : 
+1 - Rouge
+2 - Rose
+3 - Bleu
+4 - Vert
+5 - Jaune
+6 - Orange
+7 - Noir
+8 - Blanc
+9 - Retour
+Couleur : 1
+ - 28.txt en contient a 26 %
+ - 29.txt en contient a 26 %
+ - 30.txt en contient a 26 %
+ - 31.txt en contient a 26 %
+
+Sélectionner le type de fichier recherché :
+1 - Texte
+2 - Image
+3 - Retour
+4 - Quitter
+Type de fichier : 2
+
+Sélectionner un type d'image :
+1 - Noir et Blanc
+2 - Couleur
+3 - Retour
+Type de recherche : 2
+
+Quel type de recherche voulez-vous effectuer ?
+1 - Choix d'une couleur dominante
+2 - Recherche par fichier
+3 - Retour
+Type de recherche :1
+
+Choisir une couleur : 
+1 - Rouge
+2 - Rose
+3 - Bleu
+4 - Vert
+5 - Jaune
+6 - Orange
+7 - Noir
+8 - Blanc
+9 - Retour
+Couleur : 5
+ - 47.txt en contient a 6 %
+ - 48.txt en contient a 6 %
+ - 49.txt en contient a 6 %
+ - 50.txt en contient a 6 %
+
+Sélectionner le type de fichier recherché :
+1 - Texte
+2 - Image
+3 - Retour
+4 - Quitter
+Type de fichier : 2
+
+Sélectionner un type d'image :
+1 - Noir et Blanc
+2 - Couleur
+3 - Retour
+Type de recherche : 2
+
+Quel type de recherche voulez-vous effectuer ?
+1 - Choix d'une couleur dominante
+2 - Recherche par fichier
+3 - Retour
+Type de recherche :1
+
+Choisir une couleur : 
+1 - Rouge
+2 - Rose
+3 - Bleu
+4 - Vert
+5 - Jaune
+6 - Orange
+7 - Noir
+8 - Blanc
+9 - Retour
+Couleur : 4
+
+Sélectionner le type de fichier recherché :
+1 - Texte
+2 - Image
+3 - Retour
+4 - Quitter
+Type de fichier : 2
+
+Sélectionner un type d'image :
+1 - Noir et Blanc
+2 - Couleur
+3 - Retour
+Type de recherche : 2
+
+Quel type de recherche voulez-vous effectuer ?
+1 - Choix d'une couleur dominante
+2 - Recherche par fichier
+3 - Retour
+Type de recherche :1
+
+Choisir une couleur : 
+1 - Rouge
+2 - Rose
+3 - Bleu
+4 - Vert
+5 - Jaune
+6 - Orange
+7 - Noir
+8 - Blanc
+9 - Retour
+Couleur : 3
+
+Sélectionner le type de fichier recherché :
+1 - Texte
+2 - Image
+3 - Retour
+4 - Quitter
+Type de fichier : 2
+
+Sélectionner un type d'image :
+1 - Noir et Blanc
+2 - Couleur
+3 - Retour
+Type de recherche : 1
+
+Quel type de recherche voulez-vous effectuer ?
+1 - Choix d'une couleur dominante
+2 - Recherche par fichier
+3 - Retour
+4 - Quitter
+Type de recherche : 1
+
+Quelle est la couleur dominante de l'image ?
+1 - Noir
+2 - Blanc
+3 - Retour
+4 - Quitter
+Couleur : 3
+
+Quel type de recherche voulez-vous effectuer ?
+1 - Choix d'une couleur dominante
+2 - Recherche par fichier
+3 - Retour
+4 - Quitter
+Type de recherche : 3
+
+Sélectionner un type d'image :
+1 - Noir et Blanc
+2 - Couleur
+3 - Retour
+Type de recherche : 2
+
+Quel type de recherche voulez-vous effectuer ?
+1 - Choix d'une couleur dominante
+2 - Recherche par fichier
+3 - Retour
+Type de recherche :1
+
+Choisir une couleur : 
+1 - Rouge
+2 - Rose
+3 - Bleu
+4 - Vert
+5 - Jaune
+6 - Orange
+7 - Noir
+8 - Blanc
+9 - Retour
+Couleur : 1
+ - 28.txt en contient a 26 %
+ - 29.txt en contient a 26 %
+ - 30.txt en contient a 26 %
+ - 31.txt en contient a 26 %
+
+Sélectionner le type de fichier recherché :
+1 - Texte
+2 - Image
+3 - Retour
+4 - Quitter
+Type de fichier : 2
+
+Sélectionner un type d'image :
+1 - Noir et Blanc
+2 - Couleur
+3 - Retour
+Type de recherche : 2
+
+Quel type de recherche voulez-vous effectuer ?
+1 - Choix d'une couleur dominante
+2 - Recherche par fichier
+3 - Retour
+Type de recherche :1 2
+Impossible d'ouvrir le fichier liste_descripteur_imageNB
+make: *** [Makefile:9: tst_menu] Segmentation fault (core dumped)
+]777;notify;Command completed;make\]0;aurelien@localhost:~/Documents/Projects/Projet_fil_rouge/Menu\]7;file://localhost.localdomain/home/aurelien/Documents/Projects/Projet_fil_rouge/Menu\[aurelien@localhost Menu]$ cl[K[Kmake
+gcc -c -g menu.c
+gcc -c -g ../IndexationTexte/fileMot.c
+gcc -c -g ../IndexationTexte/indexationV1.c
+gcc -c -g ../Commun/Descripteurs_Textes/descripteur.c
+gcc -c -g ../Comparaison/Comparaison_Texte/comparaison.c
+gcc -c -g ../IndexationImage/image.c
+gcc -o tst_menu.out menu.o fileMot.o indexationV1.o descripteur.o comparaison.o image.o -lm
+./tst_menu.out
+
+
+
+[36;1mFoxIt vous souhaite la bienvenue sur son nouveau moteur de recherche ![0m
+
+Sélectionner un mode : 
+1 - Utilisateur
+2 - Administrateur
+Type de connexion : 1
+
+Sélectionner le type de fichier recherché :
+1 - Texte
+2 - Image
+3 - Retour
+4 - Quitter
+Type de fichier : 2
+
+Sélectionner un type d'image :
+1 - Noir et Blanc
+2 - Couleur
+3 - Retour
+Type de recherche : 1 2
+
+Quel type de recherche voulez-vous effectuer ?
+1 - Choix d'une couleur dominante
+2 - Recherche par fichier
+3 - Retour
+Type de recherche :2
+Le ficher 45.txt
+avec un comparaison à 0
+
+Le ficher 13.txt
+avec un comparaison à 40988
+
+Le ficher 47.txt
+avec un comparaison à 48554
+
+Le ficher 44.txt
+avec un comparaison à 50016
+
+
+Sélectionner le type de fichier recherché :
+1 - Texte
+2 - Image
+3 - Retour
+4 - Quitter
+Type de fichier : 2
+
+Sélectionner un type d'image :
+1 - Noir et Blanc
+2 - Couleur
+3 - Retour
+Type de recherche : 2
+
+Quel type de recherche voulez-vous effectuer ?
+1 - Choix d'une couleur dominante
+2 - Recherche par fichier
+3 - Retour
+Type de recherche :2
+Le ficher 01.txt
+avec un comparaison à 0
+
+Le ficher 09.txt
+avec un comparaison à 21038
+
+Le ficher 08.txt
+avec un comparaison à 27970
+
+Le ficher 25.txt
+avec un comparaison à 29556
+
+
+Sélectionner le type de fichier recherché :
+1 - Texte
+2 - Image
+3 - Retour
+4 - Quitter
+Type de fichier : 3
+
+Sélectionner un mode : 
+1 - Utilisateur
+2 - Administrateur
+Type de connexion : 2
+
+Mot de passe : 
+Mot de passe refusé ! Réessayez.
+
+
+Mot de passe : 
+Mot de passe accepté.
+
+
+Sélectionner une action :
+1 - Lancer une recherche
+2 - Accéder aux descripteurs
+3 - Lancer une indexation
+4 - Modifier les configurations
+5 - Retour
+6 - Quitter
+Choix : 2
+
+
+Quels descripteurs voulez-vous consulter ?
+1 - Descripteurs texte
+2 - Descripteurs image
+3 - Retour
+4 - Quitter
+Choix : 1
+
+Affichage des descripteurs texte : 
+
+0 337 Robert 15 succès 7 réalisateur 4 Welles 4 scène 4 monteur 3 septembre 3 Mélodie 3 bonheur 3 science-fiction 3 
+1 455 comète 11 Tempel 8 mission 5 Impact 5 violence 4 collision 4 comètes 4 boulet 3 juillet 3 était 3 
+2 295 football 5 communication 5 Michael 5 Madrid 4 Essien 4 atteindre 3 joueurs 3 dimension 3 terrain 3 serait 3 
+3 213 quasar 7 galaxie 5 centre 3 millions 3 matière 3 déroutant 2 regarder 2 vivant 2 comporter 2 goinfrait 2 
+4 273 Cartoucherie 4 Ivaldo 4 Bertazzo 4 chorégraphe 3 brésilien 3 enfants 3 Dança 3 Comunidade 3 indienne 3 musique 3 
+5 380 Federer 11 Agassi 10 tournoi 8 Chelem 8 finale 6 mondial 5 premier 5 service 5 joueur 4 remporter 4 
+6 410 capture 6 stockage 5 géologiques 4 devrait 4 charbon 4 tonnes 4 climatique 3 certains 3 pétrole 3 climat 3 
+7 194 grippe 6 docteur 5 pandémie 4 aviaire 3 responsable 3 risque 3 chaque 3 contre 2 future 2 nouveau 2 
+8 251 Sufjan 5 Stevens 5 disque 4 Illinoise 3 Illinois 3 magique 2 premières 2 pressent 2 chevet 2 douter 2 
+9 34 visualiser 2 navigateur 2 affiche 2 frames 1 dopage 1 problème 1 général 1 l'organisation 1 sportives 1 compétitions 1 
+10 179 cricket 3 l'équipe 3 d'Angleterre 3 devenu 2 depuis 2 tournoi 2 petite 2 devant 2 matches 2 télévision 2 
+11 475 Renault 11 points 9 saison 7 McLaren 7 Montoya 6 pilotes 6 Fernando 6 Rنikkِnen 6 course 6 Giancarlo 5 
+12 429 France 16 français 8 Saint-Denis 6 champions 6 places 6 matches 5 football 5 résidant 5 consortium 5 septembre 4 
+13 370 saison 12 football 10 matches 7 stades 6 britannique 6 League 5 fréquentation 5 supporteurs 4 championnat 4 Premier 4 
+14 183 Oberon 4 toujours 3 direction 3 Gardiner 3 fréquemment 2 Allemagne 2 Grande-Bretagne 2 dernier 2 opéras 2 romantiques 2 
+15 437 contre 9 vaccin 7 pandémie 5 millions 5 aviaire 4 production 4 vaccins 4 grippe 4 firmes 4 Sanofi-Pasteur 4 
+16 287 Benfica 4 mercredi 4 Claude 4 groupe 4 secondes 3 Lisbonne 3 champions 3 Bruges 3 Juventus 3 United 3 
+17 25 champions 2 visualiser 2 navigateur 2 affiche 2 frames 1 frames 1 Ventre 1 brésilien 1 défenseur 1 grâce 1 
+18 422 agricole 5 début 5 champs 4 Chantal 4 toujours 4 autres 3 Nonette 3 l'autre 3 Faucheurs 3 Michel 3 
+19 246 danseurs 4 pièce 4 tournée 4 sud-africains 3 Pantin 3 Ile-de-France 3 spectacle 3 Suckers 3 commence 2 nouvelle 2 
+20 283 France 8 l'équipe 7 basket 7 sélectionneur 4 championnat 4 joueurs 4 français 3 médias 3 message 3 courrons 2 
+21 175 points 6 Lituanie 4 France 4 demi-finale 3 basket-ball 3 réussi 3 Français 3 défense 3 Lituaniens 3 Rigaudeau 3 
+22 410 capture 6 stockage 5 géologiques 4 devrait 4 charbon 4 tonnes 4 climatique 3 certains 3 pétrole 3 climat 3 
+23 142 festival 4 septembre 3 reportage 3 Philip 2 Blenkinsop 2 travail 2 tsunami 2 l'image 2 Grarup 2 magazine 2 
+24 220 Slater 5 septième 5 première 4 Hossegor 3 était 3 obtenir 2 Donné 2 favori 2 l'étape 2 d'Hossegor 2 
+25 17 visualiser 2 navigateur 2 affiche 2 frames 1 frames 1 d'information 1 l'article 1 l'intégralité 1 éliminé 1 Gasquet 1 
+26 250 Susheela 9 tamoule 5 Crocodiles 5 culture 4 chanteuse 4 carnatique 4 contradiction 3 musicale 3 musique 3 chanson 3 
+27 189 journée 4 Grégory 3 Coupet 3 imposé 3 points 3 troisième 3 victoire 3 l'issue 2 septembre 2 grâce 2 
+28 177 question 3 expressions 3 femmes 3 hommes 3 langage 2 TNS-Sofres 2 l'étude 2 commandée 2 Larousse 2 dernières 2 
+29 446 Jean-Marie 10 Sevestre 10 librairie 10 rentrée 7 titres 6 Sauramps 6 Montpellier 5 littérature 4 libraire 3 nouveaux 3 
+30 480 mission 6 échantillons 5 surface 5 Hayabusa 5 spatiale 4 Japonais 4 comète 4 kilomètres 4 Itokawa 4 qu'une 4 
+31 212 comportement 4 pousser 3 suicide 3 nématomorphes 3 Frédéric 3 Thomas 3 protéines 3 nerveux 2 dialogue 2 moléculaire 2 
+32 347 Louvre 9 région 8 projet 4 musée 4 président 4 Nord-Pas-de-Calais 3 septembre 3 Delcourt 3 également 3 japonais 2 
+33 344 Carlos 5 Amalia 4 portugais 3 Festival 3 d'Ile-de-France 3 Lisbonne 3 Camané 3 Rodrigues 3 années 3 Portugal 3 
+34 303 navette 5 Katrina 4 spatial 4 cyclone 3 spatiale 3 Discovery 3 partenaires 3 Michoud 3 retour 2 dégâts 2 
+
+
+Sélectionner une action :
+1 - Lancer une recherche
+2 - Accéder aux descripteurs
+3 - Lancer une indexation
+4 - Modifier les configurations
+5 - Retour
+6 - Quitter
+Choix : 3
+
+Sélectionner le type du fichier à indexer :
+1 - Fichier texte
+2 - Fichier image
+3 - Retour
+4 - Quitter
+Choix : 1
+
+Rentrer le chemin absolu du fichier texte à indexer : /home/aurelien/testINDEXT ATION.xml
+Fichier indexé et ajouté a la base
+
+
+Sélectionner une action :
+1 - Lancer une recherche
+2 - Accéder aux descripteurs
+3 - Lancer une indexation
+4 - Modifier les configurations
+5 - Retour
+6 - Quitter
+Choix : 
+Erreur de saisie, veuillez saisir un entier.
+
+
+Sélectionner une action :
+1 - Lancer une recherche
+2 - Accéder aux descripteurs
+3 - Lancer une indexation
+4 - Modifier les configurations
+5 - Retour
+6 - Quitter
+Choix : 4
+
+
+Configurer : 
+1 - Configuration générale
+2 - Configuration Texte
+3 - Configuration Image
+4 - Retour
+5 - Quitter
+Choix : 1
+
+
+Configurer : 
+1 - Configuration générale
+2 - Configuration Texte
+3 - Configuration Image
+4 - Retour
+5 - Quitter
+Choix : 2
+
+
+Configurer : 
+1 - Configuration générale
+2 - Configuration Texte
+3 - Configuration Image
+4 - Retour
+5 - Quitter
+Choix : 4 4
+
+
+Sélectionner une action :
+1 - Lancer une recherche
+2 - Accéder aux descripteurs
+3 - Lancer une indexation
+4 - Modifier les configurations
+5 - Retour
+6 - Quitter
+Choix : 6
+
+Fin du programme.
+]777;notify;Command completed;make\]0;aurelien@localhost:~/Documents/Projects/Projet_fil_rouge/Menu\]7;file://localhost.localdomain/home/aurelien/Documents/Projects/Projet_fil_rouge/Menu\[aurelien@localhost Menu]$ exit
+exit
+
+Script done on 2019-01-25 17:50:28+01:00
