@@ -1,40 +1,87 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "descripteur.h"
+
+void tolower_DESC_STR(char* word)
+{
+    for (int i = 0; word[i]; i++){
+        word[i] = tolower(word[i]);
+    }
+}
 
 void init_DESCR(DESCR* descriptor, int id)
 {
     descriptor->id = id;
+    descriptor->nbTermes = 0;
     descriptor->termes = NULL;
 }
 
 void fill_DESCR(DESCR* descriptor, FILE *file)
 {
-    int id, termes, total;
-    char line[100];
+    int id, total;
+    char line[500];
 
-    while (fgets(line, 100, file) != NULL)
+    descriptor->nbTermes = 0;
+
+    while (fgets(line, 500, file) != NULL)
     {
-        fscanf(file, "%d %d %d\n", &id, &termes, &total);
+        fscanf(file, "%d %d", &id, &total);
 
         if (id == descriptor->id)
         {
             char word[WORD_LENGTH_MAX];
-            int occurence, i;
+            int occurence;
 
-            descriptor->nbTermes = termes;
             descriptor->total = total;
 
-            for (i = 0; i < termes; i++)
+            fscanf(file, "%s %d",word, &occurence);
+            while (atoi(word) == 0 && !feof(file))
             {
-                fscanf(file, "%s %d", &word, &occurence);
                 addWordandOcc_DESCR(descriptor, word, occurence);
+                fscanf(file, "%s %d",word, &occurence);
+                descriptor->nbTermes++;
             }
 
             return;
         }
     }
+}
+
+void fillWithPath_DESCR(DESCR* descriptor, char* path)
+{
+    int id, total;
+    char line[500];
+
+    descriptor->nbTermes = 0;
+
+    FILE* file = fopen(path, "r");
+
+    while (fgets(line, 500, file) != NULL)
+    {
+        fscanf(file, "%d %d", &id, &total);
+
+        if (id == descriptor->id)
+        {
+            char word[WORD_LENGTH_MAX];
+            int occurence;
+
+            descriptor->total = total;
+
+            fscanf(file, "%s %d", word, &occurence);
+            while (atoi(word) == 0 && !feof(file))
+            {
+                addWordandOcc_DESCR(descriptor, word, occurence);
+                fscanf(file, "%s %d", word, &occurence);
+                descriptor->nbTermes++;
+            }
+
+            return;
+        }
+    }
+
+    fclose(file);
 }
 
 void addWord_DESCR(DESCR* descriptor, char *word)
@@ -81,10 +128,15 @@ void addWordandOcc_DESCR(DESCR* descriptor, char* word, int occurence)
 
 int getOccurence_DESCR(DESCR descriptor, char* word)
 {
+    char temp[30];
     TERMES prochainTerme = descriptor.termes;
+    
     while (prochainTerme != NULL)
     {
-        if (strcmp(prochainTerme->terme->word, word) == 0)
+        strcpy(temp, prochainTerme->terme->word);
+        tolower_DESC_STR(temp);
+        tolower_DESC_STR(word);
+        if (strcmp(temp, word) == 0)
         {
             return prochainTerme->terme->occurence;
         }
@@ -95,18 +147,36 @@ int getOccurence_DESCR(DESCR descriptor, char* word)
     return 0;
 }
 
-void removeWord_DESCR(DESCR* descriptor, TERME* terme)
+void removeWord_DESCR(DESCR* descriptor)
 {
     if (descriptor->termes == NULL)
     {
-        terme = NULL;
         return;
     }
 
     TERME* termeTemp;
-
-    terme = descriptor->termes->terme;
     termeTemp = descriptor->termes->terme;
     descriptor->termes = descriptor->termes->termeSuivant;
     free(termeTemp);
+    descriptor->nbTermes--;
+}
+
+TERME* get_DESCR(DESCR descriptor, int index)
+{
+    TERMES termes = descriptor.termes;
+
+    for (int i = 0; i < index; i++)
+    {
+        termes = termes->termeSuivant;
+    }
+
+    return termes->terme;
+}
+
+void close_DESCR(DESCR* descriptor)
+{
+    for (int i = 0; i < descriptor->nbTermes - 1; i++)
+    {
+        removeWord_DESCR(descriptor);
+    }
 }

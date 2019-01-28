@@ -1,79 +1,150 @@
+/*
+** indexationV1.c
+** Samuel Jalade
+** Contient tout les fonctions necessaire pour indexer la base de donnees texte ainsi que
+** Indexation temporaire de fichier unique et d ajout de fichier a la base de donnees texte
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
 #include <dirent.h>
-
-#include "fileMot.h"
-#include "IndexationTexte.h"
 #include "indexationV1.h"
 
-#define PATH "../Base_de_donnees/TEXTES/"
 
-
-
-int main(void)
+/*int main(void)
 {
+   indexationBaseTexte();
+   return 0;
+}*/
+
+//Indexe un fichier unique et rempli la structure descripeur pour decrire le fichier
+int indexationFichierTexte(char *cheminFichier, DESCR* descripteur)
+{
+  load_config_texte();
+  printf("Generation du descripteur pour le fichier : %s\n",cheminFichier);
+  File fileDeMotDuFichier;
+  INIT_FILE(&fileDeMotDuFichier);
+  fileMotFichier(&fileDeMotDuFichier,cheminFichier,0);
+  fileMotFrequentDansDESCR(&fileDeMotDuFichier,descripteur);
+  return 1;
+}
+
+//permet d ajouter des fichiers xml a la base de donnee et indexe a nouveau la base pour actualiser
+void ajoutDocBase(char *path)
+{
+  char temp = path[0];
+  int lastSlash = 0;
+  int dotPosition = strlen(path);
+  for (int i = 0; i < strlen(path); i++)
+  {
+    if (path[i] == '/')
+    {
+      lastSlash = i + 1;
+    }
+    else if (path[i] == '.')
+    {
+      dotPosition = i;
+      break;
+    }
+  }
+  char nomFichier[100];
+  int i = 0;
+  for (int j = lastSlash; j < dotPosition; j++)
+  {
+    nomFichier[i] = path[j];
+    i++;
+  }
+  char command[500];
+  sprintf(command, "cp %s ../Base_de_donnees/TEXTES/%s", path, nomFichier);
+  system(command);
+  indexationBaseTexte();
+}
+
+//Parcours toute la base est indexa chaque fichier a la vole
+int indexationBaseTexte()
+{
+    load_config_texte();
     //LECTURE des fichier du repertoire bd
     struct dirent *lecture;
     DIR *rep;
-    rep = opendir(PATH);
+    rep = opendir(PATH_BD);
 
 
     FILE* fichierDescripteur = NULL;
-    fichierDescripteur = fopen("../Commun/descripteur_base_texte.txt", "w");
+    fichierDescripteur = fopen("../Commun/descripteur_base_texte.txt", "w"); //LEs descripteurs genere seront ecrit dans ce fichier
 
     File fileDeMot;
     File fileDescripteur;
 
+    FileChemin fileTableIndex;
+    INIT_FILE_TABLE_INDEX(&fileTableIndex);
+    //AFFICHER_FILE_TABLE_INDEX(&fileTableIndex);
+    int aucunFichierIndexe = 1;
 
     char motDefile[50];
     int id = 0, nb = 0;
+
+    //parcour des fichiers du repertoire
     while ((lecture = readdir(rep))) {//nom du fichier = lectur ->d_name
-        if(strcmp(lecture->d_name,"..") == 0 || strcmp(lecture->d_name,".") == 0 ){
+
+        if(strcmp(lecture->d_name,"..") == 0 || strcmp(lecture->d_name,".") == 0){
           continue;
         }
+
+        aucunFichierIndexe = 0;
+        //INITIALISATION DES FILES
         INIT_FILE(&fileDeMot);
         INIT_FILE(&fileDescripteur);
 
-
-        printf("\n%s\n", lecture->d_name);
-        fileMotFichier(&fileDeMot,lecture->d_name);
-        printf("\nOn passe fileMtFichier\n");
+        fileMotFichier(&fileDeMot,lecture->d_name,1);
         fileMotFrequent(&fileDeMot,&fileDescripteur);//free
-        printf("\nOn passe fileMtFichier\n");
 
         if (fichierDescripteur == NULL){return 1;}
         fprintf(fichierDescripteur,"%d %d ",id,fileDeMot.nbMot);
-        AFFICHER_FILE(&fileDescripteur);
         while(!estVide(&fileDescripteur))
         {
-          printf("On ECRIT\n");
           nb = DEFILER(&fileDescripteur,motDefile); //free
           fprintf(fichierDescripteur, "%s %d ",motDefile,nb);
         }
 
         fprintf(fichierDescripteur,"\n");
-        id++;
 
         reinit(&fileDeMot);
         reinit(&fileDescripteur);
 
+        ENFILER_CHEMIN(&fileTableIndex, lecture->d_name, id);
+        id++;
+    }// end while
 
-
-        printf("IDDDDDDDDDDDDDDDDDDDDddd : %d",id);
-    }
     fclose(fichierDescripteur);
     closedir(rep);
+    //Si au moin un fichier a ete indexe
+    if(!aucunFichierIndexe)
+    {
+      actualiserTableTexteIndex(&fileTableIndex); //on actualise la table
+    }
+
     return 0;
 }
 
-void fileMotFichier(File *fileDeMot, char *nomFichier)
+/*
+**Ajoute les mots du fichier texte dans une file, si le mot est deja existant dans la file
+**le compteur du mot est incremente.
+*/
+void fileMotFichier(File *fileDeMot, char *nomFichier,int dansBase)
 {
 
-  char path[200] = PATH;
+  char path[200] = PATH_BD;
+  if(dansBase)
+  {
+    strcat(path,nomFichier);
+  } else {
+    memset(path,'\0',sizeof(nomFichier));
+    strcpy(path,nomFichier);
+  }
 
-  strcat(path,nomFichier);
 
   FILE* fichier = NULL;
   fichier = fopen(path, "r"); // Ouverture
@@ -99,9 +170,9 @@ void fileMotFichier(File *fileDeMot, char *nomFichier)
         continue;
       }
 
-      if(caractereActuel == ' ' || caractereActuel == '\n' || caractereActuel == '.' || caractereActuel == ',' && balise == 0 )
+      if((caractereActuel == ' ' || caractereActuel == '\n' || caractereActuel == '.' || caractereActuel == ',') && balise == 0 )
       {
-        if(strlen(mot)>5)//On ne prend en compte que les mots plus grand que 5
+        if(strlen(mot)>lg_mini_mots)//lg_mini_mots est une variable globale cf : load_config_texte On ne prend en compte que les mots plus grand que lg_mini_mots
         {
           ENFILER(fileDeMot,mot); //incrementation de mot deja existant dans enfiler
         }
@@ -117,16 +188,16 @@ void fileMotFichier(File *fileDeMot, char *nomFichier)
         }
       }
   }
-
   fclose(fichier);
-
 }
-
+/*
+**Prend une file de mot A et enfile dans une seconde File B les mots les plus frequent de A.
+*/
 void fileMotFrequent(File *fileDeMot, File *fileMotFrequent)
 {
   char motFrequent[50];
   int nb;
-  for(int i = 0; i<10; i++)
+  for(int i = 0; i<nb_termes_max; i++)//nb_termes_max est une variable globale cf : load_config_texte
   {
     nb = defilerPlusGrand(fileDeMot,motFrequent);
     if(nb > 0){
@@ -135,22 +206,61 @@ void fileMotFrequent(File *fileDeMot, File *fileMotFrequent)
   }
 }
 
-/*int compteNbLigne(FILE *fichier)
+/*
+**Prend une file de mot A et enfile dans un DESCR (pour la comparaison) B les mots les plus frequent de A.
+*/
+void fileMotFrequentDansDESCR(File *fileDeMot, DESCR *fileMotFrequent)
 {
-	int c;
-	int nLignes = 0;
-	int c2 = '\0';
+  char motFrequent[50];
+  int nb;
+  int nbTermes = 0;
+  int nbMotsTotal = fileDeMot->nbMot;
+  for(int i = 0; i<10; i++)
+  {
+    nb = defilerPlusGrand(fileDeMot,motFrequent);
+    if(nb > 0){
+      addWordandOcc_DESCR(fileMotFrequent,motFrequent,nb);
+      nbTermes++;
+    }
+  }
+  //passage des attributs pour la structure descripteur de comparaison
+  fileMotFrequent->nbTermes = nbTermes;
+  fileMotFrequent->total = nbMotsTotal;
+}
 
-	while((c=fgetc(fichier)) != EOF)
-	{
-		if(c=='\n')
-			nLignes++;
-		c2 = c;
-	}
+//fonction non qui permet d actualiser la table de chemin et d ID des descripteurs indexes
+void actualiserTableTexteIndex(FileChemin *file)
+{
+  FILE* fichierTableIndex = NULL;
+  fichierTableIndex = fopen("../Commun/tableTexteIndex.txt","w");
+  if (file == NULL)
+  {
+      exit(EXIT_FAILURE);
+  }
 
-	// Ici, c2 est égal au caractère juste avant le EOF.
-	if(c2 != '\n')
-		nLignes++; // Dernière ligne non finie
-
-	return nLignes;
-}*/
+  CheminDescripteur *cel = file->premier;
+  while (cel != NULL)
+  {
+      fprintf(fichierTableIndex,"%d %s\n",cel->id,cel->chemin);
+      cel = cel->suivant;
+  }
+  fclose(fichierTableIndex);
+}
+/*
+**Charge les variable par le fichier de configuration config_texte.txt
+*/
+void load_config_texte()
+{
+  FILE* fichierConfig = NULL;
+  fichierConfig = fopen("../Config/config_texte.txt","r");
+  if(fichierConfig == NULL)
+  {
+    printf("Impossible de charger le fichier config_texte\n");
+    exit(EXIT_FAILURE);
+  }
+  char tamp[100];
+  //CHARGEMENT DES PARAMETRES
+  rewind(fichierConfig);//positionne le flag au debut du fichier
+  fscanf(fichierConfig,"%s %d",tamp,&nb_termes_max);
+  fscanf(fichierConfig,"%s %d",tamp,&lg_mini_mots);
+}

@@ -1,3 +1,7 @@
+/** XIONG Amelie
+*   menu4.h est associé au fichier menu4.c
+*/
+
 #include <stdio.h>
 
 void Recherche_image();
