@@ -61,6 +61,13 @@ typedef struct{
   Cell* premier;
 }PILE;
 
+typedef struct PAIRE_tag
+{
+  int size;
+  char ids[NOMBRE_DE_RESULTAT][150];
+  float valeurs[NOMBRE_DE_RESULTAT];
+} PAIRE;
+
 //MODULE POUR LA QUANRIFICATION
 
 int quantificationNoirBlanc(int nombre);
@@ -177,7 +184,15 @@ int comparaisonRGB(image des1,image des2);
 void comparerImageAvecImageNB();
 void comparerImageAvecImageRGB();
 void rechercherNiveauGris(int niveau);
-void rechercherCouleur(int couleur);
+void rechercherCouleur(int* tableau, int taille);
+void rechercheParCouleur(int couleur);
+
+void ouvrirFichier(char* fichier, char* localtionPath, char* extension);
+int isValeurDansTableau(int valeur, int *tableau, int taille);
+
+void initPaire(PAIRE* paire);
+void ajouterParPaireIdValeur(PAIRE* pair, char* id, float valeur);
+void afficherPaire(PAIRE* paire);
 
 //Module Pile
 PILE init_PILE();

@@ -2,6 +2,8 @@
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
+#include <sys/types.h> 
 #include "image.h"
 
 /*
@@ -9,17 +11,17 @@
   L'avantage est que l'on a juste besoin de modifier les variables globales pour changer les fonctions
   La BASE_EPHEMERE est utilisé pour la comparaison, elle sera créer et détruite après chaque comparaison
 */
-char * BASE_DESCRIPTEUR_IMAGE_NB = "../IndexationImage/data/base_descripteur_imageNB.txt\0";
-char * BASE_DESCRIPTEUR_IMAGE_RGB = "../IndexationImage/data/base_descripteur_imageRGB.txt\0";
-char * BASE_EPHEMERE_NB = "../IndexationImage/data/baseEphemereNB.txt\0";
-char * BASE_EPHEMERE_RGB = "../IndexationImage/data/baseEphemereRGB.txt\0";
-char * LISTE_EPHEMERE_NB = "../IndexationImage/data/listeEphemereNB.txt\0";
-char * LISTE_EPHEMERE_RGB = "../IndexationImage/data/listeEphemereRGB.txt\0";
-char * TEST_NB_DIR_PATH = "../IMG_et_AUDIO/TEST_NB/\0";
-char * TEST_RGB_DIR_PATH = "../IMG_et_AUDIO/TEST_RGB/\0";
-char * LISTE_DESCRIPTEUR_IMAGE_NB = "../IndexationImage/data/liste_descripteur_imageNB.txt\0";
-char * LISTE_DESCRIPTEUR_IMAGE_RGB = "../IndexationImage/data/liste_descripteur_imageRGB.txt\0";
-char * DEPOT_IMAGE_A_COMPARER = "../IndexationImage/data/depot_image_a_compararer/\0";
+char * BASE_DESCRIPTEUR_IMAGE_NB = "../IndexationImage/data/base_descripteur_imageNB.txt";
+char * BASE_DESCRIPTEUR_IMAGE_RGB = "../IndexationImage/data/base_descripteur_imageRGB.txt";
+char * BASE_EPHEMERE_NB = "../IndexationImage/data/baseEphemereNB.txt";
+char * BASE_EPHEMERE_RGB = "../IndexationImage/data/baseEphemereRGB.txt";
+char * LISTE_EPHEMERE_NB = "../IndexationImage/data/listeEphemereNB.txt";
+char * LISTE_EPHEMERE_RGB = "../IndexationImage/data/listeEphemereRGB.txt";
+char * TEST_NB_DIR_PATH = "../IMG_et_AUDIO/TEST_NB/";
+char * TEST_RGB_DIR_PATH = "../IMG_et_AUDIO/TEST_RGB/";
+char * LISTE_DESCRIPTEUR_IMAGE_NB = "../IndexationImage/data/liste_descripteur_imageNB.txt";
+char * LISTE_DESCRIPTEUR_IMAGE_RGB = "../IndexationImage/data/liste_descripteur_imageRGB.txt";
+char * DEPOT_IMAGE_A_COMPARER = "../IndexationImage/data/depot_image_a_compararer/";
 
 /*MODULE POUR LA QUANRIFICATION*/
 
@@ -560,7 +562,8 @@ int comparaisonRGB(image des1,image des2){
 void comparerImageAvecImageNB(){
   
   /*
-
+  Fonction qui parcours la liste des histogrammes noir et blancs de la base et qui la compare avec celui donnée l'image déposé
+  dans le dossier. Pour cette comparaison, l'historamme de cette image est créé temporairement le temps du traitement.
   */
   //créer un descripteur du fichier entrée
   char command[strlen(LISTE_EPHEMERE_NB) + strlen(LISTE_EPHEMERE_NB) + 18];
@@ -703,9 +706,15 @@ void comparerImageAvecImageNB(){
 
   sprintf(command, "rm %s", BASE_EPHEMERE_NB);
   system(command);
+
+  ouvrirFichier(tabNom[NOMBRE_DE_RESULTAT-1], TEST_NB_DIR_PATH, "bmp");
 }
 
 void comparerImageAvecImageRGB(){
+  /*
+  Fonction qui parcours la liste des histogrammes RGB de la base et qui la compare avec celui donnée l'image déposé
+  dans le dossier. Pour cette comparaison, l'historamme de cette image est créé temporairement le temps du traitement.
+  */
   char command[strlen(DEPOT_IMAGE_A_COMPARER) + strlen(LISTE_EPHEMERE_RGB) + 18];
 
   sprintf(command, "ls %s | grep .txt > %s", DEPOT_IMAGE_A_COMPARER, LISTE_EPHEMERE_RGB);
@@ -864,17 +873,30 @@ void comparerImageAvecImageRGB(){
 
   sprintf(command, "rm %s", BASE_EPHEMERE_RGB);
   system(command);
+
+  ouvrirFichier(tabNom[NOMBRE_DE_RESULTAT-1], TEST_RGB_DIR_PATH, "jpg");
 }
 
 //Pile dynamique
+/** Fonction qui renvoie une PILE initialisé.
+ *  Elle est indispensable pour pouvoir correctement utiliser une pile.
+ */
 PILE init_PILE(){
   PILE p;
   p.premier=NULL;
   return p;
 }
+
+/** Fonction qui revoie si la pile donnée en paramètre est vide ou non.
+ *  Revoie 1 si elle l'est, 0 sinon.
+ */
 int PILE_estVide(PILE pile){
   return pile.premier==NULL;
 }
+
+/** Fonction qui permet de parcourir une pile et d'afficher ses éléments. 
+ *  Prends la pile à parcour en paramètre.
+ */
 void ParcoursPILE(PILE pile){ 
   if(pile.premier==NULL){
     printf("PILE vide");
@@ -888,6 +910,8 @@ void ParcoursPILE(PILE pile){
   }  
 }
 
+/** Renvoie le nombre d'éléments de la pile donnée en paramètre.
+ */
 int taillePILE(PILE pile){ 
   int res=0;
   if(pile.premier==NULL){
@@ -902,6 +926,9 @@ int taillePILE(PILE pile){
   return res;  
 }
 
+/** Fonction qui empile une valeur et son identifiant dans la pile.
+ *  Prends une valeur de type int et une chaine de charactères pour l'id.
+ */
 PILE emPILE(PILE pile,int val,char * idd){
   Cell* nouvelleCase =malloc(sizeof(Cell));
   nouvelleCase->valeur=val;
@@ -989,8 +1016,11 @@ void rechercherNiveauGris(int niveau)
   i=0;
   Cell* caseMoment = p2.premier;
   while(caseMoment!=NULL){
-    tabValeur[i]=caseMoment->valeur;
-    strcpy(tabNom[i],caseMoment->id);
+    if (i < NOMBRE_DE_RESULTAT)
+    {
+      tabValeur[i]=caseMoment->valeur;
+      strcpy(tabNom[i],caseMoment->id);
+    }
     caseMoment=caseMoment->suivant;
     i++;
   }
@@ -1001,84 +1031,214 @@ void rechercherNiveauGris(int niveau)
       printf(" - Le ficher %s en contient a %d %%\n", tabNom[i], tabValeur[i]);
     }
   }
+
+  ouvrirFichier(tabNom[0], TEST_NB_DIR_PATH, "bmp");
 }
 
-void rechercherCouleur(int couleur)
+void rechercheParCouleur(int couleur)
 {
-  PILE p=init_PILE();
-  int i, composante, tmp, total, couleurCherche;
-  char imageName[150];
+  switch (couleur)
+  {
+    case 1: // ROUGE
+    {
+      int composantesRouge[2] = { 48, 49 };
+      rechercherCouleur(composantesRouge, 2);
+      break;
+    }
+    case 2: // ROSE
+    {
+      int composantesRose[2] = { 50, 51 };
+      rechercherCouleur(composantesRose, 2);
+      break;
+    }
+    case 3: // BLEU
+    {
+      int composantesBleu[4] = { 5, 3, 10, 1 };
+      rechercherCouleur(composantesBleu, 4);
+      break;
+    }
+    case 4: // VERT
+    {
+      int composantesVertes[5] = { 25, 29, 17, 12, 4 };
+      rechercherCouleur(composantesVertes, 5);
+      break;
+    }
+    case 5: // JAUNE
+    {
+      int composantesJaunes[6] = { 60, 61, 41, 42, 40, 43 };
+      rechercherCouleur(composantesJaunes, 6);
+      break;
+    }
+    case 6: // ORANGE
+    {
+      int composantesJaunes[9] = { 51, 52, 53, 61, 62, 53 };
+      rechercherCouleur(composantesJaunes, 9);
+      break;
+    }
+    case 7: // NOIR
+    {
+      int composantesJaunes[1] = { 0 };
+      rechercherCouleur(composantesJaunes, 1);
+      break;
+    }
+    case 8: // BLANC
+    {
+      int composantesJaunes[1] = { 63 };
+      rechercherCouleur(composantesJaunes, 1);
+      break;
+    }
+  }
+}
+
+void rechercherCouleur(int* tableau, int taille)
+{
   float resultatComp;
+  int i, composante, tmp, total, compoNivRecherche;
+  char imageName[150];
+  float valeurs[NOMBRE_DE_RESULTAT];
+  char tabNom[NOMBRE_DE_RESULTAT][150];
+
+  PAIRE paire;
+  initPaire(&paire);
 
   FILE* fichier = fopen(BASE_DESCRIPTEUR_IMAGE_RGB, "r");
-  if(fichier != NULL){
-    while(!feof(fichier)){
-      fscanf(fichier,"%s\n", imageName);
+  if (fichier != NULL)
+  {
+    while (!feof(fichier))
+    {
+      fscanf(fichier, "%s\n", imageName);
 
       total = 0;
-      for(i=0;i<64;i++){
-        fscanf(fichier,"%d %d\n",&composante,&tmp);
+      compoNivRecherche = 0;
+      for (i = 0; i < 64; i++)
+      {
+        fscanf(fichier,"%d %d\n",&composante, &tmp);
 
-        if (couleur == composante || (composante + 1) == couleur || (composante - 1) == couleur)
+        if (isValeurDansTableau(composante, tableau, taille))
         {
-          couleurCherche += tmp;
+          compoNivRecherche += tmp;
         }
 
         total += tmp;
       }
 
-      resultatComp = (float)couleurCherche / (float)total * 100.0;  
-      
-      p=emPILE(p,(int)resultatComp,imageName);
-      //ici imageTmp est fini on va passer au suivant
-    }
-  }else{
-    printf("Impossible d'ouvrir le fichier base_descripteur_imageNB.txt");
-  }
-  //parcourir l'ensemble des descripteurs d'image et leur appliquer la comparaison
-  //empiler le résultat dans une pile d'image
-  //parcourir la pile est renvoyé les plus petits
-  int minim;
-  PILE p2=init_PILE();
-  int taillePile=taillePILE(p);
-  for(i=0;i<NOMBRE_DE_RESULTAT;i++){
-    minim=1000000;
-    if(taillePile<NOMBRE_DE_RESULTAT){
-      printf("Nombre de résultat attendu supérieur au nombre de fichier présent");
-    }else{
-      Cell* caseMoment = p.premier;
-      while(caseMoment!=NULL){
-        if(caseMoment->valeur<minim){minim=caseMoment->valeur;}
-	    caseMoment=caseMoment->suivant;
-	  }
-      caseMoment = p.premier;
-      while(caseMoment!=NULL){
-        if(caseMoment->valeur==minim){
-          p2=emPILE(p2,caseMoment->valeur,caseMoment->id);
-		  caseMoment->valeur=1000001;
-        }
-	    caseMoment=caseMoment->suivant;
-	  }
-      
+      resultatComp = (float)compoNivRecherche / (float)total * 100.0;
+      ajouterParPaireIdValeur(&paire, imageName, resultatComp);
     }
   }
- 
-  //ParcoursPILE(p2);
-  int tabValeur[NOMBRE_DE_RESULTAT];
-  char tabNom[NOMBRE_DE_RESULTAT][150];
-  
-  i=0;
-  Cell* caseMoment = p2.premier;
-  while(caseMoment!=NULL){
-    tabValeur[i]=caseMoment->valeur;
-    strcpy(tabNom[i],caseMoment->id);
-    caseMoment=caseMoment->suivant;
-    i++;
+  else
+  {
+    printf("Impossible d'ouvrir le fichier base_descripteur_imageRGB.txt");
   }
-  for(i = 0; i< NOMBRE_DE_RESULTAT; i++){
-    if (tabValeur[i] > 0)
+
+  afficherPaire(&paire);
+  ouvrirFichier(paire.ids[0], TEST_RGB_DIR_PATH, "jpg");
+}
+
+void initPaire(PAIRE* paire)
+{
+  paire->size = 0;
+  for (int i = 0; i < NOMBRE_DE_RESULTAT; i++)
+  {
+    paire->valeurs[i] = -1;
+  }
+}
+
+void ajouterParPaireIdValeur(PAIRE* pair, char* id, float valeur)
+{
+  if (valeur <= 0)
+  {
+    return;
+  }
+
+  if (pair->size == 0)
+  {
+    strcpy(pair->ids[0], id);
+    pair->valeurs[0] = valeur;
+    pair->size++;
+  }
+  else
+  {
+    int counter = 0;
+    while (counter < NOMBRE_DE_RESULTAT && pair->valeurs[counter] >= valeur && pair->valeurs[counter] != -1)
     {
-      printf(" - %s en contient a %d %%\n", tabNom[i], tabValeur[i]);
+      counter++;
+    }
+
+    if (counter < NOMBRE_DE_RESULTAT)
+    {
+      int i = 0;
+      for (i = pair->size; (i >= counter && i < NOMBRE_DE_RESULTAT); i--)
+      {
+        strcpy(pair->ids[i + 1], pair->ids[i]);
+        pair->valeurs[i + 1] = pair->valeurs[i];
+      }
+
+      strcpy(pair->ids[counter], id);
+      pair->valeurs[counter] = valeur;
+
+      if (pair->size < NOMBRE_DE_RESULTAT)
+      {
+        pair->size++;
+      }
+    }
+  }
+}
+
+void afficherPaire(PAIRE* paire)
+{
+  if (paire->size == 0)
+  {
+    printf("Aucun résultat n'a été trouvé.\n");
+  }
+  else
+  {
+    for (int i = 0; i < paire->size; i++)
+    {
+      printf(" - %s en contient %0.1f%%\n", paire->ids[i], paire->valeurs[i]);
+    }
+  }
+}
+
+int isValeurDansTableau(int valeur, int *tableau, int taille)
+{
+  int i;
+  for (i=0; i < taille; i++) {
+    if (tableau[i] == valeur)
+      return 1;
+  }
+
+  return 0;
+}
+
+void ouvrirFichier(char* fichier, char* locationPath, char* extension)
+{
+  char path[150];
+  strcpy(path, locationPath);
+
+  int dotFound = 0;
+  for (int i = 0; i < strlen(fichier); i++)
+  {
+    if (fichier[i] == '.')
+    {
+      fichier[i + 1] = '\0';
+      dotFound = 1;
+      break;
+    }
+  }
+  
+  strcat(path, fichier);
+  if (!dotFound)
+  {
+    strcat(path, ".");
+  }
+  strcat(path, extension);
+
+  if (access(path, F_OK) != -1)
+  {
+    if (!fork())
+    {
+      execlp("eog", "eog", path, NULL);
     }
   }
 }

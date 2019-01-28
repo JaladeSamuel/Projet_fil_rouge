@@ -16,10 +16,12 @@ int main(void) {
   //comparerImageAvecImageNB();
   //comparerImageAvecImageRGB();
 
-  rechercherNiveauGris(1);
-  rechercherCouleur(21);
+  //printf("Recherche par niveau de noir et blanc :\n");
+  //rechercherNiveauGris(1);
 
-  
+  printf("Recherche par couleur :\n");
+  rechercheParCouleur(8);
+
   printf("\nGoodbye World\n");
   return 0;
 }

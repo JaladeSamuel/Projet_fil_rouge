@@ -7,6 +7,9 @@
 
 int DESCRIPTORS_MAX_ID = 0;
 
+/** Permet de transformer toute les lettre d'un mot en minuscule donnée en paramètres.
+ *  char* word : mot à mettre en minuscule
+ */
 void tolower_STR(char* word)
 {
     for (int i = 0; word[i]; i++){
@@ -75,7 +78,7 @@ void print_RES(RESULTS res)
         return;
     }
 
-    for (int i = 0; i < res.size; i++)
+    for (int i = 0; i < res.size && i < SIZE_RESULTS_MAX; i++)
     {
         FILE* file;
         file = fopen(FILE_DESCRIPTORS_INDEX, "r");

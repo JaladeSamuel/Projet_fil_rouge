@@ -72,7 +72,7 @@ void noir_blanc(){
 		nb_dom();
 		break;
 	case 2 :
-		comparaisonFichierNB();
+		comparerImageAvecImageNB();
 		break;
 	case 3 :
 		Recherche_image();
@@ -110,7 +110,7 @@ void R_couleur(){
 		couleur_dom();
 		break;
 	case 2 :
-		comparaisonFichierRGB();
+		comparerImageAvecImageRGB();
 		break;
 	case 3 :
 		Recherche_image();
@@ -143,28 +143,14 @@ void couleur_dom(){
 	{
 
 	case 1 :
-		rechercherCouleur(48);
-		break;
 	case 2 :
-		rechercherCouleur(54);
-		break;
-	case 3 : 
-		rechercherCouleur(3);
-		break;
-	case 4 : 
-		rechercherCouleur(12);
-		break;
-	case 5 : 
-		rechercherCouleur(60);
-		break;
+	case 3 :
+	case 4 :
+	case 5 :
 	case 6 :
-		rechercherCouleur(52);
-		break;
-	case 7 : 
-		rechercherCouleur(0);
-		break;
+	case 7 :
 	case 8 :
-		rechercherCouleur(63);
+		rechercheParCouleur(couleur);
 		break;
 	case 9 :
 		R_couleur();
@@ -210,14 +196,4 @@ void Recherche_image(){
 		Recherche_image();
 		break;
 	}
-}
-
-void comparaisonFichierRGB()
-{
-	comparerImageAvecImageRGB();
-}
-
-void comparaisonFichierNB()
-{
-	comparerImageAvecImageNB();
 }
