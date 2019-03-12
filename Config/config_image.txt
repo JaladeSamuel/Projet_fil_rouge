@@ -1,2 +1,0 @@
-nb_bit_quant 4
-seuil_comparaison ?
