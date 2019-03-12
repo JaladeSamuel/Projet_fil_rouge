@@ -1,0 +1,3 @@
+nb_termes_max 10
+lg_mini_mots 5
+seuil_similarite ?
