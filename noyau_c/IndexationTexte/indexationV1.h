@@ -11,8 +11,8 @@
 #include "fileMot.h"
 #include "../Commun/Descripteurs_Textes/descripteur.h"
 
-#define PATH_BD "../Base_de_donnees/TEXTES/" //chemin vers la repertoire des fichiers textes
-#define PATH_DESCRIPTEUR "../Commun/descripteur_base_texte.txt" //chemin vers le fichier qui stock les descripteurs texte
+#define PATH_BD "../noyau_c/Base_de_donnees/TEXTES/" //chemin vers la repertoire des fichiers textes
+#define PATH_DESCRIPTEUR "../noyau_c/Commun/descripteur_base_texte.txt" //chemin vers le fichier qui stock les descripteurs texte
 
 int nb_termes_max;
 int lg_mini_mots;
