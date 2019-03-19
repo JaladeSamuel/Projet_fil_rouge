@@ -11,7 +11,13 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include "indexationV1.h"
+#include "../JNI/Java_Headers/model_MoteurDeRecherche.h"
+#include <dlfcn.h>
 
+JNIEXPORT void JNICALL Java_model_MoteurDeRecherche_indexationTexte(JNIEnv * env, jclass class)
+{
+  indexationBaseTexte();
+}
 
 /*int main(void)
 {
@@ -57,7 +63,7 @@ void ajoutDocBase(char *path)
     i++;
   }
   char command[500];
-  sprintf(command, "cp %s ../Base_de_donnees/TEXTES/%s", path, nomFichier);
+  sprintf(command, "cp %s ../noyau_c/Base_de_donnees/TEXTES/%s", path, nomFichier);
   system(command);
   indexationBaseTexte();
 }
@@ -65,68 +71,67 @@ void ajoutDocBase(char *path)
 //Parcours toute la base est indexa chaque fichier a la vole
 int indexationBaseTexte()
 {
-    load_config_texte();
-    //LECTURE des fichier du repertoire bd
-    struct dirent *lecture;
-    DIR *rep;
-    rep = opendir(PATH_BD);
+  load_config_texte();
+  //LECTURE des fichier du repertoire bd
+  struct dirent *lecture;
+  DIR *rep;
+  rep = opendir(PATH_BD);
 
 
-    FILE* fichierDescripteur = NULL;
-    fichierDescripteur = fopen("../Commun/descripteur_base_texte.txt", "w"); //LEs descripteurs genere seront ecrit dans ce fichier
+  FILE* fichierDescripteur = NULL;
+  fichierDescripteur = fopen("../noyau_c/Commun/descripteur_base_texte.txt", "w"); //LEs descripteurs genere seront ecrit dans ce fichier
 
-    File fileDeMot;
-    File fileDescripteur;
+  File fileDeMot;
+  File fileDescripteur;
 
-    FileChemin fileTableIndex;
-    INIT_FILE_TABLE_INDEX(&fileTableIndex);
-    //AFFICHER_FILE_TABLE_INDEX(&fileTableIndex);
-    int aucunFichierIndexe = 1;
+  FileChemin fileTableIndex;
+  INIT_FILE_TABLE_INDEX(&fileTableIndex);
+  //AFFICHER_FILE_TABLE_INDEX(&fileTableIndex);
+  int aucunFichierIndexe = 1;
+  
+  char motDefile[50];
+  int id = 0, nb = 0;
 
-    char motDefile[50];
-    int id = 0, nb = 0;
-
-    //parcour des fichiers du repertoire
-    while ((lecture = readdir(rep))) {//nom du fichier = lectur ->d_name
-
-        if(strcmp(lecture->d_name,"..") == 0 || strcmp(lecture->d_name,".") == 0){
-          continue;
-        }
-
-        aucunFichierIndexe = 0;
-        //INITIALISATION DES FILES
-        INIT_FILE(&fileDeMot);
-        INIT_FILE(&fileDescripteur);
-
-        fileMotFichier(&fileDeMot,lecture->d_name,1);
-        fileMotFrequent(&fileDeMot,&fileDescripteur);//free
-
-        if (fichierDescripteur == NULL){return 1;}
-        fprintf(fichierDescripteur,"%d %d ",id,fileDeMot.nbMot);
-        while(!estVide(&fileDescripteur))
-        {
-          nb = DEFILER(&fileDescripteur,motDefile); //free
-          fprintf(fichierDescripteur, "%s %d ",motDefile,nb);
-        }
-
-        fprintf(fichierDescripteur,"\n");
-
-        reinit(&fileDeMot);
-        reinit(&fileDescripteur);
-
-        ENFILER_CHEMIN(&fileTableIndex, lecture->d_name, id);
-        id++;
-    }// end while
-
-    fclose(fichierDescripteur);
-    closedir(rep);
-    //Si au moin un fichier a ete indexe
-    if(!aucunFichierIndexe)
-    {
-      actualiserTableTexteIndex(&fileTableIndex); //on actualise la table
+  //parcour des fichiers du repertoire
+  while ((lecture = readdir(rep))) {//nom du fichier = lectur ->d_name
+    if(strcmp(lecture->d_name,"..") == 0 || strcmp(lecture->d_name,".") == 0){
+      continue;
     }
 
-    return 0;
+    aucunFichierIndexe = 0;
+    //INITIALISATION DES FILES
+    INIT_FILE(&fileDeMot);
+    INIT_FILE(&fileDescripteur);
+
+    fileMotFichier(&fileDeMot,lecture->d_name,1);
+    fileMotFrequent(&fileDeMot,&fileDescripteur);//free
+
+    if (fichierDescripteur == NULL){return 1;}
+    fprintf(fichierDescripteur,"%d %d ",id,fileDeMot.nbMot);
+    while(!estVide(&fileDescripteur))
+    {
+      nb = DEFILER(&fileDescripteur,motDefile); //free
+      fprintf(fichierDescripteur, "%s %d ",motDefile,nb);
+    }
+
+    fprintf(fichierDescripteur,"\n");
+
+    reinit(&fileDeMot);
+    reinit(&fileDescripteur);
+
+    ENFILER_CHEMIN(&fileTableIndex, lecture->d_name, id);
+    id++;
+  }// end while
+
+  fclose(fichierDescripteur);
+  closedir(rep);
+  //Si au moin un fichier a ete indexe
+  if(!aucunFichierIndexe)
+  {
+    actualiserTableTexteIndex(&fileTableIndex); //on actualise la table
+  }
+
+  return 0;
 }
 
 /*
@@ -135,7 +140,6 @@ int indexationBaseTexte()
 */
 void fileMotFichier(File *fileDeMot, char *nomFichier,int dansBase)
 {
-
   char path[200] = PATH_BD;
   if(dansBase)
   {
@@ -158,35 +162,35 @@ void fileMotFichier(File *fileDeMot, char *nomFichier,int dansBase)
   // Boucle de lecture des caractères un à un
   while(!feof(fichier))// On continue tant que fgetc n'a pas retourné EOF (fin de fichier)
   {
-      caractereActuel = fgetc(fichier); // On lit le caractère
-      if(caractereActuel == '<')
-      {
-        balise = 1;
-        continue;
-      }
-      if(balise && caractereActuel == '>')
-      {
-        balise = 0;
-        continue;
-      }
+    caractereActuel = fgetc(fichier); // On lit le caractère
+    if(caractereActuel == '<')
+    {
+      balise = 1;
+      continue;
+    }
+    if(balise && caractereActuel == '>')
+    {
+      balise = 0;
+      continue;
+    }
 
-      if((caractereActuel == ' ' || caractereActuel == '\n' || caractereActuel == '.' || caractereActuel == ',') && balise == 0 )
+    if((caractereActuel == ' ' || caractereActuel == '\n' || caractereActuel == '.' || caractereActuel == ',') && balise == 0 )
+    {
+      if(strlen(mot)>lg_mini_mots)//lg_mini_mots est une variable globale cf : load_config_texte On ne prend en compte que les mots plus grand que lg_mini_mots
       {
-        if(strlen(mot)>lg_mini_mots)//lg_mini_mots est une variable globale cf : load_config_texte On ne prend en compte que les mots plus grand que lg_mini_mots
-        {
-          ENFILER(fileDeMot,mot); //incrementation de mot deja existant dans enfiler
-        }
-        for(int i = 0; i<50; i++)
-        {
-          mot[i] = '\0';
-        }
-        i = 0;
-      }else{
-        if(balise == 0 && strchr(ponctuation, caractereActuel) == NULL) {
-          mot[i] = caractereActuel;
-          i++;
-        }
+        ENFILER(fileDeMot,mot); //incrementation de mot deja existant dans enfiler
       }
+      for(int i = 0; i<50; i++)
+      {
+        mot[i] = '\0';
+      }
+      i = 0;
+    }else{
+      if(balise == 0 && strchr(ponctuation, caractereActuel) == NULL) {
+        mot[i] = caractereActuel;
+        i++;
+      }
+    }
   }
   fclose(fichier);
 }
@@ -232,17 +236,17 @@ void fileMotFrequentDansDESCR(File *fileDeMot, DESCR *fileMotFrequent)
 void actualiserTableTexteIndex(FileChemin *file)
 {
   FILE* fichierTableIndex = NULL;
-  fichierTableIndex = fopen("../Commun/tableTexteIndex.txt","w");
+  fichierTableIndex = fopen("../noyau_c/Commun/tableTexteIndex.txt","w");
   if (file == NULL)
   {
-      exit(EXIT_FAILURE);
+    exit(EXIT_FAILURE);
   }
 
   CheminDescripteur *cel = file->premier;
   while (cel != NULL)
   {
-      fprintf(fichierTableIndex,"%d %s\n",cel->id,cel->chemin);
-      cel = cel->suivant;
+    fprintf(fichierTableIndex,"%d %s\n",cel->id,cel->chemin);
+    cel = cel->suivant;
   }
   fclose(fichierTableIndex);
 }
@@ -252,7 +256,7 @@ void actualiserTableTexteIndex(FileChemin *file)
 void load_config_texte()
 {
   FILE* fichierConfig = NULL;
-  fichierConfig = fopen("../Config/config_texte.txt","r");
+  fichierConfig = fopen("../noyau_c/Config/config_texte.txt","r");
   if(fichierConfig == NULL)
   {
     printf("Impossible de charger le fichier config_texte\n");

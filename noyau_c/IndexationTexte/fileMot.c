@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include "fileMot.h"
 
 void INIT_FILE(File *file)
@@ -233,9 +234,13 @@ int tableTexteIndexEstVide()
 {
   int taille = 0;
   FILE* fichierTableIndex = NULL;
-  fichierTableIndex = fopen("../Commun/tableTexteIndex.txt","r");
+  fichierTableIndex = fopen("../noyau_c/Commun/tableTexteIndex.txt","r");
   if(fichierTableIndex == NULL)
   {
+    char cheminAbsoulute[200];
+    //get chemin absolute
+    getcwd(cheminAbsoulute, sizeof(cheminAbsoulute));
+    printf("%s\n", cheminAbsoulute);
     printf("Erreur : fichier NULL \n");
     return -1;
   }
@@ -257,7 +262,7 @@ void INIT_FILE_TABLE_INDEX(FileChemin *file)
       file->premier = NULL;
     } else {
       FILE* fichierTableIndex = NULL;
-      fichierTableIndex = fopen("../Commun/tableTexteIndex.txt","r");
+      fichierTableIndex = fopen("../noyau_c/Commun/tableTexteIndex.txt","r");
       if(fichierTableIndex == NULL)
       {
         printf("Erreur : fichier NULL \n");
