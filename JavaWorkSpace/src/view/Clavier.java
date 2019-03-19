@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Clavier {
     private static Scanner scanner = new Scanner(System.in);
 
-    static int entrerClavierInt() {
+    static int entrerClavierInt() { //
         return scanner.nextInt();
     }
 
