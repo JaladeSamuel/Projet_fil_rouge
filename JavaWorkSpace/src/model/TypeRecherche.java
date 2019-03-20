@@ -1,0 +1,5 @@
+package model;
+
+public enum TypeRecherche {
+    TEXTE_MOT_CLE, TEXTE_FICHIER, IMAGE_COULEUR_DOMINANTE, IMAGE_COULEUR_FICHIER
+}

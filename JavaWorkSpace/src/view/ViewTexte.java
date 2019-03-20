@@ -1,8 +1,12 @@
 package view;
 
+import controller.ControllerTexteMotCle;
+
 public class ViewTexte implements runnableView {
 
     private ViewUtilisateur viewUtilisateur;
+    private ViewRechercheMotCle viewRechercheMotCle;
+
 
     private String accueilViewTexte = "Recherche par :\n" +
             "1 - Mot clé\n" +
@@ -12,7 +16,7 @@ public class ViewTexte implements runnableView {
 
     private int choix;
 
-    public ViewTexte(ViewUtilisateur viewUtilisateur) {
+    ViewTexte(ViewUtilisateur viewUtilisateur) {
         this.viewUtilisateur = viewUtilisateur;
     }
 
@@ -32,6 +36,8 @@ public class ViewTexte implements runnableView {
         switch (choix) {
             case 1 :
                 //mot clé
+                viewRechercheMotCle = new ViewRechercheMotCle(this, new ControllerTexteMotCle());
+                viewRechercheMotCle.run();
                 break;
             case 2 :
                 //fichier

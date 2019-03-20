@@ -15,19 +15,21 @@ public class ViewAccueil implements runnableView{
         choix = -1;
     }
 
-    public static void main(String arg[]) {
+    public static void main(String[] arg) {
         ViewAccueil viewAccueil = new ViewAccueil();
         viewAccueil.run();
     }
 
     @Override
     public void run() {
+
         init();
         System.out.println(selectionnerUnMode);
         while (choix < 1 || choix > 2) {
             System.out.print("Type de connexion : ");
             choix = Clavier.entrerClavierInt();
         }
+
         if(choix == 1) {
             viewUtilisateur = new ViewUtilisateur(this);
             viewUtilisateur.run();
