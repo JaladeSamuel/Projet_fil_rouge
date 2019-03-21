@@ -15,6 +15,14 @@ extern "C" {
 JNIEXPORT void JNICALL Java_model_MoteurDeRecherche_indexationTexte
   (JNIEnv *, jclass);
 
+/*
+ * Class:     model_MoteurDeRecherche
+ * Method:    rechercheParMotCle
+ * Signature: (Ljava/lang/String;)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheParMotCle
+  (JNIEnv *, jclass, jstring);
+
 #ifdef __cplusplus
 }
 #endif

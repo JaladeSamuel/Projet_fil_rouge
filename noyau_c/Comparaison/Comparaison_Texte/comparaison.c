@@ -67,6 +67,52 @@ void add_RES(RESULTS* res, int id, float pourcentage)
     }
 }
 
+/** Retourne les résultats sous forme d'un tableau de charactères.
+ *  RESULTS* res : structure de resultats que l'on veut afficher
+ *  char* res : resultats que l'on stocker sous forme d'un string
+ */
+void toString_RES(RESULTS res, char* resString)
+{
+    if (res.size == 0)
+    {
+        strcat(resString, "Aucun resultat n'a été trouvé.\n");
+        return;
+    }
+
+    for (int i = 0; i < res.size && i < SIZE_RESULTS_MAX; i++)
+    {
+        FILE* file;
+        file = fopen(FILE_DESCRIPTORS_INDEX, "r");
+
+        if (file == NULL)
+        {
+            strcat(resString, "ERREUR : Impossible d'ouvrir le fichier d'index des descripteurs.\n");
+            return;
+        }
+
+        int id;
+        char fileName[60];
+        while (!feof(file))
+        {
+            fscanf(file, "%d %s", &id, fileName);
+
+            if (id == res.ids[i])
+            {
+                strcat(resString, fileName);
+                strcat(resString, ":");
+
+                char percentageTemp[5];
+                sprintf(percentageTemp, "%.0f", res.percentages[i]);
+
+                strcat(resString, percentageTemp);
+                strcat(resString, " ");
+            }
+        }
+
+        rewind(file);
+    }
+}
+
 /** Affiche les résultats d'une structure RESULTS.
  *  RESULTS* res : structure de resultats que l'on veut afficher
  */
@@ -238,7 +284,7 @@ float compare_COMPTXT(DESCR base, DESCR descriptor)
  */
 void searchWord_COMPTXT(char mot[WORD_LENGTH_MAX], RESULTS* res)
 {
-    DESCR searchDescr, tempDescr;
+    DESCR searchDescr;
     init_DESCR(&searchDescr, -1);
     addWord_DESCR(&searchDescr, mot);
     searchDescr.nbTermes = 1;
@@ -365,7 +411,7 @@ void search_COMPTXT(DESCR base, RESULTS* res)
             add_RES(res, tempDescr.id, tempComp);
         }
 
-        close_DESCR(&tempDescr);
+        //close_DESCR(&tempDescr);
 
         counter++;
         fclose(file);

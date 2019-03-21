@@ -5,11 +5,8 @@ jni:
 	javac -h Java_Headers/ ../../JavaWorkSpace/src/model/MoteurDeRecherche.java
 	rm ../../JavaWorkSpace/src/model/MoteurDeRecherche.class
 
-texte: ../IndexationTexte/indexationV1.c ../IndexationTexte/fileMot.c
-	gcc -fPIC -shared -I"$$JAVA_HOME/include" -I"$$JAVA_HOME/include/linux" ../IndexationTexte/indexationV1.c ../IndexationTexte/fileMot.c -o Libraries/libindexation.so
-
-#menu:
-#	gcc -fPIC -I"$$JAVA_HOME/include" -I"$$JAVA_HOME/include/linux" -shared Libraries/libindexation.so ../Menu/menu.c -L"Libraries/" -libindexation -o Libraries/libmenu.so
+library: ../IndexationTexte/indexationV1.c ../IndexationTexte/fileMot.c ../Comparaison/Comparaison_Texte/comparaison.c ./Libraries/jni_library.c ../Commun/Descripteurs_Textes/descripteur.c
+	gcc -fPIC -shared -I"$$JAVA_HOME/include" -I"$$JAVA_HOME/include/linux" ../IndexationTexte/indexationV1.c ../IndexationTexte/fileMot.c ../Comparaison/Comparaison_Texte/comparaison.c ../Commun/Descripteurs_Textes/descripteur.c ./Libraries/jni_library.c -o Libraries/libindexation.so
 
 clean:
 	rm Java_Headers/*.h

@@ -11,13 +11,7 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include "indexationV1.h"
-#include "../JNI/Java_Headers/model_MoteurDeRecherche.h"
 #include <dlfcn.h>
-
-JNIEXPORT void JNICALL Java_model_MoteurDeRecherche_indexationTexte(JNIEnv * env, jclass class)
-{
-  indexationBaseTexte();
-}
 
 /*int main(void)
 {
