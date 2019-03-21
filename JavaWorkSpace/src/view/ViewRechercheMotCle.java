@@ -39,15 +39,15 @@ public class ViewRechercheMotCle implements runnableView{
                 case 1:
                     System.out.print("Entrez le mot clé : ");
                     String motCle = Clavier.entrerClavierString();
-                    //verifier mot clé
+                    //verifier mot clé todo
                     controllerTexteMotCle.getSelectionMotARechercher().add(motCle);
                     System.out.println("Mot clé enregistré");
                     break;
                 case 2:
-                    if (!controllerTexteMotCle.getSelectionMotANePasRechercher().isEmpty()) {
+                    if (!controllerTexteMotCle.getSelectionMotARechercher().isEmpty()) {
                         System.out.println("Entrez le mot clé non desiré : ");
                         String motcle = Clavier.entrerClavierString();
-                        //verifier mot
+                        //verifier mot todo
                         controllerTexteMotCle.getSelectionMotANePasRechercher().add(motcle);
                         System.out.println("Mot clé enregistré");
                     } else {
@@ -56,10 +56,8 @@ public class ViewRechercheMotCle implements runnableView{
                     break;
                 case 3:
                     if (!controllerTexteMotCle.getSelectionMotARechercher().isEmpty()) {
-                        //lancer recherche controleur texte
-                        System.out.println("Resultat : ...........");
-                        //resultat ok on clear les listes du controleur
-                        controllerTexteMotCle.clear();
+                        System.out.println(controllerTexteMotCle.rechercheParMotCle());//recherche par mot cle
+                        controllerTexteMotCle.clear(); //resultat ok on clear les listes du controleur
                     } else {
                         System.out.println("Veuillez entrer au moin 1 mot clé à rechercher");
                     }
