@@ -14,8 +14,11 @@ public class MoteurDeRecherche {
 
     public static native void indexationTexte();
 
+    public static native String rechercheParMotCle(String motCle);
+
     public static void main(String args[]) {
-        MoteurDeRecherche.indexationTexte();
+        //MoteurDeRecherche.indexationTexte();
+        System.out.println(MoteurDeRecherche.rechercheParMotCle("football"));
     }
 
 }
