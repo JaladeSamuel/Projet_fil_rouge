@@ -1,9 +1,9 @@
 package controller;
 
-import model.FichierTexte;
-import model.MoteurDeRecherche;
+import model.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ControllerTexteMotCle {
@@ -11,7 +11,7 @@ public class ControllerTexteMotCle {
     private List<FichierTexte> listeFichierTexte = new ArrayList<>();
     private List<String> selectionMotARechercher = new ArrayList<>();
     private List<String> selectionMotANePasRechercher = new ArrayList<>();
-
+    private BDHistoriqueRequete bdHistoriqueRequete = new BDHistoriqueRequete();
 
     public List<String> getSelectionMotARechercher() {
         return selectionMotARechercher;
@@ -83,6 +83,15 @@ public class ControllerTexteMotCle {
 
         }
 
+        StringBuilder requete = new StringBuilder();
+        for(String mot : selectionMotARechercher) {
+            requete.append("+").append(mot);
+        }
+        requete.append(" | ");
+        for(String mot : selectionMotANePasRechercher) {
+            requete.append("-").append(mot);
+        }
+        bdHistoriqueRequete.getListeRequeteTexte().add(new Requete(TypeRecherche.TEXTE_MOT_CLE, requete.toString(),new Date()));
         return resultatRequete();
     }
 }
