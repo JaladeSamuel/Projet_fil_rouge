@@ -2,10 +2,12 @@ package view;
 
 public class ViewUtilisateur implements runnableView{
 
+    private  ViewAdministrateur viewAdministrateur;
     private ViewAccueil viewAccueil;
     private ViewImage viewImage;
     private ViewTexte viewTexte;
 
+    private boolean admin = false;
     private String accueilUtilisateur = "Sélectionner le type de fichier recherché :\n" +
             "1 - Texte\n" +
             "2 - Image\n" +
@@ -16,6 +18,11 @@ public class ViewUtilisateur implements runnableView{
 
     public ViewUtilisateur (ViewAccueil viewAccueil) {
         this.viewAccueil = viewAccueil;
+    }
+
+    public ViewUtilisateur (ViewAdministrateur viewAdministrateur) {
+        this.viewAdministrateur = viewAdministrateur;
+        admin = true;
     }
 
     private void init() {
@@ -41,7 +48,11 @@ public class ViewUtilisateur implements runnableView{
                 viewImage.run();
                 break;
             case 3 :
-                this.viewAccueil.run();
+                if(admin) {
+                    this.viewAdministrateur.run();
+                } else {
+                    this.viewAccueil.run();
+                }
                 break;
             case 4 :
                 Application.quitterApp();

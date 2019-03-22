@@ -34,6 +34,7 @@ public class ViewAccueil implements runnableView{
             viewUtilisateur.run();
         } else {
             viewAdministrateur = new ViewAdministrateur(this);
+            viewAdministrateur.run();
         }
     }
 }
