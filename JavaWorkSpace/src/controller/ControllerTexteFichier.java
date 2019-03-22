@@ -1,6 +1,7 @@
 package controller;
 
 import model.*;
+import view.Application;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,8 +15,9 @@ public class ControllerTexteFichier {
     public String rechercheParFichier(String chemin) {
 
         StringBuilder resultat = new StringBuilder(MoteurDeRecherche.rechercheTexteParFichier(chemin));
-        System.out.println("RESULTAT BRUT "+resultat);
+
         if (resultat.toString().contains("Aucun resultat n'a été trouvé.")) {
+            Application.bdHistoriqueRequete.getListeRequeteTexte().add(new Requete(TypeRecherche.TEXTE_FICHIER,chemin,new Date()));
             return resultat.toString();
         }
 
@@ -25,12 +27,11 @@ public class ControllerTexteFichier {
             listeDeFichierTexte.add(new FichierTexte(Integer.parseInt(atr[1]),atr[0]));
         }
 
-        bdHistoriqueRequete.getListeRequeteTexte().add(new Requete(TypeRecherche.TEXTE_FICHIER,chemin,new Date()));
-
         resultat = new StringBuilder();
         for (FichierTexte fichier : listeDeFichierTexte) {
             resultat.append(fichier.getNom()).append(" Similarité : ").append(fichier.getSimilarite()).append("%\n");
         }
+        Application.bdHistoriqueRequete.getListeRequeteTexte().add(new Requete(TypeRecherche.TEXTE_FICHIER,chemin,new Date()));
         return resultat.toString();
 
     }

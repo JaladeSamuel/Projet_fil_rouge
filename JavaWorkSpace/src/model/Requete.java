@@ -7,6 +7,13 @@ public class Requete implements Serializable {
 
     private TypeRecherche typeRecherche;
     private Date date;
+    private String requete;
+
+    public Requete (TypeRecherche typeRecherche, String requete, Date date) {
+        this.requete = requete;
+        this.typeRecherche = typeRecherche;
+        this.date = date;
+    }
 
     public TypeRecherche getTypeRecherche() {
         return typeRecherche;
@@ -18,14 +25,6 @@ public class Requete implements Serializable {
 
     String getRequete() {
         return requete;
-    }
-
-    private String requete;
-
-    public Requete (TypeRecherche typeRecherche, String requete, Date date) {
-        this.requete = requete;
-        this.typeRecherche = typeRecherche;
-        this.date = date;
     }
 
 }

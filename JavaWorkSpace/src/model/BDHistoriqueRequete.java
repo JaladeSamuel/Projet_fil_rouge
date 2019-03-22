@@ -7,7 +7,6 @@ import java.util.List;
 public class BDHistoriqueRequete implements Serializable {
     private List<Requete> listeRequeteTexte = new ArrayList<>();
     private List<Requete> listeRequeteImage = new ArrayList<>();
-
     private List<Requete> listeRequeteSon = new ArrayList<>();
 
     public String afficherHistoriqueRequeteTexte() {

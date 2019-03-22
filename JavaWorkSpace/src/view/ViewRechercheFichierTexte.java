@@ -1,6 +1,10 @@
 package view;
 
 import controller.ControllerTexteFichier;
+import model.Requete;
+import model.TypeRecherche;
+
+import java.util.Date;
 
 public class ViewRechercheFichierTexte implements runnableView{
 
@@ -22,8 +26,8 @@ public class ViewRechercheFichierTexte implements runnableView{
         init();
         System.out.print(messageRechercheFichierTexte);
         String chemin = Clavier.entrerClavierString();
-        System.out.println(controllerTexteFichier.rechercheParFichier(chemin));
-        //historique
+        String resultat = controllerTexteFichier.rechercheParFichier(chemin);
+        System.out.println(resultat);
         viewTexte.run();
     }
 

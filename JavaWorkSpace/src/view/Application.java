@@ -52,6 +52,7 @@ public class Application {
         File fichier = new File("../BDHistorique/historique.ser");
         // ouverture d'un flux sur un fichier
         if (fichier.length() < 1) {
+            bdHistoriqueRequete = new BDHistoriqueRequete();
             return;
         }
         ObjectInputStream bd = null;
