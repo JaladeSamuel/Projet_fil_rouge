@@ -1,3 +1,6 @@
 *.o
 *.out
 *.class
+*/.idea/workspage.xml
+*/.idea/usage.statistics.xml
+*/.idea/tasks.xml
