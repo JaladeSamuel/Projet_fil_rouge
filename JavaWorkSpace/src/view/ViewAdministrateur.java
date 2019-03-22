@@ -2,9 +2,6 @@ package view;
 
 public class ViewAdministrateur implements runnableView {
 
-    public ViewAdministrateur(ViewAccueil viewAccueil) {
-
-    }
     private ViewAccueil viewAccueil;
     private ViewImage viewImage;
     private ViewTexte viewTexte;
@@ -23,13 +20,13 @@ public class ViewAdministrateur implements runnableView {
 
     private int choix;
 
-    public ViewAdministrateur(ViewAccueil viewAccueil) {
+    ViewAdministrateur(ViewAccueil viewAccueil) {
         this.viewAccueil = viewAccueil;
     }
 
     private void init() {
         choix = -1;
-        String tentative = "";
+        String tentative;
         String motDePasse = "123upssitech";
         do {
             System.out.println("Mot de passe : ");
@@ -39,7 +36,7 @@ public class ViewAdministrateur implements runnableView {
 
     @Override
     public void run() {
-        init();}
+        init();
 
         while (choix < 1 || choix > 6) {
             System.out.println(accueilAdministrateur);
