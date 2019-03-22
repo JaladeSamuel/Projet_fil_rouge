@@ -27,7 +27,7 @@ public class FichierTexte {
 
     @Override
     public boolean equals(Object o) {
-        return this.path.equals(((FichierTexte) o).path) && this.similarite == ((FichierTexte) o).similarite && this.nom.equals(((FichierTexte) o).nom);
+        return this.path.equals(((FichierTexte) o).path) && this.nom.equals(((FichierTexte) o).nom);
     }
 
     @Override

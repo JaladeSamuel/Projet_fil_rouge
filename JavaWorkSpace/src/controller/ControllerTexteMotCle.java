@@ -2,9 +2,7 @@ package controller;
 
 import model.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class ControllerTexteMotCle {
 
@@ -51,17 +49,36 @@ public class ControllerTexteMotCle {
 
     public String rechercheParMotCle() {
 
-        for (String s1 : selectionMotARechercher) {
-            String str = MoteurDeRecherche.rechercheParMotCle(s1);
+        Map<String,ArrayList<FichierTexte>> map = new HashMap<>();
+
+        for(String motCle : selectionMotARechercher) {
+            String str = MoteurDeRecherche.rechercheParMotCle(motCle);
+            map.put(motCle,new ArrayList<>());
             if (!str.contains("Aucun resultat n'a été trouvé.")) {
                 String[] arrOfStr = str.split(" ");
                 for (String s : arrOfStr) {
                     String[] attr = s.split(":");
-                    listeFichierTexte.add(new FichierTexte(Integer.parseInt(attr[1]), attr[0]));
+                    map.get(motCle).add(new FichierTexte(Integer.parseInt(attr[1]),attr[0]));
+                }
+            }
+        }
+
+
+        for (FichierTexte fichier : map.get(selectionMotARechercher.get(0))) {
+            boolean isInAllLists = true;
+            for (String motCle : map.keySet()) {
+                if (!map.get(motCle).contains(fichier)) {
+                    isInAllLists = false;
+                    break;
                 }
             }
 
+            if (isInAllLists && !listeFichierTexte.contains(fichier)) {
+                listeFichierTexte.add(fichier);
+            }
         }
+
+
 
         if(!selectionMotANePasRechercher.isEmpty()) {
             for (String s1 : selectionMotANePasRechercher) {

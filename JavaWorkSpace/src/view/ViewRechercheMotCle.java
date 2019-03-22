@@ -9,8 +9,8 @@ public class ViewRechercheMotCle implements runnableView{
     private ControllerTexteMotCle controllerTexteMotCle;
 
     private String accueilViewRechercheMotCle = "Rentrer la selections de mot(s) clé(s) pour la recherche\n" +
-            "1 - Ajouter mot clé\n" +
-            "2 - Ajouter mot clé qui ne doit pas appraitre dans les resultat de la recherche\n"+
+            "1 - (+) Ajouter mot clé\n" +
+            "2 - (-) Ajouter mot clé qui ne doit pas appraitre dans les resultat de la recherche\n"+
             "3 - Terminer et rechercher\n" +
             "4 - Retour\n" +
             "5 - Quitter \n";
