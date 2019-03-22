@@ -22,9 +22,7 @@ public class MoteurDeRecherche {
         //MoteurDeRecherche.indexationTexte();
         //System.out.println(MoteurDeRecherche.rechercheParMotCle("football"));
         //System.out.println(MoteurDeRecherche.rechercheTexteParFichier("15-Capturer_et_emprisonner_le_CO_utf8.xml"));
-        //System.out.println(rechercheTexteParFichier("22-Les_clubs_de_football_anglais_utf8.xml"));
-        BDHistoriqueRequete bdHistoriqueRequete = new BDHistoriqueRequete();
-        System.out.println(bdHistoriqueRequete.afficherHistoriqueRequeteTexte());
+        System.out.println(rechercheTexteParFichier("13-Ligue_des_champions____Si_utf8.xml"));
     }
 
 }
