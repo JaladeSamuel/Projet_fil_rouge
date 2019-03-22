@@ -1,6 +1,6 @@
 *.o
 *.out
 *.class
-*/.idea/workspage.xml
-*/.idea/usage.statistics.xml
-*/.idea/tasks.xml
+JavaWorkSpace/.idea/workspace.xml
+JavaWorkSpace/.idea/usage.statistics.xml
+JavaWorkSpace/.idea/tasks.xml

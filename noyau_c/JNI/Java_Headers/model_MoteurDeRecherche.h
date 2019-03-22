@@ -23,6 +23,14 @@ JNIEXPORT void JNICALL Java_model_MoteurDeRecherche_indexationTexte
 JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheParMotCle
   (JNIEnv *, jclass, jstring);
 
+/*
+ * Class:     model_MoteurDeRecherche
+ * Method:    rechercheTexteParFichier
+ * Signature: (Ljava/lang/String;)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheTexteParFichier
+  (JNIEnv *, jclass, jstring);
+
 #ifdef __cplusplus
 }
 #endif
