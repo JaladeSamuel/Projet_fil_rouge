@@ -1,6 +1,7 @@
 #include "../Java_Headers/model_MoteurDeRecherche.h"
 #include "../../IndexationTexte/indexationV1.h"
 #include "../../Comparaison/Comparaison_Texte/comparaison.h"
+#include "../../IndexationImage/image.h"
 
 void initComparaison()
 {
@@ -48,7 +49,19 @@ JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheTexteParFichier(
 	searchFILE_COMPTXT(path, &res);
 
 	toString_RES(res, resString);
+    openFirstResult_RES(res);
 
     result = (*env)->NewStringUTF(env, resString);
+    return result;
+}
+
+JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheParCouleur(JNIEnv * env, jclass class, jint integer)
+{
+    char retString[200];
+    jstring result;
+    int couleur = (int)integer;
+    rechercheParCouleurStr(couleur, retString);
+
+    result = (*env)->NewStringUTF(env, retString);
     return result;
 }

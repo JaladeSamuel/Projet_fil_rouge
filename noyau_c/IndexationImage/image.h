@@ -186,12 +186,14 @@ void comparerImageAvecImageRGB();
 void rechercherNiveauGris(int niveau);
 void rechercherCouleur(int* tableau, int taille);
 void rechercheParCouleur(int couleur);
+void rechercheParCouleurStr(int couleur, char* string);
 
 void ouvrirFichier(char* fichier, char* localtionPath, char* extension);
 int isValeurDansTableau(int valeur, int *tableau, int taille);
 
 void initPaire(PAIRE* paire);
 void ajouterParPaireIdValeur(PAIRE* pair, char* id, float valeur);
+void getPaire(PAIRE * paire, char * paireStr);
 void afficherPaire(PAIRE* paire);
 
 //Module Pile

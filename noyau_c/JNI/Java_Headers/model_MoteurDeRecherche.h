@@ -31,6 +31,14 @@ JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheParMotCle
 JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheTexteParFichier
   (JNIEnv *, jclass, jstring);
 
+/*
+ * Class:     model_MoteurDeRecherche
+ * Method:    rechercheParCouleur
+ * Signature: (I)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheParCouleur
+  (JNIEnv *, jclass, jint);
+
 #ifdef __cplusplus
 }
 #endif

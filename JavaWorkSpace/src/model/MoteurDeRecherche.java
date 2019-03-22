@@ -18,11 +18,16 @@ public class MoteurDeRecherche {
 
     public static native String rechercheTexteParFichier(String chemin);
 
+    /**Recherche d'une image par sa couleur principale :
+     * 1:Rouge 2:Rose 3:Bleu 4:Vert 5:Jaune 6:Orange 7:Noir 8:Blanc
+     */
+    public static native String rechercheParCouleur(int couleur);
+
     public static void main(String[] args) {
         //MoteurDeRecherche.indexationTexte();
         //System.out.println(MoteurDeRecherche.rechercheParMotCle("football"));
-        //System.out.println(MoteurDeRecherche.rechercheTexteParFichier("15-Capturer_et_emprisonner_le_CO_utf8.xml"));
-        System.out.println(rechercheTexteParFichier("13-Ligue_des_champions____Si_utf8.xml"));
+        System.out.println(MoteurDeRecherche.rechercheTexteParFichier("13-Ligue_des_champions____Si_utf8.xml"));
+        //System.out.println(MoteurDeRecherche.rechercheParCouleur(3));
     }
 
 }

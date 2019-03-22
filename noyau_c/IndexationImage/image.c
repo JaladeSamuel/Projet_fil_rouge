@@ -11,17 +11,17 @@
   L'avantage est que l'on a juste besoin de modifier les variables globales pour changer les fonctions
   La BASE_EPHEMERE est utilisé pour la comparaison, elle sera créer et détruite après chaque comparaison
 */
-char * BASE_DESCRIPTEUR_IMAGE_NB = "../IndexationImage/data/base_descripteur_imageNB.txt";
-char * BASE_DESCRIPTEUR_IMAGE_RGB = "../IndexationImage/data/base_descripteur_imageRGB.txt";
-char * BASE_EPHEMERE_NB = "../IndexationImage/data/baseEphemereNB.txt";
-char * BASE_EPHEMERE_RGB = "../IndexationImage/data/baseEphemereRGB.txt";
-char * LISTE_EPHEMERE_NB = "../IndexationImage/data/listeEphemereNB.txt";
-char * LISTE_EPHEMERE_RGB = "../IndexationImage/data/listeEphemereRGB.txt";
-char * TEST_NB_DIR_PATH = "../IMG_et_AUDIO/TEST_NB/";
-char * TEST_RGB_DIR_PATH = "../IMG_et_AUDIO/TEST_RGB/";
-char * LISTE_DESCRIPTEUR_IMAGE_NB = "../IndexationImage/data/liste_descripteur_imageNB.txt";
-char * LISTE_DESCRIPTEUR_IMAGE_RGB = "../IndexationImage/data/liste_descripteur_imageRGB.txt";
-char * DEPOT_IMAGE_A_COMPARER = "../IndexationImage/data/depot_image_a_compararer/";
+char * BASE_DESCRIPTEUR_IMAGE_NB = "../noyau_c/IndexationImage/data/base_descripteur_imageNB.txt";
+char * BASE_DESCRIPTEUR_IMAGE_RGB = "../noyau_c/IndexationImage/data/base_descripteur_imageRGB.txt";
+char * BASE_EPHEMERE_NB = "../noyau_c/IndexationImage/data/baseEphemereNB.txt";
+char * BASE_EPHEMERE_RGB = "../noyau_c/IndexationImage/data/baseEphemereRGB.txt";
+char * LISTE_EPHEMERE_NB = "../noyau_c/IndexationImage/data/listeEphemereNB.txt";
+char * LISTE_EPHEMERE_RGB = "../noyau_c/IndexationImage/data/listeEphemereRGB.txt";
+char * TEST_NB_DIR_PATH = "../noyau_c/IMG_et_AUDIO/TEST_NB/";
+char * TEST_RGB_DIR_PATH = "../noyau_c/IMG_et_AUDIO/TEST_RGB/";
+char * LISTE_DESCRIPTEUR_IMAGE_NB = "../noyau_c/IndexationImage/data/liste_descripteur_imageNB.txt";
+char * LISTE_DESCRIPTEUR_IMAGE_RGB = "../noyau_c/IndexationImage/data/liste_descripteur_imageRGB.txt";
+char * DEPOT_IMAGE_A_COMPARER = "../noyau_c/IndexationImage/data/depot_image_a_compararer/";
 
 /*MODULE POUR LA QUANRIFICATION*/
 
@@ -1035,7 +1035,7 @@ void rechercherNiveauGris(int niveau)
   ouvrirFichier(tabNom[0], TEST_NB_DIR_PATH, "bmp");
 }
 
-void rechercheParCouleur(int couleur)
+void rechercheParCouleurStr(int couleur, char* string)
 {
   switch (couleur)
   {
@@ -1135,6 +1135,50 @@ void rechercherCouleur(int* tableau, int taille)
   ouvrirFichier(paire.ids[0], TEST_RGB_DIR_PATH, "jpg");
 }
 
+void rechercherCouleurStr(int* tableau, int taille, char* string)
+{
+  float resultatComp;
+  int i, composante, tmp, total, compoNivRecherche;
+  char imageName[150];
+  float valeurs[NOMBRE_DE_RESULTAT];
+  char tabNom[NOMBRE_DE_RESULTAT][150];
+
+  PAIRE paire;
+  initPaire(&paire);
+
+  FILE* fichier = fopen(BASE_DESCRIPTEUR_IMAGE_RGB, "r");
+  if (fichier != NULL)
+  {
+    while (!feof(fichier))
+    {
+      fscanf(fichier, "%s\n", imageName);
+
+      total = 0;
+      compoNivRecherche = 0;
+      for (i = 0; i < 64; i++)
+      {
+        fscanf(fichier,"%d %d\n",&composante, &tmp);
+
+        if (isValeurDansTableau(composante, tableau, taille))
+        {
+          compoNivRecherche += tmp;
+        }
+
+        total += tmp;
+      }
+
+      resultatComp = (float)compoNivRecherche / (float)total * 100.0;
+      ajouterParPaireIdValeur(&paire, imageName, resultatComp);
+    }
+  }
+  else
+  {
+    printf("Impossible d'ouvrir le fichier base_descripteur_imageRGB.txt");
+  }
+
+  getPaire(&paire, string);
+}
+
 void initPaire(PAIRE* paire)
 {
   paire->size = 0;
@@ -1196,6 +1240,21 @@ void afficherPaire(PAIRE* paire)
     for (int i = 0; i < paire->size; i++)
     {
       printf(" - %s en contient %0.1f%%\n", paire->ids[i], paire->valeurs[i]);
+    }
+  }
+}
+
+void getPaire(PAIRE * paire, char * paireStr)
+{
+  if (paire->size == 0)
+  {
+    strcat(paireStr, "Aucun résultat n'a été trouvé.\n");
+  }
+  else
+  {
+    for (int i = 0; i < paire->size; i++)
+    {
+      sprintf(paireStr, "%s:%0.1f ", paire->ids[i], paire->valeurs[i]);
     }
   }
 }

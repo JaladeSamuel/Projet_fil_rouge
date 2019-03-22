@@ -180,7 +180,7 @@ void openFirstResult_RES(RESULTS res)
 
         if (id == res.ids[0])
         {
-            strcpy(path, "../Base_de_donnees/TEXTES/");
+            strcpy(path, "../noyau_c/Base_de_donnees/TEXTES/");
             strcat(path, fileName);
         }
     }
