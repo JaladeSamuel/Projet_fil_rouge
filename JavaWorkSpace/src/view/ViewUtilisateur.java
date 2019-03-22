@@ -44,7 +44,7 @@ public class ViewUtilisateur implements runnableView{
                 this.viewAccueil.run();
                 break;
             case 4 :
-                System.exit(1);
+                Application.quitterApp();
                 break;
         }
     }

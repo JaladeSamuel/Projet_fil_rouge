@@ -1,5 +1,9 @@
 package view;
 
+import model.BDHistoriqueRequete;
+
+import java.io.*;
+
 public class ViewAccueil implements runnableView{
 
     private ViewAdministrateur viewAdministrateur;
@@ -13,11 +17,6 @@ public class ViewAccueil implements runnableView{
 
     private void init() {
         choix = -1;
-    }
-
-    public static void main(String[] arg) {
-        ViewAccueil viewAccueil = new ViewAccueil();
-        viewAccueil.run();
     }
 
     @Override

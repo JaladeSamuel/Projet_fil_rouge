@@ -1,11 +1,13 @@
 package view;
 
+import controller.ControllerTexteFichier;
 import controller.ControllerTexteMotCle;
 
 public class ViewTexte implements runnableView {
 
     private ViewUtilisateur viewUtilisateur;
     private ViewRechercheMotCle viewRechercheMotCle;
+    private  ViewRechercheFichierTexte viewRechercheFichierTexte;
 
 
     private String accueilViewTexte = "Recherche par :\n" +
@@ -41,12 +43,15 @@ public class ViewTexte implements runnableView {
                 break;
             case 2 :
                 //fichier
+                viewRechercheFichierTexte = new ViewRechercheFichierTexte(this, new ControllerTexteFichier());
+                viewRechercheFichierTexte.run();
                 break;
             case 3 :
                 viewUtilisateur.run();
                 break;
             case 4 :
-                System.exit(1);
+                Application.quitterApp();
+                break;
 
         }
     }

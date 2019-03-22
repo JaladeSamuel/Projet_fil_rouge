@@ -1,6 +1,7 @@
 package controller;
 
 import model.*;
+import view.Application;
 
 import java.util.*;
 
@@ -9,7 +10,6 @@ public class ControllerTexteMotCle {
     private List<FichierTexte> listeFichierTexte = new ArrayList<>();
     private List<String> selectionMotARechercher = new ArrayList<>();
     private List<String> selectionMotANePasRechercher = new ArrayList<>();
-    private BDHistoriqueRequete bdHistoriqueRequete = new BDHistoriqueRequete();
 
     public List<String> getSelectionMotARechercher() {
         return selectionMotARechercher;
@@ -108,7 +108,7 @@ public class ControllerTexteMotCle {
         for(String mot : selectionMotANePasRechercher) {
             requete.append("-").append(mot);
         }
-        bdHistoriqueRequete.getListeRequeteTexte().add(new Requete(TypeRecherche.TEXTE_MOT_CLE, requete.toString(),new Date()));
+        Application.bdHistoriqueRequete.getListeRequeteTexte().add(new Requete(TypeRecherche.TEXTE_MOT_CLE, requete.toString(),new Date()));
         return resultatRequete();
     }
 }

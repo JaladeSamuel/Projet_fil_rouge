@@ -67,7 +67,7 @@ public class ViewRechercheMotCle implements runnableView{
                     viewTexte.run();
                     break;
                 case 5:
-                    System.exit(1);
+                    Application.quitterApp();
                     break;
             }
         }

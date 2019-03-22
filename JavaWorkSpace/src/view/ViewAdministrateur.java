@@ -5,7 +5,7 @@ public class ViewAdministrateur implements runnableView {
     private ViewAccueil viewAccueil;
     private ViewImage viewImage;
     private ViewTexte viewTexte;
-    private ViewSon viewSon;
+    private ViewImage viewSon;
     private ViewDescripteur viewDescripteur;
     private ViewUtilisateur viewUtilisateur;
 
@@ -59,7 +59,7 @@ public class ViewAdministrateur implements runnableView {
                 this.viewAccueil.run();
                 break;
             case 5 : //Quitter
-                System.exit(1);
+                Application.quitterApp();
                 break;
         }
     }
