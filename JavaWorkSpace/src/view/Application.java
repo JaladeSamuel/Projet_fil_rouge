@@ -26,14 +26,14 @@ public class Application {
     }
 
     public static void clearHistorique() {
-        File fichier = new File("BDHistorique/historique.ser");
+        File fichier = new File("../BDHistorique/historique.ser");
         if(fichier.exists()) {
             fichier.delete();
         }
     }
 
     private static void serialisation() {
-        File fichier = new File("BDHistorique/historique.ser");
+        File fichier = new File("../BDHistorique/historique.ser");
         //Serialization
         // ouverture d'un flux sur un fichier
         ObjectOutputStream oos;
@@ -49,7 +49,7 @@ public class Application {
     }
 
     private static void deserialisation() {
-        File fichier = new File("BDHistorique/historique.ser");
+        File fichier = new File("../BDHistorique/historique.ser");
         // ouverture d'un flux sur un fichier
         if (fichier.length() < 1) {
             return;
@@ -78,7 +78,7 @@ public class Application {
     }
 
     private static void creationFichierBD() {
-        File fichier = new File("BDHistorique/historique.ser");
+        File fichier = new File("../BDHistorique/historique.ser");
 
         //Si le fichier n'existe pas on le crée et on sort de la fonction ( historique vide )
         if (!fichier.exists()) {
