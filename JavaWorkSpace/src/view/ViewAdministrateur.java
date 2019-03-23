@@ -93,7 +93,6 @@ public class ViewAdministrateur implements runnableView {
                 this.run();
                 break;
             case 3 : //Lancer une indexation
-                //TODO
                 int choix = -1;
                 while (choix < 1 || choix > 3) {
                     System.out.println("Type d'indexation : \n" +

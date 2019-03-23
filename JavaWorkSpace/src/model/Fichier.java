@@ -12,7 +12,7 @@ public class Fichier {
         this.nom = nom;
         this.similarite = similarite;
         this.typeFichier = typeFichier;
-        //todo bon chemin à definir
+        //todo bon chemin à definir en fonction du type de fichier
         this.path = "../noyau_c/Base_de_donnees/"+nom;
     }
 
