@@ -1042,49 +1042,49 @@ void rechercheParCouleurStr(int couleur, char* string)
     case 1: // ROUGE
     {
       int composantesRouge[2] = { 48, 49 };
-      rechercherCouleur(composantesRouge, 2);
+      rechercherCouleurStr(composantesRouge, 2, string);
       break;
     }
     case 2: // ROSE
     {
       int composantesRose[2] = { 50, 51 };
-      rechercherCouleur(composantesRose, 2);
+      rechercherCouleurStr(composantesRose, 2, string);
       break;
     }
     case 3: // BLEU
     {
       int composantesBleu[4] = { 5, 3, 10, 1 };
-      rechercherCouleur(composantesBleu, 4);
+      rechercherCouleurStr(composantesBleu, 4, string);
       break;
     }
     case 4: // VERT
     {
       int composantesVertes[5] = { 25, 29, 17, 12, 4 };
-      rechercherCouleur(composantesVertes, 5);
+      rechercherCouleurStr(composantesVertes, 5, string);
       break;
     }
     case 5: // JAUNE
     {
       int composantesJaunes[6] = { 60, 61, 41, 42, 40, 43 };
-      rechercherCouleur(composantesJaunes, 6);
+      rechercherCouleurStr(composantesJaunes, 6, string);
       break;
     }
     case 6: // ORANGE
     {
       int composantesJaunes[9] = { 51, 52, 53, 61, 62, 53 };
-      rechercherCouleur(composantesJaunes, 9);
+      rechercherCouleurStr(composantesJaunes, 9, string);
       break;
     }
     case 7: // NOIR
     {
       int composantesJaunes[1] = { 0 };
-      rechercherCouleur(composantesJaunes, 1);
+      rechercherCouleurStr(composantesJaunes, 1, string);
       break;
     }
     case 8: // BLANC
     {
       int composantesJaunes[1] = { 63 };
-      rechercherCouleur(composantesJaunes, 1);
+      rechercherCouleurStr(composantesJaunes, 1, string);
       break;
     }
   }
@@ -1254,7 +1254,14 @@ void getPaire(PAIRE * paire, char * paireStr)
   {
     for (int i = 0; i < paire->size; i++)
     {
-      sprintf(paireStr, "%s:%0.1f ", paire->ids[i], paire->valeurs[i]);
+      char percentageTemp[5];
+      strcat(paireStr, paire->ids[i]);
+      strcat(paireStr, ":");
+
+      sprintf(percentageTemp, "%.0f", paire->valeurs[i]);
+      strcat(paireStr, percentageTemp);
+
+      strcat(paireStr, " ");
     }
   }
 }

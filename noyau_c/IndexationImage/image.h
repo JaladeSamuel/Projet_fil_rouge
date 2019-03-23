@@ -185,6 +185,7 @@ void comparerImageAvecImageNB();
 void comparerImageAvecImageRGB();
 void rechercherNiveauGris(int niveau);
 void rechercherCouleur(int* tableau, int taille);
+void rechercherCouleurStr(int* tableau, int taille, char* string);
 void rechercheParCouleur(int couleur);
 void rechercheParCouleurStr(int couleur, char* string);
 
