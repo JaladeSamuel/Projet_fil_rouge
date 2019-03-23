@@ -17,6 +17,28 @@ JNIEXPORT void JNICALL Java_model_MoteurDeRecherche_indexationTexte(JNIEnv * env
     indexationBaseTexte();
 }
 
+JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_indexationFichierTexte(JNIEnv * env, jclass class, jstring string)
+{
+    char resString[200];
+    resString[0] = '\0';
+    jstring result;
+    char* path = (*env)->GetStringUTFChars(env, string, NULL);
+
+	FILE *fichier = fopen(path,"r");
+	if (fichier == NULL)
+	{
+        strcat(resString, "Fichier introuvable.\n");
+	}
+    else
+    {
+	    ajoutDocBase(path);
+        strcat(resString, "Fichier indexé et ajouté a la base.\n");
+    }
+    
+    result = (*env)->NewStringUTF(env, resString);
+    return result;
+}
+
 JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheParMotCle(JNIEnv * env, jclass class, jstring motCle)
 {
     RESULTS res;
