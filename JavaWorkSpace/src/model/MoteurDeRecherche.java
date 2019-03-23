@@ -30,8 +30,20 @@ public class MoteurDeRecherche {
      */
     public static native String rechercheNoirEtBlanc(int niveau);
 
+    /**Recherche d'une image couleur en comparaison avec une autre image.
+     * Cette image doit être dans le dossier de recherche d'image.
+     * @return Liste des résultats sous la forme : resultat1:distance resultat2:distance ...
+     */
+    public static native String rechercheImageRGBParFichier();
+
+    /**Recherche d'une image noire et blanche en comparaison avec une autre image.
+     * Cette image doit être dans le dossier de recherche d'image.
+     * @return Liste des résultats sous la forme : resultat1:distance resultat2:distance ...
+     */
+    public static native String rechercheImageNBParFichier();
+
     public static void main(String[] args) {
-        String s = MoteurDeRecherche.rechercheNoirEtBlanc(0);
+        String s = MoteurDeRecherche.rechercheImageNBParFichier();
         //rechercheParCouleur(3);
         //indexationTexte();
         //rechercheParMotCle("football");

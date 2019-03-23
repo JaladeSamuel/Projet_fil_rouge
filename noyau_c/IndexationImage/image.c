@@ -559,7 +559,7 @@ int comparaisonRGB(image des1,image des2){
   return somme;  
 }
 
-void comparerImageAvecImageNB(){
+void comparerImageAvecImageNB(char* string){
   
   /*
   Fonction qui parcours la liste des histogrammes noir et blancs de la base et qui la compare avec celui donnée l'image déposé
@@ -613,18 +613,18 @@ void comparerImageAvecImageNB(){
 			  fclose(fichier3);
 		  }
 		  else{
-			  printf("Impossible d'ouvrir le fichier baseEphemereNB.txt");
+        strcat(string, "Impossible d'ouvrir le fichier baseEphemereNB.txt");
 		  }
         }
         else{
-          printf("Impossible d'ouvrir %s\n",nom2);
+          string += sprintf(string, "Impossible d'ouvrir %s\n", nom2);
         }
         fclose(fichier2);
       }
       fclose(fichier);
   }
   else{
-      printf("Impossible d'ouvrir le fichier liste_descripteur_imageNB\n");
+      strcat(string, "Impossible d'ouvrir le fichier liste_descripteur_imageNB\n");
   }
   imageNB imageEntree=creation_imageNB(140,140);
   imageNB imageTmp=creation_imageNB(140,140);
@@ -636,7 +636,7 @@ void comparerImageAvecImageNB(){
       imageEntree->histogramme[i]=tmp;
     }
   }else{
-    printf("Impossible d'ouvrir le fichier baseEphemereNB.txt");
+    strcat(string, "Impossible d'ouvrir le fichier baseEphemereNB.txt");
   }
   PILE p=init_PILE();
   int resultatComp;
@@ -653,7 +653,7 @@ void comparerImageAvecImageNB(){
       //ici imageTmp est fini on va passer au suivant
     }
   }else{
-    printf("Impossible d'ouvrir le fichier base_descripteur_imageNB.txt");
+    strcat(string, "Impossible d'ouvrir le fichier base_descripteur_imageNB.txt");
   }
   //parcourir l'ensemble des descripteurs d'image et leur appliquer la comparaison
   //empiler le résultat dans une pile d'image
@@ -664,7 +664,7 @@ void comparerImageAvecImageNB(){
   for(i=0;i<NOMBRE_DE_RESULTAT;i++){
     minim=1000000;
     if(taillePile<NOMBRE_DE_RESULTAT){
-      printf("Nombre de résultat attendu supérieur au nombre de fichier présent");
+      strcat(string, "Nombre de résultat attendu supérieur au nombre de fichier présent");
     }else{
       Cell* caseMoment = p.premier;
       while(caseMoment!=NULL){
@@ -697,8 +697,7 @@ void comparerImageAvecImageNB(){
   }
 
   for(i=NOMBRE_DE_RESULTAT-1;i>=0;i--){
-    printf("Le ficher %s\n",tabNom[i]);
-    printf("a une distance de %d\n\n",tabValeur[i]);
+    string += sprintf(string, "%s:%d ", tabNom[i], tabValeur[i]);
   }
   
   sprintf(command, "rm %s", LISTE_EPHEMERE_NB);
@@ -710,7 +709,7 @@ void comparerImageAvecImageNB(){
   ouvrirFichier(tabNom[NOMBRE_DE_RESULTAT-1], TEST_NB_DIR_PATH, "bmp");
 }
 
-void comparerImageAvecImageRGB(){
+void comparerImageAvecImageRGB(char* string){
   /*
   Fonction qui parcours la liste des histogrammes RGB de la base et qui la compare avec celui donnée l'image déposé
   dans le dossier. Pour cette comparaison, l'historamme de cette image est créé temporairement le temps du traitement.
@@ -780,18 +779,18 @@ void comparerImageAvecImageRGB(){
 			  fclose(fichier3);
 		  }
 		  else{
-			  printf("Impossible d'ouvrir le fichier baseEphemereRGB.txt");
+        strcat(string, "Impossible d'ouvrir le fichier baseEphemereRGB.txt");
 		  }
         }
         else{
-          printf("Impossible d'ouvrir %s\n",nom2);
+          string += sprintf(string, "mpossible d'ouvrir %s", nom2);
         }
         fclose(fichier2);
       }
       fclose(fichier);
   }
   else{
-      printf("Impossible d'ouvrir le fichier liste_descripteur_imageNB\n");
+    strcat(string, "Impossible d'ouvrir le fichier liste_descripteur_imageNB\n");
   }
   image imageEntree=creation_imageRGB(y,x);
   image imageTmp=creation_imageRGB(y,x);
@@ -803,7 +802,7 @@ void comparerImageAvecImageRGB(){
       imageEntree->histogramme[i]=tmp;
     }
   }else{
-    printf("Impossible d'ouvrir le fichier baseEphemereRGB.txt");
+    strcat(string, "Impossible d'ouvrir le fichier baseEphemereRGB.txt");
   }
   PILE p=init_PILE();
   int resultatComp;
@@ -821,7 +820,7 @@ void comparerImageAvecImageRGB(){
       //ici imageTmp est fini on va passer au suivant
     }
   }else{
-    printf("Impossible d'ouvrir le fichier base_descripteur_imageNB.txt");
+    strcat(string, "Impossible d'ouvrir le fichier base_descripteur_imageNB.txt");
   }
   //parcourir l'ensemble des descripteurs d'image et leur appliquer la comparaison
   //empiler le résultat dans une pile d'image
@@ -832,7 +831,7 @@ void comparerImageAvecImageRGB(){
   for(i=0;i<NOMBRE_DE_RESULTAT;i++){
     minim=1000000;
     if(taillePile<NOMBRE_DE_RESULTAT){
-      printf("Nombre de résultat attendu supérieur au nombre de fichier présent");
+      strcat(string, "Nombre de résultat attendu supérieur au nombre de fichier présent");
     }else{
       Cell* caseMoment = p.premier;
       while(caseMoment!=NULL){
@@ -864,8 +863,7 @@ void comparerImageAvecImageRGB(){
     i++;
   }
   for(i=NOMBRE_DE_RESULTAT-1;i>=0;i--){
-    printf("Le ficher %s\n",tabNom[i]);
-    printf("avec un comparaison à %d\n\n",tabValeur[i]);
+    string += sprintf(string, "%s:%d ", tabNom[i], tabValeur[i]);
   }
   
   sprintf(command, "rm %s", LISTE_EPHEMERE_RGB);

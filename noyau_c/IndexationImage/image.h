@@ -181,8 +181,8 @@ int comparaisonRGB(image des1,image des2);
   Plus les images se ressemblent et plus le score et petit. Fonction pour les images colorées.
   */
 
-void comparerImageAvecImageNB();
-void comparerImageAvecImageRGB();
+void comparerImageAvecImageNB(char* string);
+void comparerImageAvecImageRGB(char* string);
 void rechercherNiveauGris(int niveau);
 void rechercherNiveauGrisStr(int niveau, char* string);
 void rechercherCouleur(int* tableau, int taille);

@@ -5,41 +5,41 @@
 
 void initComparaison()
 {
-	FILE_DESCRIPTORS_PATH = "../noyau_c/Commun/descripteur_base_texte.txt";
-	FILE_TEXT_CONFIG_PATH = "../noyau_c/Config/config_texte.txt";
+    FILE_DESCRIPTORS_PATH = "../noyau_c/Commun/descripteur_base_texte.txt";
+    FILE_TEXT_CONFIG_PATH = "../noyau_c/Config/config_texte.txt";
     FILE_DESCRIPTORS_INDEX = "../noyau_c/Commun/tableTexteIndex.txt";
     DATA_BASE_PATH = "../noyau_c/Base_de_donnees/TEXTES/";
     init_COMPTXT();
 }
 
-JNIEXPORT void JNICALL Java_model_MoteurDeRecherche_indexationTexte(JNIEnv * env, jclass class)
+JNIEXPORT void JNICALL Java_model_MoteurDeRecherche_indexationTexte(JNIEnv *env, jclass class)
 {
     indexationBaseTexte();
 }
 
-JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_indexationFichierTexte(JNIEnv * env, jclass class, jstring string)
+JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_indexationFichierTexte(JNIEnv *env, jclass class, jstring string)
 {
     char resString[200];
     resString[0] = '\0';
     jstring result;
-    char* path = (*env)->GetStringUTFChars(env, string, NULL);
+    char *path = (*env)->GetStringUTFChars(env, string, NULL);
 
-	FILE *fichier = fopen(path,"r");
-	if (fichier == NULL)
-	{
+    FILE *fichier = fopen(path, "r");
+    if (fichier == NULL)
+    {
         strcat(resString, "Fichier introuvable.\n");
-	}
+    }
     else
     {
-	    ajoutDocBase(path);
+        ajoutDocBase(path);
         strcat(resString, "Fichier indexé et ajouté a la base.\n");
     }
-    
+
     result = (*env)->NewStringUTF(env, resString);
     return result;
 }
 
-JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheParMotCle(JNIEnv * env, jclass class, jstring motCle)
+JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheParMotCle(JNIEnv *env, jclass class, jstring motCle)
 {
     RESULTS res;
     char resString[200];
@@ -48,16 +48,16 @@ JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheParMotCle(JNIEnv
     initComparaison();
 
     char *mot = (*env)->GetStringUTFChars(env, motCle, NULL);
-	init_RES(&res);
+    init_RES(&res);
 
-	searchWord_COMPTXT(mot, &res);
-	toString_RES(res, resString);
+    searchWord_COMPTXT(mot, &res);
+    toString_RES(res, resString);
 
     result = (*env)->NewStringUTF(env, resString);
     return result;
 }
 
-JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheTexteParFichier(JNIEnv * env, jclass class, jstring chemin)
+JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheTexteParFichier(JNIEnv *env, jclass class, jstring chemin)
 {
     RESULTS res;
     char resString[200];
@@ -66,18 +66,18 @@ JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheTexteParFichier(
     initComparaison();
 
     char *path = (*env)->GetStringUTFChars(env, chemin, NULL);
-	init_RES(&res);
+    init_RES(&res);
 
-	searchFILE_COMPTXT(path, &res);
+    searchFILE_COMPTXT(path, &res);
 
-	toString_RES(res, resString);
+    toString_RES(res, resString);
     openFirstResult_RES(res);
 
     result = (*env)->NewStringUTF(env, resString);
     return result;
 }
 
-JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheParCouleur(JNIEnv * env, jclass class, jint integer)
+JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheParCouleur(JNIEnv *env, jclass class, jint integer)
 {
     char retString[200];
     jstring result;
@@ -88,12 +88,32 @@ JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheParCouleur(JNIEn
     return result;
 }
 
-JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheNoirEtBlanc(JNIEnv * env, jclass class, jint integer)
+JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheNoirEtBlanc(JNIEnv *env, jclass class, jint integer)
 {
     char retString[200];
     jstring result;
     int couleur = (int)integer;
     rechercherNiveauGrisStr(couleur, retString);
+
+    result = (*env)->NewStringUTF(env, retString);
+    return result;
+}
+
+JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheImageRGBParFichier(JNIEnv *env, jclass class)
+{
+    char retString[200];
+    jstring result;
+    comparerImageAvecImageRGB(retString);
+
+    result = (*env)->NewStringUTF(env, retString);
+    return result;
+}
+
+JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheImageNBParFichier(JNIEnv *env, jclass class)
+{
+    char retString[200];
+    jstring result;
+    comparerImageAvecImageNB(retString);
 
     result = (*env)->NewStringUTF(env, retString);
     return result;

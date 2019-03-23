@@ -55,6 +55,22 @@ JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheParCouleur
 JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheNoirEtBlanc
   (JNIEnv *, jclass, jint);
 
+/*
+ * Class:     model_MoteurDeRecherche
+ * Method:    rechercheImageRGBParFichier
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheImageRGBParFichier
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     model_MoteurDeRecherche
+ * Method:    rechercheImageNBParFichier
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheImageNBParFichier
+  (JNIEnv *, jclass);
+
 #ifdef __cplusplus
 }
 #endif
