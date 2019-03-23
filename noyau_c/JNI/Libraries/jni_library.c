@@ -80,6 +80,7 @@ JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheTexteParFichier(
 JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheParCouleur(JNIEnv *env, jclass class, jint integer)
 {
     char retString[200];
+    retString[0] = '\0';
     jstring result;
     int couleur = (int)integer;
     rechercheParCouleurStr(couleur, retString);
@@ -91,6 +92,7 @@ JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheParCouleur(JNIEn
 JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheNoirEtBlanc(JNIEnv *env, jclass class, jint integer)
 {
     char retString[200];
+    retString[0] = '\0';
     jstring result;
     int couleur = (int)integer;
     rechercherNiveauGrisStr(couleur, retString);
@@ -102,6 +104,7 @@ JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheNoirEtBlanc(JNIE
 JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheImageRGBParFichier(JNIEnv *env, jclass class)
 {
     char retString[200];
+    retString[0] = '\0';
     jstring result;
     comparerImageAvecImageRGB(retString);
 
@@ -112,6 +115,7 @@ JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheImageRGBParFichi
 JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheImageNBParFichier(JNIEnv *env, jclass class)
 {
     char retString[200];
+    retString[0] = '\0';
     jstring result;
     comparerImageAvecImageNB(retString);
 

@@ -20,14 +20,7 @@ public class ViewRechercheCouleur implements runnableView {
 
     @Override
     public void run() {
-        int choix = -1;
-        while (choix < 1 || choix > 3) {
-            System.out.print(messageCouleur);
-            choix = Clavier.entrerClavierInt();
-            if(choix < 1 || choix > 3) {
-                System.out.println("Erreur veuillez entrer un chiffre entre 1 et 3 ...");
-            }
-        }
+        int choix = Clavier.getIntRange(messageCouleur, 1, 3);
 
         switch (choix) {
             case 1 : //couleur dominante
@@ -55,14 +48,14 @@ public class ViewRechercheCouleur implements runnableView {
                 this.run();
                 break;
             case 2 : // par fichier
-                //todo
+                System.out.println("Comparaison avec le fichier dans le répertoire noyau_c/IndexationImage/data/depot_image_a_compararer.");
+                System.out.println(controllerRechercheCouleur.rechercheImageParFichier());
+                this.run();
                 break;
             case 3 :
                 viewImage.run();
                 break;
         }
-
-
-
     }
+
 }

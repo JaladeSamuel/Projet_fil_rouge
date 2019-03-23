@@ -14,7 +14,7 @@ public class ControllerRechercheCouleur {
     public String rechercheCouleurDominanante(int choix) {
         StringBuilder msg;
         msg = new StringBuilder(MoteurDeRecherche.rechercheParCouleur(choix));
-        String[] attr = msg.toString().split(" ");
+        String[] attr = msg.toString().split(" "); // TODO: nettoyer le code en double
         for(String str : attr) {
             String[] s = str.split(":");
             listeFichier.add(new Fichier(Integer.parseInt(s[1]),s[0], TypeFichier.IMAGE));
@@ -30,4 +30,17 @@ public class ControllerRechercheCouleur {
 
         return msg.toString();
     }
+
+    public String rechercheImageParFichier() {
+        String ret = "";
+        for (String word : MoteurDeRecherche.rechercheImageRGBParFichier().split(" ")) {
+            int indiceDistance = word.indexOf(':');
+            ret += word.substring(0, indiceDistance) + "\n";
+        }
+
+        Application.bdHistoriqueRequete.getListeRequeteImage().add(new Requete(TypeRecherche.IMAGE_COULEUR_FICHIER, "", new Date(), ret));
+
+        return ret;
+    }
+
 }
