@@ -26,12 +26,12 @@ public class MoteurDeRecherche {
     public static native String rechercheParCouleur(int couleur);
 
     public static void main(String[] args) {
-        String s = MoteurDeRecherche.indexationFichierTexte("/home/aurelien/Documents/Projects/Projet_fil_rouge/noyau_c/test_fichier_a_indexer.xml");
+       // String s = MoteurDeRecherche.indexationFichierTexte("/home/aurelien/Documents/Projects/Projet_fil_rouge/noyau_c/test_fichier_a_indexer.xml");
         //rechercheParCouleur(3);
         //indexationTexte();
         //rechercheParMotCle("football");
         //rechercheTexteParFichier("13-Ligue_des_champions____Si_utf8.xml");
-        System.out.println("resultat : " + s);
+       // System.out.println("resultat : " + s);
     }
 
 }
