@@ -1,10 +1,7 @@
 package view;
 
 import controller.ControllerTexteFichier;
-import model.Requete;
-import model.TypeRecherche;
 
-import java.util.Date;
 
 public class ViewRechercheFichierTexte implements runnableView{
 

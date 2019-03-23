@@ -103,14 +103,20 @@ public class ViewAdministrateur implements runnableView {
                             "Choix : ");
                     choix = Clavier.entrerClavierInt();
                 }
-
+                System.out.print("Entrez le chemin absolu du fichier que vous voulez indexer : ");
                 String chemin = Clavier.entrerClavierString();
                 switch (choix) {
                     case 1 :
                         System.out.println(controllerIndexation.indexationFichierTexte(chemin));
+                        this.run();
                         break;
                     case 2 :
-
+                        //todo
+                        this.run();
+                        break;
+                    case 3 :
+                        //todo
+                        this.run();
                         break;
 
                 }
