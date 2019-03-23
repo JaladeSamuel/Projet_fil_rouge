@@ -1,5 +1,7 @@
 package view;
 
+import controller.ControllerIndexation;
+
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -12,6 +14,8 @@ public class ViewAdministrateur implements runnableView {
     private ViewImage viewSon;
     private ViewDescripteur viewDescripteur;
     private ViewUtilisateur viewUtilisateur;
+    private ControllerIndexation controllerIndexation = new ControllerIndexation();
+
     private boolean mdpTrue = false;
     private String accueilAdministrateur = "Sélectionner une action :\n" +
             "1 - Lancer une recherche\n"+
@@ -90,6 +94,27 @@ public class ViewAdministrateur implements runnableView {
                 break;
             case 3 : //Lancer une indexation
                 //TODO
+                int choix = -1;
+                while (choix < 1 || choix > 3) {
+                    System.out.println("Type d'indexation : \n" +
+                            "1 - Texte \n" +
+                            "2 - Image \n" +
+                            "3 - Son\n" +
+                            "Choix : ");
+                    choix = Clavier.entrerClavierInt();
+                }
+
+                String chemin = Clavier.entrerClavierString();
+                switch (choix) {
+                    case 1 :
+                        System.out.println(controllerIndexation.indexationFichierTexte(chemin));
+                        break;
+                    case 2 :
+
+                        break;
+
+                }
+
                 break;
             case 4 : //Modifier les configurations
                 choix = -1;
