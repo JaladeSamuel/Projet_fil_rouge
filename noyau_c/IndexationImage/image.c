@@ -1035,6 +1035,110 @@ void rechercherNiveauGris(int niveau)
   ouvrirFichier(tabNom[0], TEST_NB_DIR_PATH, "bmp");
 }
 
+void rechercherNiveauGrisStr(int niveau, char* string)
+{
+  PILE p = init_PILE();
+  int i, composante, tmp, compoNivRecherche, total;
+  char imageName[150];
+  float resultatComp;
+  
+  FILE* fichier = fopen(BASE_DESCRIPTEUR_IMAGE_NB, "r");
+  if (fichier != NULL)
+  {
+    while (!feof(fichier))
+    {
+      fscanf(fichier, "%s\n", imageName);
+
+      total = 0;
+      compoNivRecherche = 0;
+      for (i = 0; i < 4; i++)
+      {
+        fscanf(fichier,"%d %d\n",&composante, &tmp);
+
+        if (composante == niveau)
+        {
+          compoNivRecherche = tmp;
+        }
+
+        total += tmp;
+      }
+
+      resultatComp = (float)compoNivRecherche / (float)total * 100.0;
+      p = emPILE(p, (int)resultatComp, imageName);
+    }
+  }
+  else
+  {
+    strcat(string, "Impossible d'ouvrir le fichier base_descripteur_imageNB.txt");
+  }
+
+  int minim;
+  PILE p2=init_PILE();
+  int taillePile=taillePILE(p);
+  
+  for (i = 0; i < NOMBRE_DE_RESULTAT; i++)
+  {
+    minim=1000000;
+    if (taillePile < NOMBRE_DE_RESULTAT)
+    {
+      strcat(string, "Nombre de résultat attendu supérieur au nombre de fichier présent");
+    }
+    else
+    {
+      Cell* caseMoment = p.premier;
+      while(caseMoment!=NULL)
+      {
+        if(caseMoment->valeur < minim)
+        {
+          minim = caseMoment->valeur;
+        }
+	      caseMoment=caseMoment->suivant;
+	    }
+      caseMoment = p.premier;
+      while(caseMoment!=NULL)
+      {
+        if (caseMoment->valeur == minim)
+        {
+          p2=emPILE(p2,caseMoment->valeur,caseMoment->id);
+		      caseMoment->valeur=1000001;
+        }
+	      caseMoment=caseMoment->suivant;
+	    }
+    }
+  }
+
+  //ParcoursPILE(p2);
+  int tabValeur[NOMBRE_DE_RESULTAT];
+  char tabNom[NOMBRE_DE_RESULTAT][150];
+  i=0;
+  Cell* caseMoment = p2.premier;
+  while(caseMoment!=NULL){
+    if (i < NOMBRE_DE_RESULTAT)
+    {
+      tabValeur[i]=caseMoment->valeur;
+      strcpy(tabNom[i],caseMoment->id);
+    }
+    caseMoment=caseMoment->suivant;
+    i++;
+  }
+
+  for(i = 0; i < NOMBRE_DE_RESULTAT; i++){
+    if (tabValeur[i] != 0)
+    {
+      strcat(string, tabNom[i]);
+      strcat(string, ":");
+
+      char percentageTemp[5];
+      sprintf(percentageTemp, "%d", tabValeur[i]);
+      strcat(string, percentageTemp);
+
+      strcat(string, " ");
+    }
+  }
+
+  ouvrirFichier(tabNom[0], TEST_NB_DIR_PATH, "bmp");
+}
+
 void rechercheParCouleurStr(int couleur, char* string)
 {
   switch (couleur)

@@ -87,3 +87,14 @@ JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheParCouleur(JNIEn
     result = (*env)->NewStringUTF(env, retString);
     return result;
 }
+
+JNIEXPORT jstring JNICALL Java_model_MoteurDeRecherche_rechercheNoirEtBlanc(JNIEnv * env, jclass class, jint integer)
+{
+    char retString[200];
+    jstring result;
+    int couleur = (int)integer;
+    rechercherNiveauGrisStr(couleur, retString);
+
+    result = (*env)->NewStringUTF(env, retString);
+    return result;
+}
