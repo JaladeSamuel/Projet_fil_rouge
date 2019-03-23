@@ -24,11 +24,10 @@ public class MoteurDeRecherche {
     public static native String rechercheParCouleur(int couleur);
 
     public static void main(String[] args) {
-        String s = MoteurDeRecherche.rechercheParCouleur(3);
         //MoteurDeRecherche.indexationTexte();
         //System.out.println(MoteurDeRecherche.rechercheParMotCle("football"));
-        //System.out.println(MoteurDeRecherche.rechercheTexteParFichier("13-Ligue_des_champions____Si_utf8.xml"));
-        System.out.println("resultat : " + s);
+        System.out.println(MoteurDeRecherche.rechercheTexteParFichier("13-Ligue_des_champions____Si_utf8.xml"));
+        //System.out.println(MoteurDeRecherche.rechercheParCouleur(3));
     }
 
 }

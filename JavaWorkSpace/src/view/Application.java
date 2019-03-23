@@ -6,10 +6,20 @@ import java.io.*;
 
 public class Application {
     public static BDHistoriqueRequete bdHistoriqueRequete;
+    private static boolean enregistrerRequete = false;
 
     public static void main(String[] arg) {
         creationFichierBD();
         deserialisation();
+        int choix = -1;
+        while (choix > 2 || choix < 1) {
+            System.out.println("Enregistrer les requetes qui vont être effectuées durant cette session ? : \n" +
+                    "1 - OUI\n" +
+                    "2 - NON\n" +
+                    "Choix : ");
+            choix = Clavier.entrerClavierInt();
+        }
+        enregistrerRequete = choix == 1;
         ViewAccueil viewAccueil = new ViewAccueil();
         viewAccueil.run();
 
@@ -19,13 +29,16 @@ public class Application {
         if(bdHistoriqueRequete.getListeRequeteTexte().isEmpty() && bdHistoriqueRequete.getListeRequeteImage().isEmpty() && bdHistoriqueRequete.getListeRequeteSon().isEmpty()) {
             System.exit(1);
         }
+        if(!enregistrerRequete) {
+            System.exit(1);
+        }
         System.out.println("Sauvegarde de l'historique ...");
         serialisation();
         System.out.println("Fermeture du programme");
         System.exit(1);
     }
 
-    public static void clearHistorique() {
+    private static void clearHistorique() {
         File fichier = new File("../BDHistorique/historique.ser");
         if(fichier.exists()) {
             fichier.delete();
@@ -59,7 +72,6 @@ public class Application {
         try {
             bd = new ObjectInputStream(new FileInputStream(fichier));
         } catch (IOException e) {
-            System.out.println("BLEMLA");
             e.printStackTrace();
         }
 
@@ -68,7 +80,11 @@ public class Application {
             assert bd != null;
             bdHistoriqueRequete = (BDHistoriqueRequete) bd.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("Historique non fonctionnel");
+            clearHistorique();
+            creationFichierBD();
+            deserialisation();
+           // e.printStackTrace();
         }
         //fermeture
         try {

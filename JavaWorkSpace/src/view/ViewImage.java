@@ -1,12 +1,14 @@
 package view;
 
-//import controller.truc;
+
+import controller.ControllerRechercheCouleur;
+import controller.ControllerRechercheNoirBlanc;
 
 public class ViewImage implements runnableView {
 
     private ViewUtilisateur viewUtilisateur;
-    //private ViewRechercheCouleur viewRechercheCouleur;
-    //private ViewRechercheNoirBlanc rechercheNoirBlanc;
+    private ViewRechercheCouleur viewRechercheCouleur;
+    private ViewRechercheNoirBlanc viewRechercheNoirBlanc;
 
     private String accueilViewSon = "Sélectionner un type d'image :\n"+
             "1 - Noir et Blanc\n"+
@@ -27,19 +29,19 @@ public class ViewImage implements runnableView {
     public void run() {
         init();
         do {
-            System.out.println(accueilViewSon);
-            System.out.println("\nErreur : Saisie impossible, veuillez choisir \"1\",\"2\" ou \"3\".\n");
+            System.out.print(accueilViewSon);
+            choix = Clavier.entrerClavierInt();
         } while (choix < 1 || choix > 4);
         switch (choix) {
             case 1:
                 //noir et blanc
-                //viewRechercheCouleur = new ViewRechercheCouleur(this.new ControllerRechercheCouleur());
-                //viewRechercherCouleur.run();
+                viewRechercheNoirBlanc = new ViewRechercheNoirBlanc(this,new ControllerRechercheNoirBlanc());
+                viewRechercheNoirBlanc.run();
                 break;
             case 2:
                 //couleur
-                //viewRechercheNoirBlanc = new ViewRechercheNoirBlanc(this.new ControllerRechercheNoirBlanc());
-                //viewRechercherNoirBlanc.run();
+                viewRechercheCouleur = new ViewRechercheCouleur(this,new ControllerRechercheCouleur());
+                viewRechercheCouleur.run();
                 break;
             case 3:
                 //retour

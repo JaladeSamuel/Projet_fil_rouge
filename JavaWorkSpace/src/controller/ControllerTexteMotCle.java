@@ -7,7 +7,7 @@ import java.util.*;
 
 public class ControllerTexteMotCle {
 
-    private List<FichierTexte> listeFichierTexte = new ArrayList<>();
+    private List<Fichier> listeFichier = new ArrayList<>();
     private List<String> selectionMotARechercher = new ArrayList<>();
     private List<String> selectionMotANePasRechercher = new ArrayList<>();
 
@@ -20,7 +20,7 @@ public class ControllerTexteMotCle {
     }
 
     public void clear() {
-        listeFichierTexte = new ArrayList<>();
+        listeFichier = new ArrayList<>();
         selectionMotANePasRechercher = new ArrayList<>();
         selectionMotARechercher = new ArrayList<>();
     }
@@ -28,7 +28,7 @@ public class ControllerTexteMotCle {
     @Override
     public String toString() {
         return "ControllerTexteMotCle{" +
-                "listeFichierTexte=" + listeFichierTexte +
+                "listeFichier=" + listeFichier +
                 ", selectionMotARechercher=" + selectionMotARechercher +
                 ", selectionMotANePasRechercher=" + selectionMotANePasRechercher +
                 '}';
@@ -36,12 +36,12 @@ public class ControllerTexteMotCle {
 
     private String resultatRequete() {
         StringBuilder msg;
-        if(listeFichierTexte.isEmpty()) {
+        if(listeFichier.isEmpty()) {
             return  "Aucun fichier dans la base ne correspond à votre recherche.";
         }
 
         msg = new StringBuilder("Liste des fichiers correspondant à votre recherche : \n");
-        for (FichierTexte fichier : listeFichierTexte) {
+        for (Fichier fichier : listeFichier) {
             msg.append(fichier.getNom()).append("\n");
         }
         return msg.toString();
@@ -49,7 +49,7 @@ public class ControllerTexteMotCle {
 
     public String rechercheParMotCle() {
 
-        Map<String,ArrayList<FichierTexte>> map = new HashMap<>();
+        Map<String,ArrayList<Fichier>> map = new HashMap<>();
 
         for(String motCle : selectionMotARechercher) {
             String str = MoteurDeRecherche.rechercheParMotCle(motCle);
@@ -58,13 +58,13 @@ public class ControllerTexteMotCle {
                 String[] arrOfStr = str.split(" ");
                 for (String s : arrOfStr) {
                     String[] attr = s.split(":");
-                    map.get(motCle).add(new FichierTexte(Integer.parseInt(attr[1]),attr[0]));
+                    map.get(motCle).add(new Fichier(Integer.parseInt(attr[1]),attr[0],TypeFichier.TEXTE));
                 }
             }
         }
 
 
-        for (FichierTexte fichier : map.get(selectionMotARechercher.get(0))) {
+        for (Fichier fichier : map.get(selectionMotARechercher.get(0))) {
             boolean isInAllLists = true;
             for (String motCle : map.keySet()) {
                 if (!map.get(motCle).contains(fichier)) {
@@ -73,8 +73,8 @@ public class ControllerTexteMotCle {
                 }
             }
 
-            if (isInAllLists && !listeFichierTexte.contains(fichier)) {
-                listeFichierTexte.add(fichier);
+            if (isInAllLists && !listeFichier.contains(fichier)) {
+                listeFichier.add(fichier);
             }
         }
 
@@ -82,19 +82,19 @@ public class ControllerTexteMotCle {
 
         if(!selectionMotANePasRechercher.isEmpty()) {
             for (String s1 : selectionMotANePasRechercher) {
-                ArrayList<FichierTexte> tamp = new ArrayList<>();
+                ArrayList<Fichier> tamp = new ArrayList<>();
                 String str = MoteurDeRecherche.rechercheParMotCle(s1);
                 if (!str.contains("Aucun resultat n'a été trouvé.")) {
                     String[] arrOfStr = str.split(" ");
                     for (String s : arrOfStr) {
                         String[] attr = s.split(":");
-                        for (FichierTexte fichier : listeFichierTexte) {
+                        for (Fichier fichier : listeFichier) {
                             if (fichier.getNom().equals(attr[0])) {
                                 tamp.add(fichier);
                             }
                         }
                     }
-                    listeFichierTexte.removeAll(tamp);
+                    listeFichier.removeAll(tamp);
                 }
             }
 
@@ -108,7 +108,7 @@ public class ControllerTexteMotCle {
         for(String mot : selectionMotANePasRechercher) {
             requete.append("-").append(mot);
         }
-        Application.bdHistoriqueRequete.getListeRequeteTexte().add(new Requete(TypeRecherche.TEXTE_MOT_CLE, requete.toString(),new Date()));
+        Application.bdHistoriqueRequete.getListeRequeteTexte().add(new Requete(TypeRecherche.TEXTE_MOT_CLE, requete.toString(),new Date(),resultatRequete()));
         return resultatRequete();
     }
 }

@@ -33,4 +33,24 @@ public class BDHistoriqueRequete implements Serializable {
     public List<Requete> getListeRequeteSon() {
         return listeRequeteSon;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder texte = new StringBuilder("Historique requetes TEXTE : \n");
+        for(Requete requete : listeRequeteTexte) {
+            texte.append("| ").append(requete.getDate()).append(" | Requete : ").append(requete.getRequete()).append(" | Resultat : ").append(requete.getResultat()).append("\n");
+        }
+
+        StringBuilder image = new StringBuilder("Historique requetes IMAGE : \n");
+        for(Requete requete : listeRequeteImage) {
+            image.append("| ").append(requete.getDate()).append(" | Requete : ").append(requete.getRequete()).append(" | Resultat : ").append(requete.getResultat()).append("\n");
+        }
+
+        StringBuilder son = new StringBuilder("Historique requetes SON : \n");
+        for(Requete requete : listeRequeteSon) {
+            son.append("| ").append(requete.getDate()).append(" | Requete : ").append(requete.getRequete()).append(" | Resultat : ").append(requete.getResultat()).append("\n");
+        }
+
+        return texte + "\n" + image +"\n" + son+"\n";
+    }
 }

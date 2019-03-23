@@ -11,8 +11,9 @@ public class ViewUtilisateur implements runnableView{
     private String accueilUtilisateur = "Sélectionner le type de fichier recherché :\n" +
             "1 - Texte\n" +
             "2 - Image\n" +
-            "3 - Retour\n" +
-            "4 - Quitter\n";
+            "3 - Visualiser historique\n"+
+            "4 - Retour\n" +
+            "5 - Quitter\n";
 
     private int choix;
 
@@ -33,8 +34,8 @@ public class ViewUtilisateur implements runnableView{
     public void run() {
         init();
         System.out.println(accueilUtilisateur);
-        while (choix < 1 || choix > 4) {
-            System.out.println("Type de fichier : ");
+        while (choix < 1 || choix > 5) {
+            System.out.print("Choix : ");
             choix = Clavier.entrerClavierInt();
         }
 
@@ -48,13 +49,17 @@ public class ViewUtilisateur implements runnableView{
                 viewImage.run();
                 break;
             case 3 :
+                System.out.println(Application.bdHistoriqueRequete.toString());
+                this.run();
+                break;
+            case 4 :
                 if(admin) {
                     this.viewAdministrateur.run();
                 } else {
                     this.viewAccueil.run();
                 }
                 break;
-            case 4 :
+            case 5 :
                 Application.quitterApp();
                 break;
         }

@@ -1,16 +1,19 @@
 package model;
 
-public class FichierTexte {
+public class Fichier {
 
     private String path;
     private int similarite;
-    private  String nom;
+    private String nom;
+    private TypeFichier typeFichier;
 
 
-    public FichierTexte(int similarite, String nom) {
+    public Fichier(int similarite, String nom, TypeFichier typeFichier) {
         this.nom = nom;
         this.similarite = similarite;
-        this.path = "../../noyau_c/Base_de_donnees/"+nom;
+        this.typeFichier = typeFichier;
+        //todo bon chemin à definir
+        this.path = "../noyau_c/Base_de_donnees/"+nom;
     }
 
     public String getPath() {
@@ -27,11 +30,11 @@ public class FichierTexte {
 
     @Override
     public boolean equals(Object o) {
-        return this.path.equals(((FichierTexte) o).path) && this.nom.equals(((FichierTexte) o).nom);
+        return this.path.equals(((Fichier) o).path) && this.nom.equals(((Fichier) o).nom);
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return nom + " " + similarite+"%\n";
     }
 }
