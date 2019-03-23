@@ -1177,6 +1177,7 @@ void rechercherCouleurStr(int* tableau, int taille, char* string)
   }
 
   getPaire(&paire, string);
+  ouvrirFichier(paire.ids[0], TEST_RGB_DIR_PATH, "jpg");
 }
 
 void initPaire(PAIRE* paire)
