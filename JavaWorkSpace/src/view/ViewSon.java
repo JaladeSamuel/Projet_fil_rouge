@@ -1,6 +1,10 @@
 package view;
 
 import model.MoteurDeRecherche;
+import model.Requete;
+import model.TypeRecherche;
+
+import java.util.Date;
 
 public class ViewSon implements runnableView {
 
@@ -24,8 +28,8 @@ public class ViewSon implements runnableView {
         switch (choix) {
             case 1:
                 choix = Clavier.getIntRange(listeExtraitsExistants, 1, 3);
-                System.out.println(MoteurDeRecherche.rechercheSon(choix));
-                // TODO : Enregistrer les résultats dans la base de données.
+                String s = MoteurDeRecherche.rechercheSon(choix);
+                Application.bdHistoriqueRequete.getListeRequeteImage().add(new Requete(TypeRecherche.SON, "", new Date(), s));
                 break;
             case 2 :
                 viewUtilisateur.run();
