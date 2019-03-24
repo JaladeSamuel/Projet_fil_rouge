@@ -6,7 +6,7 @@ import model.TypeRecherche;
 
 import java.util.Date;
 
-public class ViewSon implements runnableView {
+public class ViewSon implements RunnableView {
 
     private ViewUtilisateur viewUtilisateur;
     private String messageMenuSon = "Recherche par :\n" +

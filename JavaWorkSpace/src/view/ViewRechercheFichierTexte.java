@@ -3,7 +3,7 @@ package view;
 import controller.ControllerTexteFichier;
 
 
-public class ViewRechercheFichierTexte implements runnableView{
+public class ViewRechercheFichierTexte implements RunnableView {
 
     private String messageRechercheFichierTexte = "Recherche par fichier : \n" +
             "Rentrer le nom du fichier present dans la base que vous voulez comparer ou un chemin absolu : ";
@@ -11,7 +11,7 @@ public class ViewRechercheFichierTexte implements runnableView{
     private ViewTexte viewTexte;
     private  ControllerTexteFichier controllerTexteFichier;
 
-    public ViewRechercheFichierTexte(ViewTexte viewTexte, ControllerTexteFichier controllerTexteFichier) {
+    ViewRechercheFichierTexte(ViewTexte viewTexte, ControllerTexteFichier controllerTexteFichier) {
 
         this.viewTexte = viewTexte;
         this.controllerTexteFichier = controllerTexteFichier;

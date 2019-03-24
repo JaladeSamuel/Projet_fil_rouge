@@ -2,7 +2,7 @@ package view;
 
 import controller.ControllerRechercheCouleur;
 
-public class ViewRechercheCouleur implements runnableView {
+public class ViewRechercheCouleur implements RunnableView {
 
     private String messageCouleur ="Quel type de recherche voulez-vous effectuer ?\n" +
             "1 - Choix d'une couleur dominante\n" +
@@ -13,7 +13,7 @@ public class ViewRechercheCouleur implements runnableView {
     private ViewImage viewImage;
     private ControllerRechercheCouleur controllerRechercheCouleur;
 
-    public ViewRechercheCouleur(ViewImage viewImage, ControllerRechercheCouleur controllerRechercheCouleur) {
+    ViewRechercheCouleur(ViewImage viewImage, ControllerRechercheCouleur controllerRechercheCouleur) {
         this.viewImage = viewImage;
         this.controllerRechercheCouleur = controllerRechercheCouleur;
     }

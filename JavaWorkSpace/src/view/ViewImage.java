@@ -4,7 +4,7 @@ package view;
 import controller.ControllerRechercheCouleur;
 import controller.ControllerRechercheNoirBlanc;
 
-public class ViewImage implements runnableView {
+public class ViewImage implements RunnableView {
 
     private ViewUtilisateur viewUtilisateur;
     private ViewRechercheCouleur viewRechercheCouleur;
@@ -18,7 +18,7 @@ public class ViewImage implements runnableView {
             "Type de recherche : ";
     private int choix;
 
-    public ViewImage(ViewUtilisateur viewUtilisateur) {
+    ViewImage(ViewUtilisateur viewUtilisateur) {
         this.viewUtilisateur = viewUtilisateur;
     }
     private void init() {

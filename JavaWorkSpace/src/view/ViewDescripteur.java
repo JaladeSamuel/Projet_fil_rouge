@@ -1,6 +1,6 @@
 package view;
 
-public class ViewDescripteur implements runnableView {
+public class ViewDescripteur implements RunnableView {
     public ViewDescripteur(ViewUtilisateur viewUtilisateur) {
     }
 

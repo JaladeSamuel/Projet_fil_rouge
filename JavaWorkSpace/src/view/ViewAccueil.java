@@ -1,10 +1,6 @@
 package view;
 
-import model.BDHistoriqueRequete;
-
-import java.io.*;
-
-public class ViewAccueil implements runnableView{
+public class ViewAccueil implements RunnableView {
 
     private ViewAdministrateur viewAdministrateur;
     private ViewUtilisateur viewUtilisateur;

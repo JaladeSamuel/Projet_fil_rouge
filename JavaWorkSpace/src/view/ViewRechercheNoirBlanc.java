@@ -2,7 +2,7 @@ package view;
 
 import controller.ControllerRechercheNoirBlanc;
 
-public class ViewRechercheNoirBlanc implements runnableView {
+public class ViewRechercheNoirBlanc implements RunnableView {
 
     private String messageNB = "Quel type de recherche voulez-vous effectuer ?\n" +
             "1 - Choix d'un niveau dominant\n" +
@@ -13,7 +13,7 @@ public class ViewRechercheNoirBlanc implements runnableView {
     private ViewImage viewImage;
     private ControllerRechercheNoirBlanc controllerRechercheNoirBlanc;
 
-    public ViewRechercheNoirBlanc(ViewImage viewImage, ControllerRechercheNoirBlanc controllerRechercheNoirBlanc) {
+    ViewRechercheNoirBlanc(ViewImage viewImage, ControllerRechercheNoirBlanc controllerRechercheNoirBlanc) {
         this.viewImage = viewImage;
         this.controllerRechercheNoirBlanc = controllerRechercheNoirBlanc;
     }

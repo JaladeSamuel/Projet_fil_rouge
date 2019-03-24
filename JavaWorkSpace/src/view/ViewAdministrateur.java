@@ -6,7 +6,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-public class ViewAdministrateur implements runnableView {
+public class ViewAdministrateur implements RunnableView {
 
     private ViewAccueil viewAccueil;
     private ViewImage viewImage;

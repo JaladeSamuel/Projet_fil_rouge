@@ -3,7 +3,7 @@ package view;
 import controller.ControllerTexteFichier;
 import controller.ControllerTexteMotCle;
 
-public class ViewTexte implements runnableView {
+public class ViewTexte implements RunnableView {
 
     private ViewUtilisateur viewUtilisateur;
     private ViewRechercheMotCle viewRechercheMotCle;
