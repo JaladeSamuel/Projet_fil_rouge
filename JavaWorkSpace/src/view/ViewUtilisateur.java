@@ -1,6 +1,6 @@
 package view;
 
-public class ViewUtilisateur implements runnableView{
+public class ViewUtilisateur implements runnableView {
 
     private  ViewAdministrateur viewAdministrateur;
     private ViewAccueil viewAccueil;
@@ -19,11 +19,11 @@ public class ViewUtilisateur implements runnableView{
 
     private int choix;
 
-    public ViewUtilisateur(ViewAccueil viewAccueil) {
+    ViewUtilisateur(ViewAccueil viewAccueil) {
         this.viewAccueil = viewAccueil;
     }
 
-    public ViewUtilisateur(ViewAdministrateur viewAdministrateur) {
+    ViewUtilisateur(ViewAdministrateur viewAdministrateur) {
         this.viewAdministrateur = viewAdministrateur;
         admin = true;
     }
@@ -36,7 +36,7 @@ public class ViewUtilisateur implements runnableView{
     public void run() {
         init();
         System.out.println(accueilUtilisateur);
-        while (choix < 1 || choix > 5) {
+        while (choix < 1 || choix > 6) {
             System.out.print("Choix : ");
             choix = Clavier.entrerClavierInt();
         }

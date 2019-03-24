@@ -1,5 +1,5 @@
 package model;
 
 public enum TypeFichier {
-    TEXTE,IMAGE,SON
+    TEXTE, IMAGE_RGB, IMAGE_NB, SON
 }

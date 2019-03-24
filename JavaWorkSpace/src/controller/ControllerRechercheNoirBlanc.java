@@ -14,10 +14,10 @@ public class ControllerRechercheNoirBlanc {
     public String rechercheParNiveau(int choix) {
         StringBuilder msg;
         msg = new StringBuilder(MoteurDeRecherche.rechercheNoirEtBlanc(choix));
-        String[] attr = msg.toString().split(" "); // TODO: nettoyer le code en double
+        String[] attr = msg.toString().split(" ");
         for(String str : attr) {
             String[] s = str.split(":");
-            listeFichier.add(new Fichier(Integer.parseInt(s[1]),s[0], TypeFichier.IMAGE));
+            listeFichier.add(new Fichier(Integer.parseInt(s[1]),s[0], TypeFichier.IMAGE_NB));
         }
 
         msg = new StringBuilder();
@@ -31,15 +31,16 @@ public class ControllerRechercheNoirBlanc {
     }
 
     public String rechercheImageParFichier() {
-        String ret = "";
+        StringBuilder stringBuilder = new StringBuilder();
         for (String word : MoteurDeRecherche.rechercheImageNBParFichier().split(" ")) {
             int indiceDistance = word.indexOf(':');
-            ret += word.substring(0, indiceDistance) + "\n";
+            stringBuilder.append(word.substring(indiceDistance));
+            stringBuilder.append("\n");
         }
 
-        Application.bdHistoriqueRequete.getListeRequeteImage().add(new Requete(TypeRecherche.IMAGE_NB_FICHIER, "", new Date(), ret));
+        Application.bdHistoriqueRequete.getListeRequeteImage().add(new Requete(TypeRecherche.IMAGE_NB_FICHIER, "", new Date(), stringBuilder.toString()));
 
-        return ret;
+        return stringBuilder.toString();
     }
 
 }

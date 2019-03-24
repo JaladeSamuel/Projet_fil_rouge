@@ -14,7 +14,7 @@ public class ViewSon implements runnableView {
             "2 - extrait2.avi\n" +
             "3 - extrait3.avi\n";
 
-    public ViewSon(ViewUtilisateur viewUtilisateur) {
+    ViewSon(ViewUtilisateur viewUtilisateur) {
         this.viewUtilisateur = viewUtilisateur;
     }
 
@@ -35,4 +35,5 @@ public class ViewSon implements runnableView {
                 break;
         }
     }
+
 }

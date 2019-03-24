@@ -7,13 +7,25 @@ public class Fichier {
     private String nom;
     private TypeFichier typeFichier;
 
-
     public Fichier(int similarite, String nom, TypeFichier typeFichier) {
         this.nom = nom;
         this.similarite = similarite;
         this.typeFichier = typeFichier;
-        //todo bon chemin à definir en fonction du type de fichier
-        this.path = "../noyau_c/Base_de_donnees/"+nom;
+
+        switch(typeFichier) {
+            case TEXTE:
+                this.path = "../noyau_c/Base_de_donnees/" + nom + ".xml";
+                break;
+            case IMAGE_RGB:
+                this.path = "../noyau_c/IndexationImage/data/DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB" + nom + ".bmp";
+                break;
+            case IMAGE_NB:
+                this.path = "../noyau_c/IndexationImage/data/DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB" + nom + ".jpg";
+                break;
+            default:
+                this.path = nom;
+                break;
+        }
     }
 
     public String getPath() {
@@ -30,7 +42,11 @@ public class Fichier {
 
     @Override
     public boolean equals(Object o) {
-        return this.path.equals(((Fichier) o).path) && this.nom.equals(((Fichier) o).nom);
+        if (o instanceof Fichier) {
+            return this.path.equals(((Fichier) o).path) && this.nom.equals(((Fichier) o).nom);
+        } else {
+            return false;
+        }
     }
 
     @Override
