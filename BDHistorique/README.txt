@@ -1,0 +1,1 @@
+Ici on retrouve l'historique des recherches automatiquement créés ici.
