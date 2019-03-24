@@ -25,8 +25,6 @@ public class ViewRechercheMotCle implements runnableView{
         init();
         boolean rechercheTermine = false;
 
-
-
         while (!rechercheTermine) {
             choix = -1;
             while (choix < 1 || choix > 5) {

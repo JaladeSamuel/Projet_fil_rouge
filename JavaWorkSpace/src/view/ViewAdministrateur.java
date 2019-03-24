@@ -86,8 +86,12 @@ public class ViewAdministrateur implements runnableView {
                             e.printStackTrace();
                         }
                         break;
-                    case 3 : //base son
-                        //todo
+                    case 3 :
+                        try {
+                            Desktop.getDesktop().open(new File("../noyau_c/IndexationImage/data/base_descripteur_audio.txt"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         break;
                 }
                 this.run();
@@ -110,11 +114,11 @@ public class ViewAdministrateur implements runnableView {
                         this.run();
                         break;
                     case 2 :
-                        //todo
+                        System.out.println(controllerIndexation.indexationFichierImage(chemin));
                         this.run();
                         break;
                     case 3 :
-                        //todo
+                        System.out.println(controllerIndexation.indexationFichierSon(chemin));
                         this.run();
                         break;
 
@@ -152,8 +156,12 @@ public class ViewAdministrateur implements runnableView {
                                 e.printStackTrace();
                             }
                             break;
-                        case 4 : //config son
-                            //todo
+                        case 4 :
+                            try {
+                                Desktop.getDesktop().open(new File("../noyau_c/Config/config_son.txt"));
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                             break;
                     }
                     this.run();
