@@ -9,10 +9,6 @@ import java.io.IOException;
 public class ViewAdministrateur implements RunnableView {
 
     private ViewAccueil viewAccueil;
-    private ViewImage viewImage;
-    private ViewTexte viewTexte;
-    private ViewImage viewSon;
-    private ViewDescripteur viewDescripteur;
     private ViewUtilisateur viewUtilisateur;
     private ControllerIndexation controllerIndexation = new ControllerIndexation();
 
