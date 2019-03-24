@@ -111,4 +111,17 @@ public class ControllerTexteMotCle {
         Application.bdHistoriqueRequete.getListeRequeteTexte().add(new Requete(TypeRecherche.TEXTE_MOT_CLE, requete.toString(),new Date(),resultatRequete()));
         return resultatRequete();
     }
+
+    public boolean isMotCleNonCorrecte(String motCle) {
+        if (motCle.length() < 3) {
+            System.out.println("La longueur du mot doit être supérieur à 3 charactères.");
+            return false;
+        } else if (!motCle.matches("[a-zA-Z0-9]+")) {
+            System.out.println("Le mot clé contient un caractère spécial.");
+            return false;
+        }
+
+        return true;
+    }
+
 }

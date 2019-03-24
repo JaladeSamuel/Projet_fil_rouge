@@ -37,7 +37,12 @@ public class ViewRechercheMotCle implements runnableView{
                 case 1:
                     System.out.print("Entrez le mot clé : ");
                     String motCle = Clavier.entrerClavierString();
-                    //verifier mot clé todo
+
+                    while (controllerTexteMotCle.isMotCleNonCorrecte(motCle)) {
+                        System.out.print("Ressayez : ");
+                        motCle = Clavier.entrerClavierString();
+                    }
+
                     controllerTexteMotCle.getSelectionMotARechercher().add(motCle);
                     System.out.println("Mot clé enregistré");
                     break;
@@ -45,7 +50,12 @@ public class ViewRechercheMotCle implements runnableView{
                     if (!controllerTexteMotCle.getSelectionMotARechercher().isEmpty()) {
                         System.out.println("Entrez le mot clé non desiré : ");
                         String motcle = Clavier.entrerClavierString();
-                        //verifier mot todo
+
+                        while (controllerTexteMotCle.isMotCleNonCorrecte(motcle)) {
+                            System.out.print("Ressayez : ");
+                            motcle = Clavier.entrerClavierString();
+                        }
+
                         controllerTexteMotCle.getSelectionMotANePasRechercher().add(motcle);
                         System.out.println("Mot clé enregistré");
                     } else {
@@ -69,8 +79,6 @@ public class ViewRechercheMotCle implements runnableView{
                     break;
             }
         }
-
-
     }
 
     private void init() {
