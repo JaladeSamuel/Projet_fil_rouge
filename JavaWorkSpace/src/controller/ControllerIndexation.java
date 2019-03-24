@@ -9,11 +9,11 @@ public class ControllerIndexation {
     }
 
     public String indexationFichierImage(String path) {
-        return null; //todo
+        return "Fichier Image indexé (simulé)";
     }
 
     public String indexationFichierSon(String path) {
-        return null; //todo
+        return "Fichier Son indexé (simulé)";
     }
 
 }

@@ -63,13 +63,4 @@ public class MoteurDeRecherche {
         }
     }
 
-    public static void main(String[] args) {
-        String s = MoteurDeRecherche.rechercheImageNBParFichier();
-        //rechercheParCouleur(3);
-        //indexationTexte();
-        //rechercheParMotCle("football");
-        //rechercheTexteParFichier("13-Ligue_des_champions____Si_utf8.xml");
-        System.out.println("resultat : " + s);
-    }
-
 }
