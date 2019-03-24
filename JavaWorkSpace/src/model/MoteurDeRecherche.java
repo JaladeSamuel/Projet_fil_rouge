@@ -14,6 +14,14 @@ public class MoteurDeRecherche {
 
     public static native void indexationTexte();
 
+    public static void indexationImage() {
+        //todo ...
+    }
+
+    public static void indexationSon() {
+        //todo ...
+    }
+
     public static native String indexationFichierTexte(String chemin);
 
     public static native String rechercheParMotCle(String motCle);
@@ -41,6 +49,19 @@ public class MoteurDeRecherche {
      * @return Liste des résultats sous la forme : resultat1:distance resultat2:distance ...
      */
     public static native String rechercheImageNBParFichier();
+
+    public static String rechercheSon(int extrait) {
+        switch (extrait) {
+            case 1:
+                return "son1.avi son4.avi son3.avi";
+            case 2:
+                return "son2.avi son7.avi son2.avi son4.avi";
+            case 3:
+                return "son7.avi son4.avi";
+            default:
+                return "Cet extrait n'est pas connu dans la base.";
+        }
+    }
 
     public static void main(String[] args) {
         String s = MoteurDeRecherche.rechercheImageNBParFichier();

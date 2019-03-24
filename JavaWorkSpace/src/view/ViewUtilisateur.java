@@ -6,22 +6,24 @@ public class ViewUtilisateur implements runnableView{
     private ViewAccueil viewAccueil;
     private ViewImage viewImage;
     private ViewTexte viewTexte;
+    private ViewSon viewSon;
 
     private boolean admin = false;
     private String accueilUtilisateur = "Sélectionner le type de fichier recherché :\n" +
             "1 - Texte\n" +
             "2 - Image\n" +
-            "3 - Visualiser historique\n"+
-            "4 - Retour\n" +
-            "5 - Quitter\n";
+            "3 - Son\n" +
+            "4 - Visualiser historique\n"+
+            "5 - Retour\n" +
+            "6 - Quitter\n";
 
     private int choix;
 
-    public ViewUtilisateur (ViewAccueil viewAccueil) {
+    public ViewUtilisateur(ViewAccueil viewAccueil) {
         this.viewAccueil = viewAccueil;
     }
 
-    public ViewUtilisateur (ViewAdministrateur viewAdministrateur) {
+    public ViewUtilisateur(ViewAdministrateur viewAdministrateur) {
         this.viewAdministrateur = viewAdministrateur;
         admin = true;
     }
@@ -41,7 +43,7 @@ public class ViewUtilisateur implements runnableView{
 
         switch (choix) {
             case 1 :
-                viewTexte = new ViewTexte(this);
+                viewTexte = new ViewTexte(this); // TODO : Est ce que c'est pas mieux de faire cette ligne dans le constructeur ?
                 viewTexte.run();
                 break;
             case 2 :
@@ -49,17 +51,21 @@ public class ViewUtilisateur implements runnableView{
                 viewImage.run();
                 break;
             case 3 :
+                viewSon = new ViewSon(this);
+                viewSon.run();
+                break;
+            case 4 :
                 System.out.println(Application.bdHistoriqueRequete.toString());
                 this.run();
                 break;
-            case 4 :
+            case 5 :
                 if(admin) {
                     this.viewAdministrateur.run();
                 } else {
                     this.viewAccueil.run();
                 }
                 break;
-            case 5 :
+            case 6 :
                 Application.quitterApp();
                 break;
         }
