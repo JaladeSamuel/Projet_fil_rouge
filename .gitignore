@@ -1,0 +1,8 @@
+*.o
+*.out
+*.class
+JavaWorkSpace/.idea/workspace.xml
+JavaWorkSpace/.idea/usage.statistics.xml
+JavaWorkSpace/.idea/tasks.xml
+noyau_c/.vscode/*
+BDHistorique/historique.ser
