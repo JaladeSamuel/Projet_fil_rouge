@@ -1,4 +1,0 @@
-//id termes total terme1 occurence1 terme2 occurence2 ...
-0 4 754 jeux 20 olympique 15 natation 10 medaille 7
-1 4 920 software 12 hardware 25 olympique 4 natation 3
-2 4 329 bonjour 4 anonyme 4 flamme 3 hardware 3
