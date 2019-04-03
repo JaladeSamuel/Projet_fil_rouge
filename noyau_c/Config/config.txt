@@ -1,0 +1,1 @@
+nb_resultats_max 10
