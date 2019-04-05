@@ -1,6 +1,7 @@
 *.o
 *.out
 *.class
+InterfaceFX/.idea/workspace.xml
 InterfaceFX/.idea/usage.statistics.xml
 InterfaceFX/.idea/tasks.xml
 noyau_c/.vscode/*
