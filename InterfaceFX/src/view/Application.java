@@ -1,5 +1,6 @@
 package view;
 
+import javafx.application.Platform;
 import model.BDHistoriqueRequete;
 
 import java.io.*;
@@ -24,6 +25,17 @@ public class Application {
         viewAccueil.run();
 
     }
+    public static void enregistrerHistorique() {
+        if(bdHistoriqueRequete.getListeRequeteTexte().isEmpty() && bdHistoriqueRequete.getListeRequeteImage().isEmpty() && bdHistoriqueRequete.getListeRequeteSon().isEmpty()) {
+            return;
+        }
+        if(!enregistrerRequete) {
+            return;
+        }
+        System.out.println("Sauvegarde de l'historique ...");
+        serialisation();
+        System.out.println("Sauvegarde terminé");
+    }
 
     public static void quitterApp() {
         if(bdHistoriqueRequete.getListeRequeteTexte().isEmpty() && bdHistoriqueRequete.getListeRequeteImage().isEmpty() && bdHistoriqueRequete.getListeRequeteSon().isEmpty()) {
@@ -35,17 +47,18 @@ public class Application {
         System.out.println("Sauvegarde de l'historique ...");
         serialisation();
         System.out.println("Fermeture du programme");
+        Platform.exit();
         System.exit(1);
     }
 
-    private static void clearHistorique() {
+    public static void clearHistorique() {
         File fichier = new File("../BDHistorique/historique.ser");
         if(fichier.exists()) {
             fichier.delete();
         }
     }
 
-    private static void serialisation() {
+    public static void serialisation() {
         File fichier = new File("../BDHistorique/historique.ser");
         //Serialization
         // ouverture d'un flux sur un fichier
@@ -61,7 +74,7 @@ public class Application {
         }
     }
 
-    private static void deserialisation() {
+    public static void deserialisation() {
         File fichier = new File("../BDHistorique/historique.ser");
         // ouverture d'un flux sur un fichier
         if (fichier.length() < 1) {
@@ -94,7 +107,7 @@ public class Application {
         }
     }
 
-    private static void creationFichierBD() {
+    public static void creationFichierBD() {
         File fichier = new File("../BDHistorique/historique.ser");
 
         //Si le fichier n'existe pas on le crée et on sort de la fonction ( historique vide )
@@ -106,6 +119,10 @@ public class Application {
             }
         }
 
+    }
+
+    public static void coucou() {
+        System.out.println("coucou");
     }
 
 }
