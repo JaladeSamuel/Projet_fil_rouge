@@ -1,8 +1,39 @@
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<GridPane fx:controller="sample.Controller"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <Button onAction="#handlerButton" GridPane.columnIndex="1" GridPane.rowIndex="2">Titre du bouton</Button>
+   <VBox prefHeight="200.0" prefWidth="100.0">
+      <children>
+         <ColorPicker />
+      </children>
+   </VBox>
+   <ComboBox prefWidth="150.0" GridPane.columnIndex="1" onAction="#handlerComboBox">
+      <items>
+         <FXCollections fx:factory="observableArrayList">
+            <String fx:value="Apple" />
+            <String fx:value="Orange" />
+            <String fx:value="Pear" />
+         </FXCollections>
+      </items>
+   </ComboBox>
+
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
 </GridPane>
