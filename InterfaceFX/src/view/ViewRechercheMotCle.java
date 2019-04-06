@@ -62,7 +62,7 @@ public class ViewRechercheMotCle implements RunnableView {
                         System.out.println("Veuillez entrer au moin 1 mot clé à rechercher");
                     }
                     break;
-                case 3:
+                case 3: //RECHERCHE
                     if (!controllerTexteMotCle.getSelectionMotARechercher().isEmpty()) {
                         System.out.println(controllerTexteMotCle.rechercheParMotCle());//recherche par mot cle
                         controllerTexteMotCle.clear(); //resultat ok on clear les listes du controleur

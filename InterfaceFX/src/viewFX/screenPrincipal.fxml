@@ -1,40 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox id="vbox" prefHeight="400" prefWidth="800"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="controller.MenuController">
+<VBox id="vbox" prefHeight="400" prefWidth="898.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuController">
     <MenuBar fx:id="menuBar" onKeyPressed="#handleKeyInput">
         <menus>
-            <Menu text="File">
+            <Menu text="Application">
                 <items>
-                    <MenuItem text="New"/>
-                    <MenuItem text="Open"/>
-                    <MenuItem text="Save"/>
-                    <MenuItem text="Save As"/>
-                    <SeparatorMenuItem  />
-                    <MenuItem text="Exit"/>
+                    <MenuItem text="Visualiser historique" />
+                    <MenuItem text="Administrateur" />
                 </items>
             </Menu>
-            <Menu text="Edit">
+            <Menu text="Quitter">
                 <items>
-                    <MenuItem text="Copy"/>
-                    <MenuItem text="Cut"/>
-                    <MenuItem text="Paste"/>
+                    <MenuItem onAction="#handleAboutActionQuitterEnregistrer" text="Quitter et enregistrer l'historique" />
+                    <MenuItem onAction="#handleAboutActionQuitter" text="Quitter sans enregistrer l'historique" />
                 </items>
             </Menu>
-            <Menu text="Help">
-                <items>
-                    <MenuItem text="Search" disable="true"/>
-                    <MenuItem text="Online Manual" visible="false"/>
-                    <SeparatorMenuItem />
-                    <MenuItem text="About" onAction="#handleAboutAction"/>
-                </items>
-            </Menu>
+
         </menus>
     </MenuBar>
+   <Pane prefHeight="372.0" prefWidth="898.0">
+      <children>
+         <Button layoutX="62.0" layoutY="59.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="133.0" text="Texte" onAction="#runInterfaceTexte"/>
+         <Button layoutX="62.0" layoutY="158.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="133.0" text="Image" onAction="#runInterfaceImage" />
+         <Button layoutX="62.0" layoutY="258.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="133.0" text="Son"  onAction="#runInterfaceSon"/>
+      </children>
+   </Pane>
+
 </VBox>
