@@ -4,52 +4,76 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
-import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ControllerScreenImage {
 
     private ControllerRechercheCouleur controllerRechercheCouleur = new ControllerRechercheCouleur();
     private ControllerRechercheNoirBlanc controllerRechercheNoirBlanc = new ControllerRechercheNoirBlanc();
+    private Map<String, Integer> choixCouleurs = new HashMap<>();
+    private Map<String, Integer> choixNoirBlanc = new HashMap<>();
     public static Stage stage;
 
+    public ControllerScreenImage() {
+        choixCouleurs.put("Rouge", 1);
+        choixCouleurs.put("Rose", 2);
+        choixCouleurs.put("Bleu", 3);
+        choixCouleurs.put("Vert", 4);
+        choixCouleurs.put("Jaune", 5);
+        choixCouleurs.put("Orange", 6);
+        choixCouleurs.put("Noir", 7);
+        choixCouleurs.put("Blanc", 8);
+        choixNoirBlanc.put("Noir", 7);
+        choixNoirBlanc.put("Blanc", 8);
+    }
 
     @FXML
     public void handlerRadioCouleur(ActionEvent actionEvent) {
         Scene scene = stage.getScene();
-        ChoiceBox txt = (ChoiceBox)scene.lookup("#typeImage_choiceBox");
-        // TODO : changer la liste en fonction du type de l'image recherchée
-    }
-
-    @FXML
-    public void handlerFileChoice(ActionEvent actionEvent) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Fichier à utiliser pour la comparaison");
-        File file = fileChooser.showOpenDialog(stage);
-
-        if (file != null) {
-            String resultat = controllerRechercheCouleur.rechercheImageParFichier();
-            Scene scene = stage.getScene();
-            TextArea txt = (TextArea)scene.lookup("#results_area");
-            txt.setText(txt.getText() + resultat + "\n");
+        ChoiceBox choiceBox = (ChoiceBox)scene.lookup("#typeImage_choiceBox");
+        choiceBox.getItems().clear();
+        for (String couleur : choixCouleurs.keySet()) {
+            choiceBox.getItems().add(couleur);
         }
     }
 
     @FXML
-    public void handlerButtonRechercher(ActionEvent actionEvent) {
-        /*if (!controllerTexteMotCle.getSelectionMotARechercher().isEmpty()) {
-            String resultat = controllerTexteMotCle.rechercheParMotCle();
-            Scene scene = stage.getScene();
-            TextArea txt = (TextArea)scene.lookup("#results_area");
+    public void handlerRadioNoirBlanc(ActionEvent actionEvent) {
+        Scene scene = stage.getScene();
+        ChoiceBox choiceBox = (ChoiceBox)scene.lookup("#typeImage_choiceBox");
+        choiceBox.getItems().clear();
+        for (String couleur : choixNoirBlanc.keySet()) {
+            choiceBox.getItems().add(couleur);
+        }
+    }
 
-            txt.setText(txt.getText() + resultat + "\n");
-            controllerTexteMotCle.clear();
+    @FXML
+    public void handlerFileChoice(ActionEvent actionEvent) {
+        // TODO
+    }
+
+    @FXML
+    public void handlerButtonRechercher(ActionEvent actionEvent) {
+        String resultat;
+        Scene scene = stage.getScene();
+        RadioButton radioButtonCouleur = (RadioButton)scene.lookup("#couleur_radio");
+        ChoiceBox choiceBox = (ChoiceBox)scene.lookup("#typeImage_choiceBox");
+        if (radioButtonCouleur.isSelected()) {
+            String choix = (String)choiceBox.getValue();
+            resultat = controllerRechercheCouleur.rechercheCouleurDominanante(choixCouleurs.get(choix));
         } else {
-            // TODO : Notifier l'utilisateur qu'il doit ajouter au moins 1 mot clé à rechercher.
-        }*/
+            String choix = (String)choiceBox.getValue();
+            resultat = controllerRechercheNoirBlanc.rechercheParNiveau(choixNoirBlanc.get(choix));
+        }
+
+        if (resultat != null) {
+            TextArea txt = (TextArea)scene.lookup("#results_area");
+            txt.setText(txt.getText() + resultat + "\n");
+        }
     }
 
 }

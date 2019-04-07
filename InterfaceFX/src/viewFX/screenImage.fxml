@@ -36,9 +36,9 @@
             <fx:define>
                 <ToggleGroup fx:id="typeImage" />
             </fx:define>
-            <HBox alignment="CENTER">
-                <RadioButton onAction="#handlerRadioCouleur" selected="true" text="Couleur" toggleGroup="$typeImage" />
-                <RadioButton text="Noir et blanc" toggleGroup="$typeImage" />
+            <HBox alignment="CENTER" spacing="5">
+                <RadioButton onAction="#handlerRadioCouleur" fx:id="couleur_radio" selected="true" text="Couleur" toggleGroup="$typeImage" />
+                <RadioButton onAction="#handlerRadioNoirBlanc" fx:id="noirBlanc_radio" text="Noir et blanc" toggleGroup="$typeImage" />
             </HBox>
 
             <Separator />
