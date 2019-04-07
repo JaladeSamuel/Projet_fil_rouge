@@ -50,10 +50,10 @@ public class ControllerScreenTexte {
         File file = fileChooser.showOpenDialog(stage);
 
         if (file != null) {
-            String result = controllerTexteFichier.rechercheParFichier(file.getPath());
+            String resultat = controllerTexteFichier.rechercheParFichier(file.getPath());
             Scene scene = stage.getScene();
-            TextField txt = (TextField)scene.lookup("#result_area");
-            txt.setText(result);
+            TextArea txt = (TextArea)scene.lookup("#results_area");
+            txt.setText(txt.getText() + resultat + "\n");
         }
     }
 

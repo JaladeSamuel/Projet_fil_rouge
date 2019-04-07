@@ -67,7 +67,7 @@ public class ViewRechercheMotCle implements RunnableView {
                         System.out.println(controllerTexteMotCle.rechercheParMotCle());//recherche par mot cle
                         controllerTexteMotCle.clear(); //resultat ok on clear les listes du controleur
                     } else {
-                        System.out.println("Veuillez entrer au moin 1 mot clé à rechercher");
+                        System.out.println("Veuillez entrer au moins 1 mot clé à rechercher");
                     }
                     break;
                 case 4:

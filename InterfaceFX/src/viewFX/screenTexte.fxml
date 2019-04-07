@@ -28,7 +28,7 @@
 
         <VBox GridPane.rowIndex="0" GridPane.columnIndex="2" spacing="5.0">
             <Label>Résultats</Label>
-            <TextArea fx:id="results_area" editable="true" prefHeight="380"/>
+            <TextArea fx:id="results_area" editable="false" prefHeight="380"/>
         </VBox>
     </GridPane>
 </VBox>
