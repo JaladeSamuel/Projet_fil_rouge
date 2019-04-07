@@ -50,7 +50,11 @@ public class MenuController {
         stage.show();
     }
 
-    public void runInterfaceImage(ActionEvent actionEvent) {
+    @FXML
+    public void runInterfaceImage(ActionEvent actionEvent) throws Exception {
+        root = FXMLLoader.load(getClass().getResource("/viewFX/screenImage.fxml"));
+        stage.setScene(new Scene(root, 600, 400));
+        stage.show();
     }
 
     public void runInterfaceSon(ActionEvent actionEvent) {

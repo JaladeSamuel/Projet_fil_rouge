@@ -15,5 +15,4 @@
             <MenuItem onAction="#handleAboutActionQuitter" text="Quitter sans enregistrer l'historique"/>
         </items>
     </Menu>
-
 </MenuBar>

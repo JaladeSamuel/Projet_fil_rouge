@@ -1,5 +1,6 @@
 package viewFX;
 
+import controller.ControllerScreenImage;
 import controller.ControllerScreenTexte;
 import controller.MenuController;
 import javafx.application.Application;
@@ -29,10 +30,11 @@ public class Main extends Application {
         MenuController.root = root;
         MenuController.stage = primaryStage;
         ControllerScreenTexte.stage = primaryStage;
+        ControllerScreenImage.stage = primaryStage;
     }
-
 
     public static void main(String[] args) {
         launch(args);
     }
+
 }

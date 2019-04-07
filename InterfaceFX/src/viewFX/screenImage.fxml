@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.HBox?>
+<VBox id="vbox" prefHeight="400" prefWidth="800" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="controller.ControllerScreenImage">
+    <fx:include source="screenMenu.fxml" />
+    <GridPane>
+        <VBox GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="400" alignment="CENTER" spacing="5.0">
+            <HBox alignment="CENTER">
+                <Label text="Couleur "/>
+                <ChoiceBox fx:id="typeImage_choiceBox" value="Rouge">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Rouge" />
+                            <String fx:value="Rose" />
+                            <String fx:value="Bleu" />
+                            <String fx:value="Vert" />
+                            <String fx:value="Jaune" />
+                            <String fx:value="Orange" />
+                            <String fx:value="Noir" />
+                            <String fx:value="Blanc" />
+                        </FXCollections>
+                    </items>
+                </ChoiceBox>
+            </HBox>
+
+            <fx:define>
+                <ToggleGroup fx:id="typeImage" />
+            </fx:define>
+            <HBox alignment="CENTER">
+                <RadioButton onAction="#handlerRadioCouleur" selected="true" text="Couleur" toggleGroup="$typeImage" />
+                <RadioButton text="Noir et blanc" toggleGroup="$typeImage" />
+            </HBox>
+
+            <Separator />
+            <Button onAction="#handlerFileChoice">Sélectionner par fichier</Button>
+            <Separator />
+            <Button onAction="#handlerButtonRechercher">Rechercher</Button>
+        </VBox>
+
+        <VBox GridPane.rowIndex="0" GridPane.columnIndex="2" spacing="5.0">
+            <Label>Résultats</Label>
+            <TextArea fx:id="results_area" editable="false" prefHeight="380"/>
+        </VBox>
+    </GridPane>
+</VBox>
