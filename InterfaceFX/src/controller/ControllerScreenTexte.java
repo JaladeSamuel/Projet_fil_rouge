@@ -71,6 +71,7 @@ public class ControllerScreenTexte {
         }
     }
 
+
     // TODO : Afficher les mots clés utilisés dans la recherche + ajouter un bouton pour faire un clear de tous ces mots clés
 
 }

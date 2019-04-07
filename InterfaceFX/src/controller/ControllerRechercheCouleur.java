@@ -18,7 +18,6 @@ public class ControllerRechercheCouleur {
         for(String str : attr) {
             String[] s = str.split(":");
             listeFichier.add(new Fichier(Integer.parseInt(s[1]),s[0], TypeFichier.IMAGE_RGB));
-
         }
 
         msg = new StringBuilder();

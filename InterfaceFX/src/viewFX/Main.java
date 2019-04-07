@@ -13,6 +13,8 @@ import static view.Application.deserialisation;
 
 public class Main extends Application {
 
+    public static boolean administrateurConnecte = false;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         //historique

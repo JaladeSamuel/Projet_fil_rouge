@@ -6,7 +6,7 @@
     <Menu text="Application">
         <items>
             <MenuItem text="Visualiser historique"/>
-            <MenuItem text="Administrateur"/>
+            <MenuItem text="Administrateur" onAction="#handlerMenuItemAdministrateur"/>
         </items>
     </Menu>
     <Menu text="Quitter">
