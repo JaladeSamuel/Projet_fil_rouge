@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -69,6 +70,8 @@ public class MenuController {
 
             ButtonType loginButtonType = new ButtonType("Login", ButtonBar.ButtonData.OK_DONE);
             dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
+
+            dialog.setGraphic(new ImageView(this.getClass().getResource("../image/loginAdmin.png").toString()));
 
             // Création username et password
             GridPane grid = new GridPane();
