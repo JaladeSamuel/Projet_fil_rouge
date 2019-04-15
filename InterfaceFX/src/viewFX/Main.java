@@ -31,9 +31,12 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
 
+        Scene scene = primaryStage.getScene();
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 
         MenuController.root = root;
         MenuController.stage = primaryStage;
+        ControllerScreenTexte.root = root;
         ControllerScreenTexte.stage = primaryStage;
         ControllerScreenImage.stage = primaryStage;
     }

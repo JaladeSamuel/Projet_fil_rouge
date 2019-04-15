@@ -1,34 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
+
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<VBox id="vbox" prefHeight="400" prefWidth="800" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="controller.ControllerScreenTexte">
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox id="vbox" prefHeight="400" prefWidth="800" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerScreenTexte">
     <fx:include source="screenMenu.fxml" />
     <GridPane>
-        <VBox GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="400" alignment="CENTER" spacing="5.0">
+        <VBox alignment="CENTER" prefWidth="400" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
             <Label>Selection mot clé</Label>
+
+            <TreeView fx:id="treeView" prefHeight="120.0">
+                <VBox.margin>
+                    <Insets left="6.0" right="6.0" />
+                </VBox.margin>
+            </TreeView>
+
+            <Button onAction="#handlerVider">Vider les mots</Button>
+
             <HBox alignment="CENTER" spacing="2.0">
-                <TextField fx:id="plus_area"/>
+                <TextField fx:id="plus_area" />
                 <Button onAction="#handlerPlusButton" prefWidth="30">+</Button>
             </HBox>
+
             <HBox alignment="CENTER" spacing="2.0">
-                <TextField fx:id="minus_area"/>
+                <TextField fx:id="minus_area" />
                 <Button onAction="#handlerMinusButton" prefWidth="30">-</Button>
             </HBox>
             <Separator />
+
             <Button onAction="#handlerFileChoice">Sélectionner par fichier</Button>
             <Separator />
-            <Button onAction="#handlerButtonRechercher">Rechercher</Button>
+
+            <HBox alignment="CENTER" spacing="5.0">
+                <Button onAction="#handlerButtonRetour">Retour</Button>
+                <Button onAction="#handlerButtonRechercher">Rechercher</Button>
+            </HBox>
         </VBox>
 
-        <VBox GridPane.rowIndex="0" GridPane.columnIndex="2" spacing="5.0">
-            <Label>Résultats</Label>
-            <TextArea fx:id="results_area" editable="false" prefHeight="380"/>
+        <VBox GridPane.columnIndex="2" GridPane.rowIndex="0">
+            <Label>Résultats du moteur 1</Label>
+            <TextArea fx:id="results_area" editable="false" prefHeight="380" />
+            <padding>
+                <Insets bottom="5.0" right="5.0" top="5.0" />
+            </padding>
         </VBox>
+
+        <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints />
+        </rowConstraints>
     </GridPane>
 </VBox>

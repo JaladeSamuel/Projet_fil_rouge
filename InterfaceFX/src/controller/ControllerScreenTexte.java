@@ -2,17 +2,25 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ControllerScreenTexte {
 
     private ControllerTexteMotCle controllerTexteMotCle = new ControllerTexteMotCle();
     private ControllerTexteFichier controllerTexteFichier = new ControllerTexteFichier();
+    private TreeItem<String> toIncludeRoot = null;
+    private TreeItem<String> toExcludeRoot = null;
+    private TreeItem<String> topRoot = new TreeItem<>();
+    public static Parent root;
     public static Stage stage;
 
     @FXML
@@ -24,8 +32,20 @@ public class ControllerScreenTexte {
         if (!controllerTexteMotCle.isMotCleNonCorrecte(motCle)) {
             controllerTexteMotCle.getSelectionMotARechercher().add(motCle);
             txt.setText("");
+
+            if (toIncludeRoot == null) {
+                toIncludeRoot = new TreeItem<>("A inclure");
+                topRoot.getChildren().add(toIncludeRoot);
+            }
+
+            toIncludeRoot.getChildren().add(new TreeItem<>(motCle));
+            ((TreeView)scene.lookup("#treeView")).setRoot(topRoot);
+            ((TreeView)scene.lookup("#treeView")).setShowRoot(false);
         } else {
-            // TODO : Notifier l'utilisateur que le mot n'est pas correcte.
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Attention");
+            alert.setHeaderText("Vous ne pouvez pas utiliser les charactères spéciales pour la recherche.");
+            alert.showAndWait();
         }
     }
 
@@ -38,8 +58,20 @@ public class ControllerScreenTexte {
         if (!controllerTexteMotCle.isMotCleNonCorrecte(motCle)) {
             controllerTexteMotCle.getSelectionMotANePasRechercher().add(txt.getText());
             txt.setText("");
+
+            if (toExcludeRoot == null) {
+                toExcludeRoot = new TreeItem<>("A Exclure");
+                topRoot.getChildren().add(toExcludeRoot);
+            }
+
+            toExcludeRoot.getChildren().add(new TreeItem<>(motCle));
+            ((TreeView)scene.lookup("#treeView")).setRoot(topRoot);
+            ((TreeView)scene.lookup("#treeView")).setShowRoot(false);
         } else {
-            // TODO : Notifier l'utilisateur que le mot n'est pas correcte.
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Attention");
+            alert.setHeaderText("Vous ne pouvez pas utiliser de charactères spéciaux pour la recherche.");
+            alert.showAndWait();
         }
     }
 
@@ -65,13 +97,25 @@ public class ControllerScreenTexte {
             TextArea txt = (TextArea)scene.lookup("#results_area");
 
             txt.setText(txt.getText() + resultat + "\n");
-            controllerTexteMotCle.clear();
         } else {
-            // TODO : Notifier l'utilisateur qu'il doit ajouter au moins 1 mot clé à rechercher.
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Attention");
+            alert.setHeaderText("Vous devez au moins ajouter un mot pour lancer une recherche.");
+            alert.showAndWait();
         }
     }
 
+    @FXML
+    public void handlerButtonRetour(ActionEvent actionEvent) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/viewFX/screenPrincipal.fxml"));
+        stage.setScene(new Scene(root, 600, 400));
+        stage.show();
+    }
 
-    // TODO : Afficher les mots clés utilisés dans la recherche + ajouter un bouton pour faire un clear de tous ces mots clés
+    @FXML
+    public void handlerVider(ActionEvent actionEvent) {
+        controllerTexteMotCle.clear();
+        topRoot.getChildren().clear();
+    }
 
 }
