@@ -2,11 +2,15 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +20,7 @@ public class ControllerScreenImage {
     private ControllerRechercheNoirBlanc controllerRechercheNoirBlanc = new ControllerRechercheNoirBlanc();
     private Map<String, Integer> choixCouleurs = new HashMap<>();
     private Map<String, Integer> choixNoirBlanc = new HashMap<>();
+    public static Parent root;
     public static Stage stage;
 
     public ControllerScreenImage() {
@@ -39,6 +44,7 @@ public class ControllerScreenImage {
         for (String couleur : choixCouleurs.keySet()) {
             choiceBox.getItems().add(couleur);
         }
+        choiceBox.setValue("Rouge");
     }
 
     @FXML
@@ -49,6 +55,7 @@ public class ControllerScreenImage {
         for (String couleur : choixNoirBlanc.keySet()) {
             choiceBox.getItems().add(couleur);
         }
+        choiceBox.setValue("Noir");
     }
 
     @FXML
@@ -75,5 +82,13 @@ public class ControllerScreenImage {
             txt.setText(txt.getText() + resultat + "\n");
         }
     }
+
+    @FXML
+    public void handlerButtonRetour(ActionEvent actionEvent) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/viewFX/screenPrincipal.fxml"));
+        stage.setScene(new Scene(root, 600, 400));
+        stage.show();
+    }
+
 
 }

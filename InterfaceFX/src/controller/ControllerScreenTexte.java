@@ -116,6 +116,8 @@ public class ControllerScreenTexte {
     public void handlerVider(ActionEvent actionEvent) {
         controllerTexteMotCle.clear();
         topRoot.getChildren().clear();
+        toIncludeRoot = null;
+        toExcludeRoot = null;
     }
 
 }

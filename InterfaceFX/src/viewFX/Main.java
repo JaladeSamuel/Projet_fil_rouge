@@ -7,11 +7,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-
-import java.io.InputStream;
 
 import static view.Application.creationFichierBD;
 import static view.Application.deserialisation;
@@ -38,6 +34,7 @@ public class Main extends Application {
         MenuController.stage = primaryStage;
         ControllerScreenTexte.root = root;
         ControllerScreenTexte.stage = primaryStage;
+        ControllerScreenImage.root = root;
         ControllerScreenImage.stage = primaryStage;
     }
 
