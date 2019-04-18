@@ -32,9 +32,9 @@
                     <CheckBox fx:id="checkBoxPopup" onAction="#handlerCheckBox" />
                 </HBox>
 
-                <Button prefWidth="180" text="Indexer fichier texte" />
-                <Button prefWidth="180" text="Indexer fichier image" />
-                <Button prefWidth="180" text="Indexer fichier son" />
+                <Button prefWidth="180" text="Indexer fichier texte" onAction="#handlerIndexerTexte" />
+                <Button prefWidth="180" text="Indexer fichier image" onAction="#handlerIndexerImage" />
+                <Button prefWidth="180" text="Indexer fichier son" onAction="#handlerIndexerSon" />
             </VBox>
 
             <VBox GridPane.columnIndex="1" GridPane.rowIndex="0">

@@ -54,7 +54,7 @@ public class ControllerTexteMotCle {
         for(String motCle : selectionMotARechercher) {
             // TODO : make this work !! String str = MoteurDeRecherche.rechercheParMotCle(motCle);
             String str = MoteurDeRecherche.simulationRechercheParMotCle(motCle, true);
-            map.put(motCle,new ArrayList<>());
+            map.put(motCle, new ArrayList<>());
             if (!str.contains("Aucun resultat n'a été trouvé.")) {
                 String[] arrOfStr = str.split(" ");
                 for (String s : arrOfStr) {
