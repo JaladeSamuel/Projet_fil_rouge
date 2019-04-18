@@ -29,11 +29,17 @@ public class MoteurDeRecherche {
     public static String simulationRechercheParMotCle(String motCle, boolean utiliserNoyauSiPasSimulation) {
         if (motCle.equals("football")) {
             return "22-Les_clubs_de_football_anglais_utf8.xml:30 13-Ligue_des_champions____Si_utf8.xml:20 27-Le_Stade_de_France_s_ouvre_utf8.xml:10";
+        } else if (motCle.equals("navigateur")) {
+            return "06-US_Open___Mauresmo_et_utf8.xml:2 29-Ligue_des_champions___Lyon_utf8.xml:30 18-Ligue_1___Lyon_a_utf8.xml;24";
         } else if (utiliserNoyauSiPasSimulation) {
             return rechercheParMotCle(motCle);
         } else {
             return "Aucun résultat n'a était trouvé.";
         }
+    }
+
+    public static String simulationRechercheTexteParFichier() {
+        return "03-Mimer_un_signal_nerveux_pour_utf8.xml:100";
     }
 
     public static native String rechercheTexteParFichier(String chemin);

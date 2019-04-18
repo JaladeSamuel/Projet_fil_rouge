@@ -13,7 +13,8 @@ public class ControllerTexteFichier {
 
     public String rechercheParFichier(String chemin) {
 
-        StringBuilder resultat = new StringBuilder(MoteurDeRecherche.rechercheTexteParFichier(chemin));
+        // TODO : make this work !! StringBuilder resultat = new StringBuilder(MoteurDeRecherche.rechercheTexteParFichier(chemin));
+        StringBuilder resultat = new StringBuilder(MoteurDeRecherche.simulationRechercheTexteParFichier());
 
         if (resultat.toString().contains("Aucun resultat n'a été trouvé.")) {
             Application.bdHistoriqueRequete.getListeRequeteTexte().add(new Requete(TypeRecherche.TEXTE_FICHIER,chemin,new Date(),"Aucun resultat n'a été trouvé"));
@@ -28,7 +29,7 @@ public class ControllerTexteFichier {
 
         resultat = new StringBuilder();
         for (Fichier fichier : listeDeFichier) {
-            resultat.append(fichier.getNom()).append(" Similarité : ").append(fichier.getSimilarite()).append("%\n");
+            resultat.append(" Similarité : ").append(fichier.getSimilarite()).append("%\n").append(fichier.getNom());
         }
         Application.bdHistoriqueRequete.getListeRequeteTexte().add(new Requete(TypeRecherche.TEXTE_FICHIER,chemin,new Date(),resultat.toString()));
         return resultat.toString();
