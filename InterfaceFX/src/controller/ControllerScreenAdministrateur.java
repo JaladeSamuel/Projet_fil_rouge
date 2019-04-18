@@ -12,6 +12,7 @@ import java.io.IOException;
 public class ControllerScreenAdministrateur {
 
     public static Stage stage;
+    @FXML
     private static CheckBox checkBoxPopup;
 
     @FXML
