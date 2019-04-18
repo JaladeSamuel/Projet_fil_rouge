@@ -15,15 +15,15 @@
     <fx:include source="screenMenu.fxml" />
     <HBox>
         <GridPane prefHeight="382.0" prefWidth="200.0" stylesheets="/viewFX/style.css" VBox.vgrow="ALWAYS">
-            <Button onAction="#runInterfaceTexte" prefHeight="Infinity" prefWidth="Infinity" styleClass="button" text="Texte" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <Button onAction="#runInterfaceTexte" prefHeight="Infinity" prefWidth="Infinity" styleClass="button" text=" Texte" style="-fx-graphic: url('http://icons.iconarchive.com/icons/hopstarter/sleek-xp-basic/64/Document-icon.png')" GridPane.columnIndex="0" GridPane.rowIndex="0">
             <font>
                <Font name="System Bold" size="20.0" />
             </font></Button>
-            <Button onAction="#runInterfaceImage" prefHeight="Infinity" prefWidth="Infinity" styleClass="button" text="Image" GridPane.columnIndex="0" GridPane.rowIndex="1">
+            <Button onAction="#runInterfaceImage" prefHeight="Infinity" prefWidth="Infinity" styleClass="button" text="Image" style="-fx-graphic: url('http://icons.iconarchive.com/icons/hopstarter/soft-scraps/64/Image-PNG-icon.png')" GridPane.columnIndex="0" GridPane.rowIndex="1">
             <font>
                <Font name="System Bold" size="20.0" />
             </font></Button>
-            <Button onAction="#runInterfaceSon" prefHeight="Infinity" prefWidth="200.0" styleClass="button" text="Son" GridPane.columnIndex="0" GridPane.rowIndex="2">
+            <Button onAction="#runInterfaceSon" prefHeight="Infinity" prefWidth="200.0" styleClass="button" text="  Son " style="-fx-graphic: url('http://icons.iconarchive.com/icons/hopstarter/soft-scraps/64/File-Audio-icon.png')" GridPane.columnIndex="0" GridPane.rowIndex="2">
             <font>
                <Font name="System Bold" size="20.0" />
             </font></Button>
