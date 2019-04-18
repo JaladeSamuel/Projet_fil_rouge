@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox id="vbox" prefHeight="400" prefWidth="800" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerScreenTexte">
+<VBox id="vbox" prefHeight="400" prefWidth="800" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerSon">
     <fx:include source="screenMenu.fxml" />
     <GridPane>
         <VBox alignment="CENTER" prefWidth="400" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
@@ -24,7 +24,7 @@
 
             <HBox alignment="CENTER">
                 <Label text="Nombre d'apparition  " />
-                <ChoiceBox fx:id="typeImage_choiceBox" prefWidth="80" value="Rouge">
+                <ChoiceBox fx:id="typeImage_choiceBox" prefHeight="26.0" prefWidth="39.0" value="Rouge">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="1" />

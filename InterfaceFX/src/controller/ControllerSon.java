@@ -25,29 +25,24 @@ public class ControllerSon {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Fichier à utiliser pour comparaison");
         File file = fileChooser.showOpenDialog(stage);
-
+        /*
         if (file != null) {
-            String resultat = controllerTexteFichier.rechercheParFichier(file.getPath());
+            String resultat = "coucou";
             Scene scene = stage.getScene();
             TextArea txt = (TextArea)scene.lookup("#results_area");
             txt.setText(txt.getText() + resultat + "\n");
-        }
+        }*/
     }
 
     @FXML
     public void handlerButtonRechercher(ActionEvent actionEvent) {
-        if (!controllerTexteMotCle.getSelectionMotARechercher().isEmpty()) {
-            String resultat = controllerTexteMotCle.rechercheParMotCle();
-            Scene scene = stage.getScene();
-            TextArea txt = (TextArea)scene.lookup("#results_area");
-
-            txt.setText(txt.getText() + resultat + "\n");
-        } else {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Attention");
-            alert.setHeaderText("Vous devez au moins ajouter un mot pour lancer une recherche.");
-            alert.showAndWait();
-        }
+        String resultat = "Liste des fichiers correspondant à votre recherche : \n" +
+                "1-SonNumero1.wav\n" +
+                "2-SonNumero2.wav\n" +
+                "3-SonNumero3.wav";
+        Scene scene = stage.getScene();
+        TextArea txt = (TextArea)scene.lookup("#results_area");
+        txt.setText(txt.getText() + resultat + "\n");
     }
 
     @FXML
