@@ -24,14 +24,14 @@
       <children>
          <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
             <children>
-               <Button layoutX="348.0" layoutY="44.0" mnemonicParsing="false" text="Appliquer" onAction="#handlerButtonAppliquer"/>
-               <Button layoutX="263.0" layoutY="44.0" mnemonicParsing="false" text="Retour" onAction="#handlerButtonRetour"/>
+               <Button layoutX="348.0" layoutY="44.0" mnemonicParsing="false" onAction="#handlerButtonAppliquer" text="Appliquer" />
+               <Button layoutX="263.0" layoutY="44.0" mnemonicParsing="false" onAction="#handlerButtonRetour" text="Retour" />
             </children>
          </Pane>
          <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
             <children>
                <Label layoutX="115.0" layoutY="14.0" text="Choix du/des moteur(s) de recherche" />
-               <CheckBox layoutX="195.0" layoutY="48.0" mnemonicParsing="false" text="Moteur 1" />
+               <CheckBox layoutX="195.0" layoutY="48.0" mnemonicParsing="false" selected="true" text="Moteur 1" />
                <CheckBox layoutX="195.0" layoutY="75.0" mnemonicParsing="false" text="Moteur 2" />
                <CheckBox layoutX="195.0" layoutY="102.0" mnemonicParsing="false" text="Moteur 3" />
             </children>
@@ -39,10 +39,15 @@
          <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          <Pane prefHeight="200.0" prefWidth="200.0">
             <children>
-               <CheckBox layoutX="14.0" layoutY="57.0" mnemonicParsing="false" text="Enregistrer historique des recherches" />
+               <CheckBox layoutX="14.0" layoutY="57.0" mnemonicParsing="false" text="Historique des recherches" />
             </children></Pane>
          <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
-         <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+         <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+            <children>
+               <Button layoutX="48.0" layoutY="51.0" mnemonicParsing="false" text="Indexer fihcier texte" />
+               <Button layoutX="48.0" layoutY="6.0" mnemonicParsing="false" text="Indexer fichier image" />
+               <Button layoutX="48.0" layoutY="100.0" mnemonicParsing="false" text="Indexer fichier son" />
+            </children></Pane>
       </children>
    </GridPane>
 </VBox>
