@@ -154,7 +154,6 @@ public class MenuController {
         }
         stage.setScene(new Scene(root, 600, 400));
         stage.show();
-
         ControllerHistorique.inititialize();
     }
 }

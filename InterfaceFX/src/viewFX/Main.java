@@ -19,7 +19,7 @@ public class Main extends Application {
         //historique
         creationFichierBD();
         deserialisation();
-
+        view.Application.enregistrerRequete = true;
         Parent root = FXMLLoader.load(getClass().getResource("screenPrincipal.fxml"));
         primaryStage.setTitle("FoxIt - Moteur de recherche");
         primaryStage.setScene(new Scene(root, 600, 400));
@@ -33,6 +33,7 @@ public class Main extends Application {
         ControllerScreenTexte.root = root;
         ControllerScreenTexte.stage = primaryStage;
         ControllerHistorique.stage = primaryStage;
+        ControllerHistorique.root = root;
         ControllerScreenImage.root = root;
         ControllerScreenImage.stage = primaryStage;
         ControllerSon.root = root;

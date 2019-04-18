@@ -1,25 +1,38 @@
 package controller;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.stage.Stage;
 import model.Requete;
 import view.Application;
+
+import java.io.IOException;
 import java.util.List;
+
 
 public class ControllerHistorique {
 
-    private static TreeItem<String> imageRoot = new TreeItem<>();
-    private static TreeItem<String> texteRoot = new TreeItem<>();
-    private static TreeItem<String> sonRoot = new TreeItem<>();
-    private static TreeItem<String> topRoot = new TreeItem<>();
+    private static TreeItem<String> imageRoot;
+    private static TreeItem<String> texteRoot;
+    private static TreeItem<String> sonRoot;
+    private static TreeItem<String> topRoot;
     private static List<Requete> requeteImage;
     private static List<Requete> requeteTexte;
     private static List<Requete> requeteSon;
     public static Stage stage;
+    public static Parent root;
+
 
     public static void inititialize() {
+        topRoot = new TreeItem<>();
+        imageRoot = new  TreeItem<>("Image");
+        texteRoot = new  TreeItem<>("Texte");
+        sonRoot = new  TreeItem<>("Son");
+
         Scene scene = stage.getScene();
         requeteImage = Application.bdHistoriqueRequete.getListeRequeteImage();
         requeteTexte = Application.bdHistoriqueRequete.getListeRequeteTexte();
@@ -37,12 +50,35 @@ public class ControllerHistorique {
             sonRoot.getChildren().add(new TreeItem<>(requete.toString()));
         }
 
-        topRoot.getChildren().add(texteRoot);
-        topRoot.getChildren().add(imageRoot);
-        topRoot.getChildren().add(sonRoot);
+        if(!requeteTexte.isEmpty()) {
+            topRoot.getChildren().add(texteRoot);
+        } else {
+            topRoot.getChildren().add(new TreeItem<>("Aucunne requête texte"));
+        }
+
+        if(!requeteImage.isEmpty()) {
+            topRoot.getChildren().add(imageRoot);
+        } else {
+            topRoot.getChildren().add(new TreeItem<>("Aucunne requête image"));
+        }
+
+        if(!requeteSon.isEmpty()) {
+            topRoot.getChildren().add(sonRoot);
+        } else {
+            topRoot.getChildren().add(new TreeItem<>("Aucunne requête son"));
+        }
 
         ((TreeView)scene.lookup("#treeViewHistorique")).setRoot(topRoot);
         ((TreeView)scene.lookup("#treeViewHistorique")).setShowRoot(false);
     }
 
+    public void handlerRetour(ActionEvent actionEvent) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/viewFX/screenPrincipal.fxml"));
+        stage.setScene(new Scene(root, 600, 400));
+        stage.show();
+    }
+
+    public void handlerRechercher(ActionEvent actionEvent) {
+        //todo
+    }
 }

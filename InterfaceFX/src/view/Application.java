@@ -7,7 +7,7 @@ import java.io.*;
 
 public class Application {
     public static BDHistoriqueRequete bdHistoriqueRequete;
-    private static boolean enregistrerRequete = false;
+    public static boolean enregistrerRequete = false;
 
     public static void main(String[] arg) {
         creationFichierBD();
@@ -51,7 +51,7 @@ public class Application {
         System.exit(1);
     }
 
-    public static void clearHistorique() {
+    private static void clearHistorique() {
         File fichier = new File("../BDHistorique/historique.ser");
         if(fichier.exists()) {
             fichier.delete();
@@ -93,7 +93,7 @@ public class Application {
             assert bd != null;
             bdHistoriqueRequete = (BDHistoriqueRequete) bd.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            System.out.println("Historique non fonctionnel");
+            System.out.println("Historique non fonctionnel : " +e);
             clearHistorique();
             creationFichierBD();
             deserialisation();
