@@ -48,7 +48,6 @@
 
     <bottom>
         <HBox alignment="BASELINE_RIGHT" spacing="5.0">
-            <Button onAction="#handlerButtonAppliquer" text="Appliquer" />
             <Button onAction="#handlerButtonRetour" text="Retour" />
         </HBox>
     </bottom>
