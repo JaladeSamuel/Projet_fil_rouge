@@ -2,6 +2,7 @@ package viewFX;
 
 import controller.ControllerScreenImage;
 import controller.ControllerScreenTexte;
+import controller.ControllerSon;
 import controller.MenuController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -36,6 +37,8 @@ public class Main extends Application {
         ControllerScreenTexte.stage = primaryStage;
         ControllerScreenImage.root = root;
         ControllerScreenImage.stage = primaryStage;
+        ControllerSon.root = root;
+        ControllerSon.stage = primaryStage;
     }
 
     public static void main(String[] args) {

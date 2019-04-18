@@ -58,7 +58,16 @@ public class MenuController {
         stage.show();
     }
 
+    @FXML
     public void runInterfaceSon(ActionEvent actionEvent) {
+        try {
+            root = FXMLLoader.load(getClass().getResource("/viewFX/screenSon.fxml"));
+            stage.setScene(new Scene(root, 600, 400));
+            stage.show();
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void handlerMenuItemAdministrateur(ActionEvent actionEvent) {
