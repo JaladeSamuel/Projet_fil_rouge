@@ -26,6 +26,16 @@ public class MoteurDeRecherche {
 
     public static native String rechercheParMotCle(String motCle);
 
+    public static String simulationRechercheParMotCle(String motCle, boolean utiliserNoyauSiPasSimulation) {
+        if (motCle.equals("football")) {
+            return "22-Les_clubs_de_football_anglais_utf8.xml:30 13-Ligue_des_champions____Si_utf8.xml:20 27-Le_Stade_de_France_s_ouvre_utf8.xml:10";
+        } else if (utiliserNoyauSiPasSimulation) {
+            return rechercheParMotCle(motCle);
+        } else {
+            return "Aucun résultat n'a était trouvé.";
+        }
+    }
+
     public static native String rechercheTexteParFichier(String chemin);
 
     /**Recherche d'une image par sa couleur principale.

@@ -52,7 +52,8 @@ public class ControllerTexteMotCle {
         Map<String,ArrayList<Fichier>> map = new HashMap<>();
 
         for(String motCle : selectionMotARechercher) {
-            String str = MoteurDeRecherche.rechercheParMotCle(motCle);
+            // TODO : make this work !! String str = MoteurDeRecherche.rechercheParMotCle(motCle);
+            String str = MoteurDeRecherche.simulationRechercheParMotCle(motCle, true);
             map.put(motCle,new ArrayList<>());
             if (!str.contains("Aucun resultat n'a été trouvé.")) {
                 String[] arrOfStr = str.split(" ");
@@ -83,7 +84,8 @@ public class ControllerTexteMotCle {
         if(!selectionMotANePasRechercher.isEmpty()) {
             for (String s1 : selectionMotANePasRechercher) {
                 ArrayList<Fichier> tamp = new ArrayList<>();
-                String str = MoteurDeRecherche.rechercheParMotCle(s1);
+                // TODO : make this work !! String str = MoteurDeRecherche.rechercheParMotCle(motCle);
+                String str = MoteurDeRecherche.simulationRechercheParMotCle(s1, true);
                 if (!str.contains("Aucun resultat n'a été trouvé.")) {
                     String[] arrOfStr = str.split(" ");
                     for (String s : arrOfStr) {
