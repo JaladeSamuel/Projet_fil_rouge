@@ -4,7 +4,6 @@ import controller.ControllerTexteMotCle;
 
 public class ViewRechercheMotCle implements RunnableView {
 
-
     private ViewTexte viewTexte;
     private ControllerTexteMotCle controllerTexteMotCle;
 
