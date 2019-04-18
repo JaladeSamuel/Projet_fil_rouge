@@ -70,8 +70,9 @@ public class MenuController {
         }
     }
 
+    @FXML
     public void handlerMenuItemAdministrateur(ActionEvent actionEvent) {
-        if(!Main.administrateurConnecte) {
+        if (!Main.administrateurConnecte) {
             //Dialog
             Dialog<Pair<String,String>> dialog = new Dialog<>();
             dialog.setTitle("Adminsitrateur");
@@ -108,7 +109,7 @@ public class MenuController {
             dialog.getDialogPane().setContent(grid);
 
             // Requete sur l'username par defaut
-            Platform.runLater(() -> username.requestFocus());
+            Platform.runLater(username::requestFocus);
 
             // On créer la paire
             dialog.setResultConverter(dialogButton -> {
@@ -128,8 +129,10 @@ public class MenuController {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    stage.setScene(new Scene(root, 800, 400));
+                    stage.setScene(new Scene(root, 600, 400));
                     stage.show();
+
+                    ControllerScreenAdministrateur.initialise();
                 } else {
                     handlerMenuItemAdministrateur(actionEvent);
                 }
@@ -140,12 +143,15 @@ public class MenuController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            stage.setScene(new Scene(root, 800, 600));
+            stage.setScene(new Scene(root, 600, 400));
             stage.show();
+
+            ControllerScreenAdministrateur.initialise();
         }
 
     }
 
+    @FXML
     public void handlerVisualiserHistorique(ActionEvent actionEvent) {
         try {
             root = FXMLLoader.load(getClass().getResource("/viewFX/screenHistorique.fxml"));
@@ -156,4 +162,5 @@ public class MenuController {
         stage.show();
         ControllerHistorique.inititialize();
     }
+
 }
