@@ -33,4 +33,8 @@ public class Requete implements Serializable {
         return requete;
     }
 
+    public String toString() {
+        return "Requête : " + requete + " | Date : " +date +"\n Resultat : "+resultat+"\n";
+    }
+
 }

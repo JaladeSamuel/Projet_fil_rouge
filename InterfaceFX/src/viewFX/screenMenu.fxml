@@ -7,7 +7,7 @@
 <MenuBar fx:id="menuBar" onKeyPressed="#handleKeyInput" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.172-ea" fx:controller="controller.MenuController">
     <Menu text="Application">
         <items>
-            <MenuItem text="Visualiser historique" />
+            <MenuItem onAction="#handlerVisualiserHistorique" text="Visualiser historique" />
             <MenuItem onAction="#handlerMenuItemAdministrateur" text="Administrateur" />
         </items>
     </Menu>

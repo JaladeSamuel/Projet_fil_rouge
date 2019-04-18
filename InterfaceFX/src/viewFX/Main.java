@@ -1,9 +1,6 @@
 package viewFX;
 
-import controller.ControllerScreenImage;
-import controller.ControllerScreenTexte;
-import controller.ControllerSon;
-import controller.MenuController;
+import controller.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -35,6 +32,7 @@ public class Main extends Application {
         MenuController.stage = primaryStage;
         ControllerScreenTexte.root = root;
         ControllerScreenTexte.stage = primaryStage;
+        ControllerHistorique.stage = primaryStage;
         ControllerScreenImage.root = root;
         ControllerScreenImage.stage = primaryStage;
         ControllerSon.root = root;

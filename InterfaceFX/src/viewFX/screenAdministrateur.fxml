@@ -44,8 +44,8 @@
          <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
          <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
             <children>
-               <Button layoutX="48.0" layoutY="51.0" mnemonicParsing="false" text="Indexer fihcier texte" />
-               <Button layoutX="48.0" layoutY="6.0" mnemonicParsing="false" text="Indexer fichier image" />
+               <Button layoutX="47.0" layoutY="14.0" mnemonicParsing="false" text="Indexer fihcier texte" />
+               <Button layoutX="48.0" layoutY="57.0" mnemonicParsing="false" text="Indexer fichier image" />
                <Button layoutX="48.0" layoutY="100.0" mnemonicParsing="false" text="Indexer fichier son" />
             </children></Pane>
       </children>

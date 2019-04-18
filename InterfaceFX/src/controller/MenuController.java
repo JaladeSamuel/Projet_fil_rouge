@@ -145,4 +145,14 @@ public class MenuController {
         }
 
     }
+
+    public void handlerVisualiserHistorique(ActionEvent actionEvent) {
+        try {
+            root = FXMLLoader.load(getClass().getResource("/viewFX/screenHistorique.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stage.setScene(new Scene(root, 600, 400));
+        stage.show();
+    }
 }
