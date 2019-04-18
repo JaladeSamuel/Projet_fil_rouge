@@ -79,7 +79,7 @@ public class ControllerScreenImage {
 
         if (resultat != null) {
             TextArea txt = (TextArea)scene.lookup("#results_area");
-            txt.setText(txt.getText() + resultat + "\n");
+            txt.setText("\n"+resultat + "\n");
         }
     }
 
