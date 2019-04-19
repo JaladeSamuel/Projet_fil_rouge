@@ -54,7 +54,7 @@
         </VBox>
 
         <VBox GridPane.rowIndex="0" GridPane.columnIndex="2" spacing="5.0">
-            <Label>Résultats du moteur 1</Label>
+            <Label>Résultats</Label>
             <TextArea fx:id="results_area" editable="false" prefHeight="380"/>
         </VBox>
     </GridPane>
