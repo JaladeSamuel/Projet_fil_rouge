@@ -9,6 +9,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
+import model.MoteurDeRecherche;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -60,7 +61,16 @@ public class ControllerScreenImage {
 
     @FXML
     public void handlerFileChoice(ActionEvent actionEvent) {
-        // TODO
+        Scene scene = stage.getScene();
+        TextArea txt = (TextArea)scene.lookup("#results_area");
+        String resultat = MoteurDeRecherche.rechercheImageRGBParFichier();
+        String ret = "Résultat de la recherche par fichier :\n";
+
+        for (String s : resultat.split(" ")) {
+            ret += s + "\n";
+        }
+
+        txt.setText("\n" + ret + "\n");
     }
 
     @FXML
@@ -79,7 +89,7 @@ public class ControllerScreenImage {
 
         if (resultat != null) {
             TextArea txt = (TextArea)scene.lookup("#results_area");
-            txt.setText("\n"+resultat + "\n");
+            txt.setText(txt.getText() + "\n" + resultat + "\n");
         }
     }
 
