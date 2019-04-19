@@ -16,6 +16,7 @@
 
 <VBox id="vbox" prefHeight="400" prefWidth="800" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerSon">
     <fx:include source="screenMenu.fxml" />
+       <Button onAction="#handlerButtonRetour" style="-fx-graphic: url('http://icons.iconarchive.com/icons/everaldo/crystal-clear/24/App-restart-icon.png')" />
     <GridPane>
         <VBox alignment="CENTER" prefWidth="400" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
             
@@ -41,7 +42,6 @@
 
             <HBox alignment="CENTER" spacing="5.0" />
              <Button onAction="#handlerButtonRechercher">Rechercher</Button>
-             <Button onAction="#handlerButtonRetour">Retour</Button>
         </VBox>
 
         <VBox GridPane.columnIndex="2" GridPane.rowIndex="0">
