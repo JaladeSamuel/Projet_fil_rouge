@@ -21,6 +21,7 @@ public class ControllerScreenTexte {
     public static Parent root;
     public static Stage stage;
 
+
     @FXML
     public void handlerPlusButton(ActionEvent actionEvent) {
         Scene scene = stage.getScene();
