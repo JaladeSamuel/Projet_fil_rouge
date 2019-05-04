@@ -2,13 +2,12 @@ package viewFX;
 
 import controller.*;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+import model.DataBaseWatcherThread;
 
 import static view.Application.creationFichierBD;
 import static view.Application.deserialisation;
