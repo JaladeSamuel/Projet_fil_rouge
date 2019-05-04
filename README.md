@@ -4,5 +4,4 @@ Version Graphique JavaFX
 
 Pour lancer l'application ouvrez le projet (InterfaceJavaFX) avec IntelliJ puis lancer la classe Main dans le package viewFX
 
-Vous pouvez trouver les fichiers source dans le dossier JavaWorkSpace
 
